@@ -13,26 +13,34 @@
 
             <ul class="nav navbar-nav side-bar">
 
-
+                <li class="side-bar tmargin">
+                    <a href="<c:url value="" />">
+                        <span  class="active glyphicon glyphicon-home">&nbsp;</span>Trang Chủ</a>
+                </li>
 
                 <li class="side-bar tmargin">
                     <a href="<c:url value="" />">
-                        <span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Quản lý Đơn Hàng</a>
+                        <span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Bán Hàng Tại Quầy</a>
                 </li>
-                <li class="side-bar">
-                    <a href='<c:url value=""/>'>
-                        <span class="glyphicon glyphicon-tasks">&nbsp;</span>Quản lý Danh Mục</a>
-                </li>
+
 
                 <li class="side-bar">
                     <a href='<c:url value=""/>'  class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-folder-open">&nbsp;</span>Quản lý Sản Phẩm</a>
+                        <span class="glyphicon glyphicon-folder-open">&nbsp;</span>Quản lý Danh Mục</a>
                     <ul class="dropdown-menu custom-dropdown">
-                        <li><a href="#">Liên kết con 1</a></li>
-                        <li><a href="#">Liên kết con 2</a></li>
-                        <li><a href="#">Liên kết con 3</a></li>
+                        <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Chất liệu</a></li>
+                        <li><a href="#">Thương hiệu</a></li>
+                        <li><a href="#">Kiểu khóa</a></li>
+                        <li><a href="#">Kích cỡ</a></li>
+                        <li><a href="#">Thương hiệu</a></li>
                         <!-- Thêm các liên kết con khác nếu cần -->
                     </ul>
+                </li>
+
+                <li class="side-bar">
+                    <a href='<c:url value=""/>'>
+                        <span class="glyphicon glyphicon-tasks">&nbsp;</span>Quản lý Sản Phẩm</a>
                 </li>
 
                 <li class="side-bar">

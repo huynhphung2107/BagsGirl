@@ -89,7 +89,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="margin-left: -80px" href="<c:url value=""/>">Balo Shop - Trang Quản Trị</a>
+            <a class="navbar-brand" style="margin-left: -90px;" href="<c:url value=""/>">Balo Shop - Trang Quản Trị</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
