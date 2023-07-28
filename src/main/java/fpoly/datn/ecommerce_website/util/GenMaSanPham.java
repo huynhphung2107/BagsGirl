@@ -1,4 +1,4 @@
-package com.teamcode.demo.genCode;
+package fpoly.datn.ecommerce_website.util;
 
 import java.util.Random;
 

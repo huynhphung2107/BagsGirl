@@ -1,4 +1,4 @@
-package com.teamcode.demo.controller.admin;
+package fpoly.datn.ecommerce_website.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.teamcode.demo.entity;
+package fpoly.datn.ecommerce_website.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,8 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.UUID;
 
 @Entity
 @Table(name = "staff")

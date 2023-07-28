@@ -1,5 +1,4 @@
-package com.teamcode.demo.entity;
-
+package fpoly.datn.ecommerce_website.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,43 +12,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.UUID;
-
-@Entity
-@Table(name = "user_info")
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@ToString
 @Setter
 @Getter
-public class UserInfo {
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
+@Entity
+@Table(name = "balo")
+public class Balo {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "balo_code")
+    private String code;
 
-    @Column(name = "account")
-    private String account;
-
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "email")
-    private String email;
+    @Column(name = "balo_name")
+    private String name;
 
     @Column(name = "status")
-    private Integer status;
-
-    @Column(name = "gender")
-    private Boolean gender;
-
-    @Column(name = "role")
-    private Integer role;
-
-
+    private String status;
 }
