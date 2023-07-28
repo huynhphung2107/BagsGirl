@@ -1,0 +1,18 @@
+
+.custom-dropdown {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none; /* Ẩn danh sách con ban đầu */
+}
+.custom-dropdown li {
+    margin-bottom: 5px;
+}
+.custom-dropdown li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+.custom-dropdown li a:hover {
+    color: #ff0000;
+}
