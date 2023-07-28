@@ -1,19 +1,23 @@
-package com.teamcode.demo.controller.admin;
+package fpoly.datn.ecommerce_website.controller;
 
-import com.teamcode.demo.entity.Balo;
-import com.teamcode.demo.genCode.GenMaSanPham;
-import com.teamcode.demo.repository.BaloRepository;
+import fpoly.datn.ecommerce_website.entity.Balo;
+import fpoly.datn.ecommerce_website.repository.IBaloRepository;
+import fpoly.datn.ecommerce_website.util.GenMaSanPham;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/sanpham")
 public class BaloController {
 
     @Autowired
-    private BaloRepository service;
+    private IBaloRepository service;
 
 
     @GetMapping("/hienthi")
