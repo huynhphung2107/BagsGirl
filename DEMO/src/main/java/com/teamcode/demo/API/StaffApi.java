@@ -46,17 +46,12 @@ public class StaffApi {
         return nv;
     }
 
-    @RequestMapping(value = "/staff", method = RequestMethod.DELETE)
-    public Staff delete(@RequestBody Staff staff) {
-        UserInfo userInfo = userInfoRepository.save(staff.getUserInfo());
-        System.out.println(userInfo);
-        Staff nv = Staff.builder()
-                .status(staff.getStatus())
-                .userInfo(userInfo)
-                .build();
-        staffRepository.save(nv);
-        System.out.println(nv);
-        return nv;
+    @RequestMapping(value = "/staff/{id}", method = RequestMethod.DELETE)
+    public void delete(@RequestBody Staff staff) {
+        UserInfo userInfo= new UserInfo();
+        userInfoRepository.deleteById(userInfo.getId());
+        staffRepository.deleteById(staff.getId());
+        System.out.println();
     }
 
 
