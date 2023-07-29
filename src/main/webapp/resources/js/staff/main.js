@@ -21,7 +21,7 @@ function hienThi() {
             <td> ${item.userInfo.fullName}</td>
             <td> ${item.userInfo.account}</td>
             <td> ${item.userInfo.email}</td>
-            <td> ${item.userInfo.gender}</td>
+            <td> ${item.userInfo.gender==1?"Nam":"Nữ"}</td>
             <td> ${item.userInfo.role}</td>
             <td> ${item.status==1? "Hoạt động":"Ngừng hoạt động"}</td>
             <td> 
