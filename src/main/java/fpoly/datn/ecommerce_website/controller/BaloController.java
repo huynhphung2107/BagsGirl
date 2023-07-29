@@ -25,7 +25,7 @@ public class BaloController {
 
         model.addAttribute("listSp", service.findAll());
 
-        return "/sanpham/sanphams";
+        return "/client/admin/sanphams";
     }
 
 
