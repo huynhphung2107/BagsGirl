@@ -1,5 +1,6 @@
 package fpoly.datn.ecommerce_website.controller.RestController;
 
+import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.entity.CustomErrorType;
 import fpoly.datn.ecommerce_website.entity.Staff;
 import fpoly.datn.ecommerce_website.entity.UserInfo;
@@ -16,12 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-@RequestMapping("dashboard/edit")
+//@RequestMapping("dashboard/edit")
 @RestController
 public class StaffRestController {
 
-
-
+    List<Staff> list = new ArrayList<>();
 
     @Autowired
     private IStaffRepository staffRepository;
@@ -29,16 +29,24 @@ public class StaffRestController {
     @Autowired
     private IUserInfoRepository userInfoRepository;
 
+
     @RequestMapping(value = "/staff", method = RequestMethod.GET)
-    public ResponseEntity<List<Staff>> getAll() {
-        List<Staff> list = new ArrayList<>();
+    public List<Staff> getAll() {
         userInfoRepository.findAll();
         list = staffRepository.findAll();
-        if (list == null){
-            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return list;
     }
+
+//    @RequestMapping(value = "/staff", method = RequestMethod.GET)
+//    public ResponseEntity<List<Staff>> getAll() {
+//        List<Staff> list = new ArrayList<>();
+//        userInfoRepository.findAll();
+//        list = staffRepository.findAll();
+//        if (list == null){
+//            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(list, HttpStatus.OK);
+//    }
 
 
     @RequestMapping(value = "/staff", method = RequestMethod.POST)
