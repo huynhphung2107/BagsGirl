@@ -1,9 +1,8 @@
 package fpoly.datn.ecommerce_website.controller.RestController;
 
-import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.entity.Brand;
-import fpoly.datn.ecommerce_website.repository.IBaloRepository;
-import fpoly.datn.ecommerce_website.repository.IBrandRepository;
+import fpoly.datn.ecommerce_website.entity.Producer;
+import fpoly.datn.ecommerce_website.repository.IProducerReposiory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,56 +13,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.function.EntityResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/dashboard/brand")
+@RequestMapping("/dashboard/producer")
 @RestController
-public class BrandRestController {
+public class ProducerRestController {
     @Autowired
-    private IBrandRepository iBrandRepository;
+    IProducerReposiory  iProducerReposiory;
+
 
     @GetMapping(value = "")
-    public List<Brand> getAll() {
-        return iBrandRepository.findAll();
+    public List<Producer> getAll() {
+        return iProducerReposiory.findAll();
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Brand> getOne(@PathVariable("id") UUID id) {
-        Brand brand = iBrandRepository.findById(id).orElse(null);
-        return new ResponseEntity<>(brand, HttpStatus.OK);
+    public ResponseEntity<Producer> getOne(@PathVariable("id") UUID id) {
+        Producer producer = iProducerReposiory.findById(id).orElse(null);
+        return new ResponseEntity<>(producer, HttpStatus.OK);
     }
-    //update
-    @PutMapping(value ="")
-    public Brand update(@RequestBody Brand brand) {
-
-       return  iBrandRepository.save(brand);
+//
+//    update
+    @PutMapping(value = "")
+    public Producer update(@RequestBody Producer producer) {
+        return iProducerReposiory.save(producer);
     }
-//    addd
+//   add
     @PostMapping(value = "")
-    public Brand add(@RequestBody Brand brand) {
-        brand.setId(null);
-        return iBrandRepository.save(brand);
+    public Producer add(@RequestBody Producer producer) {
+        producer.setId(null);
+        return iProducerReposiory.save(producer);
     }
 
     //delete
     @DeleteMapping(value = "/{id}")
     public ResponseEntity remove(@PathVariable("id") UUID id)  {
-        iBrandRepository.deleteById(id);
+        iProducerReposiory.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
-
-
-
 }
-
-
-
-
-
