@@ -22,7 +22,9 @@ public class BaloController {
 
     @GetMapping("/hienthi")
     public String hienThi(Model model) {
+
         return "/adminLayout/balos";
+
     }
 
 
