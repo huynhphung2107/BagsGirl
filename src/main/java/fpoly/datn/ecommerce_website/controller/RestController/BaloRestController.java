@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-//@RequestMapping("/dashboard/edit")
+@RequestMapping("/dashboard")
 @RestController
 public class BaloRestController {
 
