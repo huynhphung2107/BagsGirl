@@ -20,38 +20,38 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/dashboard/color")
-@RestController
-public class ColorRestController {
+@RequestMapping("/admin/manage")
+    @RestController
+    public class ColorRestController {
 
 
-    @Autowired
-    private IColorReponsitory iColorReponsitory;
+        @Autowired
+        private IColorReponsitory iColorReponsitory;
 
-    @GetMapping(value = "")
+        @GetMapping(value = "")
     public List<Color> getAll() {
         return iColorReponsitory.findAll();
     }
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/color/{id}")
     public ResponseEntity<Color> getOne(@PathVariable("id") UUID id) {
         Color color = iColorReponsitory.findById(id).orElse(null);
         return new ResponseEntity<>(color, HttpStatus.OK);
     }
     //update
-    @PutMapping(value ="")
+    @PutMapping(value ="/color")
     public Color update(@RequestBody Color color) {
 
         return  iColorReponsitory.save(color);
     }
     //    addd
-    @PostMapping(value = "")
+    @PostMapping(value = "/color")
     public Color add(@RequestBody Color color) {
         color.setId(null);
         return iColorReponsitory.save(color);
     }
 
     //delete
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/color/{id}")
     public ResponseEntity remove(@PathVariable("id") UUID id)  {
         iColorReponsitory.deleteById(id);
         return ResponseEntity.ok().build();

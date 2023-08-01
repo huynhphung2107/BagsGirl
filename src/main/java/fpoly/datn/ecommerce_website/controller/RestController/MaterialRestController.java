@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequestMapping("/admin/manage")
 @RestController
 public class MaterialRestController {
 
@@ -71,12 +72,6 @@ public class MaterialRestController {
         }
         return new ResponseEntity<>(material, HttpStatus.OK);
     }
-
-    //delete
-//    @RequestMapping(value = "/material/{id}", method = RequestMethod.DELETE)
-//    public void remove(@PathVariable("id") String id) {
-//        materialRepository.deleteById(id);
-//    }
     @RequestMapping(value = "/material/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable String id) {
         Material material  = materialRepository.findById(id).get();

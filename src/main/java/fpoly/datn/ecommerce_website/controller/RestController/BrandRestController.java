@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/dashboard/brand")
+@RequestMapping("/admin/manage")
 @RestController
 public class BrandRestController {
     @Autowired
@@ -33,26 +33,26 @@ public class BrandRestController {
     public List<Brand> getAll() {
         return iBrandRepository.findAll();
     }
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/brand/{id}")
     public ResponseEntity<Brand> getOne(@PathVariable("id") UUID id) {
         Brand brand = iBrandRepository.findById(id).orElse(null);
         return new ResponseEntity<>(brand, HttpStatus.OK);
     }
     //update
-    @PutMapping(value ="")
+    @PutMapping(value ="/brand")
     public Brand update(@RequestBody Brand brand) {
 
        return  iBrandRepository.save(brand);
     }
 //    addd
-    @PostMapping(value = "")
+    @PostMapping(value = "/brand")
     public Brand add(@RequestBody Brand brand) {
         brand.setId(null);
         return iBrandRepository.save(brand);
     }
 
     //delete
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/brand/{id}")
     public ResponseEntity remove(@PathVariable("id") UUID id)  {
         iBrandRepository.deleteById(id);
         return ResponseEntity.ok().build();

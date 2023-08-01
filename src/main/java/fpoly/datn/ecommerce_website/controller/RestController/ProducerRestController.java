@@ -12,42 +12,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/dashboard/producer")
+@RequestMapping("/admin/manage")
 @RestController
 public class ProducerRestController {
     @Autowired
     IProducerReposiory  iProducerReposiory;
 
 
-    @GetMapping(value = "")
+    @RequestMapping(value = "/producer", method = RequestMethod.GET)
     public List<Producer> getAll() {
         return iProducerReposiory.findAll();
     }
-    @GetMapping(value = "/{id}")
+    @RequestMapping(value = "/producer/{id}", method = RequestMethod.GET)
     public ResponseEntity<Producer> getOne(@PathVariable("id") UUID id) {
         Producer producer = iProducerReposiory.findById(id).orElse(null);
         return new ResponseEntity<>(producer, HttpStatus.OK);
     }
 //
 //    update
-    @PutMapping(value = "")
+    @RequestMapping(value = "/producer", method = RequestMethod.PUT)
     public Producer update(@RequestBody Producer producer) {
         return iProducerReposiory.save(producer);
     }
 //   add
-    @PostMapping(value = "")
+    @RequestMapping(value = "/producer", method = RequestMethod.POST)
     public Producer add(@RequestBody Producer producer) {
         producer.setId(null);
         return iProducerReposiory.save(producer);
     }
 
     //delete
-    @DeleteMapping(value = "/{id}")
+    @RequestMapping(value = "/producer/{id}", method = RequestMethod.DELETE)
     public ResponseEntity remove(@PathVariable("id") UUID id)  {
         iProducerReposiory.deleteById(id);
         return ResponseEntity.ok().build();

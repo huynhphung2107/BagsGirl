@@ -46,8 +46,7 @@ public class Staff {
     private UserInfo userInfo;
 
     public static void main(String[] args) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+
     }
 
 }

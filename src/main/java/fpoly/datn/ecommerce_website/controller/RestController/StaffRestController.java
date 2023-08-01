@@ -19,22 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping("/dashboard")
 @RestController
+@RequestMapping("/admin/manage")
 public class StaffRestController {
-
-
     @Autowired
     private IStaffRepository staffRepository;
-
     @Autowired
     private IRoleRepository iRoleRepository;
-
     @Autowired
     private IUserInfoRepository userInfoRepository;
-
-
-    @GetMapping("/staff")
+    @RequestMapping("/staff")
     public List<Staff> getAll() {
 
         userInfoRepository.findAll();
@@ -65,20 +59,24 @@ public class StaffRestController {
 
     @RequestMapping(value = "/staff", method = RequestMethod.POST)
     public ResponseEntity<Staff> add(@RequestBody Staff staffParam) {
-        UserInfo userInfo = userInfoRepository.save(staffParam.getUserInfo());
 
-//        List<Role> role = iRoleRepository.findAll();
-        System.out.println(userInfo);
-        Staff nv = Staff.builder()
-                .status(staffParam.getStatus())
-                .userInfo(userInfo)
+        UserInfo newUserInfo = UserInfo.builder()
+                .fullName(staffParam.getUserInfo().getFullName())
+                .account(staffParam.getUserInfo().getAccount())
+                .password(staffParam.getUserInfo().getPassword())
+                .email(staffParam.getUserInfo().getEmail())
+                .status(staffParam.getUserInfo().getStatus())
+                .gender(staffParam.getUserInfo().getGender())
+                .userRole(staffParam.getUserInfo().getUserRole())
                 .build();
-        Staff staff = staffRepository.save(nv);
-        System.out.println(nv);
-        if (staff == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(staff, HttpStatus.OK);
+        Staff newStaff = Staff.builder()
+                .status(staffParam.getStatus())
+                .userInfo(this.userInfoRepository.save(newUserInfo))
+                .build();
+
+
+        return new ResponseEntity<>(this.staffRepository.save(newStaff), HttpStatus.OK);
+
     }
 
     @RequestMapping(value = "/staff", method = RequestMethod.PUT)

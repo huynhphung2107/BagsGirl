@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dashboard/buckle-type")
+@RequestMapping("/admin/manage")
 public class BuckleTypeRestController {
 
     @Autowired
@@ -28,20 +28,20 @@ public class BuckleTypeRestController {
 
 
     //hien thi
-    @GetMapping("")
+    @GetMapping("/buckle")
     public List<BuckleType> getAll() {
         list = iBuckleTypeRepository.findAll();
         return list;
     }
 
-    @GetMapping("/id")
+    @GetMapping("/buckle/{id}")
     public BuckleType getOne(@PathVariable("id") String id) {
         BuckleType buckleType = iBuckleTypeRepository.findById(id).get();
         return buckleType;
     }
 
     //add
-    @PostMapping("")
+    @PostMapping("/buckle")
     public ResponseEntity<BuckleType> add(@RequestBody BuckleType BuckleType) {
         BuckleType buckleType = iBuckleTypeRepository.save(BuckleType);
 
@@ -53,7 +53,7 @@ public class BuckleTypeRestController {
 
 
     //update
-    @PutMapping("")
+    @PutMapping("/buckle")
     public ResponseEntity<BuckleType> update(@RequestBody BuckleType BuckleType) {
         BuckleType buckleType = iBuckleTypeRepository.save(BuckleType);
 
@@ -64,7 +64,7 @@ public class BuckleTypeRestController {
     }
 
     //delete
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/buckle/{id}")
     public void delete(@PathVariable("id") String id) {
         iBuckleTypeRepository.deleteById(id);
 

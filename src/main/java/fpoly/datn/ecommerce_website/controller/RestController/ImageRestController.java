@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@RequestMapping("/admin/manage")
 @RestController
 public class ImageRestController {
 
@@ -65,11 +67,7 @@ public class ImageRestController {
         return new ResponseEntity<>(image, HttpStatus.OK);
     }
 
-    //delete
-//    @RequestMapping(value = "/material/{id}", method = RequestMethod.DELETE)
-//    public void remove(@PathVariable("id") String id) {
-//        materialRepository.deleteById(id);
-//    }
+
     @RequestMapping(value = "/image/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable String id) {
         Image image  = iImageRepository.findById(id).get();

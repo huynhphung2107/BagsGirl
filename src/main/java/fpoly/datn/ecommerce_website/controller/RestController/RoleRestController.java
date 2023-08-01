@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dashboard/role")
+@RequestMapping("/admin/manage")
 public class RoleRestController {
 
     @Autowired
@@ -20,7 +20,7 @@ public class RoleRestController {
 
     List<UserRole> list = new ArrayList<>();
 
-    @GetMapping("")
+    @GetMapping("/role")
     public List<UserRole> getAll() {
         list = iRoleRepository.findAll();
         return list;

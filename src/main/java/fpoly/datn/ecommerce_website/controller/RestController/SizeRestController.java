@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/dashboard/size")
+@RequestMapping("/admin/manage")
 @RestController
 public class SizeRestController {
 
@@ -25,25 +26,25 @@ public class SizeRestController {
         @Autowired
         private ISizeReponsitory iSizeReponsitory;
 
-        @GetMapping(value = "")
+        @RequestMapping(value = "/size", method = RequestMethod.GET)
         public List<Size> getAll() {
             return iSizeReponsitory.findAll();
         }
-        @GetMapping(value = "/{id}")
+        @RequestMapping(value = "/size/{id}", method = RequestMethod.GET)
         public ResponseEntity<Size> getOne(@PathVariable("id") UUID id) {
             Size size = iSizeReponsitory.findById(id).orElse(null);
             return new ResponseEntity<>(size, HttpStatus.OK);
         }
         //update
-        @PutMapping(value ="")
+        @RequestMapping(value ="/size", method = RequestMethod.PUT)
         public Size update(@RequestBody Size size) {
 
             return  iSizeReponsitory.save(size);
         }
         //    addd
-        @PostMapping(value = "")
+        @RequestMapping(value = "/size", method = RequestMethod.POST)
         public Size add(@RequestBody Size size) {
-            size.setId(null);
+
             return iSizeReponsitory.save(size);
         }
 

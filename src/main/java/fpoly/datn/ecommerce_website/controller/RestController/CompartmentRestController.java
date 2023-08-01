@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dashboard/compartment")
+@RequestMapping("/admin/manage")
 public class CompartmentRestController {
 
     @Autowired
@@ -28,20 +28,20 @@ public class CompartmentRestController {
 
 
     //hien thi
-    @GetMapping("")
+    @GetMapping("/compartment")
     public List<Compartment> getAll() {
         list = iCompartmentRepository.findAll();
         return list;
     }
 
-    @GetMapping("/id")
+    @GetMapping("/compartment/{id}")
     public Compartment getOne(@PathVariable("id") String id) {
         Compartment compartment = iCompartmentRepository.findById(id).get();
         return compartment;
     }
 
     //add
-    @PostMapping("")
+    @PostMapping("/compartment")
     public ResponseEntity<Compartment> add(@RequestBody Compartment compartment) {
         Compartment compartment1 = iCompartmentRepository.save(compartment);
 
@@ -53,7 +53,7 @@ public class CompartmentRestController {
 
 
     //update
-    @PutMapping("")
+    @PutMapping("/compartment")
     public ResponseEntity<Compartment> update(@RequestBody Compartment compartment) {
         Compartment compartment1 = iCompartmentRepository.save(compartment);
 
@@ -64,7 +64,7 @@ public class CompartmentRestController {
     }
 
     //delete
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/compartment/{id}")
     public void delete(@PathVariable("id") String id) {
         iCompartmentRepository.deleteById(id);
 
