@@ -37,21 +37,22 @@ public class UserInfoRestController {
         return list;
     }
 
-    @PutMapping("")
+    @PostMapping("")
     public UserInfo add(@RequestBody UserInfo userInfo) {
 
-        UserInfo userInfo1 = UserInfo.builder()
-                .fullName(userInfo.getFullName())
-                .account(userInfo.getAccount())
-                .password(userInfo.getPassword())
-                .email(userInfo.getEmail())
-                .status(userInfo.getStatus())
-                .gender(userInfo.getGender())
-                .userRole(iRoleRepository.findById(userInfo.getId()).get())
-                .build();
-        iUserInfoRepository.save(userInfo1);
-        System.out.println(iUserInfoRepository.save(userInfo1));
-        return userInfo1;
+//        UserInfo userInfo1 = UserInfo.builder()
+//                .fullName(userInfo.getFullName())
+//                .account(userInfo.getAccount())
+//                .password(userInfo.getPassword())
+//                .email(userInfo.getEmail())
+//                .status(userInfo.getStatus())
+//                .gender(userInfo.getGender())
+//                .userRole(iRoleRepository.findById(userInfo.getId()).get())
+//                .build();
+//        iUserInfoRepository.save(userInfo1);
+//        System.out.println(iUserInfoRepository.save(userInfo1));
+        iUserInfoRepository.save(userInfo);
+        return userInfo;
     }
 
     @GetMapping("/{id}")
