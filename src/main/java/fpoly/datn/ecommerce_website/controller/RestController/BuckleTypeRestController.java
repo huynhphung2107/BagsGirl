@@ -1,7 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.RestController;
 
-import fpoly.datn.ecommerce_website.entity.Compartment;
-import fpoly.datn.ecommerce_website.repository.ICompartmentRepository;
+import fpoly.datn.ecommerce_website.entity.BuckleType;
+import fpoly.datn.ecommerce_website.repository.IBuckleTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,34 +18,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dashboard/compartment")
-public class CompartmentRestController {
+@RequestMapping("/dashboard/buckle-type")
+public class BuckleTypeRestController {
 
     @Autowired
-    private ICompartmentRepository iCompartmentRepository;
+    private IBuckleTypeRepository iBuckleTypeRepository;
 
-    List<Compartment> list = new ArrayList<>();
+    List<BuckleType> list = new ArrayList<>();
 
 
     //hien thi
     @GetMapping("")
-    public List<Compartment> getAll() {
-        list = iCompartmentRepository.findAll();
+    public List<BuckleType> getAll() {
+        list = iBuckleTypeRepository.findAll();
         return list;
     }
 
     @GetMapping("/id")
-    public Compartment getOne(@PathVariable("id") String id) {
-        Compartment compartment = iCompartmentRepository.findById(id).get();
-        return compartment;
+    public BuckleType getOne(@PathVariable("id") String id) {
+        BuckleType buckleType = iBuckleTypeRepository.findById(id).get();
+        return buckleType;
     }
 
     //add
     @PostMapping("")
-    public ResponseEntity<Compartment> add(@RequestBody Compartment compartment) {
-        Compartment compartment1 = iCompartmentRepository.save(compartment);
+    public ResponseEntity<BuckleType> add(@RequestBody BuckleType BuckleType) {
+        BuckleType buckleType = iBuckleTypeRepository.save(BuckleType);
 
-        if (compartment1 == null) {
+        if (buckleType == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.OK);
@@ -54,10 +54,10 @@ public class CompartmentRestController {
 
     //update
     @PutMapping("")
-    public ResponseEntity<Compartment> update(@RequestBody Compartment compartment) {
-        Compartment compartment1 = iCompartmentRepository.save(compartment);
+    public ResponseEntity<BuckleType> update(@RequestBody BuckleType BuckleType) {
+        BuckleType buckleType = iBuckleTypeRepository.save(BuckleType);
 
-        if (compartment1 == null) {
+        if (buckleType == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.OK);
@@ -66,7 +66,7 @@ public class CompartmentRestController {
     //delete
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") String id) {
-        iCompartmentRepository.deleteById(id);
+        iBuckleTypeRepository.deleteById(id);
 
     }
 }

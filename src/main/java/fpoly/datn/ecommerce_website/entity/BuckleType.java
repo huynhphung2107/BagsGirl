@@ -13,22 +13,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "compartment")
+@Table(name = "buckle_type")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Compartment {
+public class BuckleType {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "compartment_code")
+    @Column(name = "buckle_type_code")
     private String code;
 
-    @Column(name = "compartment_name")
+    @Column(name = "buckle_type_name")
     private String name;
 }

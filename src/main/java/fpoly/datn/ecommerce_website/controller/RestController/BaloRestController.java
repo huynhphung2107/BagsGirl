@@ -39,7 +39,7 @@ public class BaloRestController {
 
     //add
     @RequestMapping(value = "/balo/{id}", method = RequestMethod.POST)
-    public Balo hienthi(@RequestBody Balo balo) {
+    public Balo add(@RequestBody Balo balo) {
         baloRepository.save(balo);
         return balo;
     }
