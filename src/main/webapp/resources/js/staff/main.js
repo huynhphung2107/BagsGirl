@@ -17,7 +17,7 @@ function hienThi() {
 
                 // Điền thông tin của từng sinh viên vào tr vừa tạo
                 row.innerHTML = `
-<!--            <td> ${item.id}</td>-->
+            <td> ${item.id}</td>
             <td> ${item.userInfo.fullName}</td>
             <td> ${item.userInfo.account}</td>
             <td> ${item.userInfo.email}</td>
