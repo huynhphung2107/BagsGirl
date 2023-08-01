@@ -14,10 +14,11 @@ function hienThi() {
                 //sử dụng DOM để tạo ra 1 phần ử html mới ( tạo tr)
 
                 let row = document.createElement("tr");
-
+                var index=0;
                 // Điền thông tin của từng sinh viên vào tr vừa tạo
                 row.innerHTML= `
-            <td> ${item.id}</td>
+<!--            <td> ${item.id}</td>-->
+            <td> ${index +1}</td>
             <td> ${item.code}</td>
             <td> ${item.name}</td>
             <td> ${item.status}</td>

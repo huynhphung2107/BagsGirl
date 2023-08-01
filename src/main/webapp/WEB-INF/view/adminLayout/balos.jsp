@@ -32,7 +32,7 @@
     <table style="margin: 100px 100px; text-align: center;" id="custom-table" class="table table border  table table-hover table-striped">
         <thead>
         <tr>
-            <th>ID </th>
+            <th>STT </th>
             <th>Mã </th>
             <th>Tên</th>
             <th>Status</th>
