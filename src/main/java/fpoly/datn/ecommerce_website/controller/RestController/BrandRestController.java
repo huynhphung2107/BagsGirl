@@ -1,8 +1,6 @@
 package fpoly.datn.ecommerce_website.controller.RestController;
 
-import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.entity.Brand;
-import fpoly.datn.ecommerce_website.repository.IBaloRepository;
 import fpoly.datn.ecommerce_website.repository.IBrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,12 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.function.EntityResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,10 +23,11 @@ public class BrandRestController {
     @Autowired
     private IBrandRepository iBrandRepository;
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/brand")
     public List<Brand> getAll() {
         return iBrandRepository.findAll();
     }
+
     @GetMapping(value = "/brand/{id}")
     public ResponseEntity<Brand> getOne(@PathVariable("id") UUID id) {
         Brand brand = iBrandRepository.findById(id).orElse(null);

@@ -22,15 +22,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/manage")
 public class StaffRestController {
+
     @Autowired
     private IStaffRepository staffRepository;
+
     @Autowired
     private IRoleRepository iRoleRepository;
+
     @Autowired
     private IUserInfoRepository userInfoRepository;
+
     @RequestMapping("/staff")
     public List<Staff> getAll() {
-
         userInfoRepository.findAll();
         iRoleRepository.findAll();
         List<Staff> list = staffRepository.findAll();

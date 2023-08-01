@@ -29,6 +29,7 @@ public class ProducerRestController {
     public List<Producer> getAll() {
         return iProducerReposiory.findAll();
     }
+
     @RequestMapping(value = "/producer/{id}", method = RequestMethod.GET)
     public ResponseEntity<Producer> getOne(@PathVariable("id") UUID id) {
         Producer producer = iProducerReposiory.findById(id).orElse(null);

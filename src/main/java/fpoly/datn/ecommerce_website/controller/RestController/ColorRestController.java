@@ -28,10 +28,11 @@ import java.util.UUID;
         @Autowired
         private IColorReponsitory iColorReponsitory;
 
-        @GetMapping(value = "")
+        @GetMapping(value = "/color")
     public List<Color> getAll() {
         return iColorReponsitory.findAll();
     }
+
     @GetMapping(value = "/color/{id}")
     public ResponseEntity<Color> getOne(@PathVariable("id") UUID id) {
         Color color = iColorReponsitory.findById(id).orElse(null);
