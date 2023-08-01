@@ -1,5 +1,7 @@
 package fpoly.datn.ecommerce_website.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,5 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/Frontend/css/**").addResourceLocations("/resources/Frontend/css/");
         registry.addResourceHandler("/Frontend/js/**").addResourceLocations("/resources/Frontend/js/");
     }
+
 
 }

@@ -99,7 +99,7 @@
                         <span class="glyphicon glyphicon-user">&nbsp;</span>Xin chào: Huỳnh</a>
                 </li>
                 <li>
-                    <a href="<c:url value="" />"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a>
+                    <a href="<c:url value="/login" />"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a>
                 </li>
             </ul>
         </div>

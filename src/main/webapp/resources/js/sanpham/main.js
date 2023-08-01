@@ -1,6 +1,6 @@
 //tạo hàm tải dữ liệu từ api về
 function hienThi() {
-    const studentAPIT = "http://localhost:8080/balo";
+    const studentAPIT = "http://localhost:8080/dashboard/balo";
 
     //Dùng fetch để lấy dữ liệu từ api
     fetch(studentAPIT)

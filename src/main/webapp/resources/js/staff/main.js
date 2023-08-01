@@ -1,6 +1,6 @@
 //tạo hàm tải dữ liệu từ api về
 function hienThi() {
-    const studentAPIT = "http://localhost:8080/staff";
+    const studentAPIT = "http://localhost:8080/dashboard/staff";
 
     //Dùng fetch để lấy dữ liệu từ api
     fetch(studentAPIT)
@@ -21,9 +21,9 @@ function hienThi() {
             <td> ${item.userInfo.fullName}</td>
             <td> ${item.userInfo.account}</td>
             <td> ${item.userInfo.email}</td>
-            <td> ${item.userInfo.gender==1?"Nam":"Nữ"}</td>
+            <td> ${item.userInfo.gender == 1 ? "Nam" : "Nữ"}</td>
             <td> ${item.userInfo.role}</td>
-            <td> ${item.status==1? "Hoạt động":"Ngừng hoạt động"}</td>
+            <td> ${item.status == 1 ? "Hoạt động" : "Ngừng hoạt động"}</td>
             <td> 
             <button class="btn btn-warning" id="editStudentBtn"> Update
             </button>
