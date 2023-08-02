@@ -1,8 +1,11 @@
 package fpoly.datn.ecommerce_website.controller.RestController;
 
 import fpoly.datn.ecommerce_website.entity.CustomErrorType;
+import fpoly.datn.ecommerce_website.entity.Image;
 import fpoly.datn.ecommerce_website.entity.Material;
 import fpoly.datn.ecommerce_website.repository.IMaterialRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,8 @@ import java.util.List;
 @RequestMapping("/admin/manage")
 @RestController
 public class MaterialRestController {
+
+    public static final Logger logger = LoggerFactory.getLogger(MaterialRestController.class);
 
     @Autowired
     private IMaterialRepository materialRepository;
@@ -34,8 +39,14 @@ public class MaterialRestController {
     // hien thi get one
     @RequestMapping(value = "/material/{id}", method = RequestMethod.GET)
     public ResponseEntity<Material> getOne(@PathVariable("id") String id){
-        Material material = materialRepository.findById(id).get();
-        return new ResponseEntity<>(material, HttpStatus.OK);
+        logger.info("Fetching Material with id {}", id);
+        Material material = materialRepository.findById(id).orElse(null);
+        if (material == null) {
+            logger.error("Material with id {} not found.", id);
+            return new ResponseEntity(new CustomErrorType("Material with id " + id
+                    + " not found"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Material>(material, HttpStatus.OK);
     }
 //    @GetMapping(value = "/material/{id}")
 //    public Material getOne(@PathVariable("id") String id){
@@ -82,12 +93,16 @@ public class MaterialRestController {
     //delete
     @RequestMapping(value = "/material/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable String id) {
-        Material material  = materialRepository.findById(id).get();
-        if (material == null){
-            return new ResponseEntity<>( new CustomErrorType("Unable To Delete with id" + id + "not found"), HttpStatus.NOT_FOUND);
+        logger.info("Fetching & Deleting Material with id {}", id);
+
+        Material image = materialRepository.findById(id).orElse(null);
+        if (image == null) {
+            logger.error("Unable to delete. Material with id {} not found.", id);
+            return new ResponseEntity(new CustomErrorType("Unable to delete Material with id " + id + " not found."),
+                    HttpStatus.NOT_FOUND);
         }
-        this.materialRepository.delete(material);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        materialRepository.deleteById(id);
+        return new ResponseEntity<Image>(HttpStatus.NO_CONTENT);
     }
 
 }
