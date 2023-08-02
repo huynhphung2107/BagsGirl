@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-//@RequestMapping("/dashboard/edit")
+@RequestMapping("/admin/manage")
 @RestController
 public class BaloRestController {
 
@@ -38,14 +38,14 @@ public class BaloRestController {
     }
 
     //add
-    @RequestMapping(value = "/balo/{id}", method = RequestMethod.POST)
-    public Balo hienthi(@RequestBody Balo balo) {
+    @RequestMapping(value = "/balo", method = RequestMethod.POST)
+    public Balo add(@RequestBody Balo balo) {
         baloRepository.save(balo);
         return balo;
     }
 
     //update
-    @RequestMapping(value = "/balo/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/balo", method = RequestMethod.PUT)
     public void update(@RequestBody Balo balo) {
         baloRepository.save(balo);
     }

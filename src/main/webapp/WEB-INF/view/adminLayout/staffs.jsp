@@ -7,8 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<%--    <script src="/js/staff/add.js"></script>--%>
-<%--    <script src="/js/staff/edit.js"></script>--%>
+    <%--    <script src="/js/staff/add.js"></script>--%>
+    <%--    <script src="/js/staff/edit.js"></script>--%>
     <script src="/js/staff/main.js"></script>
 
     <style type="text/css">
@@ -24,14 +24,16 @@
 <jsp:include page="template/header.jsp"></jsp:include>
 <jsp:include page="template/sidebar.jsp"></jsp:include>
 
-<div  class="container mt-3">
+<div class="container mt-3">
     <button id="addSanPhamBtn" class="btn btn-success my-3">Thêm nhân viên</button>
 
 
-    <table style="margin: 100px 100px; text-align: center;" id="custom-table" class=" table table-border table table-hover table-striped">
+    <table style="margin: 100px 100px; text-align: center;" id="custom-table"
+           class=" table table-border table table-hover table-striped">
         <thead>
         <tr>
-            <th>FullName</th>
+            <th>Id</th>
+            <th>Name</th>
             <th>Account</th>
             <th>Email</th>
             <th>Gender</th>

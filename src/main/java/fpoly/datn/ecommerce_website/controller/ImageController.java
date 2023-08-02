@@ -1,8 +1,9 @@
 package fpoly.datn.ecommerce_website.controller;
 
-import fpoly.datn.ecommerce_website.entity.Balo;
-import fpoly.datn.ecommerce_website.repository.IBaloRepository;
-import fpoly.datn.ecommerce_website.util.GenMaSanPham;
+import fpoly.datn.ecommerce_website.entity.Image;
+import fpoly.datn.ecommerce_website.entity.Material;
+import fpoly.datn.ecommerce_website.repository.IImageRepository;
+import fpoly.datn.ecommerce_website.repository.IMaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,41 +14,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/balo")
-public class BaloController {
+@RequestMapping("/image")
+public class ImageController {
 
     @Autowired
-    private IBaloRepository service;
+    private IImageRepository service;
 
 
     @GetMapping("/hienthi")
     public String hienThi(Model model) {
 
-        return "/adminLayout/balos";
+        return "/adminLayout/images";
 
     }
 
 
     @PostMapping("/add")
-    public String add(@RequestParam("name") String name, @RequestParam("status") String status) {
-        Balo balo = new Balo(null, GenMaSanPham.generateMaTuDong(), name, status);
-        service.save(balo);
-        System.out.println(service);
+    public String add(@RequestParam("code") String code, @RequestParam("name") String name,
+                      @RequestParam("urlImage") String urlImage) {
+        Image image = new Image(null, code, name, urlImage);
+        System.out.println(image.toString());
         return "redirect:/san-pham/hien-thi";
     }
 
 
     @PostMapping("/update/{id}")
     public String update(
-            Model model, @PathVariable("id") String id
-            , @RequestParam("name") String name, @RequestParam("status") String status) {
+            Model model, @PathVariable("id") String id,@RequestParam("code") String code,
+            @RequestParam("name") String name, @RequestParam("urlImage") String urlImage) {
         model.addAttribute("sp", service.getOne(id));
-//        Balo balo = new Balo(null, GenMaSanPham.generateMaTuDong(), name, status);
-        Balo balo = new Balo();
-        balo.setName(name);
-        balo.setStatus(status);
-        service.save(balo);
-//        System.out.println(service);
+        Image image = new Image();
+        image.setCode(code);
+        image.setName(name);
+        image.setUrlImage(urlImage);
+        service.save(image);
         return "redirect:/san-pham/hien-thi";
     }
 

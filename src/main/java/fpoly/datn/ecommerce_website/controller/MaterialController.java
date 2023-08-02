@@ -1,7 +1,8 @@
 package fpoly.datn.ecommerce_website.controller;
 
 import fpoly.datn.ecommerce_website.entity.Balo;
-import fpoly.datn.ecommerce_website.repository.IBaloRepository;
+import fpoly.datn.ecommerce_website.entity.Material;
+import fpoly.datn.ecommerce_website.repository.IMaterialRepository;
 import fpoly.datn.ecommerce_website.util.GenMaSanPham;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,25 +14,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/balo")
-public class BaloController {
+@RequestMapping("/material")
+public class MaterialController {
 
     @Autowired
-    private IBaloRepository service;
+    private IMaterialRepository service;
 
 
     @GetMapping("/hienthi")
     public String hienThi(Model model) {
 
-        return "/adminLayout/balos";
+        return "/adminLayout/materials";
 
     }
 
 
     @PostMapping("/add")
-    public String add(@RequestParam("name") String name, @RequestParam("status") String status) {
-        Balo balo = new Balo(null, GenMaSanPham.generateMaTuDong(), name, status);
-        service.save(balo);
+    public String add(@RequestParam("code") String code, @RequestParam("name") String name) {
+        Material material = new Material(null, code, name);
+        service.save(material);
         System.out.println(service);
         return "redirect:/san-pham/hien-thi";
     }
@@ -40,14 +41,12 @@ public class BaloController {
     @PostMapping("/update/{id}")
     public String update(
             Model model, @PathVariable("id") String id
-            , @RequestParam("name") String name, @RequestParam("status") String status) {
+            ,@RequestParam("code") String code, @RequestParam("name") String name) {
         model.addAttribute("sp", service.getOne(id));
-//        Balo balo = new Balo(null, GenMaSanPham.generateMaTuDong(), name, status);
-        Balo balo = new Balo();
-        balo.setName(name);
-        balo.setStatus(status);
-        service.save(balo);
-//        System.out.println(service);
+        Material material = new Material();
+        material.setCode(code);
+        material.setName(name);
+        service.save(material);
         return "redirect:/san-pham/hien-thi";
     }
 

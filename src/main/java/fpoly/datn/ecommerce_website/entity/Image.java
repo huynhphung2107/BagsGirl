@@ -11,38 +11,29 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
+import lombok.ToString;
 
 @Entity
-@Table(name = "size")
+@Table(name = "image")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-
-public class Size {
-
+@ToString
+@Setter
+@Getter
+public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
-    @Column(name = "code")
+    @Column(name = "image_code")
     private String code;
 
-    @Column(name = "name")
+    @Column(name = "image_name")
     private String name;
 
-    @Column(name = "length_size")
-    private String lengthSize;
-
-    @Column(name = "wide_size")
-    private String wideSize;
-
-    @Column(name = "height_size")
-    private String heightSize;
-
+    @Column(name = "image_url")
+    private String urlImage;
 
 }
