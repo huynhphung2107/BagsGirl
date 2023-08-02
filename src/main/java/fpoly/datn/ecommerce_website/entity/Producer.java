@@ -27,7 +27,7 @@ public class Producer {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
 
     @Column(name = "producer_code")
     private String producerCode;
