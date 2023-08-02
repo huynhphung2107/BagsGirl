@@ -2,8 +2,6 @@ package fpoly.datn.ecommerce_website.controller.RestController;
 
 import fpoly.datn.ecommerce_website.entity.CustomErrorType;
 import fpoly.datn.ecommerce_website.entity.Material;
-import fpoly.datn.ecommerce_website.entity.Staff;
-import fpoly.datn.ecommerce_website.entity.UserInfo;
 import fpoly.datn.ecommerce_website.repository.IMaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,9 +23,12 @@ public class MaterialRestController {
 
     //hien thi
     @RequestMapping(value = "/material", method = RequestMethod.GET)
-    public List<Material> getAll(){
-        lst = materialRepository.findAll();
-        return lst;
+    public ResponseEntity<List<Material>> getAll() {
+        List<Material> materials = materialRepository.findAll();
+        if (materials.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Material>>(materials, HttpStatus.OK);
     }
 
     // hien thi get one
@@ -36,6 +37,11 @@ public class MaterialRestController {
         Material material = materialRepository.findById(id).get();
         return new ResponseEntity<>(material, HttpStatus.OK);
     }
+//    @GetMapping(value = "/material/{id}")
+//    public Material getOne(@PathVariable("id") String id){
+//        Material material = materialRepository.findById(id).get();
+//        return material;
+//    }
 
     //add
 //    @RequestMapping(value = "/material", method = RequestMethod.POST)
@@ -50,7 +56,7 @@ public class MaterialRestController {
                 .name(materialParam.getName())
                 .build();
         Material material = materialRepository.save(nv);
-        System.out.println(nv);
+        System.out.println(nv.toString());
         if (material == null){
             return new ResponseEntity<>( HttpStatus.NO_CONTENT);
         }
@@ -72,6 +78,8 @@ public class MaterialRestController {
         }
         return new ResponseEntity<>(material, HttpStatus.OK);
     }
+
+    //delete
     @RequestMapping(value = "/material/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable String id) {
         Material material  = materialRepository.findById(id).get();
