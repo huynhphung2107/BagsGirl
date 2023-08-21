@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/manage")
+@RequestMapping("/api/manage")
 public class CompartmentRestController {
 
     @Autowired
@@ -29,44 +29,43 @@ public class CompartmentRestController {
 
     //hien thi
     @GetMapping("/compartment")
-    public List<Compartment> getAll() {
-        list = iCompartmentRepository.findAll();
-        return list;
+    public ResponseEntity<List<Compartment>> getAll() {
+        return new ResponseEntity<>(iCompartmentRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/compartment/{id}")
-    public Compartment getOne(@PathVariable("id") String id) {
+    public ResponseEntity<Compartment> getOne(@PathVariable("id") String id) {
         Compartment compartment = iCompartmentRepository.findById(id).get();
-        return compartment;
+        return new ResponseEntity<>(compartment, HttpStatus.OK);
     }
 
     //add
     @PostMapping("/compartment")
-    public ResponseEntity<Compartment> add(@RequestBody Compartment compartment) {
-        Compartment compartment1 = iCompartmentRepository.save(compartment);
+    public ResponseEntity<Compartment> add(@RequestBody Compartment compartmentParam) {
+        Compartment compartment = iCompartmentRepository.save(compartmentParam);
 
-        if (compartment1 == null) {
+        if (compartment == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(compartment, HttpStatus.OK);
     }
 
 
     //update
     @PutMapping("/compartment")
-    public ResponseEntity<Compartment> update(@RequestBody Compartment compartment) {
-        Compartment compartment1 = iCompartmentRepository.save(compartment);
+    public ResponseEntity<Compartment> update(@RequestBody Compartment compartmentParam) {
+        Compartment compartment = iCompartmentRepository.save(compartmentParam);
 
-        if (compartment1 == null) {
+        if (compartment == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(compartment, HttpStatus.OK);
     }
 
     //delete
     @DeleteMapping("/compartment/{id}")
-    public void delete(@PathVariable("id") String id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String id) {
         iCompartmentRepository.deleteById(id);
-
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
