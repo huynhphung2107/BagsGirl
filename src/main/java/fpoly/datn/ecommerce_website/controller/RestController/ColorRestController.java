@@ -2,9 +2,7 @@ package fpoly.datn.ecommerce_website.controller.RestController;
 
 
 import fpoly.datn.ecommerce_website.entity.Color;
-import fpoly.datn.ecommerce_website.entity.Size;
 import fpoly.datn.ecommerce_website.repository.IColorReponsitory;
-import fpoly.datn.ecommerce_website.repository.ISizeReponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/admin/manage")
-    @RestController
-    public class ColorRestController {
+@RequestMapping("/api/manage")
+@RestController
+public class ColorRestController {
 
 
-        @Autowired
-        private IColorReponsitory iColorReponsitory;
+    @Autowired
+    private IColorReponsitory iColorReponsitory;
 
-        @GetMapping(value = "/color")
-    public List<Color> getAll() {
-        return iColorReponsitory.findAll();
+    @GetMapping(value = "/color")
+    public ResponseEntity<List<Color>> getAll() {
+        return new ResponseEntity<>(iColorReponsitory.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/color/{id}")
@@ -38,26 +36,26 @@ import java.util.UUID;
         Color color = iColorReponsitory.findById(id).orElse(null);
         return new ResponseEntity<>(color, HttpStatus.OK);
     }
-    //update
-    @PutMapping(value ="/color")
-    public Color update(@RequestBody Color color) {
 
-        return  iColorReponsitory.save(color);
+    //update
+    @PutMapping(value = "/color")
+    public ResponseEntity<Color> update(@RequestBody Color color) {
+
+        return new ResponseEntity<>(iColorReponsitory.save(color), HttpStatus.OK);
     }
+
     //    addd
     @PostMapping(value = "/color")
-    public Color add(@RequestBody Color color) {
-        color.setId(null);
-        return iColorReponsitory.save(color);
+    public ResponseEntity<Color> add(@RequestBody Color color) {
+        return new ResponseEntity<>(iColorReponsitory.save(color), HttpStatus.OK);
     }
 
     //delete
     @DeleteMapping(value = "/color/{id}")
-    public ResponseEntity remove(@PathVariable("id") UUID id)  {
+    public ResponseEntity<?> remove(@PathVariable("id") UUID id) {
         iColorReponsitory.deleteById(id);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 
 }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/manage")
+@RequestMapping("/api/manage")
 public class BuckleTypeRestController {
 
     @Autowired
@@ -29,15 +29,15 @@ public class BuckleTypeRestController {
 
     //hien thi
     @GetMapping("/buckle")
-    public List<BuckleType> getAll() {
+    public ResponseEntity<List<BuckleType>> getAll() {
         list = iBuckleTypeRepository.findAll();
-        return list;
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/buckle/{id}")
-    public BuckleType getOne(@PathVariable("id") String id) {
+    public ResponseEntity<BuckleType> getOne(@PathVariable("id") String id) {
         BuckleType buckleType = iBuckleTypeRepository.findById(id).get();
-        return buckleType;
+        return new ResponseEntity<>(buckleType, HttpStatus.OK);
     }
 
     //add
@@ -65,8 +65,8 @@ public class BuckleTypeRestController {
 
     //delete
     @DeleteMapping("/buckle/{id}")
-    public void delete(@PathVariable("id") String id) {
-        iBuckleTypeRepository.deleteById(id);
-
+    public ResponseEntity<?> delete(@PathVariable("id") String id) {
+        iBuckleTypeRepository.delete(iBuckleTypeRepository.findById(id).get());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

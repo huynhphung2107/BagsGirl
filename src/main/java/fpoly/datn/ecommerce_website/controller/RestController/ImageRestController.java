@@ -8,14 +8,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+=======
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> main
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@RequestMapping("/admin/manage")
+@RequestMapping("/api/manage")
 @RestController
 public class ImageRestController {
 
@@ -38,9 +46,14 @@ public class ImageRestController {
 
     //hienThiGetOne
     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
+<<<<<<< HEAD
     public ResponseEntity<?> getOne(@PathVariable("id") String id){
         logger.info("Fetching Image with id {}", id);
         Image image = iImageRepository.findById(id).orElse(null);
+=======
+    public ResponseEntity<Image> getOne(@PathVariable("id") String id) {
+        Image image = iImageRepository.findById(id).get();
+>>>>>>> main
         if (image == null) {
             logger.error("Image with id {} not found.", id);
             return new ResponseEntity(new CustomErrorType("Image with id " + id
@@ -59,15 +72,16 @@ public class ImageRestController {
                 .urlImage(imageParam.getUrlImage())
                 .build();
         Image image = iImageRepository.save(nv);
-        System.out.println(nv.toString());
-        if (image == null){
-            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        System.out.println(nv);
+        if (image == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(image, HttpStatus.OK);
     }
 
     //update
     @RequestMapping(value = "/image/{id}", method = RequestMethod.PUT)
+<<<<<<< HEAD
     public ResponseEntity<Image> update(@PathVariable String id,@RequestBody Image imageParam) {
         logger.info("Updating Image with id {}", id);
 
@@ -77,6 +91,19 @@ public class ImageRestController {
             logger.error("Unable to update Image with id {} not found.", id);
             return new ResponseEntity(new CustomErrorType("Unable to update Image with id " + id + " not found."),
                     HttpStatus.NOT_FOUND);
+=======
+    public ResponseEntity<Image> update(@PathVariable String id, @RequestBody Image imageParam) {
+        Image nv = Image.builder()
+                .id(id)
+                .code(imageParam.getCode())
+                .name(imageParam.getName())
+                .urlImage(imageParam.getUrlImage())
+                .build();
+        Image image = iImageRepository.save(nv);
+        System.out.println(nv);
+        if (image == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+>>>>>>> main
         }
 
         x.setName(imageParam.getName());
@@ -103,6 +130,7 @@ public class ImageRestController {
     //delete
     @RequestMapping(value = "/image/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable String id) {
+<<<<<<< HEAD
         logger.info("Fetching & Deleting Image with id {}", id);
 
         Image image = iImageRepository.findById(id).orElse(null);
@@ -110,6 +138,11 @@ public class ImageRestController {
             logger.error("Unable to delete. Image with id {} not found.", id);
             return new ResponseEntity(new CustomErrorType("Unable to delete Image with id " + id + " not found."),
                     HttpStatus.NOT_FOUND);
+=======
+        Image image = iImageRepository.findById(id).get();
+        if (image == null) {
+            return new ResponseEntity<>(new CustomErrorType("Unable To Delete with id" + id + "not found"), HttpStatus.NOT_FOUND);
+>>>>>>> main
         }
         iImageRepository.deleteById(id);
         return new ResponseEntity<Image>(HttpStatus.NO_CONTENT);
