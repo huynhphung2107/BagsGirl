@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/manage")
+@RequestMapping("/api/manage")
 public class RoleRestController {
 
     @Autowired

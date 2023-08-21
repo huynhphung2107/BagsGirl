@@ -16,7 +16,7 @@ function hienThi() {
                 let row = document.createElement("tr");
 
                 // Điền thông tin của từng sinh viên vào tr vừa tạo
-                row.innerHTML= `
+                row.innerHTML = `
             <td> ${item.id}</td>
             <td> ${item.code}</td>
             <td> ${item.name}</td>
@@ -29,7 +29,7 @@ function hienThi() {
             </td>
         `;
                 tableBody.appendChild(row);
-                ;
+
             });
         });
 }

@@ -3,60 +3,51 @@ package fpoly.datn.ecommerce_website.controller.RestController;
 import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.repository.IBaloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-@RequestMapping("/admin/manage")
+@RequestMapping("/api/manage")
 @RestController
 public class BaloRestController {
 
     @Autowired
     private IBaloRepository baloRepository;
 
-    List<Balo> list = new ArrayList<>();
-
     //hienthi
-    @RequestMapping(value = "/balo", method = RequestMethod.GET)
-    public List<Balo> getAll() {
-        list = baloRepository.findAll();
-        return list;
+    @RequestMapping(value = "/balo/", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(this.baloRepository.findAll(), HttpStatus.OK);
     }
 
     //hien thi get one
-    @RequestMapping(value = "/balo/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Balo> getOne(@PathVariable("id") String id) {
-        Balo balo = baloRepository.findById(id).get();
-        return new ResponseEntity<>(balo, HttpStatus.OK);
+    @RequestMapping(value = "/balo", method = RequestMethod.GET)
+    public ResponseEntity<?> getOne(@RequestParam("id") String id) {
+        return new ResponseEntity<>(this.baloRepository.findById(id).get(), HttpStatus.OK);
     }
 
     //add
     @RequestMapping(value = "/balo", method = RequestMethod.POST)
-    public Balo add(@RequestBody Balo balo) {
-        baloRepository.save(balo);
-        return balo;
+    public ResponseEntity<?> add(@RequestBody Balo balo) {
+        return new ResponseEntity<>(baloRepository.save(balo), HttpStatus.OK);
     }
 
     //update
     @RequestMapping(value = "/balo", method = RequestMethod.PUT)
-    public void update(@RequestBody Balo balo) {
-        baloRepository.save(balo);
+    public ResponseEntity<?> update(@RequestBody Balo balo) {
+        return new ResponseEntity<>(baloRepository.save(balo), HttpStatus.OK);
     }
 
     //delete
-    @RequestMapping(value = "/balo/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable("id") String id) {
-        baloRepository.deleteById(id);
+    @RequestMapping(value = "/balo", method = RequestMethod.DELETE)
+    public ResponseEntity<?> remove(@RequestParam("id") String id) {
+        baloRepository.delete(baloRepository.findById(id).get());
+        return new ResponseEntity<>("Delete Successfully!!!!!!", HttpStatus.NO_CONTENT);
     }
-
-
 
 
 }

@@ -32,7 +32,7 @@ function hienThi() {
             </td>
         `;
                 tableBody.appendChild(row);
-                ;
+
             });
         });
 }

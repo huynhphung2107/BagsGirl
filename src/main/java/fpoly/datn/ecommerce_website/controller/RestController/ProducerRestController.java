@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping("/admin/manage")
+@RequestMapping("/api/manage")
 @RestController
 public class ProducerRestController {
     @Autowired
-    IProducerReposiory  iProducerReposiory;
+    IProducerReposiory iProducerReposiory;
 
     List<Producer> lst = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class ProducerRestController {
 
     //hienThiGetOne
     @RequestMapping(value = "/producer/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Producer> getOne(@PathVariable("id") String id){
+    public ResponseEntity<Producer> getOne(@PathVariable("id") String id) {
         Producer producer = iProducerReposiory.findById(id).get();
         if (producer == null) {
             return new ResponseEntity(new CustomErrorType("User with id " + id
@@ -52,25 +52,25 @@ public class ProducerRestController {
                 .producerName(producerParam.getProducerName())
                 .build();
         Producer producer = iProducerReposiory.save(nv);
-        System.out.println(nv.toString());
-        if (producer == null){
-            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        System.out.println(nv);
+        if (producer == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(producer, HttpStatus.OK);
     }
 
     //update
     @RequestMapping(value = "/producer/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Producer> update(@PathVariable String id,@RequestBody Producer producerParam) {
+    public ResponseEntity<Producer> update(@PathVariable String id, @RequestBody Producer producerParam) {
         Producer nv = Producer.builder()
                 .id(id)
                 .producerCode(producerParam.getProducerCode())
                 .producerName(producerParam.getProducerName())
                 .build();
         Producer producer = iProducerReposiory.save(nv);
-        System.out.println(nv.toString());
-        if (producer == null){
-            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        System.out.println(nv);
+        if (producer == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(producer, HttpStatus.OK);
     }
@@ -78,9 +78,9 @@ public class ProducerRestController {
     //delete
     @RequestMapping(value = "/producer/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable String id) {
-        Producer producer  = iProducerReposiory.findById(id).get();
-        if (producer == null){
-            return new ResponseEntity<>( new CustomErrorType("Unable To Delete with id" + id + "not found"), HttpStatus.NOT_FOUND);
+        Producer producer = iProducerReposiory.findById(id).get();
+        if (producer == null) {
+            return new ResponseEntity<>(new CustomErrorType("Unable To Delete with id" + id + "not found"), HttpStatus.NOT_FOUND);
         }
         this.iProducerReposiory.delete(producer);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
