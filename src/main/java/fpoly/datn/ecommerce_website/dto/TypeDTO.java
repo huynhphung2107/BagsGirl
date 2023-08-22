@@ -5,16 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.UUID;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@ToString
+@NoArgsConstructor
 @Setter
 @Getter
+@Builder
 public class TypeDTO {
     private UUID id;
     private String typeCode;
