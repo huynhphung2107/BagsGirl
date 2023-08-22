@@ -27,7 +27,7 @@ public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private UUID id;
+    private String id;
 
     @Column(name = "code")
     private String code;

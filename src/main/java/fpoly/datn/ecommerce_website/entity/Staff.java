@@ -40,8 +40,5 @@ public class Staff {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserInfo userInfo;
 
-    public static void main(String[] args) {
-
-    }
 
 }

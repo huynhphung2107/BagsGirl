@@ -1,4 +1,4 @@
-package fpoly.datn.ecommerce_website.entity.dto;
+package fpoly.datn.ecommerce_website.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,14 +9,19 @@ import lombok.ToString;
 
 import java.util.UUID;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Builder
 @ToString
-@Setter
-@Getter
-public class TypeDTO {
+
+public class SizeDTO {
     private UUID id;
-    private String typeCode;
-    private String typeName;
+    private String code;
+    private String name;
+    private String lengthSize;
+    private String wideSize;
+    private String heightSize;
 }

@@ -1,7 +1,7 @@
-package fpoly.datn.ecommerce_website.controller.RestController;
+package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.entity.Type;
-import fpoly.datn.ecommerce_website.entity.dto.TypeDTO;
+import fpoly.datn.ecommerce_website.dto.TypeDTO;
 import fpoly.datn.ecommerce_website.service.serviceImpl.TypeServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,14 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/manage")
 public class TypeRestController {
+
     @Autowired
     private ModelMapper modelMapper;
+
     @Autowired
     private TypeServiceImpl typeService;
 
+//GetAll
     @RequestMapping(value = "/type/", method = RequestMethod.GET)
     public ResponseEntity<List<TypeDTO>> getAll() {
         return new ResponseEntity<>(
@@ -33,14 +36,14 @@ public class TypeRestController {
                         .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
-
+//GetOne
     @RequestMapping(value = "/type", method = RequestMethod.GET)
     public ResponseEntity<TypeDTO> getOne(@RequestParam String id) {
         return new ResponseEntity<>(
-                modelMapper.map(this.typeService.findByID(id), TypeDTO.class)
+                modelMapper.map(this.typeService.findById(id), TypeDTO.class)
                 , HttpStatus.OK);
     }
-
+//Add
     @RequestMapping(value = "/type", method = RequestMethod.POST)
     public ResponseEntity<Type> save(@RequestBody TypeDTO typeDTO) {
         Type type = modelMapper.map(typeDTO, Type.class);
@@ -48,7 +51,7 @@ public class TypeRestController {
                 this.typeService.save(type)
                 , HttpStatus.OK);
     }
-
+//Update
     @RequestMapping(value = "/type", method = RequestMethod.PUT)
     public ResponseEntity<Type> update(@RequestBody TypeDTO typeDTO) {
         Type type = modelMapper.map(typeDTO, Type.class);
@@ -56,7 +59,7 @@ public class TypeRestController {
                 this.typeService.save(type)
                 , HttpStatus.OK);
     }
-
+//Delete
     @RequestMapping(value = "/type", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
         this.typeService.delete(id);
