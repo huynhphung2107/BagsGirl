@@ -1,4 +1,4 @@
-package fpoly.datn.ecommerce_website.controller.RestController;
+package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.entity.CustomErrorType;
 import fpoly.datn.ecommerce_website.entity.Material;

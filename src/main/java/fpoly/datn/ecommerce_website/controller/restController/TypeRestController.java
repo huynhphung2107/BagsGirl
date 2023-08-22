@@ -1,7 +1,7 @@
-package fpoly.datn.ecommerce_website.controller.RestController;
+package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.entity.Type;
-import fpoly.datn.ecommerce_website.entity.dto.TypeDTO;
+import fpoly.datn.ecommerce_website.dto.TypeDTO;
 import fpoly.datn.ecommerce_website.service.serviceImpl.TypeServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
