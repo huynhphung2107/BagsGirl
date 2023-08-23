@@ -35,6 +35,7 @@ public class ProducerRestController {
                         .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
+
     //GetOne
     @RequestMapping(value = "/producer", method = RequestMethod.GET)
     public ResponseEntity<ProducerDTO> getOne(@RequestParam String id) {
@@ -42,6 +43,7 @@ public class ProducerRestController {
                 modelMapper.map(this.producerService.findById(id), ProducerDTO.class)
                 , HttpStatus.OK);
     }
+
     //Add
     @RequestMapping(value = "/producer", method = RequestMethod.POST)
     public ResponseEntity<Producer> save(@RequestBody ProducerDTO producerDTO) {
@@ -50,6 +52,7 @@ public class ProducerRestController {
                 this.producerService.save(producer)
                 , HttpStatus.OK);
     }
+
     //Update
     @RequestMapping(value = "/producer", method = RequestMethod.PUT)
     public ResponseEntity<Producer> update(@RequestBody ProducerDTO producerDTO) {
@@ -58,6 +61,7 @@ public class ProducerRestController {
                 this.producerService.save(producer)
                 , HttpStatus.OK);
     }
+
     //Delete
     @RequestMapping(value = "/producer", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {

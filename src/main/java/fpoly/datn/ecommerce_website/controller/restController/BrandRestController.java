@@ -1,12 +1,8 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BrandDTO;
-
 import fpoly.datn.ecommerce_website.entity.Brand;
-
-import fpoly.datn.ecommerce_website.repository.IBrandRepository;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BrandServiceImpl;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +35,7 @@ public class BrandRestController {
                         .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
+
     //GetOne
     @RequestMapping(value = "/brand", method = RequestMethod.GET)
     public ResponseEntity<BrandDTO> getOne(@RequestParam String id) {
@@ -46,6 +43,7 @@ public class BrandRestController {
                 modelMapper.map(this.brandService.findById(id), BrandDTO.class)
                 , HttpStatus.OK);
     }
+
     //Add
     @RequestMapping(value = "/brand", method = RequestMethod.POST)
     public ResponseEntity<Brand> save(@RequestBody BrandDTO brandDTO) {
@@ -54,6 +52,7 @@ public class BrandRestController {
                 this.brandService.save(brand)
                 , HttpStatus.OK);
     }
+
     //Update
     @RequestMapping(value = "/brand", method = RequestMethod.PUT)
     public ResponseEntity<Brand> update(@RequestBody BrandDTO brandDTO) {
@@ -62,6 +61,7 @@ public class BrandRestController {
                 this.brandService.save(brand)
                 , HttpStatus.OK);
     }
+
     //Delete
     @RequestMapping(value = "/brand", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {

@@ -21,11 +21,9 @@ import java.util.List;
 @RequestMapping("/api/manage")
 public class BuckleTypeRestController {
 
+    List<BuckleType> list = new ArrayList<>();
     @Autowired
     private IBuckleTypeRepository iBuckleTypeRepository;
-
-    List<BuckleType> list = new ArrayList<>();
-
 
     //hien thi
     @GetMapping("/buckle")

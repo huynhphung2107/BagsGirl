@@ -20,10 +20,9 @@ import java.util.List;
 @RestController
 public class ImageRestController {
 
+    List<Image> lst = new ArrayList<>();
     @Autowired
     private IImageRepository iImageRepository;
-
-    List<Image> lst = new ArrayList<>();
 
     //hienthi
     @RequestMapping(value = "/image", method = RequestMethod.GET)

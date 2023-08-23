@@ -14,11 +14,9 @@ import java.util.List;
 @RequestMapping("/api/manage")
 public class RoleRestController {
 
+    List<UserRole> list = new ArrayList<>();
     @Autowired
     private IRoleRepository iRoleRepository;
-
-
-    List<UserRole> list = new ArrayList<>();
 
     @GetMapping("/role")
     public List<UserRole> getAll() {
