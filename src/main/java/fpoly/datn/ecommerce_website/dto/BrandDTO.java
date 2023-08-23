@@ -13,8 +13,8 @@ import java.util.UUID;
 @Setter
 @Getter
 @Builder
-public class TypeDTO {
+public class BrandDTO {
     private UUID id;
-    private String typeCode;
-    private String typeName;
+    private String brandCode;
+    private String brandName;
 }
