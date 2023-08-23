@@ -19,10 +19,9 @@ import java.util.List;
 @RestController
 public class MaterialRestController {
 
+    List<Material> lst = new ArrayList<>();
     @Autowired
     private IMaterialRepository materialRepository;
-
-    List<Material> lst = new ArrayList<>();
 
     //hien thi
     @RequestMapping(value = "/material", method = RequestMethod.GET)

@@ -1,4 +1,5 @@
 package fpoly.datn.ecommerce_website.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

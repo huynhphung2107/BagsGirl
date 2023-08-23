@@ -1,7 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.Type;
-import fpoly.datn.ecommerce_website.repository.ITypeRepository;
+import fpoly.datn.ecommerce_website.entity.Brand;
+import fpoly.datn.ecommerce_website.repository.IBrandRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,41 +9,41 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TypeServiceImpl implements ServiceGenarel<Type> {
+public class BrandServiceImpl implements ServiceGenarel<Brand> {
 
     @Autowired
-    private ITypeRepository typeRepository;
+    private IBrandRepository iBrandRepository;
 
     @Override
-    public List<Type> findAll() {
-        return typeRepository.findAll();
+    public List<Brand> findAll() {
+        return iBrandRepository.findAll();
     }
 
     @Override
-    public Type findById(String id) {
-        return typeRepository.findById(id).get();
+    public Brand findById(String id) {
+        return iBrandRepository.findById(id).get();
     }
 
     @Override
-    public Type save(Type entity) {
-        typeRepository.save(entity);
+    public Brand save(Brand entity) {
+        iBrandRepository.save(entity);
         return entity;
     }
 
     @Override
-    public Type update(Type entity) {
-        typeRepository.save(entity);
+    public Brand update(Brand entity) {
+        iBrandRepository.save(entity);
         return entity;
     }
 
     @Override
     public void delete(String id) {
-        typeRepository.deleteById(id);
+        iBrandRepository.deleteById(id);
 
     }
 
     @Override
-    public List<Type> searchByName(String name) {
+    public List<Brand> searchByName(String name) {
         return null;
     }
 

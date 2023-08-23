@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class BaloServiceImpl implements ServiceGenarel<Balo> {
 
@@ -26,12 +27,12 @@ public class BaloServiceImpl implements ServiceGenarel<Balo> {
 
     @Override
     public Balo save(Balo entity) {
-return entity;
+        return entity;
     }
 
     @Override
     public Balo update(Balo entity) {
-return entity;
+        return entity;
     }
 
     @Override

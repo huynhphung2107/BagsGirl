@@ -21,11 +21,9 @@ import java.util.List;
 @RequestMapping("/api/manage")
 public class CompartmentRestController {
 
+    List<Compartment> list = new ArrayList<>();
     @Autowired
     private ICompartmentRepository iCompartmentRepository;
-
-    List<Compartment> list = new ArrayList<>();
-
 
     //hien thi
     @GetMapping("/compartment")
