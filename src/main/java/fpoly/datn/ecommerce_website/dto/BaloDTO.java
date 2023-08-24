@@ -1,5 +1,6 @@
 package fpoly.datn.ecommerce_website.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,10 @@ import lombok.ToString;
 public class BaloDTO {
 
     private String id;
+    @NotBlank
     private String code;
+    @NotBlank
     private String name;
+    @NotBlank
     private String status;
 }
