@@ -1,4 +1,4 @@
-package fpoly.datn.ecommerce_website.controller.RestController;
+package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.entity.BuckleType;
 import fpoly.datn.ecommerce_website.repository.IBuckleTypeRepository;
@@ -21,11 +21,9 @@ import java.util.List;
 @RequestMapping("/api/manage")
 public class BuckleTypeRestController {
 
+    List<BuckleType> list = new ArrayList<>();
     @Autowired
     private IBuckleTypeRepository iBuckleTypeRepository;
-
-    List<BuckleType> list = new ArrayList<>();
-
 
     //hien thi
     @GetMapping("/buckle")

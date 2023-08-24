@@ -6,9 +6,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.*;
-
-import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
@@ -25,8 +28,8 @@ public class Brand {
     private String id;
 
     @Column(name = "brand_code")
-    private String  brandCode;
+    private String brandCode;
 
     @Column(name = "brand_name")
-    private String  brandName;
+    private String brandName;
 }

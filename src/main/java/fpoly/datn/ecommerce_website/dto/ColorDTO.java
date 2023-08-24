@@ -5,16 +5,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
+@AllArgsConstructor
 @Getter
+@Setter
+@ToString
 @Builder
-public class TypeDTO {
+
+public class ColorDTO {
     private UUID id;
-    private String typeCode;
-    private String typeName;
+    private String colorCode;
+    private String colorName;
 }

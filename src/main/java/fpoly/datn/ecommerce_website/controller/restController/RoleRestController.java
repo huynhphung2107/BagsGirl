@@ -1,4 +1,4 @@
-package fpoly.datn.ecommerce_website.controller.RestController;
+package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.entity.UserRole;
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
@@ -14,11 +14,9 @@ import java.util.List;
 @RequestMapping("/api/manage")
 public class RoleRestController {
 
+    List<UserRole> list = new ArrayList<>();
     @Autowired
     private IRoleRepository iRoleRepository;
-
-
-    List<UserRole> list = new ArrayList<>();
 
     @GetMapping("/role")
     public List<UserRole> getAll() {

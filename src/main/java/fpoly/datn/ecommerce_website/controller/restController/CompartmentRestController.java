@@ -1,4 +1,4 @@
-package fpoly.datn.ecommerce_website.controller.RestController;
+package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.entity.Compartment;
 import fpoly.datn.ecommerce_website.repository.ICompartmentRepository;
@@ -21,11 +21,9 @@ import java.util.List;
 @RequestMapping("/api/manage")
 public class CompartmentRestController {
 
+    List<Compartment> list = new ArrayList<>();
     @Autowired
     private ICompartmentRepository iCompartmentRepository;
-
-    List<Compartment> list = new ArrayList<>();
-
 
     //hien thi
     @GetMapping("/compartment")

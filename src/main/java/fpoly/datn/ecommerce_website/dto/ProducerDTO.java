@@ -13,8 +13,8 @@ import java.util.UUID;
 @Setter
 @Getter
 @Builder
-public class TypeDTO {
+public class ProducerDTO {
     private UUID id;
-    private String typeCode;
-    private String typeName;
+    private String producerCode;
+    private String producerName;
 }
