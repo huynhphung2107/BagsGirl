@@ -27,17 +27,17 @@ public class BaloServiceImpl implements ServiceGenarel<Balo> {
 
     @Override
     public Balo save(Balo entity) {
-        return entity;
+        return iBaloRepository.save(entity);
     }
 
     @Override
     public Balo update(Balo entity) {
-        return entity;
+        return iBaloRepository.save(entity);
     }
 
     @Override
     public void delete(String id) {
-
+        iBaloRepository.deleteById(id);
     }
 
     @Override

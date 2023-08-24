@@ -21,22 +21,23 @@ public class BuckleTypeServiceImpl implements ServiceGenarel<BuckleType> {
 
     @Override
     public BuckleType findById(String id) {
-        return null;
+        return iBuckleTypeRepository.findById(id).get();
     }
 
     @Override
     public BuckleType save(BuckleType entity) {
-        return entity;
+        return iBuckleTypeRepository.save(entity);
     }
 
     @Override
     public BuckleType update(BuckleType entity) {
-        return entity;
+        return iBuckleTypeRepository.save(entity);
+
     }
 
     @Override
     public void delete(String id) {
-
+        iBuckleTypeRepository.deleteById(id);
     }
 
     @Override
