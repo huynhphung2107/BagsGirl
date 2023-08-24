@@ -1,4 +1,4 @@
-package fpoly.datn.ecommerce_website.entity.dto;
+package fpoly.datn.ecommerce_website.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
