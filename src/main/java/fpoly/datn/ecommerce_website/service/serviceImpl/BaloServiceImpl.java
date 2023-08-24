@@ -22,7 +22,7 @@ public class BaloServiceImpl implements ServiceGenarel<Balo> {
 
     @Override
     public Balo findById(String id) {
-        return null;
+        return this.iBaloRepository.findById(id).get();
     }
 
     @Override
