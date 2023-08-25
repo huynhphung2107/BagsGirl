@@ -81,21 +81,18 @@ public class CompartmentRestController {
         return new ResponseEntity<>("Delete Successfully!!!!!!", HttpStatus.NO_CONTENT);
     }
 
-    //Validation Balo Rest API
+    //validate
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    //Anotation này đánh dấu cho func này sẽ được thực thi khi nhận được Trang thái của HTTP là Bad Request (BAD_REQUEST khi yêu cầu URL không chạy đúng)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    //Khi validate không thành công nhờ cái thằng này mới bắt đc các exception mà chương trình ném ra
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>(); //Dùng map để lưu các error khi nhận đc từ các exception
+        Map<String, String> errors = new HashMap<>();
 
-        ex.getBindingResult().getAllErrors().forEach(error -> {  //Duyệt list error mà thằng MethodArgumentNotValidException trả ra
-            String fieldName = ((FieldError) error).getField();  //Cái này là tên thuộc tính của thằng đối tượng validate ko thành công
-            String errorMesssage = error.getDefaultMessage(); // Còn đây là mô tả của thuộc tính đó (mặc định sẽ là của spring, có thể custom message bên dto)
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMesssage = error.getDefaultMessage();
             errors.put(fieldName, errorMesssage);
         });
 
         return errors;
     }
-    //End
 }
