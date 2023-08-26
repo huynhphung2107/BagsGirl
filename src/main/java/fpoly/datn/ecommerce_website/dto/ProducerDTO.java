@@ -1,5 +1,6 @@
 package fpoly.datn.ecommerce_website.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,8 @@ import java.util.UUID;
 @Builder
 public class ProducerDTO {
     private UUID id;
+    @NotBlank
     private String producerCode;
+    @NotBlank
     private String producerName;
 }
