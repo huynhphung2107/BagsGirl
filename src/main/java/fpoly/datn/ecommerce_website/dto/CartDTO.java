@@ -30,7 +30,7 @@ public class CartDTO {
     private String note;
 
     @NotBlank( message = "Không được để trống status")
-    private String status;
+    private Integer status;
 
     @NotBlank( message = "Không được để trống customer")
     private String customer;
