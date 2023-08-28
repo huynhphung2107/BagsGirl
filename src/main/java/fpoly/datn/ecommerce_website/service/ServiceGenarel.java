@@ -12,7 +12,7 @@ public interface ServiceGenarel<T> {
 
     T update(T entity);
 
-    void delete(String id);
+    String delete(String id);
 
     List<T> searchByName(String name);
 

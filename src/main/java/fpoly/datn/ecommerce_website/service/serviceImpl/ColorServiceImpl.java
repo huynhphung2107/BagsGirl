@@ -36,8 +36,9 @@ public class ColorServiceImpl implements ServiceGenarel<Color> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         iColorReponsitory.deleteById(UUID.fromString(id));
+        return "Delete successfully";
     }
 
     @Override

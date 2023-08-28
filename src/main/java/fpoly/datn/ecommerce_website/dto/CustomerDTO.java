@@ -1,6 +1,6 @@
 package fpoly.datn.ecommerce_website.dto;
 
-import fpoly.datn.ecommerce_website.entity.UserRole;
+import fpoly.datn.ecommerce_website.entity.UserInfo;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,20 +15,13 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class UserInfoDTO {
+public class CustomerDTO {
+    @NotBlank
     private String id;
-    @NotBlank
-    private String fullName;
-    @NotBlank
-    private String account;
-    @NotBlank
-    private String password;
-    @NotBlank
-    private String email;
     @NotBlank
     private Integer status;
     @NotBlank
-    private Boolean gender;
+    private Integer point;
     @NotBlank
-    private UserRole userRole;
+    private UserInfo userInfo;
 }

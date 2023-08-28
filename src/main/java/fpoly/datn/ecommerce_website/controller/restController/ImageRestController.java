@@ -2,7 +2,7 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.ImageDTO;
 import fpoly.datn.ecommerce_website.entity.Image;
-import fpoly.datn.ecommerce_website.service.ServiceGenarelTwo;
+import fpoly.datn.ecommerce_website.service.serviceImpl.ImageServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,26 +25,23 @@ import java.util.Map;
 @RequestMapping("/api/manage")
 @RestController
 public class ImageRestController {
-
     @Autowired
     private ModelMapper modelMapper;
-
     @Autowired
-    private ServiceGenarelTwo<Image> serviceGenarelTwo;
+    private ImageServiceImpl imageService;
 
     //GetAll
     @RequestMapping(value = "/image/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(serviceGenarelTwo.findAll());
+        return ResponseEntity.ok(imageService.findAll());
     }
 
     //GetOne
     @RequestMapping(value = "/image", method = RequestMethod.GET)
     public ResponseEntity<?> getOne(@RequestParam String id) {
-        if(serviceGenarelTwo.findById(id) != null){
-            return ResponseEntity.ok(serviceGenarelTwo.findById(id));
-
-        }else{
+        if (imageService.findById(id) != null) {
+            return ResponseEntity.ok(imageService.findById(id));
+        } else {
             return ResponseEntity.ok("Không tìm thấy ID !!!");
         }
     }
@@ -54,44 +51,37 @@ public class ImageRestController {
     public ResponseEntity<Image> add(@RequestBody @Valid ImageDTO imageDTO) {
         Image image = modelMapper.map(imageDTO, Image.class);
         return new ResponseEntity<>(
-                this.serviceGenarelTwo.save(image)
+                this.imageService.save(image)
                 , HttpStatus.OK);
     }
 
     //update
     @RequestMapping(value = "/image", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@RequestBody @Valid ImageDTO imageDTO, @RequestParam String id) {
-        if(serviceGenarelTwo.findById(id) != null){
+        if (imageService.findById(id) != null) {
             Image image = modelMapper.map(imageDTO, Image.class);
-            return ResponseEntity.ok(serviceGenarelTwo.update(image,id));
+            return ResponseEntity.ok(imageService.update(image));
 
-        }else{
+        } else {
             return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
         }
-
     }
 
     //delete
     @RequestMapping(value = "/image", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
-        if(serviceGenarelTwo.delete(id)){
-            return ResponseEntity.ok("Xóa thành công!!");
-        }else{
-            return ResponseEntity.ok("id không tồn tại để xóa!!");
-        }
+        return new ResponseEntity<>(this.imageService.delete(id), HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMesssage = error.getDefaultMessage();
             errors.put(fieldName, errorMesssage);
         });
-
         return errors;
     }
 }

@@ -37,15 +37,13 @@ public class TypeServiceImpl implements ServiceGenarel<Type> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         typeRepository.deleteById(id);
-
+        return "Delete successfully";
     }
 
     @Override
     public List<Type> searchByName(String name) {
         return null;
     }
-
-
 }

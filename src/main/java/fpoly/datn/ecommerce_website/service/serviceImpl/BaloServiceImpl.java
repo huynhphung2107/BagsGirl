@@ -36,8 +36,9 @@ public class BaloServiceImpl implements ServiceGenarel<Balo> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         iBaloRepository.deleteById(id);
+        return "Delete successfully";
     }
 
     @Override

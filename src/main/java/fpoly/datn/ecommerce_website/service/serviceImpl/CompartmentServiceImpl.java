@@ -35,8 +35,9 @@ public class CompartmentServiceImpl implements ServiceGenarel<Compartment> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         iCompartmentRepository.deleteById(id);
+        return "Delete successfully";
     }
 
     @Override
