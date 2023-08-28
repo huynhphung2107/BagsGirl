@@ -37,8 +37,9 @@ public class ProducerServiceImpl implements ServiceGenarel<Producer> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         producerRepository.deleteById(id);
+        return "Delete successfully";
 
     }
 

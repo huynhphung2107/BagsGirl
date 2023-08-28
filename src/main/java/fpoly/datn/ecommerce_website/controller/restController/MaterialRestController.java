@@ -2,7 +2,7 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.MaterialDTO;
 import fpoly.datn.ecommerce_website.entity.Material;
-import fpoly.datn.ecommerce_website.service.ServiceGenarelTwo;
+import fpoly.datn.ecommerce_website.service.serviceImpl.MaterialServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +30,22 @@ public class MaterialRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ServiceGenarelTwo<Material> serviceGenarelTwo;
+    private MaterialServiceImpl materialService;
 
     //GetAll
     @RequestMapping(value = "/material/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
 
-        return ResponseEntity.ok(serviceGenarelTwo.findAll());
+        return ResponseEntity.ok(materialService.findAll());
     }
 
     //GetOne
     @RequestMapping(value = "/material", method = RequestMethod.GET)
     public ResponseEntity<?> getOne(@RequestParam String id) {
-        if(serviceGenarelTwo.findById(id) != null){
-            return ResponseEntity.ok(serviceGenarelTwo.findById(id));
+        if (materialService.findById(id) != null) {
+            return ResponseEntity.ok(materialService.findById(id));
 
-        }else{
+        } else {
             return ResponseEntity.ok("Không tìm thấy ID !!!");
         }
     }
@@ -55,17 +55,17 @@ public class MaterialRestController {
     public ResponseEntity<Material> add(@RequestBody @Valid MaterialDTO materialDTO) {
         Material material = modelMapper.map(materialDTO, Material.class);
         return new ResponseEntity<>(
-                this.serviceGenarelTwo.save(material)
+                this.materialService.save(material)
                 , HttpStatus.OK);
     }
 
     //update
     @RequestMapping(value = "/material", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@RequestBody @Valid MaterialDTO materialDTO, @RequestParam String id) {
-        if(serviceGenarelTwo.findById(id) != null){
+        if (materialService.findById(id) != null) {
             Material material = modelMapper.map(materialDTO, Material.class);
-            return ResponseEntity.ok(serviceGenarelTwo.update(material,id));
-        }else{
+            return ResponseEntity.ok(materialService.update(material));
+        } else {
             return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
         }
 
@@ -74,11 +74,8 @@ public class MaterialRestController {
     //delete
     @RequestMapping(value = "/material", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
-        if(serviceGenarelTwo.delete(id)){
-            return ResponseEntity.ok("Xóa thành công!!");
-        }else{
-            return ResponseEntity.ok("id không tồn tại để xóa!!");
-        }
+        return new ResponseEntity<>(this.materialService.delete(id), HttpStatus.OK);
+
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
