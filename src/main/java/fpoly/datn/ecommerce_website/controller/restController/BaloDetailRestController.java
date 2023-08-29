@@ -74,9 +74,8 @@ public class BaloDetailRestController {
     //delete
     @RequestMapping(value = "/balo-detail", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
-        return new ResponseEntity<>(
-                serviceGenarel.delete(id))
-               ,h ;
+        serviceGenarel.delete(id);
+        return new ResponseEntity<>("Delete successfully!", HttpStatus.OK);
     }
 
 

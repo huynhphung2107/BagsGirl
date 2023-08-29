@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,13 +23,13 @@ public class BaloDetailDTO {
     private UUID imageId;
     private UUID producerId;
 
-    @NotBlank
+    @NotNull
     private Float importPrice;
 
-    @NotBlank
+    @NotNull
     private Float retailPrice;
 
-    @NotBlank
+    @NotNull
     private Integer amount;
 
     @NotBlank

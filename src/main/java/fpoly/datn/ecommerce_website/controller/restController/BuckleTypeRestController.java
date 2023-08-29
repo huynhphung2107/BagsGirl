@@ -79,7 +79,7 @@ public class BuckleTypeRestController {
     @RequestMapping(value = "/buckletype", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam("id") String id) {
         serviceGenarel.delete(id);
-        return new ResponseEntity<>("Delete Successfully!", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("Delete Successfully!", HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
