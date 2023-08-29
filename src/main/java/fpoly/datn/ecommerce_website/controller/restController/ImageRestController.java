@@ -27,6 +27,7 @@ import java.util.Map;
 public class ImageRestController {
     @Autowired
     private ModelMapper modelMapper;
+
     @Autowired
     private ImageServiceImpl imageService;
 
