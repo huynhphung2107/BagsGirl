@@ -3,6 +3,7 @@ package fpoly.datn.ecommerce_website.controller.restController;
 import fpoly.datn.ecommerce_website.dto.TypeDTO;
 import fpoly.datn.ecommerce_website.entity.Type;
 import fpoly.datn.ecommerce_website.service.serviceImpl.TypeServiceImpl;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,7 +63,7 @@ public class TypeRestController {
 
     //Update
     @RequestMapping(value = "/type", method = RequestMethod.PUT)
-    public ResponseEntity<Type> update(@RequestBody TypeDTO typeDTO) {
+    public ResponseEntity<Type> update(@RequestBody @Valid TypeDTO typeDTO) {
         Type type = modelMapper.map(typeDTO, Type.class);
         return new ResponseEntity<>(
                 this.typeService.save(type)
@@ -71,7 +72,7 @@ public class TypeRestController {
 
     //Delete
     @RequestMapping(value = "/type", method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@RequestParam String id) {
+    public ResponseEntity<?> delete(@RequestParam @Valid String id) {
         this.typeService.delete(id);
         return new ResponseEntity<>(
                 "Delete Successfuly"

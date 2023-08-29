@@ -78,7 +78,7 @@ public class CompartmentRestController {
     @RequestMapping(value = "/compartment", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam("id") String id) {
         serviceGenarel.delete(serviceGenarel.findById(id).getId());
-        return new ResponseEntity<>("Delete Successfully!!!!!!", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("Delete Successfully!!!!!!", HttpStatus.OK);
     }
 
     //validate

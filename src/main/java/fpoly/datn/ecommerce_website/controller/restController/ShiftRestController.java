@@ -6,6 +6,7 @@ import fpoly.datn.ecommerce_website.dto.ShiftDTO;
 import fpoly.datn.ecommerce_website.entity.Cart;
 import fpoly.datn.ecommerce_website.entity.Shift;
 import fpoly.datn.ecommerce_website.service.ShiftService;
+import fpoly.datn.ecommerce_website.service.serviceImpl.ShiftServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class ShiftRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ShiftService shiftService;
+    private ShiftServiceImpl shiftService;
 
     //GetAll
     @RequestMapping(value = "/shift/", method = RequestMethod.GET)

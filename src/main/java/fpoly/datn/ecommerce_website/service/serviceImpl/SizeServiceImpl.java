@@ -43,7 +43,8 @@ public class SizeServiceImpl implements ServiceGenarel<Size> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         this.iSizeReponsitory.deleteById(id);
+        return "Delete successfully";
     }
 }

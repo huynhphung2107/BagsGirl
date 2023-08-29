@@ -27,6 +27,7 @@ import java.sql.Date;
 @Setter
 @Getter
 public class Shift {
+    //    @Pattern(regexp = "0[0-9\\s.-]{9,9}", message = "Không quá 10 số và bắt đầu bằng 0")
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)

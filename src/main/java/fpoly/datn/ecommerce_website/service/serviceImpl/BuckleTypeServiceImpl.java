@@ -36,8 +36,10 @@ public class BuckleTypeServiceImpl implements ServiceGenarel<BuckleType> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         iBuckleTypeRepository.deleteById(id);
+        return "Delete successfully";
+
     }
 
     @Override

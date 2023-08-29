@@ -3,6 +3,7 @@ package fpoly.datn.ecommerce_website.controller.restController;
 import fpoly.datn.ecommerce_website.dto.CartDTO;
 import fpoly.datn.ecommerce_website.entity.Cart;
 import fpoly.datn.ecommerce_website.service.CartService;
+import fpoly.datn.ecommerce_website.service.serviceImpl.CartServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class CartRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private CartService cartService;
+    private CartServiceImpl cartService;
 
     //GetAll
     @RequestMapping(value = "/cart/", method = RequestMethod.GET)

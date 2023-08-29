@@ -2,7 +2,7 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.entity.Material;
 import fpoly.datn.ecommerce_website.repository.IMaterialRepository;
-import fpoly.datn.ecommerce_website.service.ServiceGenarelTwo;
+import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,33 +10,30 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MaterialServiceImpl implements ServiceGenarelTwo<Material> {
+public class MaterialServiceImpl implements ServiceGenarel<Material> {
     @Autowired
-    private IMaterialRepository repo;
+    private IMaterialRepository materialRepository;
 
 
     @Override
     public List<Material> findAll() {
-        return repo.findAll();
+        return materialRepository.findAll();
     }
 
 
     @Override
     public Material findById(String id) {
-        return repo.findById(id).orElse(null);
+        return materialRepository.findById(id).orElse(null);
     }
 
     @Override
     public Material save(Material material) {
-        return repo.save(material);
+        return materialRepository.save(material);
     }
 
     @Override
-    public Material update(Material material, String id) {
-        Material x = this.findById(id);
-        x.setName(material.getName());
-        x.setCode(material.getCode());
-        return repo.save(x);
+    public Material update(Material material) {
+        return materialRepository.save(material);
     }
 
 
@@ -46,14 +43,14 @@ public class MaterialServiceImpl implements ServiceGenarelTwo<Material> {
     }
 
     @Override
-    public Boolean delete(String id) {
-        Optional<Material> optional = repo.findById(id);
-        if(optional.isPresent()){
+    public String delete(String id) {
+        Optional<Material> optional = materialRepository.findById(id);
+        if (optional.isPresent()) {
             Material kh = optional.get();
-            repo.delete(kh);
-            return true;
-        }else{
-            return false;
+            materialRepository.delete(kh);
+            return "Delete successfully";
+        } else {
+            return "Delete Unsuccessfully";
         }
     }
 }

@@ -1,12 +1,8 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.dto.CartDTO;
 import fpoly.datn.ecommerce_website.dto.ShiftDTO;
-import fpoly.datn.ecommerce_website.entity.Cart;
-import fpoly.datn.ecommerce_website.entity.Customer;
 import fpoly.datn.ecommerce_website.entity.Shift;
 import fpoly.datn.ecommerce_website.entity.Staff;
-import fpoly.datn.ecommerce_website.repository.ICartRepository;
 import fpoly.datn.ecommerce_website.repository.IShiftRepository;
 import fpoly.datn.ecommerce_website.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;

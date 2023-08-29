@@ -37,9 +37,10 @@ public class BrandServiceImpl implements ServiceGenarel<Brand> {
     }
 
     @Override
-    public void delete(String id) {
+    public String delete(String id) {
         iBrandRepository.deleteById(id);
 
+        return "Delete successfully";
     }
 
     @Override
