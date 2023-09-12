@@ -1,0 +1,17 @@
+@import '~bootstrap-icons/font/bootstrap-icons';
+
+.content {
+  flex-grow: 1;
+  padding: 2em;
+  background-color: #f3f4f3;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.wrapper {
+  display: flex;
+  height: 100vh;
+}
