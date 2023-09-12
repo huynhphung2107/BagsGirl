@@ -1,0 +1,149 @@
+[
+  {
+    "title": "Giao Diện Chung",
+    "icon": "bi-house-door",
+    "childrens": [
+      {
+        "title": "Home",
+        "icon": "bi-house-fill",
+        "path": "/"
+      },
+      {
+        "title": "Home 2",
+        "icon": "bi-info-circle-fill",
+        "path": "/"
+      },
+      {
+        "title": "Home 2",
+        "icon": "bi-question-circle-fill",
+        "path": "/"
+      }
+    ]
+  },
+  {
+    "title": "Bán Hàng Tại Quầy",
+    "icon": "bi-cart",
+    "childrens": [
+      {
+        "title": "Bán Hàng",
+        "path": "/"
+      },
+      {
+        "title": "Bán Hàng 2",
+        "path": "/"
+      },
+      {
+        "title": "Bán Hàng 3",
+        "path": "/"
+      },
+      {
+        "title": "Bán Hàng 4",
+        "path": "/"
+      }
+    ]
+  },
+  {
+    "title": "Quản lí Hóa Đơn",
+    "icon": "bi-gear-fill",
+    "childrens": [
+      {
+        "title": "Xem D/Sách hóa đơn",
+        "path": "/"
+      },
+      {
+        "title": "Tìm Kiếm H/Đơn"
+      },
+      {
+        "title": "Update H/Đơn",
+        "path": "/"
+      }
+    ]
+  },
+  {
+    "title": "Quản lí Nhân Viên",
+    "icon": "bi-person-badge",
+    "childrens": [
+      {
+        "title": "Xem D/Sách Nhân Viên",
+        "path": "/"
+      },
+      {
+        "title": "+ Tìm Kiếm Nhân Viên",
+        "path": "/"
+      },
+      {
+        "title": "+ Quản lí Nhân Viên",
+        "path": "/"
+      }
+    ]
+  },
+  {
+    "title": "Quản lí Khách Hàng",
+    "icon": "bi-person",
+    "childrens": [
+      {
+        "title": "Xem D/Sách Khách Hàng",
+        "path": "/"
+      },
+      {
+        "title": "+ Tìm Kiếm Khách Hàng",
+        "path": "/"
+      },
+      {
+        "title": "+ Quản lí Khách Hàng",
+        "path": "/"
+      }
+    ]
+  },
+  {
+    "title": "Quản lí Khuyến Mãi",
+    "icon": "bi-cash",
+    "childrens": [
+      {
+        "title": "Xem D/Sách Khuyến Mãi",
+        "path": "/"
+      },
+      {
+        "title": "+ Tìm Kiếm Khuyến Mãi",
+        "path": "/"
+      },
+      {
+        "title": "+ Quản lí Khuyến Mãi",
+        "path": "/"
+      }
+    ]
+  },
+  {
+    "title": "Quản lí Tài Khoản",
+    "icon": "bi-view-list",
+    "childrens": [
+      {
+        "title": "Quản lí Đăng Nhập",
+        "path": "/"
+      },
+      {
+        "title": "+ Quản Lí Phân Quyền",
+        "path": "/"
+      },
+      {
+        "title": "+ Quản lí Bla Bla",
+        "path": "/"
+      }
+    ]
+  },
+  {
+    "title": "beta 0.1",
+    "icon": "bi-question-circle-fill",
+    "path": "/support"
+  },
+  {
+    "title": "Support",
+    "icon": "bi-question-circle-fill",
+    "path": "/support"
+  },
+  {
+    "title": "Report Bug",
+    "icon": "bi-bug",
+    "path": "/report-bug"
+  }
+]

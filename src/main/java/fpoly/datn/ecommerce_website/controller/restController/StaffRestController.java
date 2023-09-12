@@ -46,6 +46,7 @@ public class StaffRestController {
     @RequestMapping("/staff/")
     public ResponseEntity<List<StaffDTO>> getAll() {
         List<Staff> list = staffService.findAll();
+        System.out.println(list.size());
         return new ResponseEntity<>(
                 list.stream().map(staff -> modelMapper.map(staff, StaffDTO.class)).collect(Collectors.toList())
                 , HttpStatus.OK

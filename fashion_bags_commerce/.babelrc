@@ -1,0 +1,14 @@
+{
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "alias": {
+                    "~": "./src"
+                }
+            }
+        ]
+    ]
+}
+//Intead of Import this: import App from '../App.js'
+// Replace with: import App from '~/App.js'
