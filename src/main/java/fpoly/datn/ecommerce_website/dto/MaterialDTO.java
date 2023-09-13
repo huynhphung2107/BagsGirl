@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class MaterialDTO {
 
+    private String id;
 
     @NotBlank(message = "Không để trống code")
     private String code;

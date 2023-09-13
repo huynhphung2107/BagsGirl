@@ -1,7 +1,11 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
+import fpoly.datn.ecommerce_website.dto.ImageDTO;
 import fpoly.datn.ecommerce_website.dto.MaterialDTO;
+import fpoly.datn.ecommerce_website.dto.TypeDTO;
+import fpoly.datn.ecommerce_website.entity.Image;
 import fpoly.datn.ecommerce_website.entity.Material;
+import fpoly.datn.ecommerce_website.entity.Type;
 import fpoly.datn.ecommerce_website.service.serviceImpl.MaterialServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -60,16 +64,24 @@ public class MaterialRestController {
     }
 
     //update
+//    @RequestMapping(value = "/material", method = RequestMethod.PUT)
+//    public ResponseEntity<?> update(@RequestBody @Valid MaterialDTO materialDTO, @RequestParam String id) {
+//        if (materialService.findById(id) != null) {
+//            Material material = modelMapper.map(materialDTO, Material.class);
+//            return ResponseEntity.ok(materialService.update(material));
+//        } else {
+//            return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
+//        }
+//
+//    }
     @RequestMapping(value = "/material", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@RequestBody @Valid MaterialDTO materialDTO, @RequestParam String id) {
-        if (materialService.findById(id) != null) {
-            Material material = modelMapper.map(materialDTO, Material.class);
-            return ResponseEntity.ok(materialService.update(material));
-        } else {
-            return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
-        }
-
+    public ResponseEntity<Material> update(@RequestBody @Valid MaterialDTO materialDTO) {
+        Material material = modelMapper.map(materialDTO, Material.class);
+        return new ResponseEntity<>(
+                this.materialService.save(material)
+                , HttpStatus.OK);
     }
+
 
     //delete
     @RequestMapping(value = "/material", method = RequestMethod.DELETE)

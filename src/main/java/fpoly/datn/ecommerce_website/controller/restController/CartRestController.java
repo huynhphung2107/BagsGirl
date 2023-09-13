@@ -1,10 +1,9 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
-import fpoly.datn.ecommerce_website.dto.ImageDTO;
-import fpoly.datn.ecommerce_website.dto.TypeDTO;
-import fpoly.datn.ecommerce_website.entity.Image;
-import fpoly.datn.ecommerce_website.entity.Type;
-import fpoly.datn.ecommerce_website.service.serviceImpl.ImageServiceImpl;
+import fpoly.datn.ecommerce_website.dto.CartDTO;
+import fpoly.datn.ecommerce_website.entity.Cart;
+import fpoly.datn.ecommerce_website.service.CartService;
+import fpoly.datn.ecommerce_website.service.serviceImpl.CartServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,74 +22,80 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @RequestMapping("/api/manage")
 @RestController
-public class ImageRestController {
+public class CartRestController {
+
     @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
-    private ImageServiceImpl imageService;
+    private CartServiceImpl cartService;
 
     //GetAll
-    @RequestMapping(value = "/image/", method = RequestMethod.GET)
+    @RequestMapping(value = "/cart/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(imageService.findAll());
+        return ResponseEntity.ok(cartService.findAll());
+    }
+
+    //PhanTrang
+    @RequestMapping(value = "/cart/phanTrang", method = RequestMethod.GET)
+    public ResponseEntity<?> phanTrang(@RequestParam(defaultValue = "0", name = "page")Integer page){
+        return ResponseEntity.ok(cartService.findAllPhanTrang(page));
     }
 
     //GetOne
-    @RequestMapping(value = "/image", method = RequestMethod.GET)
+    @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public ResponseEntity<?> getOne(@RequestParam String id) {
-        if (imageService.findById(id) != null) {
-            return ResponseEntity.ok(imageService.findById(id));
-        } else {
+        if(cartService.findById(id) != null){
+            return ResponseEntity.ok(cartService.findById(id));
+
+        }else{
             return ResponseEntity.ok("Không tìm thấy ID !!!");
         }
     }
-
+//
     //Add
-    @RequestMapping(value = "/image", method = RequestMethod.POST)
-    public ResponseEntity<Image> add(@RequestBody @Valid ImageDTO imageDTO) {
-        Image image = modelMapper.map(imageDTO, Image.class);
+    @RequestMapping(value = "/cart", method = RequestMethod.POST)
+    public ResponseEntity<Cart> add(@RequestBody @Valid CartDTO cartDTO) {
         return new ResponseEntity<>(
-                this.imageService.save(image)
+                this.cartService.save(cartDTO)
                 , HttpStatus.OK);
     }
-
+//
     //update
-//    @RequestMapping(value = "/image", method = RequestMethod.PUT)
-//    public ResponseEntity<?> update(@RequestBody @Valid ImageDTO imageDTO, @RequestParam String id) {
-//        if (imageService.findById(id) != null) {
-//            Image image = modelMapper.map(imageDTO, Image.class);
-//            return ResponseEntity.ok(imageService.update(image));
-//        } else {
-//            return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
-//        }
-//    }
-    @RequestMapping(value = "/image", method = RequestMethod.PUT)
-    public ResponseEntity<Image> update(@RequestBody @Valid ImageDTO imageDTO) {
-        Image image = modelMapper.map(imageDTO, Image.class);
-        return new ResponseEntity<>(
-                this.imageService.save(image)
-                , HttpStatus.OK);
+    @RequestMapping(value = "/cart", method = RequestMethod.PUT)
+    public ResponseEntity<?> update(@RequestBody @Valid CartDTO cartDTO, @RequestParam String id) {
+        if(cartService.findById(id) != null){
+            return ResponseEntity.ok(cartService.update(cartDTO,id));
+
+        }else{
+            return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
+        }
+
     }
 
     //delete
-    @RequestMapping(value = "/image", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/cart", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
-        return new ResponseEntity<>(this.imageService.delete(id), HttpStatus.OK);
+        if(cartService.delete(id)){
+            return ResponseEntity.ok("Xóa thành công!!");
+        }else{
+            return ResponseEntity.ok("id không tồn tại để xóa!!");
+        }
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
+
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMesssage = error.getDefaultMessage();
             errors.put(fieldName, errorMesssage);
         });
+
         return errors;
     }
 }

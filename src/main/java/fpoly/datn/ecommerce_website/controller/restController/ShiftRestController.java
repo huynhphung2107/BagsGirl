@@ -1,10 +1,12 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
-import fpoly.datn.ecommerce_website.dto.ImageDTO;
-import fpoly.datn.ecommerce_website.dto.TypeDTO;
-import fpoly.datn.ecommerce_website.entity.Image;
-import fpoly.datn.ecommerce_website.entity.Type;
-import fpoly.datn.ecommerce_website.service.serviceImpl.ImageServiceImpl;
+
+import fpoly.datn.ecommerce_website.dto.CartDTO;
+import fpoly.datn.ecommerce_website.dto.ShiftDTO;
+import fpoly.datn.ecommerce_website.entity.Cart;
+import fpoly.datn.ecommerce_website.entity.Shift;
+import fpoly.datn.ecommerce_website.service.ShiftService;
+import fpoly.datn.ecommerce_website.service.serviceImpl.ShiftServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,74 +25,80 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @RequestMapping("/api/manage")
 @RestController
-public class ImageRestController {
+public class ShiftRestController {
+
     @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
-    private ImageServiceImpl imageService;
+    private ShiftServiceImpl shiftService;
 
     //GetAll
-    @RequestMapping(value = "/image/", method = RequestMethod.GET)
+    @RequestMapping(value = "/shift/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(imageService.findAll());
+        return ResponseEntity.ok(shiftService.findAll());
+    }
+
+    //PhanTrang
+    @RequestMapping(value = "/shift/phanTrang", method = RequestMethod.GET)
+    public ResponseEntity<?> phanTrang(@RequestParam(defaultValue = "0", name = "page")Integer page){
+        return ResponseEntity.ok(shiftService.findAllPhanTrang(page));
     }
 
     //GetOne
-    @RequestMapping(value = "/image", method = RequestMethod.GET)
+    @RequestMapping(value = "/shift", method = RequestMethod.GET)
     public ResponseEntity<?> getOne(@RequestParam String id) {
-        if (imageService.findById(id) != null) {
-            return ResponseEntity.ok(imageService.findById(id));
-        } else {
+        if(shiftService.findById(id) != null){
+            return ResponseEntity.ok(shiftService.findById(id));
+
+        }else{
             return ResponseEntity.ok("Không tìm thấy ID !!!");
         }
     }
 
     //Add
-    @RequestMapping(value = "/image", method = RequestMethod.POST)
-    public ResponseEntity<Image> add(@RequestBody @Valid ImageDTO imageDTO) {
-        Image image = modelMapper.map(imageDTO, Image.class);
+    @RequestMapping(value = "/shift", method = RequestMethod.POST)
+    public ResponseEntity<Shift> add(@RequestBody @Valid ShiftDTO shiftDTO) {
         return new ResponseEntity<>(
-                this.imageService.save(image)
+                this.shiftService.save(shiftDTO)
                 , HttpStatus.OK);
     }
 
     //update
-//    @RequestMapping(value = "/image", method = RequestMethod.PUT)
-//    public ResponseEntity<?> update(@RequestBody @Valid ImageDTO imageDTO, @RequestParam String id) {
-//        if (imageService.findById(id) != null) {
-//            Image image = modelMapper.map(imageDTO, Image.class);
-//            return ResponseEntity.ok(imageService.update(image));
-//        } else {
-//            return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
-//        }
-//    }
-    @RequestMapping(value = "/image", method = RequestMethod.PUT)
-    public ResponseEntity<Image> update(@RequestBody @Valid ImageDTO imageDTO) {
-        Image image = modelMapper.map(imageDTO, Image.class);
-        return new ResponseEntity<>(
-                this.imageService.save(image)
-                , HttpStatus.OK);
+    @RequestMapping(value = "/shift", method = RequestMethod.PUT)
+    public ResponseEntity<?> update(@RequestBody @Valid ShiftDTO shiftDTO, @RequestParam String id) {
+        if(shiftService.findById(id) != null){
+            return ResponseEntity.ok(shiftService.update(shiftDTO,id));
+
+        }else{
+            return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
+        }
+
     }
 
     //delete
-    @RequestMapping(value = "/image", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/shift", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
-        return new ResponseEntity<>(this.imageService.delete(id), HttpStatus.OK);
+        if(shiftService.delete(id)){
+            return ResponseEntity.ok("Xóa thành công!!");
+        }else{
+            return ResponseEntity.ok("id không tồn tại để xóa!!");
+        }
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
+
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMesssage = error.getDefaultMessage();
             errors.put(fieldName, errorMesssage);
         });
+
         return errors;
     }
 }
