@@ -1,7 +1,10 @@
 # Getting Started with Create React App
 # Mọi người vui lòng đọc qua phần Readme này để chạy dự án reactjs:
 + Do các Dependencies trong dự án React quá lớn (~800mb) -> Nên không thể đẩy lên github được
-+ Trước khi chạy thì mọi người gõ cmd trong thư mục React là fashion_bags_commerce như trên này ![image](https://github.com/huynhphung2107/FashionBagsEcommerce/assets/106645772/ee22c190-966a-49e9-bed4-11b53baaa168)
++ Trước khi chạy thì mọi người gõ cmd trong thư mục React là fashion_bags_commerce như trên này ![image](https://github.com/huynhphung2107/FashionBagsEcommerce/assets/106645772/ee22c190-966a-49e9-bed4-11b53baaa168)!
++ ![image](https://github.com/huynhphung2107/FashionBagsEcommerce/assets/106645772/5cfc6f41-a226-48eb-b073-fb3916d9a210)
+[image](https://github.com/huynhphung2107/FashionBagsEcommerce/assets/106645772/7ffd53cc-88f2-43f1-b5c4-888b0392f556)
+
 + gõ lênh npm install để cài dặt (và sau này khi bị lỗi kiểu "cannot find module....." thì mng cứ lệnh này để cài lại)
 + Để Run hay check, build, test Dự án thì mng đọc ở phần dưới:
   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
