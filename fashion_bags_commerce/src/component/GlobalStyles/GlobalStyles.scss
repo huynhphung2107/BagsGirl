@@ -1,4 +1,4 @@
-@import 'normalize.css';
+// @import 'normalize.css';
 // - color: đặt màu cho văn bản bên trong phần tử.
 // - font-size: đặt kích thước chữ cho văn bản bên trong phần tử.
 // - background-color: đặt màu nền cho phần tử.
@@ -14,4 +14,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   color: #8890b5;
+  background-color: #f3f4f3;
+  a {
+    text-decoration: none;
+  }
 }
