@@ -50,7 +50,7 @@ public class ImageServiceImpl implements ServiceGenarel<Image> {
             imageRepository.delete(kh);
             return "Delete successfully";
         } else {
-            return "Delete successfully";
+            return "Delete Unsuccessfully";
         }
     }
 }

@@ -50,7 +50,7 @@ public class MaterialServiceImpl implements ServiceGenarel<Material> {
             materialRepository.delete(kh);
             return "Delete successfully";
         } else {
-            return "Delete successfully";
+            return "Delete Unsuccessfully";
         }
     }
 }

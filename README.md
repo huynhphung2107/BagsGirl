@@ -5,7 +5,7 @@
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://twitter.com/https:\/\/twitter.com\/NguyenCongTuanA" target="_blank">
-    <img alt="Twitter: https:\/\/twitter.com\/NguyenCongTuanA" src="https://img.shields.io/twitter/follow/https:\/\/twitter.com\/NguyenCongTuanA.svg?style=social" />
+    <img alt="" src="" />
   </a>
 </p>
 
@@ -15,10 +15,10 @@
 
 👤 **NguyenCongTuanAnh**
 
-* Website: https://github.com/NguyenCongTuanAnh
-* Twitter: [@https:\/\/twitter.com\/NguyenCongTuanA](https://twitter.com/https:\/\/twitter.com\/NguyenCongTuanA)
+* Website: https://github.com/
+* Twitter: [@https:\/\/twitter.com\/](https://twitter.com/https:\/\/twitter.com\/)
 * Github: [@FashionBagsEcommerce](https://github.com/FashionBagsEcommerce)
-* LinkedIn: [@https:\/\/www.linkedin.com\/in\/nguyen-cong-tuan-anh-923849271\/](https://linkedin.com/in/https:\/\/www.linkedin.com\/in\/nguyen-cong-tuan-anh-923849271\/)
+* LinkedIn: []
 
 ## Show your support
 
