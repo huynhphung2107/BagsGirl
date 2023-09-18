@@ -1,7 +1,9 @@
 import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
-const { Header, Footer, Sider, Content } = Layout;
+import TableContent from '../ProductViewer/Table/Table';
+
+const { Header, Footer, Sider } = Layout;
 const headerStyle = {
   borderLeft: '270px',
   color: '#fff',
@@ -10,12 +12,6 @@ const headerStyle = {
   lineHeight: '64px',
   backgroundColor: '#fff',
   padding: '30px',
-};
-const contentStyle = {
-  minHeight: 120,
-  lineHeight: '120px',
-  color: 'black',
-  backgroundColor: '#f3f4f3',
 };
 const footerStyle = {
   borderLeft: '270px',
@@ -27,21 +23,22 @@ const layoutContent = {
   flexGrow: '1',
 };
 
-function Admin() {
+function ProductViewer() {
   return (
     <Layout style={{ height: '100vh', background: '#f4f3f4' }}>
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="1" openKey="sub1" />
+        <Sidebar keyIndex="13" openKey="sub5" />
       </Sider>
       <Layout style={layoutContent}>
         <Header style={headerStyle}>
-          <HeaderContent />
+          <HeaderContent titlePage="Danh Sách Sản Phẩm" />
         </Header>
-        <Content style={contentStyle}>Đây là component của Content</Content>
+        <TableContent />
+
         <Footer style={footerStyle}>Đây là component của Footer</Footer>
       </Layout>
     </Layout>
   );
 }
 
-export default Admin;
+export default ProductViewer;
