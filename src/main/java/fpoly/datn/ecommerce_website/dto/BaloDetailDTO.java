@@ -12,16 +12,17 @@ import java.util.UUID;
 public class BaloDetailDTO {
 
     private UUID id;
-    private UUID baloId;
-    private UUID colorId;
-    private UUID typeId;
-    private UUID materialId;
-    private UUID sizeId;
-    private UUID brandId;
-    private UUID compartmentId;
-    private UUID buckleTypeId;
-    private UUID imageId;
-    private UUID producerId;
+    private String baloCode;
+    private String baloName;
+    private String colorName;
+    private String typeName;
+    private String materialName;
+    private String sizeName;
+    private String brandName;
+    private String compartmentName;
+    private String buckleTypeName;
+    private String imgUrl;
+    private String producerName;
 
     @NotNull
     private Float importPrice;

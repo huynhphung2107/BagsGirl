@@ -34,6 +34,6 @@ public class Image {
     private String name;
 
     @Column(name = "image_url")
-    private String urlImage;
+    private String imgUrl;
 
 }
