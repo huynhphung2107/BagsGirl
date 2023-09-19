@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Admin from './pages/Admin';
 import Profile from './pages/Profile';
 import ProductViewer from './pages/Admin/ProductManager/ProductViewer';
+import ShiftViewer from './pages/Admin/Shift/ShiftViewer';
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/product-viewer" element={<ProductViewer />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/shift" element={<ShiftViewer />}></Route>
         </Routes>
       </div>
     </Router>

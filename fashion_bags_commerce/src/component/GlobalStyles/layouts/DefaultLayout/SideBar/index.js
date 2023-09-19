@@ -8,6 +8,7 @@ import {
   ShoppingCartOutlined,
   TeamOutlined,
   UserOutlined,
+  ContactsOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import Avartar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/Avartar';
@@ -57,7 +58,7 @@ const items = [
     getItem('Option 12', '16'),
   ]),
   getItem('Quản lí Khuyến Mãi', 'sub6', <RedEnvelopeOutlined />, [
-    getItem('Option 9', '17'),
+    getItem('Danh sách voucher', '17'),
     getItem('Option 10', '18'),
     getItem('Option 11', '19'),
     getItem('Option 12', '20'),
@@ -74,6 +75,17 @@ const items = [
     getItem('Option 11', '27'),
     getItem('Option 12', '28'),
   ]),
+  getItem('Giao Ca', 'sub10', <ContactsOutlined />, [
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/shift'}>
+       Danh sách ca làm việc
+      </Link>,
+      '33',
+    ),
+    getItem('Option 10', '34'),
+    getItem('Option 11', '35'),
+    getItem('Option 12', '36'),
+  ]),
   getItem('Thống Kê và Phân Tích', 'sub9', <BarChartOutlined />, [
     getItem('Option 9', '29'),
     getItem('Option 10', '30'),
@@ -81,7 +93,7 @@ const items = [
     getItem('Option 12', '32'),
   ]),
 ];
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9'];
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9','sub10'];
 function Sidebar(props) {
   const { key, keyIndex, openKey } = props;
   console.log(keyIndex);

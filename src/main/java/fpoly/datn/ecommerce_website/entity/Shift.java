@@ -17,6 +17,8 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "shift")
@@ -38,11 +40,11 @@ public class Shift {
 
     @Column(name = "shift_start_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @Column(name = "shift_end_time")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date endTime;
+    @DateTimeFormat(pattern = "dd/MM/yyyy " )
+    private LocalDateTime endTime;
 
     @Column(name = "create_by")
     private String createBy;

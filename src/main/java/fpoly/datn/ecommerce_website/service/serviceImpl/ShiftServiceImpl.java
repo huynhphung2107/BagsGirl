@@ -49,11 +49,11 @@ public class ShiftServiceImpl implements ShiftService {
         Shift x = shiftDTO.validate(repo.findById(id).orElse(null));
         x.setCode(shiftDTO.getCode());
         x.setCreateBy(shiftDTO.getCreateBy());
-        x.setStartTime(shiftDTO.getStartTime());
+//        x.setStartTime(shiftDTO.getStartTime());
         x.setNote(shiftDTO.getNote());
         x.setStatus(shiftDTO.getStatus());
-        x.setEndTime(shiftDTO.getEndTime());
-        x.setStaff(Staff.builder().id(shiftDTO.getStaff()).build());
+//        x.setEndTime(shiftDTO.getEndTime());
+//        x.setStaff(Staff.builder().id(shiftDTO.getStaffName()).build());
         return repo.save(x);
     }
 
