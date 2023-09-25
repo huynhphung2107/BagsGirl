@@ -42,6 +42,7 @@ public class ShiftDTO {
     @NotBlank( message = "Không được để trống staff")
     private String staffUserInfoFullname;
 
+<<<<<<< HEAD
     public Shift validate(Shift shift){
         shift.setCode(this.getCode());
         shift.setStatus(this.getStatus());
@@ -53,5 +54,7 @@ public class ShiftDTO {
 
         return shift;
     }
+=======
+>>>>>>> main
 
 }

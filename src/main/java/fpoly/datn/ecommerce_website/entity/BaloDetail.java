@@ -35,13 +35,13 @@ public class BaloDetail {
     private Float retailPrice;
 
     @Column(name = "amount")
-    private Integer amount;
+    private Integer baloDetailAmount;
 
     @Column(name = "describe")
-    private String describe;
+    private String baloDetailDescribe;
 
     @Column(name = "status")
-    private Integer status;
+    private Integer baloDetailStatus;
 
     @ManyToOne
     @JoinColumn(name = "balo_id")

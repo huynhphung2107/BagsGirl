@@ -18,7 +18,7 @@ function FormProductEdit(props) {
         Edit
       </a>
       <Drawer
-        title={'Edit - ' + props.balo.code}
+        title={'Edit - ' + props.balo.baloCode}
         width={360}
         onClose={onClose}
         open={open}
@@ -38,7 +38,7 @@ function FormProductEdit(props) {
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name="code"
+                name="baloCode"
                 label="Mã Code Balo "
                 rules={[
                   {
@@ -56,7 +56,7 @@ function FormProductEdit(props) {
               <Row gutter={16}>
                 <Col span={24}>
                   <Form.Item
-                    name="name"
+                    name="baloName"
                     label="Tên "
                     rules={[
                       {
@@ -65,7 +65,7 @@ function FormProductEdit(props) {
                       },
                     ]}
                   >
-                    <Input value={'mkmxsimxs'} name="name" placeholder="Vui lòng điền Mã Code Balo" />
+                    <Input name="baloName" placeholder="Vui lòng điền Mã Code Balo" />
                   </Form.Item>
                 </Col>
               </Row>
@@ -74,7 +74,7 @@ function FormProductEdit(props) {
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name="status"
+                name="baloStatus"
                 label="Trạng Thái Balo"
                 rules={[
                   {

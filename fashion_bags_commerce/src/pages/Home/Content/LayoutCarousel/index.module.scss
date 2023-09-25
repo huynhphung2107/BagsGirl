@@ -1,0 +1,21 @@
+.carouselContent {
+  .item {
+    user-select: none;
+    &:hover {
+      cursor: grab;
+    }
+    height: fit-content;
+    color: #fff;
+    text-align: center;
+    background: #364d79;
+    img {
+    }
+  }
+}
+.collectionBanner {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  padding: 30px 50px;
+}

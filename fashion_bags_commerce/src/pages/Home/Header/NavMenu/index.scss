@@ -1,0 +1,23 @@
+.navContent {
+  padding: 20px;
+
+  .centeredMenu {
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0;
+
+      .ant-menu-title-content {
+        font-size: 25px;
+      }
+    }
+  }
+}
+.ant-menu-title-content {
+  font-size: 25px;
+}
+.ant-menu-overflow-item {
+  margin: 0px 28px;
+}

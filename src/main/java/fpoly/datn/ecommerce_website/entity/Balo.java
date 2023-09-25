@@ -28,14 +28,17 @@ public class Balo {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
 
     @Column(name = "balo_code")
-    private String code;
+    private String baloCode;
 
     @Column(name = "balo_name")
-    private String name;
+    private String baloName;
 
     @Column(name = "status")
-    private String status;
+    private int baloStatus;
+
+
+
 }

@@ -28,10 +28,10 @@ public class Size {
     private String id;
 
     @Column(name = "code")
-    private String code;
+    private String sizeCode;
 
     @Column(name = "name")
-    private String name;
+    private String sizeName;
 
     @Column(name = "length_size")
     private String lengthSize;
