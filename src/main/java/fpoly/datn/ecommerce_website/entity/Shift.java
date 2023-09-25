@@ -34,24 +34,24 @@ public class Shift {
     private String id;
 
     @Column(name = "shift_code")
-    private String code;
+    private String shiftCode;
 
     @Column(name = "shift_start_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date startTime;
+    private Date shiftStartTime;
 
     @Column(name = "shift_end_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date endTime;
+    private Date shiftEndTime;
 
     @Column(name = "create_by")
-    private String createBy;
+    private String shiftCreateBy;
 
     @Column(name = "note")
-    private String note;
+    private String shiftNote;
 
     @Column(name = "status")
-    private Integer status;
+    private Integer shiftStatus;
 
     @ManyToOne
     @JoinColumn(name = "staff_id")

@@ -2,8 +2,8 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BaloDetailDTO;
 import fpoly.datn.ecommerce_website.entity.BaloDetail;
-import fpoly.datn.ecommerce_website.entity.BuckleType;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
+import fpoly.datn.ecommerce_website.service.serviceImpl.BaloDetailServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -33,6 +35,21 @@ public class BaloDetailRestController {
     @Autowired
     private ServiceGenarel<BaloDetail> serviceGenarel;
 
+    @Autowired
+    private BaloDetailServiceImpl baloDetailService;
+
+    @RequestMapping(value = "/balo/{baloID}/balodetails", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllbyBalo(@PathVariable String baloID) {
+        return new ResponseEntity<>(
+                this.baloDetailService.findAllByBalo(baloID)
+                        .stream()
+                        .map(baloDetail -> modelMapper.map(baloDetail, BaloDetailDTO.class))
+                        .collect(Collectors.toList())
+                , HttpStatus.OK
+        );
+
+    }
+
     //getall
     @RequestMapping(value = "/balo-detail/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
@@ -43,7 +60,6 @@ public class BaloDetailRestController {
                         .collect(Collectors.toList())
                 , HttpStatus.OK
         );
-
     }
 
     //getOne

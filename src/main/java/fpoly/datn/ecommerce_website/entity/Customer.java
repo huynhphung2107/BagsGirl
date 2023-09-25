@@ -32,9 +32,9 @@ public class Customer {
     private String id;
 
     @Column(name = "status")
-    private Integer status;
+    private Integer customerStatus;
     @Column(name = "point")
-    private Integer point;
+    private Integer customerPoint;
 
     @OneToOne()
     @JoinColumn(name = "user_id", referencedColumnName = "id")

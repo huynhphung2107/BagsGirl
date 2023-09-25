@@ -18,9 +18,11 @@ public class BaloDTO {
 
     private String id;
     @NotBlank
-    private String code;
+    private String baloCode;
     @NotBlank
-    private String name;
+    private String baloName;
     @NotBlank
-    private String status;
+    private String baloStatus;
+    @NotBlank
+    private String baloStatusString;
 }

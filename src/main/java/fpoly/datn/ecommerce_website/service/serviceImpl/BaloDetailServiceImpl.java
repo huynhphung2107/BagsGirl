@@ -19,7 +19,9 @@ public class BaloDetailServiceImpl implements ServiceGenarel<BaloDetail> {
     public List<BaloDetail> findAll() {
         return iBaloDetailRepository.findAll();
     }
-
+    public  List<BaloDetail> findAllByBalo(String baloID){
+        return this.iBaloDetailRepository.findAllByBalo_BaloCode(baloID);
+    }
     @Override
     public BaloDetail findById(String id) {
         Optional<BaloDetail> optional = iBaloDetailRepository.findById(id);
