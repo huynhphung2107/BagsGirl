@@ -35,14 +35,4 @@ public class CartDTO {
     @NotBlank( message = "Không được để trống customer")
     private String customer;
 
-    public Cart validate(Cart cart){
-        cart.setCode(this.getCode());
-        cart.setStatus(this.getStatus());
-        cart.setPaymentTime(this.getPaymentTime());
-        cart.setCreateTime(this.getCreateTime());
-        cart.setNote(this.getNote());
-        cart.setCustomer(Customer.builder().id(this.getCustomer()).build());
-
-        return cart;
-    }
 }

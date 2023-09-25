@@ -84,8 +84,6 @@ const items = [
 const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9'];
 function Sidebar(props) {
   const { key, keyIndex, openKey } = props;
-  console.log(keyIndex);
-  console.log(openKey);
   const [openKeys, setOpenKeys] = useState([props.openKey]);
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);

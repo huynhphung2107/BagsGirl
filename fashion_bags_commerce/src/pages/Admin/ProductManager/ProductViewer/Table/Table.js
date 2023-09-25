@@ -1,91 +1,106 @@
-import { Button, Space, Table } from 'antd';
-import { useEffect, useState } from 'react';
-import baloAPI from '~/api/baloAPI';
+import { Button, Popconfirm, Space, Table, notification } from 'antd';
+import { useEffect, useState, useContext } from 'react';
 import FormProductEdit from '../../ProductEdit/FormEdit/FormProductEdit';
+import FormProductViewDetails from '../../ProductViewDetails/FormViewer/FormProductViewDetails';
+import { BaloContext } from '~/context/BaloProvider';
+import baloAPI from '~/api/baloAPI';
 
 function TableContent() {
-  //const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const { baloList, updateBaloList } = useContext(BaloContext);
   const [loading, setLoading] = useState(false);
-  const [baloList, setBaloList] = useState([]);
-  const [tableParams, setTableParams] = useState({
-    pagination: {
-      current: 1,
-      pageSize: 2,
-    },
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 14,
   });
-  const fetchProducts = async () => {
-    setLoading(true);
-
-    try {
-      const response = await baloAPI.getAll();
-      const data = response.data;
-      setBaloList(data);
-      setTimeout(() => {
-        setLoading(false);
-      }, 300);
-      setTableParams({
-        ...tableParams,
-        pagination: {
-          ...tableParams.pagination,
-          total: data.length,
-        },
-      });
-    } catch (error) {
-      console.error('Đã xảy ra lỗi: ', error);
-    }
-  };
-  useEffect(() => {
-    fetchProducts();
-  }, [JSON.stringify(tableParams)]);
   const handleTableChange = (pagination, filters, sorter) => {
-    setTableParams({
-      pagination,
-      filters,
-      ...sorter,
-    });
+    console.log('Trang hiện tại:', pagination.current);
+    console.log('Kích thước trang:', pagination.pageSize);
+    console.log('Bộ lọc:', filters);
+    console.log('Thông tin sắp xếp:', sorter);
 
-    // `dataSource` is useless since `pageSize` changed
-    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
-      setBaloList([]);
-    }
+    setPagination(pagination);
   };
   const columns = [
     {
       title: 'Code',
-      dataIndex: 'code',
+      dataIndex: 'baloCode',
+      sorter: (a, b) => a.baloCode.localeCompare(b.baloCode),
+      width: 200,
     },
     {
       title: 'Name Balo',
-      dataIndex: 'name',
-      sorter: true,
+      dataIndex: 'baloName',
+      sorter: (a, b) => a.baloName.localeCompare(b.baloName),
     },
     {
       title: 'Status',
-      dataIndex: 'status',
-      sorter: true,
+      dataIndex: 'baloStatusString',
+      sorter: (a, b) => a.baloStatusString.localeCompare(b.baloStatusString),
+      width: 300,
     },
     {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <a>View Detail</a>
+          <FormProductViewDetails baloCode={record.baloCode} />
           <FormProductEdit balo={record} />
+          <Popconfirm
+            title="Xác Nhận"
+            description="Bạn Có chắc chắn muốn xóa?"
+            okText="Đồng ý"
+            cancelText="Không"
+            onConfirm={() => {
+              handleDeleteBalo(record.id, -1);
+              start();
+            }}
+            onCancel={onCancel}
+          >
+            <Button>Xóa</Button>
+          </Popconfirm>
         </Space>
       ),
+      width: 300,
     },
   ];
-
+  const onCancel = () => {};
   const start = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      fetchProducts();
+      updateBaloList();
     }, 1000);
   };
 
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      updateBaloList();
+    }, 1000);
+  }, []);
+
+  const handleDeleteBalo = async (id, status) => {
+    try {
+      await baloAPI.updateStatus(id, status);
+      // const updatedList = baloList.filter((item) => item.id !== id);
+      updateBaloList();
+      notification.info({
+        message: 'Xóa thành Công',
+        description: 'Sản Phẩm Có ID: ' + id + ' đã được xóa thành công!!!',
+        duration: 2,
+      });
+      // console.log('Sản phẩm đã được xóa thành công.');
+    } catch (error) {
+      console.error('Đã xảy ra lỗi khi xóa sản phẩm: ', error);
+    }
+  };
   return (
-    <div>
+    <div
+      style={{
+        padding: '10px',
+      }}
+    >
       <div
         style={{
           marginBottom: 16,
@@ -101,12 +116,17 @@ function TableContent() {
         ></span>
       </div>
       <Table
-        rowKey={(record) => record.code}
+        size="midle"
+        scroll={{
+          x: 1500,
+          y: 500,
+        }}
+        rowKey={(record) => record.id}
         loading={loading}
         columns={columns}
         dataSource={baloList}
         onChange={handleTableChange}
-        pagination={tableParams.pagination}
+        pagination={pagination}
       />
     </div>
   );

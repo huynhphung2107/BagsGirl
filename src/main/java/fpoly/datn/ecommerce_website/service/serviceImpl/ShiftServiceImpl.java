@@ -40,21 +40,13 @@ public class ShiftServiceImpl implements ShiftService {
 
     @Override
     public Shift save(ShiftDTO shiftDTO) {
-        Shift shift = shiftDTO.validate(new Shift());
-        return repo.save(shift);
+
+        return null;
     }
 
     @Override
     public Shift update(ShiftDTO shiftDTO, String id) {
-        Shift x = shiftDTO.validate(repo.findById(id).orElse(null));
-        x.setCode(shiftDTO.getCode());
-        x.setCreateBy(shiftDTO.getCreateBy());
-        x.setStartTime(shiftDTO.getStartTime());
-        x.setNote(shiftDTO.getNote());
-        x.setStatus(shiftDTO.getStatus());
-        x.setEndTime(shiftDTO.getEndTime());
-        x.setStaff(Staff.builder().id(shiftDTO.getStaff()).build());
-        return repo.save(x);
+        return null;
     }
 
 

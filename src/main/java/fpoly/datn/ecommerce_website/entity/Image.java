@@ -28,12 +28,12 @@ public class Image {
     private String id;
 
     @Column(name = "image_code")
-    private String code;
+    private String imgCode;
 
     @Column(name = "image_name")
-    private String name;
+    private String imgName;
 
     @Column(name = "image_url")
-    private String urlImage;
+    private String imgUrl;
 
 }
