@@ -41,20 +41,4 @@ public class ShiftDTO {
 
     @NotBlank( message = "Không được để trống staff")
     private String staffUserInfoFullname;
-
-<<<<<<< HEAD
-    public Shift validate(Shift shift){
-        shift.setCode(this.getCode());
-        shift.setStatus(this.getStatus());
-//        shift.setStartTime(this.getStartTime());
-//        shift.setEndTime(this.getEndTime());
-        shift.setNote(this.getNote());
-        shift.setCreateBy(this.getCreateBy());
-//        shift.setStaff(Staff.builder().id(this.getStaffName()).build());
-
-        return shift;
-    }
-=======
->>>>>>> main
-
 }
