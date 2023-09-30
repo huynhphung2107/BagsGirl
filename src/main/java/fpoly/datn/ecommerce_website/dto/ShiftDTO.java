@@ -28,7 +28,7 @@ public class ShiftDTO {
 
     private LocalDateTime startTime;
 
-    private LocalDateTime endTime;
+    private LocalDateTime    endTime;
 
     @NotBlank( message = "Không được để trống createBy")
     private String createBy;

@@ -40,12 +40,11 @@ public class Shift {
 
     @Column(name = "shift_start_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-
-    private Date shiftStartTime;
+    private LocalDateTime shiftStartTime;
 
     @Column(name = "shift_end_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date shiftEndTime;
+    private LocalDateTime shiftEndTime;
 
     @Column(name = "create_by")
     private String shiftCreateBy;
