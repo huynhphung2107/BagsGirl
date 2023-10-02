@@ -13,7 +13,7 @@
 
 ## Author
 
-👤 **NguyenCongTuanAnh**
+👤 **NoName**
 
 * Website: https://github.com/
 * Twitter: [@https:\/\/twitter.com\/](https://twitter.com/https:\/\/twitter.com\/)
