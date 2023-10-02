@@ -3,7 +3,6 @@ import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../ProductViewer/Table/Table';
 import FormBaloEditTonggle from '../ProductEdit/FormCreate/FormBaloEditTonggle';
-import { BaloProvider } from '~/context/BaloProvider';
 
 import './index.css';
 
@@ -13,26 +12,24 @@ const contentStyle = {};
 
 function ProductViewer() {
   return (
-    <BaloProvider>
-      <Layout className="layout">
-        <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-          <Sidebar keyIndex="13" openKey="sub5" />
-        </Sider>
-        <Layout className="layoutContent">
-          <Header className="headerStyle">
-            <HeaderContent titlePage="Danh Sách Sản Phẩm" />
-          </Header>
-          <Content style={contentStyle}>
-            <div>
-              <FormBaloEditTonggle />
-            </div>
-            <TableContent />
-          </Content>
+    <Layout className="layout">
+      <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
+        <Sidebar keyIndex="13" openKey="sub5" />
+      </Sider>
+      <Layout className="layoutContent">
+        <Header className="headerStyle">
+          <HeaderContent titlePage="Danh Sách Sản Phẩm" />
+        </Header>
+        <Content style={contentStyle}>
+          <div>
+            <FormBaloEditTonggle />
+          </div>
+          <TableContent />
+        </Content>
 
-          <Footer className="footerStyle">Đây là component của Footer</Footer>
-        </Layout>
+        <Footer className="footerStyle">Đây là component của Footer</Footer>
       </Layout>
-    </BaloProvider>
+    </Layout>
   );
 }
 

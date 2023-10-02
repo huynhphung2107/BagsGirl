@@ -15,6 +15,8 @@ import Avartar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/Avar
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import './index.module.scss';
+
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -53,7 +55,10 @@ const items = [
       </Link>,
       '13',
     ),
-    getItem('Option 10', '14'),
+    getItem('Quản lí Thuộc tính Balo', 'sub999', <AppstoreOutlined />, [
+      getItem('Màu sắc', '7'),
+      getItem('Chất liệu', '8'),
+    ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),
   ]),
@@ -112,6 +117,7 @@ function Sidebar(props) {
         <hr />
       </div>
       <Menu
+        className="menuCustom"
         mode="inline"
         openKeys={openKeys}
         onOpenChange={onOpenChange}

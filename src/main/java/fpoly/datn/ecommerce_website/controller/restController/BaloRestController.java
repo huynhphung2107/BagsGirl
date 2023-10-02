@@ -6,6 +6,7 @@ import fpoly.datn.ecommerce_website.service.serviceImpl.BaloServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -37,12 +38,15 @@ public class BaloRestController {
 
     //hienthi
     @RequestMapping(value = "/balo/", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(
+            @RequestParam(name = "page", defaultValue = "1") int pageNum,
+            @RequestParam(name = "size", defaultValue = "10") int pageSize
+    ) {
+        Page<Balo> baloPage = baloService.findAll(pageNum,pageSize);
         return new ResponseEntity<>
                 (
-                        this.baloService.findAll().stream()
-                                .map(baloService::mapBaloToBaloDTO)
-                                .collect(Collectors.toList())
+//
+                        baloPage
                         , HttpStatus.OK
     );
     }
@@ -88,22 +92,5 @@ public class BaloRestController {
     }
 
 
-    //Validation Balo Rest API
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    //Anotation này đánh dấu cho func này sẽ được thực thi khi nhận được Trang thái của HTTP là Bad Request (BAD_REQUEST khi yêu cầu URL không chạy đúng)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    //Khi validate không thành công nhờ cái thằng này mới bắt đc các exception mà chương trình ném ra
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>(); //Dùng map để lưu các error khi nhận đc từ các exception
-
-        ex.getBindingResult().getAllErrors().forEach(error -> {  //Duyệt list error mà thằng MethodArgumentNotValidException trả ra
-            String fieldName = ((FieldError) error).getField();  //Cái này là tên thuộc tính của thằng đối tượng validate ko thành công
-            String errorMesssage = error.getDefaultMessage(); // Còn đây là mô tả của thuộc tính đó (mặc định sẽ là của spring, có thể custom message bên dto)
-            errors.put(fieldName, errorMesssage);
-        });
-
-        return errors;
-    }
     //End
 }

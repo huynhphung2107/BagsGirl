@@ -7,7 +7,6 @@ export const BaloProvider = ({ children }) => {
   const [baloList, setBaloList] = useState([]);
 
   function updateBaloList() {
-    // setBaloList(newList);
     fetchProducts();
   }
 
