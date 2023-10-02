@@ -42,7 +42,7 @@ public class UserInfo {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "userInfoStatus")
+    @Column(name = "status")
     private Integer status;
 
     @Column(name = "gender")

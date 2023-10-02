@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequestMapping("/api/manage")
 @RestController
@@ -38,7 +40,16 @@ public class ShiftRestController {
     //GetAll
     @RequestMapping(value = "/shift/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(shiftService.findAll());
+//        return ResponseEntity.ok(shiftService.findAll());
+
+        return new ResponseEntity<>(
+                this.shiftService.findAll()
+                        .stream()
+                        .map(shift -> modelMapper.map(shift, ShiftDTO.class))
+                        .sorted(Comparator.comparing(ShiftDTO::getCode)) // Sắp xếp theo trường "name"
+                        .collect(Collectors.toList())
+                , HttpStatus.OK
+        );
     }
 
     //PhanTrang
