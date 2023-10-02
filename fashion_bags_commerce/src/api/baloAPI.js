@@ -1,9 +1,14 @@
 import axiosClient from './axiosClient';
 
 const baloAPI = {
-  getAll(params) {
+  getAll(pageNum, pageSize) {
     const url = '/balo/';
-    return axiosClient.get(url, { params });
+    return axiosClient.get(url, {
+      params: {
+        page: pageNum,
+        size: pageSize,
+      },
+    });
   },
   get(id) {
     const url = `/balo?id=${id}`;
@@ -11,7 +16,6 @@ const baloAPI = {
   },
   add(data) {
     const url = `/balo`;
-    console.log(data);
     return axiosClient.post(url, data, {
       headers: {
         'Content-Type': 'application/json',

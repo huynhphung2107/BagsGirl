@@ -1,24 +1,23 @@
-import { Button, Popconfirm, Space, Table, notification } from 'antd';
+import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import { useEffect, useState, useContext } from 'react';
 import FormProductEdit from '../../ProductEdit/FormEdit/FormProductEdit';
 import FormProductViewDetails from '../../ProductViewDetails/FormViewer/FormProductViewDetails';
-import { BaloContext } from '~/context/BaloProvider';
 import baloAPI from '~/api/baloAPI';
 
+import styles from './index.module.scss';
+
 function TableContent() {
-  const { baloList, updateBaloList } = useContext(BaloContext);
+  const [baloList, setBaloList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 14,
-  });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(2);
+  const [totalItem, setTotalItem] = useState(); // Số lượng dữ liệu tổng cộng (tùy chỉnh)
+
   const handleTableChange = (pagination, filters, sorter) => {
     console.log('Trang hiện tại:', pagination.current);
     console.log('Kích thước trang:', pagination.pageSize);
     console.log('Bộ lọc:', filters);
     console.log('Thông tin sắp xếp:', sorter);
-
-    setPagination(pagination);
   };
   const columns = [
     {
@@ -34,7 +33,19 @@ function TableContent() {
     },
     {
       title: 'Status',
-      dataIndex: 'baloStatusString',
+      dataIndex: 'baloStatus',
+      render: (status) => {
+        switch (status) {
+          case 1:
+            return 'Hoạt động';
+          case 0:
+            return 'Không hoạt động';
+          case -1:
+            return 'Trạng thái khác';
+          default:
+            return 'Không xác định';
+        }
+      },
       sorter: (a, b) => a.baloStatusString.localeCompare(b.baloStatusString),
       width: 300,
     },
@@ -52,7 +63,7 @@ function TableContent() {
             cancelText="Không"
             onConfirm={() => {
               handleDeleteBalo(record.id, -1);
-              start();
+              reload();
             }}
             onCancel={onCancel}
           >
@@ -64,11 +75,11 @@ function TableContent() {
     },
   ];
   const onCancel = () => {};
-  const start = () => {
+  const reload = () => {
     setLoading(true);
+    getAllBalo(currentPage, pageSize);
     setTimeout(() => {
       setLoading(false);
-      updateBaloList();
     }, 1000);
   };
 
@@ -76,24 +87,40 @@ function TableContent() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      updateBaloList();
     }, 1000);
   }, []);
 
+  const getAllBalo = async (pageNum, pageSize) => {
+    try {
+      const response = await baloAPI.getAll(pageNum, pageSize);
+      const data = response.data.content;
+      setTotalItem(response.data.totalElements);
+      setBaloList(data);
+      setTimeout(() => {}, 300);
+    } catch (error) {
+      console.error('Đã xảy ra lỗi: ', error);
+    }
+  };
+  useEffect(() => {
+    getAllBalo(currentPage, pageSize);
+  }, []);
   const handleDeleteBalo = async (id, status) => {
     try {
       await baloAPI.updateStatus(id, status);
-      // const updatedList = baloList.filter((item) => item.id !== id);
-      updateBaloList();
       notification.info({
         message: 'Xóa thành Công',
         description: 'Sản Phẩm Có ID: ' + id + ' đã được xóa thành công!!!',
         duration: 2,
       });
-      // console.log('Sản phẩm đã được xóa thành công.');
+      getAllBalo(currentPage, pageSize);
     } catch (error) {
       console.error('Đã xảy ra lỗi khi xóa sản phẩm: ', error);
     }
+  };
+  const onShowSizeChange = (current, pageSize) => {
+    setPageSize(pageSize);
+    setCurrentPage(current);
+    getAllBalo(current, pageSize);
   };
   return (
     <div
@@ -106,7 +133,7 @@ function TableContent() {
           marginBottom: 16,
         }}
       >
-        <Button type="primary" onClick={start} loading={loading}>
+        <Button type="primary" onClick={reload} loading={loading}>
           Reload
         </Button>
         <span
@@ -115,19 +142,29 @@ function TableContent() {
           }}
         ></span>
       </div>
-      <Table
-        size="midle"
-        scroll={{
-          x: 1500,
-          y: 500,
-        }}
-        rowKey={(record) => record.id}
-        loading={loading}
-        columns={columns}
-        dataSource={baloList}
-        onChange={handleTableChange}
-        pagination={pagination}
-      />
+      <Spin spinning={loading}>
+        <Table
+          size="midle"
+          scroll={{
+            x: 1500,
+            y: 500,
+          }}
+          rowKey={(record) => record.id}
+          columns={columns}
+          dataSource={baloList}
+          onChange={handleTableChange}
+          pagination={false}
+        />
+        <div className={styles.pagination}>
+          <Pagination
+            showSizeChanger
+            onShowSizeChange={onShowSizeChange}
+            onChange={onShowSizeChange}
+            defaultCurrent={1}
+            total={totalItem}
+          />
+        </div>
+      </Spin>
     </div>
   );
 }

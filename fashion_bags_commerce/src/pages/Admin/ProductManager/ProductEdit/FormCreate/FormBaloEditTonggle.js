@@ -9,48 +9,59 @@ import Input from 'antd/es/input/Input';
 import baloAPI from '~/api/baloAPI';
 // Utils
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
-import { BaloContext } from '~/context/BaloProvider';
 //Function Component
 function FormBaloEditTonggle(props) {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(true);
   const [isPopconfirmVisible, setPopconfirmVisible] = useState(false);
   const [form] = Form.useForm();
-  const { updateBaloList } = useContext(BaloContext);
   const showDrawer = () => {
     setOpen(true);
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    setError(true);
+    const errorMessages = Object.values(errorInfo.errorFields)
+      .map((field) => field.errors)
+      .flat();
+    notification.error({
+      message: 'Lỗi',
+      description: errorMessages.join('\n'), // Display error messages as a newline-separated string
+      duration: 2,
+    });
   };
   const onClose = () => {
+    form.resetFields();
     setOpen(false);
   };
   const addFunc = async (values) => {
-    let addBalo = { ...values, baloCode: generateCustomCode('baloCode', 9) };
-    try {
-      const response = await baloAPI.add(addBalo);
-      setPopconfirmVisible(false);
-    } catch (error) {
-      console.error('Đã xảy ra lỗi: ', error);
+    setError(false);
+    if (error == false) {
+      let addBalo = { ...values, baloCode: generateCustomCode('baloCode', 9) };
+      try {
+        const response = await baloAPI.add(addBalo);
+        setPopconfirmVisible(false);
+        notification.success({
+          message: 'Thành Công',
+          description: 'Dữ liệu đã được thêm!!!!',
+          duration: 2,
+        });
+        onClose();
+      } catch (error) {
+        setError(true);
+        notification.info({
+          message: 'Lỗi',
+          description: 'Vui lòng chọn xác nhận!!!',
+          duration: 2,
+        });
+      }
     }
   };
   const onConfirm = () => {
     form.submit(); // Gọi hàm onFinish của Form khi xác nhận
-    setPopconfirmVisible(false); // Đóng Popconfirm sau khi xác nhận
-    notification.success({
-      message: 'Thành Công',
-      description: 'Dữ liệu đã được thêm!!!!',
-      duration: 2,
-    });
-    updateBaloList();
+    setPopconfirmVisible(false);
   };
   const onCancel = () => {
-    // notification.info({
-    //   message: 'Lỗi',
-    //   description: 'Dữ liệu chưa được thêm!!!!',
-    //   duration: 1,
-    // });
     setPopconfirmVisible(false); // Đóng Popconfirm sau khi xác nhận
   };
   return (
@@ -61,6 +72,9 @@ function FormBaloEditTonggle(props) {
       <Modal title="Thêm Sản Phẩm" open={open} onOk={onClose} onCancel={onClose}>
         <div>
           <Form
+            initialValues={{
+              baloStatus: '1',
+            }}
             form={form}
             name="basic"
             onFinish={addFunc}
@@ -99,8 +113,6 @@ function FormBaloEditTonggle(props) {
               ]}
             >
               <Select
-                defaultValue={'1'}
-                value={1}
                 style={{
                   width: 200,
                 }}
@@ -125,13 +137,13 @@ function FormBaloEditTonggle(props) {
             >
               <Popconfirm
                 title="Xác Nhận"
-                description="Bạn Có chắc chắn muốn xóa?"
+                description="Bạn Có chắc chắn muốn Thêm?"
                 okText="Đồng ý"
                 cancelText="Không"
                 onConfirm={onConfirm}
                 onCancel={onCancel}
               >
-                <Button type="primary" onClick={() => setPopconfirmVisible(true)}>
+                <Button type="primary" onClick={addFunc}>
                   Submit
                 </Button>
               </Popconfirm>
