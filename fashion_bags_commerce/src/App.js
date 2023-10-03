@@ -5,9 +5,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Admin from './pages/Admin';
 import ProductViewer from './pages/Admin/ProductManager/ProductViewer';
-
-import ShiftViewer from './pages/Admin/Shift/ShiftViewer';
-
 import Login from './pages/Login';
 import Home from './pages/Home';
 import ProductAdd from './pages/Admin/ProductManager/ProductEdit/ProductAdd';

@@ -161,6 +161,7 @@ function BaloDetailsPreview(props) {
             x: 1500,
             y: 600,
           }}
+          style={{ maxHeight: '700px' }}
         />
       </div>
     </Fragment>
