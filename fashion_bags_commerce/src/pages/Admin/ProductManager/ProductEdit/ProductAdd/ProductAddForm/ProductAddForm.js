@@ -1,5 +1,5 @@
 //CSS
-
+import styles from './index.module.scss';
 //React Component
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
@@ -438,7 +438,7 @@ function ProductAddForm() {
     notification.error({
       message: 'Lỗi',
       description: errorMessages + '/n',
-      duration: 20,
+      duration: 2,
     });
   };
   const onClose = () => {
@@ -467,7 +467,7 @@ function ProductAddForm() {
   const habdleAddBaloDetails = (values) => {
     let addBalo = { ...values, baloCode: generateCustomCode('baloCode', 9) };
     setBaloList([...baloList, addBalo]);
-    handleresetForm();
+
     notification.success({
       message: 'Thành Công',
       description: 'Dữ liệu đã được thêm!!!!',
@@ -491,7 +491,7 @@ function ProductAddForm() {
       <div>
         <div>
           <Row>
-            <h1>Thông Tin</h1>
+            <h1 className={styles.titleInfo}>Thông Tin Balo Chi tiết</h1>
           </Row>
         </div>
         <Form

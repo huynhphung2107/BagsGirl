@@ -53,11 +53,17 @@ const items = [
       <Link style={{ textDecoration: 'none' }} to={'/product-viewer'}>
         Danh sách Sản Phẩm
       </Link>,
+      '139',
+    ),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/product-add'}>
+        Thêm Balo Chi Tiết
+      </Link>,
       '13',
     ),
     getItem('Quản lí Thuộc tính Balo', 'sub999', <AppstoreOutlined />, [
-      getItem('Màu sắc', '7'),
-      getItem('Chất liệu', '8'),
+      getItem('Màu sắc', '79'),
+      getItem('Chất liệu', '89'),
     ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),
@@ -83,7 +89,7 @@ const items = [
   getItem('Giao Ca', 'sub10', <ContactsOutlined />, [
     getItem(
       <Link style={{ textDecoration: 'none' }} to={'/shift'}>
-       Danh sách ca làm việc
+        Danh sách ca làm việc
       </Link>,
       '33',
     ),
@@ -98,7 +104,7 @@ const items = [
     getItem('Option 12', '32'),
   ]),
 ];
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9','sub10'];
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9', 'sub10'];
 function Sidebar(props) {
   const { key, keyIndex, openKey } = props;
   const [openKeys, setOpenKeys] = useState([props.openKey]);
