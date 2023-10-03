@@ -10,8 +10,8 @@ function TableContent() {
   const [baloList, setBaloList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(2);
-  const [totalItem, setTotalItem] = useState(); // Số lượng dữ liệu tổng cộng (tùy chỉnh)
+  const [pagesSize, setPagesSize] = useState(10);
+  const [totalItem, setTotalItem] = useState();
 
   const handleTableChange = (pagination, filters, sorter) => {
     console.log('Trang hiện tại:', pagination.current);
@@ -24,7 +24,7 @@ function TableContent() {
       title: 'Code',
       dataIndex: 'baloCode',
       sorter: (a, b) => a.baloCode.localeCompare(b.baloCode),
-      width: 200,
+      width: '100px',
     },
     {
       title: 'Name Balo',
@@ -77,23 +77,22 @@ function TableContent() {
   const onCancel = () => {};
   const reload = () => {
     setLoading(true);
-    getAllBalo(currentPage, pageSize);
+    getAllBalo(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   };
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
+    handleLoading();
+    getAllBalo(currentPage, pagesSize);
+  }, [currentPage]);
 
   const getAllBalo = async (pageNum, pageSize) => {
     try {
       const response = await baloAPI.getAll(pageNum, pageSize);
       const data = response.data.content;
+
       setTotalItem(response.data.totalElements);
       setBaloList(data);
       setTimeout(() => {}, 300);
@@ -101,9 +100,13 @@ function TableContent() {
       console.error('Đã xảy ra lỗi: ', error);
     }
   };
-  useEffect(() => {
-    getAllBalo(currentPage, pageSize);
-  }, []);
+
+  const handleLoading = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  };
   const handleDeleteBalo = async (id, status) => {
     try {
       await baloAPI.updateStatus(id, status);
@@ -112,15 +115,23 @@ function TableContent() {
         description: 'Sản Phẩm Có ID: ' + id + ' đã được xóa thành công!!!',
         duration: 2,
       });
-      getAllBalo(currentPage, pageSize);
+      getAllBalo(currentPage, pagesSize);
     } catch (error) {
       console.error('Đã xảy ra lỗi khi xóa sản phẩm: ', error);
     }
   };
-  const onShowSizeChange = (current, pageSize) => {
-    setPageSize(pageSize);
-    setCurrentPage(current);
+  const onHandleSizeChange = (current, pageSize) => {
+    setCurrentPage(1);
+    setPagesSize(pageSize);
+
     getAllBalo(current, pageSize);
+    handleLoading();
+  };
+  const onHandlePageNum = (current, pageSize) => {
+    setCurrentPage(1);
+    setPagesSize(pageSize);
+    getAllBalo(current, pageSize);
+    handleLoading();
   };
   return (
     <div
@@ -143,26 +154,30 @@ function TableContent() {
         ></span>
       </div>
       <Spin spinning={loading}>
-        <Table
-          size="midle"
-          scroll={{
-            x: 1500,
-            y: 500,
-          }}
-          rowKey={(record) => record.id}
-          columns={columns}
-          dataSource={baloList}
-          onChange={handleTableChange}
-          pagination={false}
-        />
-        <div className={styles.pagination}>
-          <Pagination
-            showSizeChanger
-            onShowSizeChange={onShowSizeChange}
-            onChange={onShowSizeChange}
-            defaultCurrent={1}
-            total={totalItem}
+        <div>
+          <Table
+            style={{
+              minHeight: ' 700px',
+            }}
+            scroll={{
+              x: 1000,
+              y: 700,
+            }}
+            rowKey={(record) => record.id}
+            columns={columns}
+            dataSource={baloList}
+            onChange={handleTableChange}
+            pagination={false}
           />
+          <div className={styles.pagination}>
+            <Pagination
+              showSizeChanger
+              onShowSizeChange={onHandleSizeChange}
+              onChange={onHandlePageNum}
+              defaultCurrent={1}
+              total={totalItem}
+            />
+          </div>
         </div>
       </Spin>
     </div>

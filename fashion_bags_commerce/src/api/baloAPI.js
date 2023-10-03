@@ -5,7 +5,7 @@ const baloAPI = {
     const url = '/balo/';
     return axiosClient.get(url, {
       params: {
-        page: pageNum,
+        page: pageNum - 1,
         size: pageSize,
       },
     });

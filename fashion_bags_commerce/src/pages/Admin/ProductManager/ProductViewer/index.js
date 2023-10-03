@@ -8,7 +8,9 @@ import './index.css';
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const contentStyle = {};
+const contentStyle = {
+  height: 'auto',
+};
 
 function ProductViewer() {
   return (
@@ -23,8 +25,8 @@ function ProductViewer() {
         <Content style={contentStyle}>
           <div>
             <FormBaloEditTonggle />
+            <TableContent />
           </div>
-          <TableContent />
         </Content>
 
         <Footer className="footerStyle">Đây là component của Footer</Footer>
