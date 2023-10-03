@@ -7,16 +7,24 @@ import Admin from './pages/Admin';
 import ProductViewer from './pages/Admin/ProductManager/ProductViewer';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import ProductAdd from './pages/Admin/ProductManager/ProductEdit/ProductAdd';
+
+const dynamicRoutes = [
+  { path: '/admin', component: <Admin />, title: 'Trang chủ' },
+  { path: '/product-viewer', component: <ProductViewer />, title: 'Về chúng tôi' },
+  { path: '/login', component: <Login />, title: 'Liên hệ' },
+  { path: '/', component: <Home />, title: 'Liên hệ' },
+  { path: '/product-add', component: <ProductAdd />, title: 'Liên hệ' },
+];
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={'<Login />'}></Route>
-          <Route path="/admin" element={<Admin />}></Route>
-          <Route path="/product-viewer" element={<ProductViewer />}></Route>
+          {dynamicRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.component}></Route>
+          ))}
         </Routes>
       </div>
     </Router>
