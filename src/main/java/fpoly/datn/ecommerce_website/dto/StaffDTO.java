@@ -21,6 +21,7 @@ public class StaffDTO {
 
     @NotNull
     private Integer status;
+
     @NotNull
     private UserInfo userInfo;
 
