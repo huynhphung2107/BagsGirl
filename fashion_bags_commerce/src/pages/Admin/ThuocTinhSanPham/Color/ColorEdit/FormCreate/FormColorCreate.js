@@ -10,7 +10,7 @@ import colorAPI from '~/api/colorAPI';
 // Utils
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 //Function Component
-function FormBaloEditTonggle(props) {
+function FormcolorEditTonggle(props) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(true);
   const [isPopconfirmVisible, setPopconfirmVisible] = useState(false);
@@ -37,9 +37,9 @@ function FormBaloEditTonggle(props) {
   const addFunc = async (values) => {
     setError(false);
     if (error == false) {
-      let addBalo = { ...values, baloCode: generateCustomCode('baloCode', 9) };
+      let addcolor = { ...values, colorCode: generateCustomCode('col', 3) };
       try {
-        const response = await baloAPI.add(addBalo);
+        const response = await colorAPI.add(addcolor);
         setPopconfirmVisible(false);
         notification.success({
           message: 'Thành Công',
@@ -69,11 +69,11 @@ function FormBaloEditTonggle(props) {
       <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
         Thêm màu sắc
       </Button>
-      <Modal title="Thêm Sản Phẩm" open={open} onOk={onClose} onCancel={onClose}>
+      <Modal title="Thêm Màu Sắc" open={open} onOk={onClose} onCancel={onClose}>
         <div>
           <Form
             initialValues={{
-              baloStatus: '1',
+              colorStatus: '1',
             }}
             form={form}
             name="basic"
@@ -91,42 +91,19 @@ function FormBaloEditTonggle(props) {
             }}
           >
             <Form.Item
-              label="Balo Name"
-              name="baloName"
+              label="Color Name"
+              name="colorName"
               rules={[
                 {
                   required: true,
-                  message: 'Vui lòng điền Tên Balo!',
+                  message: 'Vui lòng điền Tên color!',
                 },
               ]}
             >
               <Input />
-            </Form.Item>
-            <Form.Item
-              label="Balo Status"
-              name="baloStatus"
-              rules={[
-                {
-                  required: true,
-                  message: 'Vui lòng chọn trạng thái Balo!',
-                },
-              ]}
-            >
-              <Select
-                style={{
-                  width: 200,
-                }}
-                options={[
-                  {
-                    value: '1',
-                    label: 'Hoạt Động',
-                  },
-                  {
-                    value: '0',
-                    label: 'Không Hoạt Động',
-                  },
-                ]}
-              />
+           
+        
+             
             </Form.Item>
 
             <Form.Item
@@ -154,4 +131,4 @@ function FormBaloEditTonggle(props) {
     </Fragment>
   );
 }
-export default FormBaloEditTonggle;
+export default FormcolorEditTonggle;

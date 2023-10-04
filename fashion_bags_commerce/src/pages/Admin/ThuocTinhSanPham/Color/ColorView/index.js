@@ -2,9 +2,8 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../ColorView/Table/Table';
-// import FormBaloEditTonggle from '../ProductEdit/FormCreate/FormBaloEditTonggle';
-
 import './index.css';
+import FormcolorEditTonggle from '../ColorEdit/FormCreate/FormColorCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -22,7 +21,7 @@ function ColorView() {
         </Header>
         <Content style={contentStyle}>
           <div>
-            {/* <FormBaloEditTonggle /> */}
+            <FormcolorEditTonggle />
           </div>
           <TableContent />
         </Content>

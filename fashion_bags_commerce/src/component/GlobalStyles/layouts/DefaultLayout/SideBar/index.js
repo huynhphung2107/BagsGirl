@@ -67,6 +67,7 @@ const items = [
       style={{textDecoration: 'none'}} to={  '/color-view'}>
         Màu sắc
       </Link>, '79'),
+      getItem('Thương hiệu', '80'),
       getItem('Chất liệu', '89'),
 
     ]),

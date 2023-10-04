@@ -31,6 +31,7 @@ function App() {
           <Route path="/product-viewer" element={<ProductViewer />}></Route>
           <Route path="/shift-view" element={<ShiftViewer />}></Route>
           <Route path="/color-view" element={<ColorView />}></Route>
+          <Route path="/brand-view" element={<ColorView />}></Route>
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}
