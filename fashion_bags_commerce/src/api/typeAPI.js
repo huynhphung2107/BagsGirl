@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient';
 
-const typeAPi = {
+const typeAPI = {
   getAll(params) {
     const url = '/type/';
     return axiosClient.get(url, { params });
@@ -23,4 +23,4 @@ const typeAPi = {
   },
 };
 
-export default typeAPi;
+export default typeAPI;
