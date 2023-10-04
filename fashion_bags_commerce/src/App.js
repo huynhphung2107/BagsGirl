@@ -5,16 +5,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Admin from './pages/Admin';
 import ProductViewer from './pages/Admin/ProductManager/ProductViewer';
-<<<<<<< HEAD
 import ShiftViewer from './pages/Admin/Shift/ShiftViewer';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import ColorView from './pages/Admin/ThuocTinhSanPham/Color/ColorView';
-=======
-import Login from './pages/Login';
-import Home from './pages/Home';
 import ProductAdd from './pages/Admin/ProductManager/ProductEdit/ProductAdd';
->>>>>>> main
+
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
@@ -29,18 +25,16 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-<<<<<<< HEAD
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={'<Login />'}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/product-viewer" element={<ProductViewer />}></Route>
           <Route path="/shift-view" element={<ShiftViewer />}></Route>
           <Route path="/color-view" element={<ColorView />}></Route>
-=======
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}
->>>>>>> main
+
         </Routes>
       </div>
     </Router>

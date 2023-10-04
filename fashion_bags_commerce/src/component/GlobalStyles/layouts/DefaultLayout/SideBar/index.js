@@ -62,17 +62,13 @@ const items = [
       '13',
     ),
     getItem('Quản lí Thuộc tính Balo', 'sub999', <AppstoreOutlined />, [
-<<<<<<< HEAD
       getItem(
       <Link
       style={{textDecoration: 'none'}} to={  '/color-view'}>
         Màu sắc
-      </Link>, '7'),
-      getItem('Chất liệu', '8'),
-=======
-      getItem('Màu sắc', '79'),
+      </Link>, '79'),
       getItem('Chất liệu', '89'),
->>>>>>> main
+
     ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),
@@ -97,7 +93,7 @@ const items = [
   ]),
   getItem('Giao Ca', 'sub10', <ContactsOutlined />, [
     getItem(
-      <Link style={{ textDecoration: 'none' }} to={'/shift'}>
+      <Link style={{ textDecoration: 'none' }} to={'/shift-view'}>
         Danh sách ca làm việc
       </Link>,
       '33',

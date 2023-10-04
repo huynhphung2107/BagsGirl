@@ -67,7 +67,7 @@ function FormBaloEditTonggle(props) {
   return (
     <Fragment>
       <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        Thêm Sản Phẩm
+        Thêm màu sắc
       </Button>
       <Modal title="Thêm Sản Phẩm" open={open} onOk={onClose} onCancel={onClose}>
         <div>
