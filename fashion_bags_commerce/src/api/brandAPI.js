@@ -1,8 +1,8 @@
 import axiosClient from './axiosClient';
 
-const colorAPI = {
+const brandAPI = {
   getAll(pageNum, pageSize) {
-    const url = '/color/';
+    const url = '/brand/';
     return axiosClient.get(url, {
       params: {
         page: pageNum,
@@ -11,11 +11,11 @@ const colorAPI = {
     });
   },
   get(id) {
-    const url = `/color?id=${id}`;
+    const url = `/brand?id=${id}`;
     return axiosClient.get(url);
   },
   add(data) {
-    const url = `/color`;
+    const url = `/brand`;
     return axiosClient.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -23,13 +23,21 @@ const colorAPI = {
     });
   },
   update(data) {
-    const url = `/color?id=${data.id}`;
+    const url = `/brand?id=${data.id}`;
     return axiosClient.put(url, data);
   },
+  updateStatus(brandID, status) {
+    const url = `/brand/update-status?brandID=${brandID}&status=${status}`;
+    return axiosClient.put(url, null, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  },
   delete(id) {
-    const url = `/color?id=${id}`;
+    const url = `/brand?id=${id}`;
     return axiosClient.delete(url);
   },
 };
 
-export default colorAPI;
+export default brandAPI;

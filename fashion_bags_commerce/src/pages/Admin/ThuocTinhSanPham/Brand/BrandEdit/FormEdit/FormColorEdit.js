@@ -2,27 +2,22 @@ import '../FormEdit/FormColorEdit.css';
 
 import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, Row, Select, Space , notification} from 'antd';
-import colorAPI from '~/api/colorAPI';
-
+import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd';
 function FormColorEdit(props) {
   const [open, setOpen] = useState(false);
-  const [editedColor, setEditedColor] = useState({ ...props.color });
   const showDrawer = () => {
     setOpen(true);
   };
-  const [error, setError] = useState(true);
   const onClose = () => {
     setOpen(false);
   };
-    
-  
+
+
   return (
     <Fragment>
       <Button type="primary" className='btn btn-warning' onClick={showDrawer} icon={<EditOutlined />}>
        
       </Button>
-
       <Drawer
         title={'Edit - ' + props.color.colorCode}
         width={360}
@@ -34,13 +29,13 @@ function FormColorEdit(props) {
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" className='btn btn-warning'>
+            <Button onClick={onclose} type="primary" className='btn btn-warning'>
               Edit
             </Button>
           </Space>
         }
       >
-        <Form  layout="vertical" hideRequiredMark initialValues={props.color}>
+        <Form layout="vertical" hideRequiredMark initialValues={props.color}>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
@@ -79,7 +74,6 @@ function FormColorEdit(props) {
           </Row>
         </Form>
       </Drawer>
-
     </Fragment>
   );
 }

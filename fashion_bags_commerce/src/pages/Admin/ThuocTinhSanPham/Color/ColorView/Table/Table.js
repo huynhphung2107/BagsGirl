@@ -45,7 +45,6 @@ function TableContent() {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          {/* <FormProductViewDetails baloCode={record.baloCode} /> */}
           <FormColorEdit color={record} />
           <Popconfirm
             title="Xác Nhận"
