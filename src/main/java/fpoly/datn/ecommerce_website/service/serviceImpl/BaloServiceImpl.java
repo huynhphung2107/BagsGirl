@@ -1,8 +1,8 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.dto.BaloDTO;
 import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.repository.IBaloRepository;
+import fpoly.datn.ecommerce_website.service.IBaloService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

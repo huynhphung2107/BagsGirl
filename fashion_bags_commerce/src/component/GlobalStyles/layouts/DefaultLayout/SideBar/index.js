@@ -56,7 +56,11 @@ const items = [
       '13',
     ),
     getItem('Quản lí Thuộc tính Balo', 'sub999', <AppstoreOutlined />, [
-      getItem('Màu sắc', '7'),
+      getItem(
+      <Link
+      style={{textDecoration: 'none'}} to={  '/color-view'}>
+        Màu sắc
+      </Link>, '7'),
       getItem('Chất liệu', '8'),
     ]),
     getItem('Option 11', '15'),

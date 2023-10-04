@@ -5,12 +5,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Admin from './pages/Admin';
 import ProductViewer from './pages/Admin/ProductManager/ProductViewer';
-
 import ShiftViewer from './pages/Admin/Shift/ShiftViewer';
-
-
 import Login from './pages/Login';
 import Home from './pages/Home';
+import ColorView from './pages/Admin/ThuocTinhSanPham/Color/ColorView';
 
 
 function App() {
@@ -22,7 +20,8 @@ function App() {
           <Route path="/login" element={'<Login />'}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/product-viewer" element={<ProductViewer />}></Route>
-          <Route path="/shift" element={<ShiftViewer />}></Route>
+          <Route path="/shift-view" element={<ShiftViewer />}></Route>
+          <Route path="/color-view" element={<ColorView />}></Route>
         </Routes>
       </div>
     </Router>

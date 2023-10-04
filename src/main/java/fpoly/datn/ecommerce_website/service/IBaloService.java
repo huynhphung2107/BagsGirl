@@ -1,4 +1,4 @@
-package fpoly.datn.ecommerce_website.service.serviceImpl;
+package fpoly.datn.ecommerce_website.service;
 
 import fpoly.datn.ecommerce_website.dto.BaloDTO;
 import fpoly.datn.ecommerce_website.entity.Balo;
