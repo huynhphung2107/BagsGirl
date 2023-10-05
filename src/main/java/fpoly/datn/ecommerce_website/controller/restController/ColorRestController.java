@@ -40,7 +40,7 @@ public class ColorRestController {
 
     @RequestMapping(value = "/color/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
-            @RequestParam(name = "page", defaultValue = "1") int pageNum,
+            @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
         Page<Color> colorPage = colorService.findAllPage(pageNum, pageSize);

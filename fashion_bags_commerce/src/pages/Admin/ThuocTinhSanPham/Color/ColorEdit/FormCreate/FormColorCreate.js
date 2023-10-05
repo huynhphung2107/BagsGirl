@@ -69,7 +69,7 @@ function FormcolorEditTonggle(props) {
       <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
         Thêm màu sắc
       </Button>
-      <Modal title="Thêm Màu Sắc" open={open} onOk={onClose} onCancel={onClose}>
+      <Modal title="Thêm Màu Sắc" visible={open} onCancel={onClose} footer={null}>
         <div>
           <Form
             initialValues={{
@@ -77,7 +77,6 @@ function FormcolorEditTonggle(props) {
             }}
             form={form}
             name="basic"
-            onFinish={addFunc}
             onFinishFailed={onFinishFailed}
             autoComplete="on"
             labelCol={{
@@ -89,6 +88,8 @@ function FormcolorEditTonggle(props) {
             style={{
               maxWidth: 600,
             }}
+            onFinish={addFunc}
+
           >
             <Form.Item
               label="Color Name"
@@ -101,30 +102,30 @@ function FormcolorEditTonggle(props) {
               ]}
             >
               <Input />
-           
-        
-             
             </Form.Item>
 
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <Popconfirm
-                title="Xác Nhận"
-                description="Bạn Có chắc chắn muốn Thêm?"
-                okText="Đồng ý"
-                cancelText="Không"
-                onConfirm={onConfirm}
-                onCancel={onCancel}
-              >
-                <Button type="primary" onClick={addFunc}>
-                  Submit
-                </Button>
-              </Popconfirm>
+            <Form.Item label="Status" name="colorStatus">
+              <Select
+                style={{ width: 300 }}
+                placeholder="Vui lòng chọn trạng thái"
+                options={[
+                  {
+                    value: '1',
+                    label: 'Hoạt động',
+                  },
+                  {
+                    value: '0',
+                    label: 'Không Hoạt động',
+                  },
+                ]}
+              />
             </Form.Item>
+
+            <div style={{ textAlign: 'center' }}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </div>
           </Form>
         </div>
       </Modal>

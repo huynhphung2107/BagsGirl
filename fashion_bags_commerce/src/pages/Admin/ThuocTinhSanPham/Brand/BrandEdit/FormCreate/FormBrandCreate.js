@@ -49,8 +49,8 @@ function FormBrandCreate(props) {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showModal}>
-        <PlusOutlined /> Thêm
+      <Button type="primary" onClick={showModal} icon={ <PlusOutlined />}>
+        Thêm thương hiệu
       </Button>
       <br></br>
       <Modal title="Thêm thương hiệu" visible={modalOpen} onCancel={handleCancel} footer={null}>
@@ -68,7 +68,13 @@ function FormBrandCreate(props) {
             }}
             onFinish={addFunc} // Xử lý khi submit form
           >
-            <Form.Item label="Brand Name" name="brandName">
+            <Form.Item label="Brand Name" name="brandName"
+             rules={[
+              {
+                required: true,
+                message: 'Vui lòng điền Tên thương hiệu!',
+              },
+            ]}>
               <Input />
             </Form.Item>
 

@@ -20,7 +20,7 @@ function FormColorEdit(props) {
   return (
     <Fragment>
       <Button type="primary" className='btn btn-warning' onClick={showDrawer} icon={<EditOutlined />}>
-       
+       Edit
       </Button>
 
       <Drawer

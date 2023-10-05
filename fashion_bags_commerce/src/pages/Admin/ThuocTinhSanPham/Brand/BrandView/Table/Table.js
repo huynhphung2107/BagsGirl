@@ -3,6 +3,7 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import brandAPI from '~/api/brandAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import table from './table.css';
+import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ const TableContent = () => {
   const onCancel = () => {};
   const reload = () => {
     setLoading(true);
-    brandAPI.getAll(currentPage, pagesSize);
+    getAllBrand(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -22,7 +23,7 @@ const TableContent = () => {
   useEffect(() => {
     // Fetch brand data using the brandAPI.getAll function
     getAllBrand(currentPage, pagesSize);
-    reload()
+    reload();
   }, []); // Update data when page or page size changes
 
   const onChange = (current, pageSize) => {
@@ -97,19 +98,24 @@ const TableContent = () => {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
-        <Popconfirm
-          title="Xác Nhận"
-          description="Bạn Có chắc chắn muốn xóa?"
-          okText="Đồng ý"
-          cancelText="Không"
-          onConfirm={() => {
-            deleteHandle(record.id, 0);
-            reload();
-          }}
-          onCancel={onCancel}
-        >
-          <Button className='btn btn-danger ' icon={<DeleteOutlined />} /> 
-        </Popconfirm>
+        <Space size="middle">
+          <FormBrandEdit brand={record} />
+          <Popconfirm
+            title="Xác Nhận"
+            description="Bạn Có chắc chắn muốn xóa?"
+            okText="Đồng ý"
+            cancelText="Không"
+            onConfirm={() => {
+              deleteHandle(record.id, 0);
+              reload();
+            }}
+            onCancel={onCancel}
+          >
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+              Delete
+            </Button>
+          </Popconfirm>
+        </Space>
       ),
 
       width: 100,
@@ -127,10 +133,26 @@ const TableContent = () => {
   };
 
   return (
-    <Fragment>
-      <Button type="" onClick={reload} loading={loading}>
-      <SyncOutlined />
-      </Button>
+    <div
+      style={{
+        padding: '10px',
+      }}
+    >
+      <Fragment
+        style={{
+          marginBottom: 16,
+        }}
+      >
+        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+          Reload
+        </Button>
+        <span
+          style={{
+            marginLeft: 8,
+          }}
+        ></span>
+      </Fragment>
+
       <Table
         rowKey={(record) => record.id}
         columns={columns}
@@ -141,7 +163,7 @@ const TableContent = () => {
       />
 
       <Pagination total={totalItem} onChange={onChange} defaultCurrent={1} defaultPageSize={pagesSize} />
-    </Fragment>
+    </div>
   );
 };
 

@@ -1,11 +1,10 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 
-import { DeleteOutlined } from '@ant-design/icons'; 
+import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState, useContext } from 'react';
 import colorAPI from '~/api/colorAPI';
 import styles from './index.module.scss';
 import FormColorEdit from '../../ColorEdit/FormEdit/FormColorEdit';
-
 
 function TableContent() {
   const [baloList, setBaloList] = useState([]);
@@ -88,7 +87,9 @@ function TableContent() {
             }}
             onCancel={onCancel}
           >
-     <Button className='btn btn-danger ' icon={<DeleteOutlined />} /> {/* Thêm biểu tượng thùng rác */}
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+              Delete
+            </Button>
           </Popconfirm>
         </Space>
       ),
@@ -154,7 +155,7 @@ function TableContent() {
           marginBottom: 16,
         }}
       >
-        <Button type="primary" onClick={reload} loading={loading}>
+        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
           Reload
         </Button>
         <span
@@ -166,7 +167,7 @@ function TableContent() {
       <Spin spinning={loading}>
         <Table
           size="middle"
-          className='table table-striped'
+          className="table table-striped"
           scroll={{
             x: 1000,
             y: 500,
