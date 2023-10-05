@@ -14,5 +14,5 @@ public class MaterialDTO {
     private String code;
 
     @NotBlank(message = "Không để trống name")
-    private String name;
+    private String materialName;
 }
