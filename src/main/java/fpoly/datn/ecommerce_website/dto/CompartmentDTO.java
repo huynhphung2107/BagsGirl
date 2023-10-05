@@ -16,5 +16,5 @@ public class CompartmentDTO {
     private String code;
 
     @NotBlank(message = "Không để trống name")
-    private String name;
+    private String compartmentName;
 }

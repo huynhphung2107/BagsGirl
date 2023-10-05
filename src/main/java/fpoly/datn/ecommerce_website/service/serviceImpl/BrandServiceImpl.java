@@ -45,6 +45,13 @@ public class BrandServiceImpl implements ServiceGenarel<Brand> {
         return entity;
     }
 
+    public  Brand updateStatus(String id, int status){
+        Brand brand = iBrandRepository.findById(id).get();
+        brand.setBrandStatus(status);
+        return iBrandRepository.save(brand);
+
+    }
+
     @Override
     public String delete(String id) {
         iBrandRepository.deleteById(id);

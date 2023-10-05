@@ -1,11 +1,10 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 
-import { DeleteOutlined } from '@ant-design/icons'; 
+import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState, useContext } from 'react';
 import colorAPI from '~/api/colorAPI';
 import styles from './index.module.scss';
 import FormColorEdit from '../../ColorEdit/FormEdit/FormColorEdit';
-
 
 function TableContent() {
   const [baloList, setBaloList] = useState([]);
@@ -41,6 +40,37 @@ function TableContent() {
       sorter: (a, b) => a.colorName.localeCompare(b.colorName),
     },
     {
+      title: 'Status',
+      dataIndex: 'colorStatus',
+
+      width: 100,
+      sorter: (a, b) => a.colorStatus.localeCompare(b.colorStatus),
+      render: (status) => {
+        let statusText;
+        let statusClass;
+
+        switch (status) {
+          case 1:
+            statusText = 'Hoạt động';
+            statusClass = 'active-status';
+            break;
+          case 0:
+            statusText = 'Không hoạt động';
+            statusClass = 'inactive-status';
+            break;
+          case -1:
+            statusText = 'Trạng thái khác';
+            statusClass = 'other-status';
+            break;
+          default:
+            statusText = 'Không hoạt động';
+            statusClass = 'inactive-status';
+        }
+
+        return <span className={statusClass}>{statusText}</span>;
+      },
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
@@ -57,7 +87,9 @@ function TableContent() {
             }}
             onCancel={onCancel}
           >
-     <Button className='btn btn-danger ' icon={<DeleteOutlined />} /> {/* Thêm biểu tượng thùng rác */}
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+              Delete
+            </Button>
           </Popconfirm>
         </Space>
       ),
@@ -123,7 +155,7 @@ function TableContent() {
           marginBottom: 16,
         }}
       >
-        <Button type="primary" onClick={reload} loading={loading}>
+        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
           Reload
         </Button>
         <span
@@ -135,7 +167,7 @@ function TableContent() {
       <Spin spinning={loading}>
         <Table
           size="middle"
-          className='table table-striped'
+          className="table table-striped"
           scroll={{
             x: 1000,
             y: 500,
