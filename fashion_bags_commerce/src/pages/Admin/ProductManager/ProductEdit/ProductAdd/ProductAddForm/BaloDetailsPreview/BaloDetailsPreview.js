@@ -3,10 +3,10 @@ import styles from './BaloDetailsPreview.module.scss';
 import React, { Fragment, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
-import baloDetailsAPI from '~/api/baloDetailsAPI';
 
 const { Option } = Select;
 function BaloDetailsPreview(props) {
+  console.log(props.baloList);
   const [loading, setLoading] = useState(false);
   const [baloList, setBaloList] = useState(props.baloList);
 
@@ -118,6 +118,7 @@ function BaloDetailsPreview(props) {
   const start = () => {
     setLoading(true);
     setBaloList(props.baloList);
+    console.log(props.baloList);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -155,7 +156,7 @@ function BaloDetailsPreview(props) {
           rowKey={(record) => record.baloCode}
           loading={loading}
           columns={columns}
-          dataSource={props.baloList}
+          dataSource={props.baloListPreview}
           pagination={false}
           scroll={{
             x: 1500,
