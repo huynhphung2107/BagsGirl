@@ -41,6 +41,37 @@ function TableContent() {
       sorter: (a, b) => a.colorName.localeCompare(b.colorName),
     },
     {
+      title: 'Status',
+      dataIndex: 'colorStatus',
+
+      width: 100,
+      sorter: (a, b) => a.colorStatus.localeCompare(b.colorStatus),
+      render: (status) => {
+        let statusText;
+        let statusClass;
+
+        switch (status) {
+          case 1:
+            statusText = 'Hoạt động';
+            statusClass = 'active-status';
+            break;
+          case 0:
+            statusText = 'Không hoạt động';
+            statusClass = 'inactive-status';
+            break;
+          case -1:
+            statusText = 'Trạng thái khác';
+            statusClass = 'other-status';
+            break;
+          default:
+            statusText = 'Không hoạt động';
+            statusClass = 'inactive-status';
+        }
+
+        return <span className={statusClass}>{statusText}</span>;
+      },
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (_, record) => (

@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import ColorView from './pages/Admin/ThuocTinhSanPham/Color/ColorView';
 import ProductAdd from './pages/Admin/ProductManager/ProductEdit/ProductAdd';
+import BrandView from './pages/Admin/ThuocTinhSanPham/Brand/BrandView';
 
 
 const dynamicRoutes = [
@@ -31,7 +32,7 @@ function App() {
           <Route path="/product-viewer" element={<ProductViewer />}></Route>
           <Route path="/shift-view" element={<ShiftViewer />}></Route>
           <Route path="/color-view" element={<ColorView />}></Route>
-          <Route path="/brand-view" element={<ColorView />}></Route>
+          <Route path="/brand-view" element={<BrandView />}></Route>
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}
