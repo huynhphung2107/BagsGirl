@@ -22,4 +22,5 @@ public class TypeDTO {
     private String typeCode;
     @NotBlank
     private String typeName;
+    private Integer typeStatus;
 }

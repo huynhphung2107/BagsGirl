@@ -1,9 +1,15 @@
 import axiosClient from '../axiosClient';
 
 const typeAPI = {
-  getAll() {
+  getAll(pageNum, pageSize) {
     const url = '/type/';
-    return axiosClient.get(url);
+    return axiosClient.get(url,
+      {
+        params: {
+          page: pageNum - 1,
+          size: pageSize,
+        },
+      });
   },
   get(id) {
     const url = `/type?id=${id}`;
@@ -21,8 +27,8 @@ const typeAPI = {
     const url = `/type?id=${data.id}`;
     return axiosClient.put(url, data);
   },
-  updateStatus(typeID, status) {
-    const url = `/type/update-status?typeID=${typeID}&status=${status}`;
+  updateStatus(id, status) {
+    const url = `/type/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',

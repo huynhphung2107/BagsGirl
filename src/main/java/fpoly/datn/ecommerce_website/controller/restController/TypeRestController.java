@@ -1,11 +1,13 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.TypeDTO;
+import fpoly.datn.ecommerce_website.entity.Color;
 import fpoly.datn.ecommerce_website.entity.Type;
 import fpoly.datn.ecommerce_website.service.serviceImpl.TypeServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -35,13 +37,12 @@ public class TypeRestController {
 
     //GetAll
     @RequestMapping(value = "/type/", method = RequestMethod.GET)
-    public ResponseEntity<List<TypeDTO>> getAll() {
-        return new ResponseEntity<>(
-                this.typeService.findAll()
-                        .stream()
-                        .map(type -> modelMapper.map(type, TypeDTO.class))
-                        .collect(Collectors.toList())
-                , HttpStatus.OK);
+    public ResponseEntity<?> getAll(@RequestParam(name = "page", defaultValue = "0") int pageNum,
+                                                @RequestParam(name = "size", defaultValue = "10") int pageSize)
+    {
+        Page<Type> typePage = typeService.findAllPage(pageNum, pageSize);
+        return new ResponseEntity<>
+                (typePage, HttpStatus.OK);
     }
 
     //GetOne
@@ -68,6 +69,12 @@ public class TypeRestController {
         return new ResponseEntity<>(
                 this.typeService.save(type)
                 , HttpStatus.OK);
+    }
+    @RequestMapping(value = "/type/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<Type> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(typeService.updateStatus(id, status),
+                HttpStatus.OK);
+
     }
 
     //Delete

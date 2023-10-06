@@ -82,6 +82,13 @@ const items = [
         '81',
       ),
 
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/type-view'}>
+          Kiểu balo
+        </Link>,
+        '82',
+      ),
+
       getItem('Chất liệu', '89'),
     ]),
     getItem('Option 11', '15'),
