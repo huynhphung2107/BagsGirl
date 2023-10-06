@@ -76,9 +76,6 @@ public class SizeRestController {
 
     }
 
-    
-    
-
     @RequestMapping(value = "/size", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
         this.sizeService.delete(id);
