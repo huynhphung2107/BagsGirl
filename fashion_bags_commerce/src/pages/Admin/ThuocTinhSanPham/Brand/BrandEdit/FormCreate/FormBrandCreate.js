@@ -53,7 +53,7 @@ function FormBrandCreate(props) {
         Thêm thương hiệu
       </Button>
       <br></br>
-      <Modal title="Thêm thương hiệu" visible={modalOpen} onCancel={handleCancel} footer={null}>
+      <Modal title="Thêm thương hiệu" open={modalOpen} onCancel={handleCancel} footer={null}>
         <div>
           <Form
             form={form}

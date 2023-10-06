@@ -63,16 +63,26 @@ const items = [
     ),
     getItem('Quản lí Thuộc tính Balo', 'sub999', <AppstoreOutlined />, [
       getItem(
-      <Link
-      style={{textDecoration: 'none'}} to={  '/color-view'}>
-        Màu sắc
-      </Link>, '79'),
-      getItem( <Link
-        style={{textDecoration: 'none'}} to={  '/brand-view'}>
-         Thương hiệu
-        </Link>, '80'),
-      getItem('Chất liệu', '89'),
+        <Link style={{ textDecoration: 'none' }} to={'/color-view'}>
+          Màu sắc
+        </Link>,
+        '79',
+      ),
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/brand-view'}>
+          Thương hiệu
+        </Link>,
+        '80',
+      ),
 
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/size-view'}>
+          Kích cỡ
+        </Link>,
+        '81',
+      ),
+
+      getItem('Chất liệu', '89'),
     ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),

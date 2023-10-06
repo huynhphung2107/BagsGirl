@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
-import brandAPI from '~/api/brandAPI';
+import sizeAPI from '~/api/sizeAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import table from './table.css';
-import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
+// import FormsizeEdit from '../../sizeEdit/FormEdit/FormsizeEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,15 +14,15 @@ const TableContent = () => {
   const onCancel = () => {};
   const reload = () => {
     setLoading(true);
-    getAllBrand(currentPage, pagesSize);
+    getAllsize(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   };
 
   useEffect(() => {
-    // Fetch brand data using the brandAPI.getAll function
-    getAllBrand(currentPage, pagesSize);
+    // Fetch size data using the sizeAPI.getAll function
+    getAllsize(currentPage, pagesSize);
     reload();
   }, []); // Update data when page or page size changes
 
@@ -31,12 +31,12 @@ const TableContent = () => {
     console.log(pageSize);
     setCurrentPage(current);
     setPagesSize(pageSize);
-    getAllBrand(current, pageSize);
+    getAllsize(current, pageSize);
   };
 
-  const getAllBrand = async (current, pageSize) => {
+  const getAllsize = async (current, pageSize) => {
     try {
-      const response = await brandAPI.getAll(current, pageSize);
+      const response = await sizeAPI.getAllsize(current, pageSize);
       const data = response.data.content;
       console.log(data);
       setTotalItem(response.data.totalElements);
@@ -53,22 +53,30 @@ const TableContent = () => {
     },
     {
       title: 'Code',
-      dataIndex: 'brandCode',
-      sorter: (a, b) => a.brandCode.localeCompare(b.brandCode),
+      dataIndex: 'sizeCode',
+      sorter: (a, b) => a.sizeCode.localeCompare(b.sizeCode),
       width: 100,
     },
     {
-      title: 'Name Brand',
-      dataIndex: 'brandName',
+      title: 'Name size',
+      dataIndex: 'sizeName',
       width: 100,
-      sorter: (a, b) => a.brandName.localeCompare(b.brandName),
+      sorter: (a, b) => a.sizeName.localeCompare(b.sizeName),
+    },
+    {
+      title: 'Size ( dài x rộng x cao)',
+      dataIndex: 'lengthSize' + 'x' + 'wideSize' + 'x' + 'heightSize',
+
+      width: 100,
+      width: 100,
+      sorter: (a, b) => a.lengthSize.localeCompare(b.lengthSize),
     },
     {
       title: 'Status',
-      dataIndex: 'brandStatus',
+      dataIndex: 'sizeStatus',
 
       width: 100,
-      sorter: (a, b) => a.brandStatus.localeCompare(b.brandStatus),
+      sorter: (a, b) => a.sizeStatus.localeCompare(b.sizeStatus),
       render: (status) => {
         let statusText;
         let statusClass;
@@ -99,7 +107,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <FormBrandEdit brand={record} />
+          <FormsizeEdit size={record} />
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"
@@ -123,12 +131,12 @@ const TableContent = () => {
   ];
 
   const deleteHandle = async (id, status) => {
-    const xoa = await brandAPI.updateStatus(id, status);
+    const xoa = await sizeAPI.updateStatus(id, status);
     notification.info({
       message: 'Xoa trang thai',
       description: 'Đã hủy thành công trang thái của thương hiệu có id là :' + id,
     });
-    getAllBrand(currentPage, pagesSize);
+    getAllsize(currentPage, pagesSize);
     console.log(xoa);
   };
 
