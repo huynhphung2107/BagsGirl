@@ -27,8 +27,8 @@ public class BuckleType {
     private String id;
 
     @Column(name = "buckle_type_code")
-    private String code;
+    private String buckleCode;
 
     @Column(name = "buckle_type_name")
-    private String name;
+    private String buckleName;
 }

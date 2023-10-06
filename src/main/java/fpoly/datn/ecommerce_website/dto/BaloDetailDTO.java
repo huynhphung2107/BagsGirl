@@ -1,14 +1,17 @@
 package fpoly.datn.ecommerce_website.dto;
 
+import fpoly.datn.ecommerce_website.entity.Image;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
 
 @Setter
 @Getter
+@ToString
 public class BaloDetailDTO {
 
     private UUID id;
@@ -21,7 +24,12 @@ public class BaloDetailDTO {
     private String brandName;
     private String compartmentName;
     private String buckleTypeName;
+<<<<<<< HEAD
     private String imgUrl;
+=======
+    private String imageUrl;
+    private String producerCode;
+>>>>>>> c14e930910e9b8259b08407ca837f3300d229b66
     private String producerName;
 
     @NotNull
@@ -31,12 +39,12 @@ public class BaloDetailDTO {
     private Float retailPrice;
 
     @NotNull
-    private Integer amount;
+    private Integer baloDetailAmount;
 
     @NotBlank
-    private String describe;
+    private String baloDetailDescribe;
 
-    private Integer status;
+    private Integer baloDetailStatus;
     
 
 }

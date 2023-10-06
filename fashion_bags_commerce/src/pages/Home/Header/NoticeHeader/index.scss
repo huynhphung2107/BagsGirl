@@ -1,0 +1,22 @@
+.carouselHeader {
+  height: 30px;
+  padding: 5 px;
+  font-family: ttcommons-light;
+  background-color: yellow;
+  .carouselContent {
+  }
+  text-align: center;
+  color: black;
+  user-select: none;
+  :hover {
+    cursor: grab;
+  }
+  .highlightText {
+    color: red;
+  }
+  .highlightLink {
+    color: red;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}

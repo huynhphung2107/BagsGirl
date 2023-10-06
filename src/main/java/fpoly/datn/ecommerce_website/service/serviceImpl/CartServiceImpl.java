@@ -41,20 +41,13 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart save(CartDTO cartDTO) {
-        Cart cart = cartDTO.validate(new Cart());
-        return repo.save(cart);
+
+        return null;
     }
 
     @Override
     public Cart update(CartDTO cartDTO, String id) {
-        Cart x = cartDTO.validate(repo.findById(id).orElse(null));
-        x.setCode(cartDTO.getCode());
-        x.setCreateTime(cartDTO.getCreateTime());
-        x.setPaymentTime(cartDTO.getPaymentTime());
-        x.setNote(cartDTO.getNote());
-        x.setStatus(cartDTO.getStatus());
-        x.setCustomer(Customer.builder().id(cartDTO.getCustomer()).build());
-        return repo.save(x);
+        return null;
     }
 
 

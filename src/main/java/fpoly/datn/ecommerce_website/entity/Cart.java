@@ -33,21 +33,21 @@ public class Cart {
     private String id;
 
     @Column(name = "cart_code")
-    private String code;
+    private String cartCode;
 
     @Column(name = "cart_create_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date createTime;
+    private Date cartCreatTime;
 
     @Column(name = "cart_payment_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date paymentTime;
+    private Date cartPaymentTime;
 
     @Column(name = "note")
-    private String note;
+    private String cartNote;
 
     @Column(name = "status")
-    private Integer status;
+    private Integer cartStatus;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

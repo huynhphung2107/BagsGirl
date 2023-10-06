@@ -2,7 +2,6 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BaloDetailDTO;
 import fpoly.datn.ecommerce_website.entity.BaloDetail;
-import fpoly.datn.ecommerce_website.entity.BuckleType;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BaloDetailServiceImpl;
 import jakarta.validation.Valid;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -37,6 +37,10 @@ public class BaloDetailRestController {
 
     @Autowired
     private BaloDetailServiceImpl baloDetailService;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c14e930910e9b8259b08407ca837f3300d229b66
     @RequestMapping(value = "/balo/{baloID}/balodetails", method = RequestMethod.GET)
     public ResponseEntity<?> getAllbyBalo(@PathVariable String baloID) {
         return new ResponseEntity<>(
@@ -48,6 +52,10 @@ public class BaloDetailRestController {
         );
 
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c14e930910e9b8259b08407ca837f3300d229b66
     //getall
     @RequestMapping(value = "/balo-detail/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
@@ -58,7 +66,6 @@ public class BaloDetailRestController {
                         .collect(Collectors.toList())
                 , HttpStatus.OK
         );
-
     }
 
     //getOne

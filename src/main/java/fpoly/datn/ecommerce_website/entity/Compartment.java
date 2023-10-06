@@ -27,8 +27,8 @@ public class Compartment {
     private String id;
 
     @Column(name = "compartment_code")
-    private String code;
+    private String compartmentCode;
 
     @Column(name = "compartment_name")
-    private String name;
+    private String compartmentName;
 }

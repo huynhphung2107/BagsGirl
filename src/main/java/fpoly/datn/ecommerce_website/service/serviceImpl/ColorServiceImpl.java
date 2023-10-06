@@ -4,6 +4,9 @@ import fpoly.datn.ecommerce_website.entity.Color;
 import fpoly.datn.ecommerce_website.repository.IColorReponsitory;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +21,12 @@ public class ColorServiceImpl implements ServiceGenarel<Color> {
     @Override
     public List<Color> findAll() {
         return this.iColorReponsitory.findAll();
+    }
+
+
+    public Page<Color> findAllPage(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page,size);
+        return this.iColorReponsitory.findAll(pageable);
     }
 
     @Override

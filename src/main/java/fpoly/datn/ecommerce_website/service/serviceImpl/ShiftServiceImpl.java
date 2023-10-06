@@ -2,7 +2,6 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.ShiftDTO;
 import fpoly.datn.ecommerce_website.entity.Shift;
-import fpoly.datn.ecommerce_website.entity.Staff;
 import fpoly.datn.ecommerce_website.repository.IShiftRepository;
 import fpoly.datn.ecommerce_website.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,21 +39,13 @@ public class ShiftServiceImpl implements ShiftService {
 
     @Override
     public Shift save(ShiftDTO shiftDTO) {
-        Shift shift = shiftDTO.validate(new Shift());
-        return repo.save(shift);
+
+        return null;
     }
 
     @Override
     public Shift update(ShiftDTO shiftDTO, String id) {
-        Shift x = shiftDTO.validate(repo.findById(id).orElse(null));
-        x.setCode(shiftDTO.getCode());
-        x.setCreateBy(shiftDTO.getCreateBy());
-        x.setStartTime(shiftDTO.getStartTime());
-        x.setNote(shiftDTO.getNote());
-        x.setStatus(shiftDTO.getStatus());
-        x.setEndTime(shiftDTO.getEndTime());
-        x.setStaff(Staff.builder().id(shiftDTO.getStaff()).build());
-        return repo.save(x);
+        return null;
     }
 
 

@@ -1,0 +1,70 @@
+.block {
+  font-family: ttcommons-regular;
+  padding: 30px 0px;
+
+  //   background: red;
+  .titleBlock {
+    align-items: center;
+    text-align: center;
+    font-size: 42px;
+    margin: 20px 0px 20px;
+    position: relative;
+    color: #ff529c;
+    a {
+      font-size: 20px;
+      margin-right: 100px;
+      margin-top: 30px;
+    }
+    .viewAll {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      text-decoration: none;
+    }
+  }
+
+  .productList {
+    .container {
+      margin: 0px 100px;
+      padding: 20px;
+      //   background-color: red;
+
+      .producItem {
+        // background-color: blue;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column; /* Đặt hướng dọc */
+        justify-content: center; /* Căn giữa theo hướng ngang */
+        align-items: center;
+        .productImage {
+          max-width: 400px;
+          a {
+            .contentImage {
+              width: 420px;
+
+              position: relative;
+            }
+            img {
+              max-width: 100%;
+            }
+          }
+        }
+
+        .describer {
+          align-self: start;
+          padding: 20px 10px;
+          .productPrice {
+            ins {
+              text-decoration: none;
+              color: black;
+              font-size: 27px;
+            }
+          }
+          .productTitle {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+}

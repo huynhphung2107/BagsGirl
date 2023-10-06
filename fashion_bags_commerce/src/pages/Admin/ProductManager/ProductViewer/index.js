@@ -2,40 +2,33 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../ProductViewer/Table/Table';
+import FormBaloEditTonggle from '../ProductEdit/FormCreate/FormBaloEditTonggle';
 
-const { Header, Footer, Sider } = Layout;
-const headerStyle = {
-  borderLeft: '270px',
-  color: '#fff',
+import './index.css';
+
+const { Header, Footer, Sider, Content } = Layout;
+
+const contentStyle = {
   height: 'auto',
-  paddingInline: 0,
-  lineHeight: '64px',
-  backgroundColor: '#fff',
-  padding: '30px',
-};
-const footerStyle = {
-  borderLeft: '270px',
-  color: 'black',
-  backgroundColor: '#fff',
-};
-const layoutContent = {
-  marginLeft: '260px',
-  flexGrow: '1',
 };
 
 function ProductViewer() {
   return (
-    <Layout style={{ height: '100vh', background: '#f4f3f4' }}>
+    <Layout className="layout">
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
         <Sidebar keyIndex="13" openKey="sub5" />
       </Sider>
-      <Layout style={layoutContent}>
-        <Header style={headerStyle}>
+      <Layout className="layoutContent">
+        <Header className="headerStyle">
           <HeaderContent titlePage="Danh Sách Sản Phẩm" />
         </Header>
-        <TableContent />
+        <Content style={contentStyle}>
+          <div>
+            <TableContent />
+          </div>
+        </Content>
 
-        <Footer style={footerStyle}>Đây là component của Footer</Footer>
+        <Footer className="footerStyle">Đây là component của Footer</Footer>
       </Layout>
     </Layout>
   );

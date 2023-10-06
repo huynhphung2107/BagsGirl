@@ -28,9 +28,9 @@ public class Material {
     private String id;
 
     @Column(name = "material_code")
-    private String code;
+    private String materialCode;
 
     @Column(name = "material_name")
-    private String name;
+    private String materialName;
 
 }

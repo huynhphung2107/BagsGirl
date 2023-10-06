@@ -8,11 +8,14 @@ import {
   ShoppingCartOutlined,
   TeamOutlined,
   UserOutlined,
+  ContactsOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import Avartar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/Avartar';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import './index.module.scss';
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -50,14 +53,42 @@ const items = [
       <Link style={{ textDecoration: 'none' }} to={'/product-viewer'}>
         Danh sách Sản Phẩm
       </Link>,
+      '139',
+    ),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/product-add'}>
+        Thêm Balo Chi Tiết
+      </Link>,
       '13',
     ),
-    getItem('Option 10', '14'),
+    getItem('Quản lí Thuộc tính Balo', 'sub999', <AppstoreOutlined />, [
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/color-view'}>
+          Màu sắc
+        </Link>,
+        '79',
+      ),
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/brand-view'}>
+          Thương hiệu
+        </Link>,
+        '80',
+      ),
+
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/size-view'}>
+          Kích cỡ
+        </Link>,
+        '81',
+      ),
+
+      getItem('Chất liệu', '89'),
+    ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),
   ]),
   getItem('Quản lí Khuyến Mãi', 'sub6', <RedEnvelopeOutlined />, [
-    getItem('Option 9', '17'),
+    getItem('Danh sách voucher', '17'),
     getItem('Option 10', '18'),
     getItem('Option 11', '19'),
     getItem('Option 12', '20'),
@@ -74,6 +105,17 @@ const items = [
     getItem('Option 11', '27'),
     getItem('Option 12', '28'),
   ]),
+  getItem('Giao Ca', 'sub10', <ContactsOutlined />, [
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/shift-view'}>
+        Danh sách ca làm việc
+      </Link>,
+      '33',
+    ),
+    getItem('Option 10', '34'),
+    getItem('Option 11', '35'),
+    getItem('Option 12', '36'),
+  ]),
   getItem('Thống Kê và Phân Tích', 'sub9', <BarChartOutlined />, [
     getItem('Option 9', '29'),
     getItem('Option 10', '30'),
@@ -81,11 +123,9 @@ const items = [
     getItem('Option 12', '32'),
   ]),
 ];
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9'];
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9', 'sub10'];
 function Sidebar(props) {
   const { key, keyIndex, openKey } = props;
-  console.log(keyIndex);
-  console.log(openKey);
   const [openKeys, setOpenKeys] = useState([props.openKey]);
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
@@ -102,6 +142,7 @@ function Sidebar(props) {
         <hr />
       </div>
       <Menu
+        className="menuCustom"
         mode="inline"
         openKeys={openKeys}
         onOpenChange={onOpenChange}

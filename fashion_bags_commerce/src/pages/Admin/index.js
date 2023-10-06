@@ -12,7 +12,6 @@ const headerStyle = {
   padding: '30px',
 };
 const contentStyle = {
-  minHeight: 120,
   lineHeight: '120px',
   color: 'black',
   backgroundColor: '#f3f4f3',

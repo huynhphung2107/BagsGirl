@@ -32,7 +32,7 @@ public class Staff {
     private String id;
 
     @Column(name = "status")
-    private Integer status;
+    private Integer staffStatus;
 
     @OneToOne()
     @JsonManagedReference
