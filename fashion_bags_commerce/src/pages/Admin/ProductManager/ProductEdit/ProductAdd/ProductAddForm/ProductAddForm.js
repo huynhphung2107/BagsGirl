@@ -1,7 +1,7 @@
 //CSS
 import styles from './index.module.scss';
 //React Component
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, memo, useContext, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Form, InputNumber, Modal, Popconfirm, Row, Select, Typography, notification } from 'antd';
 import Input from 'antd/es/input/Input';
@@ -41,15 +41,6 @@ function ProductAddForm() {
   const [size, setSize] = useState([]);
   const [type, setType] = useState([]);
 
-  // const [selectBrand, setSelectBrand] = useState(null);
-  // const [selectBuckleType, setSelectBuckleType] = useState(null);
-  // const [selectCompartment, setSelectCompartment] = useState(null);
-  // const [selectMaterial, setSelectMaterial] = useState(null);
-  // const [selectProducer, setSelectProducer] = useState(null);
-  // const [selectSize, setSelectSize] = useState(null);
-  // const [selectColor, setSelectColor] = useState(null);
-  // const [selectType, setSelectType] = useState(null);
-
   const viewBaloProps = async () => {
     try {
       const brandData = await brandAPI.getAll();
@@ -73,6 +64,7 @@ function ProductAddForm() {
     }
   };
 
+  console.log('render');
   useEffect(() => {
     viewBaloProps();
   }, []);
@@ -147,11 +139,12 @@ function ProductAddForm() {
       materialName: materialSelectedName,
       compartmentName: compartmentSelectedName,
       sizeName: sizeSelectedName,
-      produceName: producerSelectedName,
+      producerName: producerSelectedName,
       buckleTypeName: buckleTypeSelectedName,
     };
-    console.log(tempBalo);
+
     setBaloListPreview([...baloListPreview, tempBalo]);
+
     notification.success({
       message: 'Thành Công',
       description: 'Dữ liệu đã được thêm!!!!',
@@ -438,7 +431,7 @@ function ProductAddForm() {
                   >
                     {size.map((o) => (
                       <Select.Option key={o.id} value={o.id}>
-                        {o.name} - {o.lengthSize}
+                        {o.sizeName} - {o.lengthSize}
                       </Select.Option>
                     ))}
                   </Select>
@@ -515,7 +508,7 @@ function ProductAddForm() {
                   >
                     {buckleType.map((o) => (
                       <Select.Option key={o.id} value={o.id}>
-                        {o.name}
+                        {o.buckleTypeName}
                       </Select.Option>
                     ))}
                   </Select>
@@ -628,4 +621,4 @@ function ProductAddForm() {
     </Fragment>
   );
 }
-export default ProductAddForm;
+export default memo(ProductAddForm);

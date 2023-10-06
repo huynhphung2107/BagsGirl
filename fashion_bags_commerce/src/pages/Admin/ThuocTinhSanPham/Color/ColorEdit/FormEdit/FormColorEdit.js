@@ -3,7 +3,8 @@ import '../FormEdit/FormColorEdit.css';
 import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space , notification} from 'antd';
-import colorAPI from '~/api/colorAPI';
+import colorAPI from '~/api/propertitesBalo/colorAPI';
+
 
 function FormColorEdit(props) {
   const [open, setOpen] = useState(false);

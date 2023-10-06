@@ -24,10 +24,10 @@ public class BrandServiceImpl implements ServiceGenarel<Brand> {
     }
 
     public Page<Brand> findAllPage(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page,size);
+        Pageable pageable = PageRequest.of(page, size);
         return this.iBrandRepository.findAll(pageable);
     }
-    
+
     @Override
     public Brand findById(String id) {
         return iBrandRepository.findById(id).get();
@@ -41,11 +41,14 @@ public class BrandServiceImpl implements ServiceGenarel<Brand> {
 
     @Override
     public Brand update(Brand entity) {
-        iBrandRepository.save(entity);
-        return entity;
+        Brand brand = iBrandRepository.findById(entity.getId()).get();
+        brand.setBrandName(entity.getBrandName());
+        brand.setBrandStatus(entity.getBrandStatus());
+        return iBrandRepository.save(brand);
+
     }
 
-    public  Brand updateStatus(String id, int status){
+    public Brand updateStatus(String id, int status) {
         Brand brand = iBrandRepository.findById(id).get();
         brand.setBrandStatus(status);
         return iBrandRepository.save(brand);

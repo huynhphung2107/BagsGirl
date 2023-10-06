@@ -2,7 +2,7 @@ import '../FormEdit/FormBrandEdit.css';
 import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer,Option, Form, Input, Row, Select, Space, notification } from 'antd';
-import brandAPI from '~/api/brandAPI';
+import brandAPI from '~/api/propertitesBalo/brandAPI';
 
 function FormBrandEdit(props) {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ function FormBrandEdit(props) {
   const updateFunc = async (values) => {
     setError(false);
     if (!error) {
-      let update = { ...values };
+      let update = { ...values};
       try {
         const response = await brandAPI.update(update);
         notification.success({
@@ -27,6 +27,8 @@ function FormBrandEdit(props) {
           description: 'Dữ liệu đã được cập nhật thành công',
           duration: 2,
         });
+        console.log(update)
+        console.log(response)
   
         // Đóng Modal sau khi cập nhật thành công
         onClose();
@@ -41,8 +43,11 @@ function FormBrandEdit(props) {
     }
   };
 
+  
   return (
-    <Fragment>
+    <Fragment >
+      
+      <div  style={{ color: 'red' }}>
       <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}>
         Edit
       </Button>
@@ -51,15 +56,14 @@ function FormBrandEdit(props) {
         title={'Edit - ' + props.brand.brandCode}
         width={400}
         onClose={onClose}
-        visible={open} // Sửa thành visible
-        
+        open={open} // Sửa thành visible
         bodyStyle={{
           paddingBottom: 80,
         }}
         footer={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button htmlType="submit" type="primary" className="btn btn-warning">
+            <Button onClick={updateFunc} type="primary" className="btn btn-warning">
               Edit
             </Button>
           </Space>
@@ -67,7 +71,7 @@ function FormBrandEdit(props) {
       >
         <Form layout="vertical" hideRequiredMark initialValues={props.brand}
         
-        onFinish={updateFunc}>
+        >
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
@@ -108,21 +112,24 @@ function FormBrandEdit(props) {
               <Form.Item
                 name="brandStatus"
                 label="Trạng Thái Brand"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please select an owner',
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: 'Please select an owner',
+                //   },
+                // ]}
               >
                 <Select placeholder="Vui lòng chọn Trạng Thái Brand">
-                  {/* <Option>{brandStatus}</Option> */}
+                  <Select.Option value='1'>Hoạt động</Select.Option>
+                  <Select.Option value='0'>Không hoạt động</Select.Option>
+                  <Select.Option value='-1'>Ngừng hoạt động</Select.Option>
                 </Select>
               </Form.Item>
             </Col>
           </Row>
         </Form>
       </Drawer>
+      </div>
     </Fragment>
   );
 }

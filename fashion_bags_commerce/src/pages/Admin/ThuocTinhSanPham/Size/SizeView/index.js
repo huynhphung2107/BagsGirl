@@ -1,18 +1,16 @@
 import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
-import TableContent from '../ProductViewer/Table/Table';
-import FormBaloEditTonggle from '../ProductEdit/FormCreate/FormBaloEditTonggle';
+import TableContent from '../SizeView/Table/Table'
 
 import './index.css';
+import FormSizeCreate from '../SizeEdit/FormCreate/FormSizeCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const contentStyle = {
-  height: 'auto',
-};
+const contentStyle = {};
 
-function ProductViewer() {
+function SizeView() {
   return (
     <Layout className="layout">
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
@@ -20,12 +18,13 @@ function ProductViewer() {
       </Sider>
       <Layout className="layoutContent">
         <Header className="headerStyle">
-          <HeaderContent titlePage="Danh Sách Sản Phẩm" />
+          <HeaderContent titlePage="Danh Sách Kích Cỡ" />
         </Header>
         <Content style={contentStyle}>
           <div>
-            <TableContent />
+            <FormSizeCreate />
           </div>
+          <TableContent />
         </Content>
 
         <Footer className="footerStyle">Đây là component của Footer</Footer>
@@ -34,4 +33,4 @@ function ProductViewer() {
   );
 }
 
-export default ProductViewer;
+export default SizeView;

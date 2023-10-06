@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import ColorView from './pages/Admin/ThuocTinhSanPham/Color/ColorView';
 import ProductAdd from './pages/Admin/ProductManager/ProductEdit/ProductAdd';
 import BrandView from './pages/Admin/ThuocTinhSanPham/Brand/BrandView';
+import SizeView from './pages/Admin/ThuocTinhSanPham/Size/SizeView';
 
 
 const dynamicRoutes = [
@@ -33,6 +34,7 @@ function App() {
           <Route path="/shift-view" element={<ShiftViewer />}></Route>
           <Route path="/color-view" element={<ColorView />}></Route>
           <Route path="/brand-view" element={<BrandView />}></Route>
+          <Route path="/size-view" element={<SizeView />}></Route>
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}
