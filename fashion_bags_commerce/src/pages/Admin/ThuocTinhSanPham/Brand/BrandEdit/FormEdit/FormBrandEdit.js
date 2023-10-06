@@ -2,7 +2,7 @@ import '../FormEdit/FormBrandEdit.css';
 import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer,Option, Form, Input, Row, Select, Space, notification } from 'antd';
-import brandAPI from '~/api/brandAPI';
+import brandAPI from '~/api/propertitesBalo/brandAPI';
 
 function FormBrandEdit(props) {
   const [open, setOpen] = useState(false);

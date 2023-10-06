@@ -24,12 +24,8 @@ public class BaloDetailDTO {
     private String brandName;
     private String compartmentName;
     private String buckleTypeName;
-<<<<<<< HEAD
-    private String imgUrl;
-=======
     private String imageUrl;
     private String producerCode;
->>>>>>> c14e930910e9b8259b08407ca837f3300d229b66
     private String producerName;
 
     @NotNull
