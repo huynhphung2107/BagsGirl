@@ -1,9 +1,9 @@
-import axiosClient from '../axiosClient';
+import axiosClient from './axiosClient';
 
-const typeAPI = {
-  getAll() {
+const typeAPi = {
+  getAll(params) {
     const url = '/type/';
-    return axiosClient.get(url);
+    return axiosClient.get(url, { params });
   },
   get(id) {
     const url = `/type?id=${id}`;
@@ -11,23 +11,11 @@ const typeAPI = {
   },
   add(data) {
     const url = `/type`;
-    return axiosClient.post(url, data, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    return axiosClient.post(url, data);
   },
   update(data) {
     const url = `/type?id=${data.id}`;
     return axiosClient.put(url, data);
-  },
-  updateStatus(typeID, status) {
-    const url = `/type/update-status?typeID=${typeID}&status=${status}`;
-    return axiosClient.put(url, null, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
   },
   delete(id) {
     const url = `/type?id=${id}`;
@@ -35,4 +23,4 @@ const typeAPI = {
   },
 };
 
-export default typeAPI;
+export default typeAPi;
