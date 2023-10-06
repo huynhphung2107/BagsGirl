@@ -10,9 +10,9 @@ import baloAPI from '~/api/baloAPI';
 // Utils
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 //Function Component
-function FormBaloEditTonggle(props) {
+function FormBaloEditTonggle({ reload }) {
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
   const [isPopconfirmVisible, setPopconfirmVisible] = useState(false);
   const [form] = Form.useForm();
   const showDrawer = () => {
@@ -33,25 +33,29 @@ function FormBaloEditTonggle(props) {
   const onClose = () => {
     form.resetFields();
     setOpen(false);
+    setPopconfirmVisible(false);
+  };
+  const refresh = () => {
+    reload();
   };
   const addFunc = async (values) => {
-    setError(false);
-    if (error == false) {
+    if (error === false) {
       let addBalo = { ...values, baloCode: generateCustomCode('baloCode', 9) };
       try {
         const response = await baloAPI.add(addBalo);
-        setPopconfirmVisible(false);
+        onClose();
+
         notification.success({
           message: 'Thành Công',
           description: 'Dữ liệu đã được thêm!!!!',
           duration: 2,
         });
-        onClose();
       } catch (error) {
+        console.log(error);
         setError(true);
         notification.info({
           message: 'Lỗi',
-          description: 'Vui lòng chọn xác nhận!!!',
+          description: error.toString(),
           duration: 2,
         });
       }
@@ -60,6 +64,7 @@ function FormBaloEditTonggle(props) {
   const onConfirm = () => {
     form.submit(); // Gọi hàm onFinish của Form khi xác nhận
     setPopconfirmVisible(false);
+    setOpen(true);
   };
   const onCancel = () => {
     setPopconfirmVisible(false); // Đóng Popconfirm sau khi xác nhận
@@ -142,8 +147,9 @@ function FormBaloEditTonggle(props) {
                 cancelText="Không"
                 onConfirm={onConfirm}
                 onCancel={onCancel}
+                open={isPopconfirmVisible}
               >
-                <Button type="primary" onClick={addFunc}>
+                <Button type="primary" onClick={() => setPopconfirmVisible(true)}>
                   Submit
                 </Button>
               </Popconfirm>
