@@ -1,5 +1,6 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
+import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.entity.BaloDetail;
 import fpoly.datn.ecommerce_website.repository.IBaloDetailRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
@@ -14,6 +15,10 @@ public class BaloDetailServiceImpl implements ServiceGenarel<BaloDetail> {
 
     @Autowired
     private IBaloDetailRepository iBaloDetailRepository;
+
+    public  List<BaloDetail> findAllByBalo(String baloID){
+        return this.iBaloDetailRepository.findAllByBalo_Code(baloID);
+    }
 
     @Override
     public List<BaloDetail> findAll() {

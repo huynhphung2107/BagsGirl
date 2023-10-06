@@ -17,5 +17,9 @@ public class ImageDTO {
     private String name;
 
     @NotBlank(message = "Không để trống Hình ảnh")
+<<<<<<< HEAD
+    private String imgUrl;
+=======
     private String anh2;
+>>>>>>> c14e930910e9b8259b08407ca837f3300d229b66
 }
