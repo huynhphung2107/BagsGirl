@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.entity.Color;
+import fpoly.datn.ecommerce_website.entity.Size;
 import fpoly.datn.ecommerce_website.repository.IColorReponsitory;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,13 @@ public class ColorServiceImpl implements ServiceGenarel<Color> {
     @Override
     public Color update(Color entity) {
         return this.iColorReponsitory.save(entity);
+    }
+
+    public Color updateStatus(String id, int status) {
+        Color color = iColorReponsitory.findById(UUID.fromString(id)).get();
+        color.setColorStatus(status);
+        return iColorReponsitory.save(color);
+
     }
 
     @Override

@@ -26,8 +26,8 @@ const colorAPI = {
     const url = `/color?id=${data.id}`;
     return axiosClient.put(url, data);
   },
-  updateStatus(colorID, status) {
-    const url = `/color/update-status?colorID=${colorID}&status=${status}`;
+  updateStatus(id, status) {
+    const url = `/color/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',
