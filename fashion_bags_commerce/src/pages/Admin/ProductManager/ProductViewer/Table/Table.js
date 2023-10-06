@@ -5,6 +5,7 @@ import FormProductViewDetails from '../../ProductViewDetails/FormViewer/FormProd
 import baloAPI from '~/api/baloAPI';
 
 import styles from './index.module.scss';
+import FormBaloEditTonggle from '../../ProductEdit/FormCreate/FormBaloEditTonggle';
 
 function TableContent() {
   const [baloList, setBaloList] = useState([]);
@@ -139,6 +140,7 @@ function TableContent() {
         padding: '10px',
       }}
     >
+      <FormBaloEditTonggle reload={reload} />
       <div
         style={{
           marginBottom: 16,

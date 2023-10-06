@@ -1,14 +1,14 @@
 import styles from './BaloDetailsPreview.module.scss';
 
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, memo, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
 
 const { Option } = Select;
 function BaloDetailsPreview(props) {
-  console.log(props.baloList);
   const [loading, setLoading] = useState(false);
   const [baloList, setBaloList] = useState(props.baloList);
+  const [baloListPreview, setBaloListPreview] = useState(props.baloListPreview);
 
   const columns = [
     {
@@ -106,6 +106,9 @@ function BaloDetailsPreview(props) {
       fixed: 'right',
       width: 100,
       sorter: (a, b) => a.baloDetailAmount - b.baloDetailAmount,
+      render: (text, record) => (
+        <Input value={text} onChange={(e) => handleEditChange(e.target.value, record.key, 'baloDetailAmount')} />
+      ),
     },
     {
       title: 'Action',
@@ -114,14 +117,31 @@ function BaloDetailsPreview(props) {
       fixed: 'right',
     },
   ];
-
+  const save = () => {
+    console.log('====================================');
+    console.log(baloListPreview);
+    console.log('====================================');
+  };
   const start = () => {
     setLoading(true);
     setBaloList(props.baloList);
-    console.log(props.baloList);
+
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+  };
+  const handleEditChange = (value, key, field) => {
+    const newData = [...baloListPreview];
+    const target = newData.find((item) => item.key === key);
+    if (target) {
+      target[field] = value;
+      setBaloListPreview(newData);
+    }
+  };
+
+  const handleDelete = (key) => {
+    const newData = baloListPreview.filter((item) => item.key !== key);
+    setBaloListPreview(newData);
   };
   useEffect(() => {
     start();
@@ -141,7 +161,7 @@ function BaloDetailsPreview(props) {
               </Button>
             </div>
             <div className={styles.buttonSave}>
-              <Button type="primary" onClick={start} loading={loading}>
+              <Button type="primary" onClick={save} loading={loading}>
                 Lưu
               </Button>
             </div>
@@ -156,7 +176,7 @@ function BaloDetailsPreview(props) {
           rowKey={(record) => record.baloCode}
           loading={loading}
           columns={columns}
-          dataSource={props.baloListPreview}
+          dataSource={baloListPreview}
           pagination={false}
           scroll={{
             x: 1500,
@@ -168,4 +188,4 @@ function BaloDetailsPreview(props) {
     </Fragment>
   );
 }
-export default BaloDetailsPreview;
+export default memo(BaloDetailsPreview);

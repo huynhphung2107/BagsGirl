@@ -24,7 +24,6 @@ function ProductViewer() {
         </Header>
         <Content style={contentStyle}>
           <div>
-            <FormBaloEditTonggle />
             <TableContent />
           </div>
         </Content>
