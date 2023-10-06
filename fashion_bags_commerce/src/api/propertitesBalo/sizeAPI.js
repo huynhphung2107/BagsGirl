@@ -1,9 +1,14 @@
 import axiosClient from '../axiosClient';
 
 const sizeAPI = {
-  getAll() {
+  getAll(pageNum,pageSize) {
     const url = '/size/';
-    return axiosClient.get(url);
+    return axiosClient.get(url, {
+      params: {
+        page: pageNum -1,
+        size: pageSize,
+      },
+    });
   },
   get(id) {
     const url = `/size?id=${id}`;
@@ -21,8 +26,8 @@ const sizeAPI = {
     const url = `/size?id=${data.id}`;
     return axiosClient.put(url, data);
   },
-  updateStatus(sizeID, status) {
-    const url = `/size/update-status?sizeID=${sizeID}&status=${status}`;
+  updateStatus(id, status) {
+    const url = `/size/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',

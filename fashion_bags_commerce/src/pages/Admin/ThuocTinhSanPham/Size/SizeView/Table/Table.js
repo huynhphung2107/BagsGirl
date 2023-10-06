@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
-import sizeAPI from '~/api/sizeAPI';
+import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import table from './table.css';
 // import FormsizeEdit from '../../sizeEdit/FormEdit/FormsizeEdit';
@@ -14,7 +14,7 @@ const TableContent = () => {
   const onCancel = () => {};
   const reload = () => {
     setLoading(true);
-    getAllsize(currentPage, pagesSize);
+    getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -22,7 +22,7 @@ const TableContent = () => {
 
   useEffect(() => {
     // Fetch size data using the sizeAPI.getAll function
-    getAllsize(currentPage, pagesSize);
+    getAll(currentPage, pagesSize);
     reload();
   }, []); // Update data when page or page size changes
 
@@ -31,12 +31,12 @@ const TableContent = () => {
     console.log(pageSize);
     setCurrentPage(current);
     setPagesSize(pageSize);
-    getAllsize(current, pageSize);
+    getAll(current, pageSize);
   };
 
-  const getAllsize = async (current, pageSize) => {
+  const getAll = async (current, pageSize) => {
     try {
-      const response = await sizeAPI.getAllsize(current, pageSize);
+      const response = await sizeAPI.getAll(current, pageSize);
       const data = response.data.content;
       console.log(data);
       setTotalItem(response.data.totalElements);
@@ -64,12 +64,13 @@ const TableContent = () => {
       sorter: (a, b) => a.sizeName.localeCompare(b.sizeName),
     },
     {
-      title: 'Size ( dài x rộng x cao)',
-      dataIndex: 'lengthSize' + 'x' + 'wideSize' + 'x' + 'heightSize',
-
-      width: 100,
+      title: 'Size (dài x rộng x cao)',
+      dataIndex: 'size', // Use a single dataIndex for the combined data
       width: 100,
       sorter: (a, b) => a.lengthSize.localeCompare(b.lengthSize),
+      render: (text, record) => (
+        `${record.lengthSize} x ${record.wideSize} x ${record.heightSize}`
+      ),
     },
     {
       title: 'Status',
@@ -107,7 +108,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <FormsizeEdit size={record} />
+          {/* <FormsizeEdit size={record} /> */}
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"
@@ -134,9 +135,9 @@ const TableContent = () => {
     const xoa = await sizeAPI.updateStatus(id, status);
     notification.info({
       message: 'Xoa trang thai',
-      description: 'Đã hủy thành công trang thái của thương hiệu có id là :' + id,
+      description: 'Đã hủy thành công trang thái của kich cỡ có id là :' + id,
     });
-    getAllsize(currentPage, pagesSize);
+    getAll(currentPage, pagesSize);
     console.log(xoa);
   };
 
