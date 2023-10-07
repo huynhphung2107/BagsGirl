@@ -53,8 +53,9 @@ public class TypeRestController {
 
     //PhanTrang
     @RequestMapping(value = "/type/phanTrang", method = RequestMethod.GET)
-    public ResponseEntity<?> phanTrang(@RequestParam(defaultValue = "0", name = "page")Integer page){
-        return ResponseEntity.ok(typeService.findAllPhanTrang(page));
+    public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
+                                       @RequestParam(name = "size", defaultValue = "10") int pageSize){
+        return ResponseEntity.ok(typeService.findAllPhanTrang(pageNum, pageSize));
     }
 
     //GetOne
@@ -82,6 +83,14 @@ public class TypeRestController {
                 this.typeService.save(type)
                 , HttpStatus.OK);
     }
+//    public ResponseEntity<Type> update(@Valid @RequestParam String id, @RequestBody TypeDTO typeDTO) {
+//        Type type = modelMapper.map(typeDTO, Type.class);
+//        type.setId(id);
+//        return new ResponseEntity<>(
+//                this.typeService.update(id,type)
+//                , HttpStatus.OK);
+//    }
+
     @RequestMapping(value = "/type/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Type> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(typeService.updateStatus(id, status),
