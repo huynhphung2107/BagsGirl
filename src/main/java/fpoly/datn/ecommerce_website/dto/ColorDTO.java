@@ -20,4 +20,5 @@ public class ColorDTO {
     private UUID id;
     private String colorCode;
     private String colorName;
+    private Integer colorStatus;
 }

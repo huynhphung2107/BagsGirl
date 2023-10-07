@@ -30,7 +30,7 @@ public class BaloRestController {
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
-    private BaloServiceImpl  baloService;
+    private BaloServiceImpl baloService;
 
     public BaloRestController(BaloServiceImpl baloService) {
         this.baloService = baloService;
@@ -42,13 +42,9 @@ public class BaloRestController {
             @RequestParam(name = "page", defaultValue = "1") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
-        Page<Balo> baloPage = baloService.findAll(pageNum,pageSize);
+        Page<Balo> baloPage = baloService.findAll(pageNum, pageSize);
         return new ResponseEntity<>
-                (
-//
-                        baloPage
-                        , HttpStatus.OK
-    );
+                (baloPage, HttpStatus.OK);
     }
 
     //hien thi get one
@@ -63,7 +59,7 @@ public class BaloRestController {
     @RequestMapping(value = "/balo", method = RequestMethod.POST)
     public ResponseEntity<?> add(@Valid @RequestBody Balo balo) {
         return new ResponseEntity<>(baloService.save(
-               balo
+                balo
         )
 
                 , HttpStatus.OK);
@@ -76,10 +72,12 @@ public class BaloRestController {
                 modelMapper.map(baloDTO, Balo.class)
 
         ), HttpStatus.OK);
-    } @RequestMapping(value = "/balo/update-status", method = RequestMethod.PUT)
+    }
+
+    @RequestMapping(value = "/balo/update-status", method = RequestMethod.PUT)
     public ResponseEntity<?> updateStatus(@Valid @RequestParam String baloID, @RequestParam int status) {
         return new ResponseEntity<>(baloService.updateBaloStatus(
-               baloID, status
+                baloID, status
 
         ), HttpStatus.OK);
     }

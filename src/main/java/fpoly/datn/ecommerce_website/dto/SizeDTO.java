@@ -24,4 +24,6 @@ public class SizeDTO {
     private String lengthSize;
     private String wideSize;
     private String heightSize;
+    private Integer sizeStatus;
+
 }

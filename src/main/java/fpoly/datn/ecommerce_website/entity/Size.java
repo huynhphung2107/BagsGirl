@@ -42,5 +42,7 @@ public class Size {
     @Column(name = "height_size")
     private String heightSize;
 
+    @Column(name = "size_status")
+    private Integer sizeStatus;
 
 }

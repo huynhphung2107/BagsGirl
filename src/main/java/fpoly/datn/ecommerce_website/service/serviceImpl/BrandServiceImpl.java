@@ -1,9 +1,13 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.entity.Brand;
+import fpoly.datn.ecommerce_website.entity.Brand;
 import fpoly.datn.ecommerce_website.repository.IBrandRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +23,11 @@ public class BrandServiceImpl implements ServiceGenarel<Brand> {
         return iBrandRepository.findAll();
     }
 
+    public Page<Brand> findAllPage(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return this.iBrandRepository.findAll(pageable);
+    }
+
     @Override
     public Brand findById(String id) {
         return iBrandRepository.findById(id).get();
@@ -32,8 +41,18 @@ public class BrandServiceImpl implements ServiceGenarel<Brand> {
 
     @Override
     public Brand update(Brand entity) {
-        iBrandRepository.save(entity);
-        return entity;
+        Brand brand = iBrandRepository.findById(entity.getId()).get();
+        brand.setBrandName(entity.getBrandName());
+        brand.setBrandStatus(entity.getBrandStatus());
+        return iBrandRepository.save(brand);
+
+    }
+
+    public Brand updateStatus(String id, int status) {
+        Brand brand = iBrandRepository.findById(id).get();
+        brand.setBrandStatus(status);
+        return iBrandRepository.save(brand);
+
     }
 
     @Override
