@@ -37,10 +37,7 @@ public class BaloDetailRestController {
 
     @Autowired
     private BaloDetailServiceImpl baloDetailService;
-<<<<<<< HEAD
 
-=======
->>>>>>> main
     @RequestMapping(value = "/balo/{baloID}/balodetails", method = RequestMethod.GET)
     public ResponseEntity<?> getAllbyBalo(@PathVariable String baloID) {
         return new ResponseEntity<>(
@@ -52,11 +49,7 @@ public class BaloDetailRestController {
         );
 
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> main
-    //getall
     @RequestMapping(value = "/balo-detail/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(

@@ -24,26 +24,15 @@ public class BaloDetailDTO {
     private String brandName;
     private String compartmentName;
     private String buckleTypeName;
-<<<<<<< HEAD
-    private String imageUrl;
-    private String producerCode;
-=======
-    private String imgUrl;
->>>>>>> main
     private String producerName;
-
     @NotNull
     private Float importPrice;
-
     @NotNull
     private Float retailPrice;
-
     @NotNull
     private Integer baloDetailAmount;
-
     @NotBlank
     private String baloDetailDescribe;
-
     private Integer baloDetailStatus;
     
 
