@@ -1,5 +1,6 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
+import fpoly.datn.ecommerce_website.dto.ShiftDTO;
 import fpoly.datn.ecommerce_website.dto.TypeDTO;
 import fpoly.datn.ecommerce_website.entity.Color;
 import fpoly.datn.ecommerce_website.entity.Type;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,14 +37,24 @@ public class TypeRestController {
     @Autowired
     private TypeServiceImpl typeService;
 
+
     //GetAll
     @RequestMapping(value = "/type/", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll(@RequestParam(name = "page", defaultValue = "0") int pageNum,
-                                                @RequestParam(name = "size", defaultValue = "10") int pageSize)
-    {
-        Page<Type> typePage = typeService.findAllPage(pageNum, pageSize);
-        return new ResponseEntity<>
-                (typePage, HttpStatus.OK);
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(
+                this.typeService.findAll()
+                        .stream()
+                        .map(type -> modelMapper.map(type, TypeDTO.class))
+                        .sorted(Comparator.comparing(TypeDTO::getTypeCode)) // Sắp xếp theo trường "name"
+                        .collect(Collectors.toList())
+                , HttpStatus.OK
+        );
+    }
+
+    //PhanTrang
+    @RequestMapping(value = "/type/phanTrang", method = RequestMethod.GET)
+    public ResponseEntity<?> phanTrang(@RequestParam(defaultValue = "0", name = "page")Integer page){
+        return ResponseEntity.ok(typeService.findAllPhanTrang(page));
     }
 
     //GetOne

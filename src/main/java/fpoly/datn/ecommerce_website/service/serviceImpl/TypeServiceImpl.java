@@ -24,8 +24,8 @@ public class TypeServiceImpl implements ServiceGenarel<Type> {
         return typeRepository.findAll();
     }
 
-    public Page<Type> findAllPage(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<Type> findAllPhanTrang(Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
         return this.typeRepository.findAll(pageable);
     }
 
