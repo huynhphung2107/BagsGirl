@@ -34,4 +34,6 @@ public class Color {
     @Column(name = "color_name")
     private String colorName;
 
+    @Column(name = "color_status")
+    private Integer colorStatus;
 }

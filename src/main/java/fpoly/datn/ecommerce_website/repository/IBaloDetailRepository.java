@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface IBaloDetailRepository extends JpaRepository<BaloDetail, String> {
 
-
     public  List<BaloDetail> findAllByBalo_BaloCode(String baloID);
 
 

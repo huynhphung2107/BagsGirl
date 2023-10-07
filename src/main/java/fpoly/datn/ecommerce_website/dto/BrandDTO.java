@@ -20,4 +20,6 @@ public class BrandDTO {
     private String brandCode;
     @NotBlank
     private String brandName;
+
+    private Integer brandStatus;
 }

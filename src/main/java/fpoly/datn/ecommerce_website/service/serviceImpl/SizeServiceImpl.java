@@ -4,6 +4,9 @@ import fpoly.datn.ecommerce_website.entity.Size;
 import fpoly.datn.ecommerce_website.repository.ISizeReponsitory;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +23,10 @@ public class SizeServiceImpl implements ServiceGenarel<Size> {
         return this.iSizeReponsitory.findAll();
     }
 
+    public Page<Size> findAllPage(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return this.iSizeReponsitory.findAll(pageable);
+    }
 
     @Override
     public Size findById(String id) {
@@ -37,6 +44,13 @@ public class SizeServiceImpl implements ServiceGenarel<Size> {
     }
 
 
+    public Size updateStatus(String id, int status) {
+        Size size = iSizeReponsitory.findById(id).get();
+        size.setSizeStatus(status);
+        return iSizeReponsitory.save(size);
+
+    }
+    
     @Override
     public List<Size> searchByName(String name) {
         return null;

@@ -62,7 +62,26 @@ const items = [
       '13',
     ),
     getItem('Quản lí Thuộc tính Balo', 'sub999', <AppstoreOutlined />, [
-      getItem('Màu sắc', '79'),
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/color-view'}>
+          Màu sắc
+        </Link>,
+        '79',
+      ),
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/brand-view'}>
+          Thương hiệu
+        </Link>,
+        '80',
+      ),
+
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/size-view'}>
+          Kích cỡ
+        </Link>,
+        '81',
+      ),
+
       getItem('Chất liệu', '89'),
     ]),
     getItem('Option 11', '15'),
@@ -88,7 +107,7 @@ const items = [
   ]),
   getItem('Giao Ca', 'sub10', <ContactsOutlined />, [
     getItem(
-      <Link style={{ textDecoration: 'none' }} to={'/shift'}>
+      <Link style={{ textDecoration: 'none' }} to={'/shift-view'}>
         Danh sách ca làm việc
       </Link>,
       '33',

@@ -6,6 +6,7 @@ import fpoly.datn.ecommerce_website.service.serviceImpl.BrandServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -34,18 +35,18 @@ public class BrandRestController {
 
     //GetAll
     @RequestMapping(value = "/brand/", method = RequestMethod.GET)
-    public ResponseEntity<List<BrandDTO>> getAll() {
-        return new ResponseEntity<>(
-                this.brandService.findAll()
-                        .stream()
-                        .map(brand -> modelMapper.map(brand, BrandDTO.class))
-                        .collect(Collectors.toList())
-                , HttpStatus.OK);
+    public ResponseEntity<?> getAll(
+            @RequestParam(name = "page", defaultValue = "0") int pageNum,
+            @RequestParam(name = "size", defaultValue = "10") int pageSize
+    ) {
+        Page<Brand> brandPage = brandService.findAllPage(pageNum, pageSize);
+        return new ResponseEntity<>
+                (brandPage, HttpStatus.OK);
     }
 
     //GetOne
     @RequestMapping(value = "/brand", method = RequestMethod.GET)
-    public ResponseEntity<BrandDTO> getOne(@Valid  @RequestParam String id) {
+    public ResponseEntity<BrandDTO> getOne(@Valid @RequestParam String id) {
         return new ResponseEntity<>(
                 modelMapper.map(this.brandService.findById(id), BrandDTO.class)
                 , HttpStatus.OK);
@@ -68,6 +69,14 @@ public class BrandRestController {
                 this.brandService.save(brand)
                 , HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/brand/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<Brand> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(brandService.updateStatus(id, status),
+                HttpStatus.OK);
+
+    }
+
 
     //Delete
     @RequestMapping(value = "/brand", method = RequestMethod.DELETE)

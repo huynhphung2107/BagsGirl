@@ -38,6 +38,8 @@ public class BaloDetailRestController {
     @Autowired
     private BaloDetailServiceImpl baloDetailService;
 
+
+
     @RequestMapping(value = "/balo/{baloID}/balodetails", method = RequestMethod.GET)
     public ResponseEntity<?> getAllbyBalo(@PathVariable String baloID) {
         return new ResponseEntity<>(

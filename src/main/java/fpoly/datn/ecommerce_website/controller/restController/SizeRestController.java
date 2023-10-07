@@ -3,8 +3,10 @@ package fpoly.datn.ecommerce_website.controller.restController;
 import fpoly.datn.ecommerce_website.dto.SizeDTO;
 import fpoly.datn.ecommerce_website.entity.Size;
 import fpoly.datn.ecommerce_website.service.serviceImpl.SizeServiceImpl;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -18,9 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RequestMapping("/api/manage")
 @RestController
@@ -34,14 +34,13 @@ public class SizeRestController {
 
 
     @RequestMapping(value = "/size/", method = RequestMethod.GET)
-    public ResponseEntity<List<SizeDTO>> getAll() {
-        return new ResponseEntity<>(
-                this.sizeService.findAll()
-                        .stream()
-                        .map(size -> modelMapper.map(size, SizeDTO.class))
-                        .collect(Collectors.toList())
-                , HttpStatus.OK
-        );
+    public ResponseEntity<?> getAll(
+            @RequestParam(name = "page", defaultValue = "0") int pageNum,
+            @RequestParam(name = "size", defaultValue = "10") int pageSize
+    ) {
+        Page<Size> sizePage = sizeService.findAllPage(pageNum, pageSize);
+        return new ResponseEntity<>
+                (sizePage, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/size", method = RequestMethod.GET)
@@ -68,6 +67,13 @@ public class SizeRestController {
                 this.sizeService.save(size)
                 , HttpStatus.OK
         );
+    }
+
+    @RequestMapping(value = "/size/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<Size> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(sizeService.updateStatus(id, status),
+                HttpStatus.OK);
+
     }
 
     @RequestMapping(value = "/size", method = RequestMethod.DELETE)
