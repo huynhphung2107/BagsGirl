@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class SizeDTO {
     private UUID id;
-    private String code;
+    private String sizeCode;
     private String sizeName;
     private String lengthSize;
     private String wideSize;

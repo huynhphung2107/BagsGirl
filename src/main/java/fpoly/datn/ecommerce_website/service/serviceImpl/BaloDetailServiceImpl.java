@@ -15,8 +15,7 @@ public class BaloDetailServiceImpl implements ServiceGenarel<BaloDetail> {
 
     @Autowired
     private IBaloDetailRepository iBaloDetailRepository;
-
-
+  
     @Override
     public List<BaloDetail> findAll() {
         return iBaloDetailRepository.findAll();

@@ -6,7 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, Popconfirm, Select, notification } from 'antd';
 import Input from 'antd/es/input/Input';
 //API
-import colorAPI from '~/api/colorAPI';
+import colorAPI from '~/api/propertitesBalo/colorAPI';
 // Utils
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 //Function Component

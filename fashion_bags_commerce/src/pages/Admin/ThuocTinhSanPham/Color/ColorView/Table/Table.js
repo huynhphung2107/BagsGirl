@@ -2,7 +2,7 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState, useContext } from 'react';
-import colorAPI from '~/api/colorAPI';
+import colorAPI from '~/api/propertitesBalo/colorAPI';
 import styles from './index.module.scss';
 import FormColorEdit from '../../ColorEdit/FormEdit/FormColorEdit';
 
@@ -82,7 +82,7 @@ function TableContent() {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              handleDeleteBalo(record.id, -1);
+              handleDeleteBalo(record.id, 0);
               reload();
             }}
             onCancel={onCancel}

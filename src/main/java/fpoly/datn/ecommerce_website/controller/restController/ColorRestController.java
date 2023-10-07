@@ -6,7 +6,9 @@ import fpoly.datn.ecommerce_website.dto.SizeDTO;
 import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.entity.Color;
 
+import fpoly.datn.ecommerce_website.entity.Size;
 import fpoly.datn.ecommerce_website.service.serviceImpl.ColorServiceImpl;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -72,6 +74,14 @@ public class ColorRestController {
                 , HttpStatus.OK
         );
     }
+
+    @RequestMapping(value = "/color/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<Color> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(colorService.updateStatus(id, status),
+                HttpStatus.OK);
+
+    }
+
 
     @RequestMapping(value = "/color", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {

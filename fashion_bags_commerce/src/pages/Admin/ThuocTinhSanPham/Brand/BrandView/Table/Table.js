@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
-import brandAPI from '~/api/brandAPI';
+import brandAPI from '~/api/propertitesBalo/brandAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import table from './table.css';
 import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
@@ -111,7 +111,9 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+            <Button className="btn btn-danger "
+          
+            icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
