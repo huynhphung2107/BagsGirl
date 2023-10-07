@@ -24,5 +24,7 @@ public class BaloDTO {
     @NotBlank
     private String baloStatus;
     @NotBlank
+    private String brandName;
+    @NotBlank
     private String baloStatusString;
 }

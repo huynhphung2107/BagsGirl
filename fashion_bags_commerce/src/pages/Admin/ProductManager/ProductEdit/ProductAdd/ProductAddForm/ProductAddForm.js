@@ -621,4 +621,4 @@ function ProductAddForm() {
     </Fragment>
   );
 }
-export default memo(ProductAddForm);
+export default ProductAddForm;

@@ -1,8 +1,8 @@
 import styles from './BaloDetailsPreview.module.scss';
 
-import React, { Fragment, memo, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
+import { Button, Col, Drawer, Form, Input, InputNumber, Row, Select, Space, Table } from 'antd';
 
 const { Option } = Select;
 function BaloDetailsPreview(props) {
@@ -92,6 +92,9 @@ function BaloDetailsPreview(props) {
       fixed: 'right',
       width: 100,
       sorter: (a, b) => a.importPrice - b.importPrice,
+      render: (text, record) => (
+        <InputNumber value={text} onChange={(value) => handleEditChange(value, record.baloCode, 'importPrice')} />
+      ),
     },
     {
       title: 'Retails Price',
@@ -99,6 +102,9 @@ function BaloDetailsPreview(props) {
       fixed: 'right',
       width: 100,
       sorter: (a, b) => a.retailPrice - b.retailPrice,
+      render: (text, record) => (
+        <InputNumber value={text} onChange={(value) => handleEditChange(value, record.baloCode, 'retailPrice')} />
+      ),
     },
     {
       title: 'Amount',
@@ -107,7 +113,7 @@ function BaloDetailsPreview(props) {
       width: 100,
       sorter: (a, b) => a.baloDetailAmount - b.baloDetailAmount,
       render: (text, record) => (
-        <Input value={text} onChange={(e) => handleEditChange(e.target.value, record.key, 'baloDetailAmount')} />
+        <InputNumber value={text} onChange={(value) => handleEditChange(value, record.baloCode, 'baloDetailAmount')} />
       ),
     },
     {
@@ -117,35 +123,59 @@ function BaloDetailsPreview(props) {
       fixed: 'right',
     },
   ];
-  const save = () => {
-    console.log('====================================');
-    console.log(baloListPreview);
-    console.log('====================================');
-  };
-  const start = () => {
-    setLoading(true);
-    setBaloList(props.baloList);
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
   const handleEditChange = (value, key, field) => {
     const newData = [...baloListPreview];
-    const target = newData.find((item) => item.key === key);
+    const target = newData.find((item) => item.baloCode === key);
     if (target) {
       target[field] = value;
       setBaloListPreview(newData);
     }
-  };
 
-  const handleDelete = (key) => {
-    const newData = baloListPreview.filter((item) => item.key !== key);
-    setBaloListPreview(newData);
+    const newDataAdd = [...baloList];
+    const targetAdd = newDataAdd.find((item) => item.baloCode === key);
+    if (targetAdd) {
+      targetAdd[field] = value;
+      setBaloList(newDataAdd);
+    }
+  };
+  const save = () => {
+    const tempBalo = baloList[0];
+    const baloAdd = {
+      baloCode: tempBalo.baloCode,
+      baloName: tempBalo.baloName,
+      baloStatus: tempBalo.baloStatus,
+    };
+
+    // Tạo danh sách baloDetails chứa baloColor, baloBrand, baloProducer
+    const baloDetails = baloList.map(
+      ({ brandID, buckleTypeID, colorID, compartmentID, materialID, producerID, sizeID, typeID }) => ({
+        brandID,
+        buckleTypeID,
+        colorID,
+        compartmentID,
+        materialID,
+        producerID,
+        sizeID,
+        typeID,
+      }),
+    );
+    console.log('====================================');
+    console.log(baloAdd);
+    console.log(baloDetails);
+    console.log('====================================');
+  };
+  const start = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
   useEffect(() => {
     start();
-  }, [baloList]);
+    setBaloList(props.baloList);
+    setBaloListPreview(props.baloListPreview);
+  }, [props.baloList, props.baloListPreview]);
   return (
     <Fragment>
       <div>
@@ -188,4 +218,4 @@ function BaloDetailsPreview(props) {
     </Fragment>
   );
 }
-export default memo(BaloDetailsPreview);
+export default BaloDetailsPreview;

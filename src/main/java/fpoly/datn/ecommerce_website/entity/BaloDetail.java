@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -64,21 +65,12 @@ public class BaloDetail {
     private Size size;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
-
-    @ManyToOne
     @JoinColumn(name = "compartment_id")
     private Compartment compartment;
 
     @ManyToOne
     @JoinColumn(name = "buckle_type_id")
     private BuckleType buckleType;
-
-    @ManyToOne
-    @JoinColumn(name = "image_id")
-    private Image image;
-
     @ManyToOne
     @JoinColumn(name = "producer_id")
     private Producer producer;
