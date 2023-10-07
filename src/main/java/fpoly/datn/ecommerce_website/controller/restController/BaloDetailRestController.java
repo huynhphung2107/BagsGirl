@@ -51,7 +51,7 @@ public class BaloDetailRestController {
         );
 
     }
-    //getall
+
     @RequestMapping(value = "/balo-detail/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(
