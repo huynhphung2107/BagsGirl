@@ -13,6 +13,7 @@ import ProductAdd from './pages/Admin/ProductManager/ProductEdit/ProductAdd';
 import BrandView from './pages/Admin/ThuocTinhSanPham/Brand/BrandView';
 import SizeView from './pages/Admin/ThuocTinhSanPham/Size/SizeView';
 import TypeView from './pages/Admin/ThuocTinhSanPham/Type/TypeView';
+import BuckleTypeView from './pages/Admin/ThuocTinhSanPham/BuckleType/BuckleTypeView/indexBuckleTypeView';
 
 
 const dynamicRoutes = [
@@ -37,6 +38,7 @@ function App() {
           <Route path="/brand-view" element={<BrandView />}></Route>
           <Route path="/size-view" element={<SizeView />}></Route>
           <Route path="/type-view" element={<TypeView />}></Route>
+          <Route path="/buckle-type-view" element={<BuckleTypeView />}></Route>
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}

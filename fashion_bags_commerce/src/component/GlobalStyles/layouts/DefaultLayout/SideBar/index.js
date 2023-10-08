@@ -89,6 +89,13 @@ const items = [
         '82',
       ),
 
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/buckle-type-view'}>
+          Kiểu khóa
+        </Link>,
+        '83',
+      ),
+
       getItem('Chất liệu', '89'),
     ]),
     getItem('Option 11', '15'),
