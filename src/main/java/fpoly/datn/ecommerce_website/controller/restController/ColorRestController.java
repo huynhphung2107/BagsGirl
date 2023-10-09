@@ -40,6 +40,7 @@ public class ColorRestController {
     @Autowired
     private ColorServiceImpl colorService;
 
+
     @RequestMapping(value = "/color/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,

@@ -82,7 +82,14 @@ const items = [
         '81',
       ),
 
-      getItem('Chất liệu', '89'),
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/material-view'}>
+          Chất liệu
+        </Link>,
+        '82',
+      ),
+
+
     ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),

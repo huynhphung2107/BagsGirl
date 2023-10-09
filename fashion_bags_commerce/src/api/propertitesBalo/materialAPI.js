@@ -1,9 +1,14 @@
 import axiosClient from '../axiosClient';
 
 const materialAPI = {
-  getAll() {
+  getAllPage(pageNum,pageSize) {
     const url = '/material/';
-    return axiosClient.get(url);
+    return axiosClient.get(url, {
+      params: {
+        page: pageNum -1,
+        size: pageSize,
+      },
+    });
   },
   get(id) {
     const url = `/material?id=${id}`;
@@ -21,8 +26,8 @@ const materialAPI = {
     const url = `/material?id=${data.id}`;
     return axiosClient.put(url, data);
   },
-  updateStatus(materialID, status) {
-    const url = `/material/update-status?materialID=${materialID}&status=${status}`;
+  updateStatus(id, status) {
+    const url = `/material/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',
