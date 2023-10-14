@@ -83,12 +83,18 @@ const items = [
       ),
 
       getItem(
+<<<<<<< HEAD
         <Link style={{ textDecoration: 'none' }} to={'/type-view'}>
           Kiểu balo
+=======
+        <Link style={{ textDecoration: 'none' }} to={'/material-view'}>
+          Chất liệu
+>>>>>>> main
         </Link>,
         '82',
       ),
 
+<<<<<<< HEAD
       getItem(
         <Link style={{ textDecoration: 'none' }} to={'/buckle-type-view'}>
           Kiểu khóa
@@ -97,6 +103,9 @@ const items = [
       ),
 
       getItem('Chất liệu', '89'),
+=======
+
+>>>>>>> main
     ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),

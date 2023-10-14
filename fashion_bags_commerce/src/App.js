@@ -12,8 +12,12 @@ import ColorView from './pages/Admin/ThuocTinhSanPham/Color/ColorView';
 import ProductAdd from './pages/Admin/ProductManager/ProductEdit/ProductAdd';
 import BrandView from './pages/Admin/ThuocTinhSanPham/Brand/BrandView';
 import SizeView from './pages/Admin/ThuocTinhSanPham/Size/SizeView';
+<<<<<<< HEAD
 import TypeView from './pages/Admin/ThuocTinhSanPham/Type/TypeView';
 import BuckleTypeView from './pages/Admin/ThuocTinhSanPham/BuckleType/BuckleTypeView/indexBuckleTypeView';
+=======
+import MaterialView from './pages/Admin/ThuocTinhSanPham/Material/MaterialView';
+>>>>>>> main
 
 
 const dynamicRoutes = [
@@ -37,8 +41,12 @@ function App() {
           <Route path="/color-view" element={<ColorView />}></Route>
           <Route path="/brand-view" element={<BrandView />}></Route>
           <Route path="/size-view" element={<SizeView />}></Route>
+<<<<<<< HEAD
           <Route path="/type-view" element={<TypeView />}></Route>
           <Route path="/buckle-type-view" element={<BuckleTypeView />}></Route>
+=======
+          <Route path="/material-view" element={<MaterialView />}></Route>
+>>>>>>> main
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}

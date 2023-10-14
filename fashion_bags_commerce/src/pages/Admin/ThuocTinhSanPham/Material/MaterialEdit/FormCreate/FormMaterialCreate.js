@@ -2,9 +2,9 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, notification, Modal, Popconfirm, Input, Select } from 'antd';
 import React, { Component, Fragment, useState } from 'react';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
-import brandAPI from '~/api/propertitesBalo/brandAPI';
+import materialAPI from '~/api/propertitesBalo/materialAPI';
 
-function FormBrandCreate(props)  {
+function FormMaterialCreate(props)  {
   const [modalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(true);
   const [form] = Form.useForm();
@@ -24,9 +24,9 @@ function FormBrandCreate(props)  {
   const addFunc = async (values) => {
     setError(false);
     if (!error) {
-      let add = { ...values, brandCode: generateCustomCode('brand', 3) };
+      let add = { ...values, materialCode: generateCustomCode('mat', 3) };
       try {
-        const response = await brandAPI.add(add);
+        const response = await materialAPI.add(add);
         notification.success({
           message: 'Add thành công',
           description: 'Dữ liệu đã được thêm thành công',
@@ -50,10 +50,10 @@ function FormBrandCreate(props)  {
   return (
     <Fragment>
       <Button type="primary" onClick={showModal} icon={ <PlusOutlined />}>
-        Thêm thương hiệu
+        Thêm chất liệu
       </Button>
       <br></br>
-      <Modal title="Thêm thương hiệu" open={modalOpen} onCancel={handleCancel} footer={null}>
+      <Modal title="Thêm chất liệu" open={modalOpen} onCancel={handleCancel} footer={null}>
         <div>
           <Form
             form={form}
@@ -68,17 +68,17 @@ function FormBrandCreate(props)  {
             }}
             onFinish={addFunc} // Xử lý khi submit form
           >
-            <Form.Item label="Brand Name" name="brandName"
+            <Form.Item label=" Name" name="materialName"
              rules={[
               {
                 required: true,
-                message: 'Vui lòng điền Tên thương hiệu!',
+                message: 'Vui lòng điền Tên chất liệu!',
               },
             ]}>
               <Input />
             </Form.Item>
 
-            <Form.Item label="Status" name="brandStatus">
+            <Form.Item label="Status" name="materialStatus">
               <Select
                 style={{ width: 300 }}
                 placeholder="Vui lòng chọn trạng thái"
@@ -108,4 +108,4 @@ function FormBrandCreate(props)  {
   );
 }
 
-export default FormBrandCreate;
+export default FormMaterialCreate;

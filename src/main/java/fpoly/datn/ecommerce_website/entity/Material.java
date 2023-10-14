@@ -33,4 +33,7 @@ public class Material {
     @Column(name = "material_name")
     private String materialName;
 
+    @Column(name = "material_status")
+    private Integer materialStatus;
+
 }
