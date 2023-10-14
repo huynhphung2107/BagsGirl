@@ -21,9 +21,10 @@ public class CompartmentServiceImpl implements TypeService<Compartment> {
     public List<Compartment> findAll() {
         return iCompartmentRepository.findAll();
     }
+
     public Page<Compartment> findAllPhanTrang(Integer page, Integer size){
         Pageable pageable = PageRequest.of(page,size);
-        return this.iCompartmentRepository.findAll(pageable);
+        return this.iCompartmentRepository.getAllPhanTrang(pageable);
     }
 
     @Override

@@ -23,9 +23,10 @@ public class ProducerServiceImpl implements TypeService<Producer> {
     public List<Producer> findAll() {
         return producerRepository.findAll();
     }
+
     public Page<Producer> findAllPhanTrang(Integer page, Integer size){
         Pageable pageable = PageRequest.of(page,size);
-        return this.producerRepository.findAll(pageable);
+        return this.producerRepository.getAllPhanTrang(pageable);
     }
 
     @Override
