@@ -33,5 +33,6 @@ public class Producer {
     @Column(name = "producer_name")
     private String producerName;
 
-
+    @Column(name = "producer_status")
+    private Integer producerStatus;
 }

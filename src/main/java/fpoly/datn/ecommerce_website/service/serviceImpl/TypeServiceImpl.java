@@ -27,7 +27,7 @@ public class TypeServiceImpl implements TypeService<Type> {
 
     public Page<Type> findAllPhanTrang(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        return this.typeRepository.findAll(pageable);
+        return this.typeRepository.getAllphanTrang(pageable);
     }
 
     @Override

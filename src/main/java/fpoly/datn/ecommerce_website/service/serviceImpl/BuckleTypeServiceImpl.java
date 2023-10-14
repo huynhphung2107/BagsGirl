@@ -24,7 +24,7 @@ public class BuckleTypeServiceImpl implements TypeService<BuckleType> {
     }
     public Page<BuckleType> findAllPhanTrang(Integer page, Integer size){
         Pageable pageable = PageRequest.of(page,size);
-        return this.iBuckleTypeRepository.findAll(pageable);
+        return this.iBuckleTypeRepository.getAllPhanTrang(pageable);
     }
 
     @Override

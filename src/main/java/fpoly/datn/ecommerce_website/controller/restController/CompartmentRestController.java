@@ -2,7 +2,9 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.CompartmentDTO;
 import fpoly.datn.ecommerce_website.entity.Compartment;
+import fpoly.datn.ecommerce_website.entity.Type;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
+import fpoly.datn.ecommerce_website.service.serviceImpl.CompartmentServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +33,24 @@ public class CompartmentRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ServiceGenarel<Compartment> serviceGenarel;
+    private CompartmentServiceImpl compartmentService;
 
     //hien thi
     @RequestMapping(value = "/compartment/", method = RequestMethod.GET)
     public ResponseEntity<List<CompartmentDTO>> getAll() {
         return new ResponseEntity<>(
-                this.serviceGenarel.findAll()
+                this.compartmentService.findAll()
                         .stream()
                         .map(compartment -> modelMapper.map(compartment, CompartmentDTO.class))
                         .collect(Collectors.toList())
                 , HttpStatus.OK);
+    }
+
+    //Phan trang
+    @RequestMapping(value = "/compartment/phanTrang", method = RequestMethod.GET)
+    public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
+                                       @RequestParam(name = "size", defaultValue = "10") int pageSize){
+        return ResponseEntity.ok(compartmentService.findAllPhanTrang(pageNum, pageSize));
     }
 
     //getOne
@@ -49,7 +58,7 @@ public class CompartmentRestController {
     public ResponseEntity<CompartmentDTO> getOne(@RequestParam String id) {
 
         return new ResponseEntity<>(
-                modelMapper.map(this.serviceGenarel.findById(id), CompartmentDTO.class)
+                modelMapper.map(this.compartmentService.findById(id), CompartmentDTO.class)
                 , HttpStatus.OK);
     }
 
@@ -58,7 +67,7 @@ public class CompartmentRestController {
     public ResponseEntity<?> add(@RequestBody @Valid CompartmentDTO compartmentDTO
     ) {
         return new ResponseEntity<>(
-                serviceGenarel.save(
+                compartmentService.save(
                         modelMapper.map(compartmentDTO, Compartment.class))
                 , HttpStatus.OK);
 
@@ -68,16 +77,22 @@ public class CompartmentRestController {
     //update
     @RequestMapping(value = "/compartment", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@Valid @RequestBody CompartmentDTO compartmentDTO) {
-        return new ResponseEntity<>(serviceGenarel.save(
+        return new ResponseEntity<>(compartmentService.save(
                 modelMapper.map(compartmentDTO, Compartment.class)
 
         ), HttpStatus.OK);
+    }
+    @RequestMapping(value = "/compartment/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<Compartment> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(compartmentService.updateStatus(id, status),
+                HttpStatus.OK);
+
     }
 
     //delete
     @RequestMapping(value = "/compartment", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam("id") String id) {
-        serviceGenarel.delete(serviceGenarel.findById(id).getId());
+        compartmentService.delete(compartmentService.findById(id).getId());
         return new ResponseEntity<>("Delete Successfully!!!!!!", HttpStatus.OK);
     }
 

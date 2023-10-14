@@ -69,7 +69,7 @@ function TableContent() {
                         okText="Đồng ý"
                         cancelText="Không"
                         onConfirm={() => {
-                            handleDeleteBuckleType(record.id, 0);
+                            handleDeleteBuckleType(record.id, -1);
                             reload();
                         }}
                         onCancel={onCancel}

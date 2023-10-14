@@ -2,6 +2,7 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.ProducerDTO;
 import fpoly.datn.ecommerce_website.entity.Producer;
+import fpoly.datn.ecommerce_website.entity.Type;
 import fpoly.datn.ecommerce_website.service.serviceImpl.ProducerServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -43,6 +44,13 @@ public class ProducerRestController {
                 , HttpStatus.OK);
     }
 
+    //Phan trang
+    @RequestMapping(value = "/producer/phanTrang", method = RequestMethod.GET)
+    public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
+                                       @RequestParam(name = "size", defaultValue = "10") int pageSize){
+        return ResponseEntity.ok(producerService.findAllPhanTrang(pageNum, pageSize));
+    }
+
     //GetOne
     @RequestMapping(value = "/producer", method = RequestMethod.GET)
     public ResponseEntity<ProducerDTO> getOne(@RequestParam String id) {
@@ -67,6 +75,12 @@ public class ProducerRestController {
         return new ResponseEntity<>(
                 this.producerService.save(producer)
                 , HttpStatus.OK);
+    }
+    @RequestMapping(value = "/producer/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<Producer> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(producerService.updateStatus(id, status),
+                HttpStatus.OK);
+
     }
 
     //Delete

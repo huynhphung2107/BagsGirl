@@ -17,4 +17,6 @@ public class CompartmentDTO {
 
     @NotBlank(message = "Không để trống name")
     private String compartmentName;
+
+    private Integer compartmentStatus;
 }

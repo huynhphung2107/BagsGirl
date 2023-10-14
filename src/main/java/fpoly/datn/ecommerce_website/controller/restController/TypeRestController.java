@@ -76,20 +76,20 @@ public class TypeRestController {
     }
 
     //Update
-    @RequestMapping(value = "/type", method = RequestMethod.PUT)
-    public ResponseEntity<Type> update(@RequestBody @Valid TypeDTO typeDTO) {
-        Type type = modelMapper.map(typeDTO, Type.class);
-        return new ResponseEntity<>(
-                this.typeService.save(type)
-                , HttpStatus.OK);
-    }
-//    public ResponseEntity<Type> update(@Valid @RequestParam String id, @RequestBody TypeDTO typeDTO) {
+//    @RequestMapping(value = "/type", method = RequestMethod.PUT)
+//    public ResponseEntity<Type> update(@RequestBody @Valid TypeDTO typeDTO) {
 //        Type type = modelMapper.map(typeDTO, Type.class);
-//        type.setId(id);
 //        return new ResponseEntity<>(
-//                this.typeService.update(id,type)
+//                this.typeService.save(type)
 //                , HttpStatus.OK);
 //    }
+    public ResponseEntity<Type> update(@Valid @RequestParam String id, @RequestBody TypeDTO typeDTO) {
+        Type type = modelMapper.map(typeDTO, Type.class);
+        type.setId(id);
+        return new ResponseEntity<>(
+                this.typeService.update(id,type)
+                , HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/type/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Type> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
