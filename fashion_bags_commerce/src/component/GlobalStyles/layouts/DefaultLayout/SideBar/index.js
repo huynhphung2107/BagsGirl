@@ -83,18 +83,16 @@ const items = [
       ),
 
       getItem(
-<<<<<<< HEAD
-        <Link style={{ textDecoration: 'none' }} to={'/type-view'}>
-          Kiểu balo
-=======
         <Link style={{ textDecoration: 'none' }} to={'/material-view'}>
           Chất liệu
->>>>>>> main
         </Link>,
         '82',
       ),
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/type-view'}>
+          Kiểu balo </Link>, '84',
+      ),
 
-<<<<<<< HEAD
       getItem(
         <Link style={{ textDecoration: 'none' }} to={'/buckle-type-view'}>
           Kiểu khóa
@@ -102,10 +100,18 @@ const items = [
         '83',
       ),
 
-      getItem('Chất liệu', '89'),
-=======
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/compartment-view'}>
+          Ngăn
+        </Link>,
+        '84',),
 
->>>>>>> main
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/producer-view'}>
+          Nhà sản xuất
+        </Link>,
+        '85',),
+
     ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),

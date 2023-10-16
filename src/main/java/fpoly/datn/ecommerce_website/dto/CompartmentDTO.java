@@ -13,7 +13,7 @@ public class CompartmentDTO {
     private UUID id;
 
     @NotBlank(message = "Không để trống code")
-    private String code;
+    private String compartmentCode;
 
     @NotBlank(message = "Không để trống name")
     private String compartmentName;

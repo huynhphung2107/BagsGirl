@@ -5,6 +5,16 @@ const producerAPI = {
     const url = '/producer/';
     return axiosClient.get(url);
   },
+  getAllPhanTrang(pageNum, pageSize) {
+    const url = `/producer/phanTrang?id=${pageNum}`;
+    return axiosClient.get(url,
+      {
+        params: {
+          page: pageNum - 1,
+          size: pageSize,
+        },
+      });
+  },
   get(id) {
     const url = `/producer?id=${id}`;
     return axiosClient.get(url);
@@ -21,8 +31,8 @@ const producerAPI = {
     const url = `/producer?id=${data.id}`;
     return axiosClient.put(url, data);
   },
-  updateStatus(producerID, status) {
-    const url = `/producer/update-status?producerID=${producerID}&status=${status}`;
+  updateStatus(id, status) {
+    const url = `/producer/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',
