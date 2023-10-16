@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
-import voucherAPI from '~/api/voucherAPI';
+import staffAPI from '~/api/staffAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './tableVoucher.css';
+import table from './tableStaff.css';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
@@ -10,6 +10,8 @@ const TableContent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pagesSize, setPagesSize] = useState(5);
   const [totalItem, setTotalItem] = useState();
+
+  
 
   const onCancel = () => {};
   const reload = () => {
@@ -21,7 +23,7 @@ const TableContent = () => {
   };
 
   useEffect(() => {
-    // Fetch voucher data using the voucherAPI.getAll function
+    // Fetch voucher data using the staffAPI.getAll function
     getAll(currentPage, pagesSize);
     reload();
   }, []); // Update data when page or page size changes
@@ -36,7 +38,7 @@ const TableContent = () => {
 
   const getAll = async (current, pageSize) => {
     try {
-      const response = await voucherAPI.getAll(current, pageSize);
+      const response = await staffAPI.getAll(current, pageSize);
       const data = response.data.content;
       console.log(data);
       setTotalItem(response.data.totalElements);
@@ -52,53 +54,46 @@ const TableContent = () => {
       render: (text, record, index) => index + 1,
     },
     {
-      title: 'Code',
-      dataIndex: 'voucherCode',
-      sorter: (a, b) => a.voucherCode.localeCompare(b.voucherCode),
+      title: 'Họ và tên',
+      dataIndex: ['userInfo', 'fullName'],
+      sorter: (a, b) => a.userInfo.fullName.localeCompare(b.userInfo.fullName),
       width: 100,
     },
     {
-      title: 'Name voucher',
-      dataIndex: 'voucherName',
+      title: 'Tài khoản',
+      dataIndex: ['userInfo', 'account'],
+      sorter: (a, b) => a.account.localeCompare(b.account),
       width: 100,
-      sorter: (a, b) => a.voucherName.localeCompare(b.voucherName),
     },
     {
-      title: 'Giảm giá',
-      dataIndex: 'discountPrice',
+      title: 'Mật khẩu',
+      dataIndex: ['userInfo', 'password'],
+      sorter: (a, b) => a.password.localeCompare(b.password),
       width: 100,
-      sorter: (a, b) => a.voucherName.localeCompare(b.voucherName),
     },
     {
-      title: 'Kiểu voucher',
-      dataIndex: 'voucherType',
+      title: 'Giới tính',
+      dataIndex: ['userInfo', 'gender'],
+      sorter: (a, b) => a.gender.localeCompare(b.gender),
       width: 100,
-      sorter: (a, b) => a.voucherName.localeCompare(b.voucherName),
+      render: (gender) => {
+        return gender ? 'Nam' : 'Nữ';
+      },
     },
+
     {
-      title: 'Điểm tối thiểu',
-      dataIndex: 'pointsToReceive',
+      title: 'Chức vụ',
+      dataIndex: ['userInfo', 'userRole','roleName'],
+      sorter: (a, b) => a.roleName.localeCompare(b.roleName),
       width: 100,
-      sorter: (a, b) => a.voucherName.localeCompare(b.voucherName),
     },
-    {
-      title: 'Thời gian bắt đầu',
-      dataIndex: 'voucherStartTime',
-      width: 150,
-      sorter: (a, b) => a.voucherName.localeCompare(b.voucherName),
-    },
-    {
-      title: 'Thời gian kết thúc',
-      dataIndex: 'voucherEndTime',
-      width: 150,
-      sorter: (a, b) => a.voucherName.localeCompare(b.voucherName),
-    },
+   
     {
       title: 'Trạng thái',
-      dataIndex: 'voucherStatus',
+      dataIndex: 'staffStatus',
 
       width: 150,
-      sorter: (a, b) => a.voucherStatus.localeCompare(b.voucherStatus),
+      sorter: (a, b) => a.staffStatus.localeCompare(b.staffStatus),
       render: (status) => {
         let statusText;
         let statusClass;
@@ -155,10 +150,10 @@ const TableContent = () => {
   ];
 
   const deleteHandle = async (id, status) => {
-    const xoa = await voucherAPI.updateStatus(id, status);
+    const xoa = await staffAPI.updateStatus(id, status);
     notification.info({
       message: 'Thông báo',
-      description: 'Đã hủy thành công trạng thái của voucher có id là :' + id,
+      description: 'Đã hủy thành công trạng thái nhân viên có id là :' + id,
     });
     getAll(currentPage, pagesSize);
     console.log(xoa);
@@ -200,3 +195,6 @@ const TableContent = () => {
 };
 
 export default TableContent;
+
+//add nhan vien
+

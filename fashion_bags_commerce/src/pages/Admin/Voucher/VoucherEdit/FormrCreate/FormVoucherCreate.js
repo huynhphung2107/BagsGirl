@@ -3,7 +3,7 @@ import { Button, Form, notification, Modal, Popconfirm, Input, Select, DatePicke
 import { timers } from 'jquery';
 import React, { Component, Fragment, useState } from 'react';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
-import voucherAPI from '~/api/voucher';
+import voucherAPI from '~/api/voucherAPI';
 
 function FormVoucherCreate(props) {
   const [modalOpen, setIsModalOpen] = useState(false);
@@ -100,6 +100,14 @@ function FormVoucherCreate(props) {
               <DatePicker format="YYYY-MM-DD" />
             </Form.Item>
 
+            <Form.Item label="Ngày băt đầu" name="voucherStartTime">
+              <DatePicker format="YYYY-MM-DD" />
+            </Form.Item>
+
+            <Form.Item label="Ngày kết thúc" name="voucherEndTime">
+              <DatePicker format="YYYY-MM-DD" />
+            </Form.Item>
+
 
             <Form.Item label="Kiểu voucher" name="voucherType">
               <Select
@@ -121,6 +129,19 @@ function FormVoucherCreate(props) {
             <Form.Item
               label="Điểm tối thiểu"
               name="pointsToReceive"
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng điền thông tin!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Số lượng"
+              name="voucherAmount"
               rules={[
                 {
                   required: true,

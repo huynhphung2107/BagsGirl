@@ -103,7 +103,9 @@ const items = [
     getItem('Option 12', '20'),
   ]),
   getItem('Quản lí Nhân Viên', 'sub7', <UserOutlined />, [
-    getItem('Option 9', '21'),
+    getItem(<Link style={{ textDecoration: 'none' }} to={'/staff-view'}>
+    Danh sách nhân viên
+  </Link>, '21'),
     getItem('Option 10', '22'),
     getItem('Option 11', '23'),
     getItem('Option 12', '24'),

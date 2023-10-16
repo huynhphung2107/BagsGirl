@@ -14,6 +14,7 @@ import BrandView from './pages/Admin/ThuocTinhSanPham/Brand/BrandView';
 import SizeView from './pages/Admin/ThuocTinhSanPham/Size/SizeView';
 import MaterialView from './pages/Admin/ThuocTinhSanPham/Material/MaterialView';
 import VoucherView from './pages/Admin/Voucher/VoucherView';
+import StaffView from './pages/Admin/Staff/StaffView';
 
 
 const dynamicRoutes = [
@@ -39,6 +40,7 @@ function App() {
           <Route path="/size-view" element={<SizeView />}></Route>
           <Route path="/material-view" element={<MaterialView />}></Route>
           <Route path="/voucher" element={<VoucherView />}></Route>
+          <Route path="/staff-view" element={<StaffView />}></Route>
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}

@@ -42,12 +42,11 @@ public class UserInfo {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "status")
-    private Integer status;
+    @Column(name = "userinfo_status")
+    private Integer userInfoStatus;
 
     @Column(name = "gender")
     private Boolean gender;
-
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
