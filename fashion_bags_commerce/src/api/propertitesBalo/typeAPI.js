@@ -28,8 +28,8 @@ const typeAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/type`;
+  update(id, data) {
+    const url = `/type?id=${id}`;
     return axiosClient.put(url, data, {
       headers: {
         'Content-Type': 'application/json',

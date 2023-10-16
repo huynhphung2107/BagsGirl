@@ -7,7 +7,7 @@ import typeAPI from '~/api/propertitesBalo/typeAPI';
 function FormEditType(props) {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(true);
-    const [idUpdate, setIdUpdate] = useState('');
+    const [idUpdate, setIdUpdate] = useState(props.type.id);
     const showComponent = () => {
         setOpen(true);
     };
@@ -21,7 +21,7 @@ function FormEditType(props) {
         if (!error) {
             let update = { ...values };
             try {
-                const response = await typeAPI.update(update);
+                const response = await typeAPI.update(idUpdate, update);
                 notification.success({
                     message: 'Cập nhật thành công',
                     description: 'Dữ liệu đã được cập nhật thành công',
@@ -29,6 +29,7 @@ function FormEditType(props) {
                 });
                 closeComponent();
             } catch (error) {
+                console.log(error);
                 setError(true);
                 notification.error({
                     message: 'Cập nhật thất bại',
@@ -52,7 +53,7 @@ function FormEditType(props) {
                     width={400}
                     onClose={closeComponent}
                     open={open} // Sửa thành visible
-                    bodyStyle={{
+                    style={{
                         paddingBottom: 80,
                     }}
                     footer={

@@ -75,7 +75,7 @@ public class TypeRestController {
                 , HttpStatus.OK);
     }
 
-    //Update
+//    Update
 //    @RequestMapping(value = "/type", method = RequestMethod.PUT)
 //    public ResponseEntity<Type> update(@RequestBody @Valid TypeDTO typeDTO) {
 //        Type type = modelMapper.map(typeDTO, Type.class);
@@ -83,6 +83,7 @@ public class TypeRestController {
 //                this.typeService.save(type)
 //                , HttpStatus.OK);
 //    }
+    @RequestMapping(value = "/type", method = RequestMethod.PUT)
     public ResponseEntity<Type> update(@Valid @RequestParam String id, @RequestBody TypeDTO typeDTO) {
         Type type = modelMapper.map(typeDTO, Type.class);
         type.setId(id);

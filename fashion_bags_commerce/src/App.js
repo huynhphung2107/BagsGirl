@@ -33,7 +33,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/login" element={<Login />} ></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/product-viewer" element={<ProductViewer />}></Route>
           <Route path="/shift-view" element={<ShiftViewer />}></Route>

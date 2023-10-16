@@ -10,28 +10,29 @@ function Login() {
 
     const toggleForm = (formName) => {
         setCurrentForm(formName);
-    }
+    };
+
     if (currentForm === 'login') {
         return (
-            <div className="Login">
+            <div className="formLoginne" >
                 <FormLogin onFormSwitch={toggleForm} />
             </div>
         );
     } else if (currentForm === "register") {
         return (
-            <div className="Login">
+            <div className="formLoginne">
                 <FormRegister onFormSwitch={toggleForm} />
             </div>
         );
     } else if (currentForm === "forgotPassword") {
         return (
-            <div className="Login">
+            <div className="formLoginne">
                 <ForgotPassword onFormSwitch={toggleForm} />
             </div>
         );
     } else {
         return (
-            <div className="Login">
+            <div className="formLoginne">
                 <FormLogin onFormSwitch={toggleForm} />
             </div>
         );

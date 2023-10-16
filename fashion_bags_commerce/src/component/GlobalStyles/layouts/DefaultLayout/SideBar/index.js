@@ -104,13 +104,13 @@ const items = [
         <Link style={{ textDecoration: 'none' }} to={'/compartment-view'}>
           Ngăn
         </Link>,
-        '84',),
+        '85',),
 
       getItem(
         <Link style={{ textDecoration: 'none' }} to={'/producer-view'}>
           Nhà sản xuất
         </Link>,
-        '85',),
+        '86',),
 
     ]),
     getItem('Option 11', '15'),
