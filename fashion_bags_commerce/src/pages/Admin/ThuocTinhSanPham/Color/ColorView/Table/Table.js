@@ -114,7 +114,7 @@ function TableContent() {
 
   const getAllBalo = async (pageNum, pageSize) => {
     try {
-      const response = await colorAPI.getAll(pageNum, pageSize);
+      const response = await colorAPI.getAllPagination(pageNum, pageSize);
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setBaloList(data);

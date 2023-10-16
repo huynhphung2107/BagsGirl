@@ -45,4 +45,7 @@ public class UserInfoServiceImpl implements ServiceGenarel<UserInfo> {
     public List<UserInfo> searchByName(String name) {
         return null;
     }
+    public List<UserInfo> findByKeyword(String keyword) {
+        return this.userInfoRepository.findByKeyword(keyword);
+    }
 }

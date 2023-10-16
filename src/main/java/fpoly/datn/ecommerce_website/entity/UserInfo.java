@@ -38,19 +38,22 @@ public class UserInfo {
 
     @Column(name = "password")
     private String password;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "status")
+    @Column(name = "userinfo_status")
     private Integer status;
 
     @Column(name = "gender")
     private Boolean gender;
 
-
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private UserRole userRole;
 
+    @Column(name = "note")
+    private String note;
 }

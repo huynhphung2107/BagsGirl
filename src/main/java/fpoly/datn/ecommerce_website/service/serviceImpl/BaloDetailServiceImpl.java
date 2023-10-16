@@ -49,4 +49,9 @@ public class BaloDetailServiceImpl implements ServiceGenarel<BaloDetail> {
     public List<BaloDetail> searchByName(String name) {
         return null;
     }
+
+    public  List<BaloDetail> findByKeyword(String keyword){
+
+        return this.iBaloDetailRepository.findByKeyword(keyword);
+    }
 }

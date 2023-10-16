@@ -4,9 +4,9 @@ import { Content, Footer, Header } from 'antd/es/layout/layout';
 import { Fragment } from 'react';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
-import ProductAddForm from './ProductAddForm/ProductAddForm';
-import './index.css';
-function ProductAdd() {
+import SalesCounterForm from './SalesCounterForm';
+
+function SalesCounter() {
   return (
     <Fragment>
       <Layout className="layout">
@@ -15,11 +15,11 @@ function ProductAdd() {
         </Sider>
         <Layout className="layoutContent">
           <Header className="headerStyle">
-            <HeaderContent titlePage="Thêm Sản Phẩm Chi Tiết" />
+            <HeaderContent titlePage="Bán Hàng tại quầy" />
           </Header>
           <Content>
             <div>
-              <ProductAddForm />
+              <SalesCounterForm />
             </div>
             <Footer className="footerStyle">Đây là component của Footer2</Footer>
           </Content>
@@ -29,4 +29,4 @@ function ProductAdd() {
   );
 }
 
-export default ProductAdd;
+export default SalesCounter;

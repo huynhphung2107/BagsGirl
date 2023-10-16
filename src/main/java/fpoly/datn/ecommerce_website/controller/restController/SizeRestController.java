@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/api/manage")
@@ -34,7 +35,7 @@ public class SizeRestController {
 
 
     @RequestMapping(value = "/size/", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll(
+    public ResponseEntity<?> getAllPagination(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
@@ -42,7 +43,14 @@ public class SizeRestController {
         return new ResponseEntity<>
                 (sizePage, HttpStatus.OK);
     }
+    @RequestMapping(value = "/size/get-all", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll(
 
+    ) {
+        List<Size> sizePage = sizeService.findAll();
+        return new ResponseEntity<>
+                (sizePage, HttpStatus.OK);
+    }
     @RequestMapping(value = "/size", method = RequestMethod.GET)
     public ResponseEntity<SizeDTO> getOne(@RequestParam String id) {
         return new ResponseEntity<>(

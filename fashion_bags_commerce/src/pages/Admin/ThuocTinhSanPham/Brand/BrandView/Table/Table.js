@@ -36,7 +36,7 @@ const TableContent = () => {
 
   const getAllBrand = async (current, pageSize) => {
     try {
-      const response = await brandAPI.getAll(current, pageSize);
+      const response = await brandAPI.getAll_Pagination(current, pageSize);
       const data = response.data.content;
       console.log(data);
       setTotalItem(response.data.totalElements);
@@ -111,9 +111,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger "
-          
-            icon={<DeleteOutlined />}>
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>

@@ -36,7 +36,7 @@ const TableContent = () => {
 
   const getAll = async (current, pageSize) => {
     try {
-      const response = await sizeAPI.getAll(current, pageSize);
+      const response = await sizeAPI.getAllPaginantion(current, pageSize);
       const data = response.data.content;
       console.log(data);
       setTotalItem(response.data.totalElements);
@@ -68,9 +68,7 @@ const TableContent = () => {
       dataIndex: 'size', // Use a single dataIndex for the combined data
       width: 100,
       sorter: (a, b) => a.lengthSize.localeCompare(b.lengthSize),
-      render: (text, record) => (
-        `${record.lengthSize} x ${record.wideSize} x ${record.heightSize}`
-      ),
+      render: (text, record) => `${record.lengthSize} x ${record.wideSize} x ${record.heightSize}`,
     },
     {
       title: 'Status',

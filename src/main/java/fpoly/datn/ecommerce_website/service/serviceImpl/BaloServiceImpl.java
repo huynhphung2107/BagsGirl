@@ -1,15 +1,19 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
+import fpoly.datn.ecommerce_website.dto.BaloDTO;
+import fpoly.datn.ecommerce_website.dto.Balo_BrandDTO;
 import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.repository.IBaloRepository;
 import fpoly.datn.ecommerce_website.service.IBaloService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BaloServiceImpl implements IBaloService {
@@ -38,11 +42,14 @@ public class BaloServiceImpl implements IBaloService {
     }
 
     @Override
-    public Page<Balo> findAll(int pageNum, int PageSize) {
+    public Page<BaloDTO> findAll(int pageNum, int PageSize) {
         PageRequest pageRequest = PageRequest.of(pageNum, PageSize);
-        Page<Balo> baloList = this.iBaloRepository.getAllWithoutDelete(pageRequest);
+        Page<Balo> baloPage = this.iBaloRepository.getAllWithoutDelete(pageRequest);
 
-        return baloList;
+        List<BaloDTO> baloDTOList = baloPage.getContent()
+                .stream().map(balo -> modelMapper.map(balo, BaloDTO.class))
+                .collect(Collectors.toList());
+        return new PageImpl<>(baloDTOList, pageRequest, baloPage.getTotalElements());
     }
 
 
