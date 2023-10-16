@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, notification, Modal, Popconfirm, Input, Select, DatePicker, Radio } from 'antd';
 import { timers } from 'jquery';
-import React, { Component, Fragment, useState, useEffect,initialValue } from 'react';
+import React, { Component, Fragment, useState, useEffect, initialValue } from 'react';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 import staffAPI from '~/api/staffAPI';
 
@@ -154,10 +154,10 @@ function FormStaffCreate(props) {
               </Radio.Group>
             </Form.Item>
 
-            <Form.Item label="Role" name={['userInfo', 'userRole', 'roleName']} initialValue={initialValue}>
+            <Form.Item label="Role" name={['userInfo', 'userRole','roleName']} initialValue={initialValue}>
               <Select placeholder="Select a role" loading={loading}>
                 {roles.map((role) => (
-                  <Select.Option key={role.id} value={role.roleName}>
+                  <Select.Option key={role.id} value={role.id}>
                     {role.roleName}
                   </Select.Option>
                 ))}
