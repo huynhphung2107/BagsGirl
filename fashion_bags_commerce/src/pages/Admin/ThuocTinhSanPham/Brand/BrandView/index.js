@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../BrandView/Table/Table';
 
-import './index.css';
+import './brand.css';
 import FormBrandCreate from '../BrandEdit/FormCreate/FormBrandCreate';
 
 const { Header, Footer, Sider, Content } = Layout;

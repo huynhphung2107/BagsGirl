@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './table.css';
+import table from './tableSize.css';
 // import FormsizeEdit from '../../sizeEdit/FormEdit/FormsizeEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
