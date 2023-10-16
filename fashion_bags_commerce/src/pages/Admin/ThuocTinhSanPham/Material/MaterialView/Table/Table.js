@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import materialAPI from '~/api/propertitesBalo/materialAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './table.css';
+import table from './tableMaterial.css';
 import FormMaterialEdit from '../../MaterialEdit/FormEdit/FormMaterialEdit';
 // import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
 const TableContent = () => {
