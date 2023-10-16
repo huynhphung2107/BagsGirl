@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Admin from './pages/Admin';
 import ProductViewer from './pages/Admin/ProductManager/ProductViewer';
 import ShiftViewer from './pages/Admin/Shift/ShiftViewer';
-import Login from './pages/Login';
+import Login from './pages/Login/indexLoginView';
 import Home from './pages/Home';
 import ColorView from './pages/Admin/ThuocTinhSanPham/Color/ColorView';
 import ProductAdd from './pages/Admin/ProductManager/ProductEdit/ProductAdd';
@@ -33,7 +33,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={'<Login />'}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/product-viewer" element={<ProductViewer />}></Route>
           <Route path="/shift-view" element={<ShiftViewer />}></Route>
