@@ -23,9 +23,6 @@ public class StaffDTO {
     @NotNull
     private Integer staffStatus;
 
-    private UserInfo userInfo;
-
-
     @NotBlank
     private String fullName;
     @NotBlank
@@ -39,5 +36,6 @@ public class StaffDTO {
     @NotBlank
     private Boolean gender;
 
+    private String userRoleId;
 
 }

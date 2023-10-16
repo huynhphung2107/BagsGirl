@@ -154,7 +154,7 @@ function FormStaffCreate(props) {
               </Radio.Group>
             </Form.Item>
 
-            <Form.Item label="Role" name={['userInfo', 'userRole','roleName']} initialValue={initialValue}>
+            <Form.Item label="Role" name={['userInfo', 'userRole','id']} initialValue={initialValue}>
               <Select placeholder="Select a role" loading={loading}>
                 {roles.map((role) => (
                   <Select.Option key={role.id} value={role.id}>
