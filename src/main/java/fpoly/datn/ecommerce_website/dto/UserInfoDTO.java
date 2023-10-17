@@ -33,6 +33,8 @@ public class UserInfoDTO {
     private Integer userInfoStatus;
     @NotBlank
     private Boolean gender;
+
+    private String userInfoId;
     @NotBlank
     private String roleCode;
     @NotBlank

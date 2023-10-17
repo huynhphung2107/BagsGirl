@@ -48,6 +48,14 @@ public class UserInfo {
     @Column(name = "gender")
     private Boolean gender;
 
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "note")
+    private String note;
+
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private UserRole userRole;

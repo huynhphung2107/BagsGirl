@@ -3,6 +3,7 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import staffAPI from '~/api/staffAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import table from './tableStaff.css';
+import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
@@ -62,19 +63,18 @@ const TableContent = () => {
     {
       title: 'Tài khoản',
       dataIndex: ['userInfo', 'account'],
-      sorter: (a, b) => a.account.localeCompare(b.account),
+      sorter: (a, b) => a.userInfo.account.localeCompare(b.userInfo.account),
       width: 100,
     },
     {
-      title: 'Mật khẩu',
-      dataIndex: ['userInfo', 'password'],
-      sorter: (a, b) => a.password.localeCompare(b.password),
+      title: 'SĐT',
+      dataIndex: ['userInfo', 'phoneNumber'],
+      sorter: (a, b) => a.userInfo.phoneNumber.localeCompare(b.userInfo.phoneNumber),
       width: 100,
     },
     {
       title: 'Giới tính',
       dataIndex: ['userInfo', 'gender'],
-      sorter: (a, b) => a.gender.localeCompare(b.gender),
       width: 100,
       render: (gender) => {
         return gender ? 'Nam' : 'Nữ';
@@ -82,10 +82,24 @@ const TableContent = () => {
     },
 
     {
+      title: 'Địa chỉ',
+      dataIndex: ['userInfo', 'address'],
+      sorter: (a, b) => a.userInfo.address.localeCompare(b.userInfo.address),
+      width: 100,
+    },
+    
+    {
       title: 'Chức vụ',
       dataIndex: ['userInfo', 'userRole','roleName'],
-      sorter: (a, b) => a.roleName.localeCompare(b.roleName),
+      sorter: (a, b) => a.userInfo.userRole.roleName.localeCompare(b.userInfo.userRole.roleName),
       width: 100,
+    },
+    {
+      title: 'Ghi chú',
+      dataIndex: ['userInfo', 'note'],
+      sorter: (a, b) => a.userInfo.note.localeCompare(b.userInfo.note),
+      width: 100,
+      
     },
    
     {
@@ -93,7 +107,6 @@ const TableContent = () => {
       dataIndex: 'staffStatus',
 
       width: 150,
-      sorter: (a, b) => a.staffStatus.localeCompare(b.staffStatus),
       render: (status) => {
         let statusText;
         let statusClass;
@@ -125,6 +138,8 @@ const TableContent = () => {
       render: (_, record) => (
         <Space size="middle">
           {/* <FormvoucherEdit voucher={record} /> */}
+          <FormStaffViewDetails id={record.id}/>
+          
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"

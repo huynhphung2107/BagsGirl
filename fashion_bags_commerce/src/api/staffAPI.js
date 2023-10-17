@@ -19,6 +19,10 @@ const staffAPI = {
     const url = `/staff?id=${id}`;
     return axiosClient.get(url);
   },
+  getOne(id) {
+    const url = `staff?id=${id}`;
+    return axiosClient.get(url);
+  },
   add(data) {
     const url = `/staff`;
     return axiosClient.post(url, data, {

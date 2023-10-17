@@ -25,6 +25,7 @@ function FormStaffCreate(props) {
   };
 
   const addFunc = async (values) => {
+    console.log(values)
     setError(false);
     if (!error) {
       let add = { ...values };
@@ -97,7 +98,7 @@ function FormStaffCreate(props) {
           >
             <Form.Item
               label="Họ và tên"
-              name={['userInfo', 'fullName']}
+              name='fullName'
               rules={[
                 {
                   required: true,
@@ -110,7 +111,7 @@ function FormStaffCreate(props) {
 
             <Form.Item
               label="Account"
-              name={['userInfo', 'account']}
+              name='account'
               rules={[
                 {
                   required: true,
@@ -123,7 +124,7 @@ function FormStaffCreate(props) {
 
             <Form.Item
               label="Password"
-              name={['userInfo', 'password']}
+              name='password'
               rules={[
                 {
                   required: true,
@@ -135,8 +136,21 @@ function FormStaffCreate(props) {
             </Form.Item>
 
             <Form.Item
+              label="Đia chỉ"
+              name='address'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng điền thông tin!',
+                },
+              ]}
+            >
+              <Input type="text" />
+            </Form.Item>
+
+            <Form.Item
               label="Email"
-              name={['userInfo', 'email']}
+              name='email'
               rules={[
                 {
                   required: true,
@@ -147,14 +161,14 @@ function FormStaffCreate(props) {
               <Input />
             </Form.Item>
 
-            <Form.Item label="Giới tính" name={['userInfo', 'gender']}>
-              <Radio.Group defaultValue={true}>
+            <Form.Item label="Giới tính" name='gender'>
+              <Radio.Group >
                 <Radio value={true}>Nam</Radio>
                 <Radio value={false}>Nữ</Radio>
               </Radio.Group>
             </Form.Item>
 
-            <Form.Item label="Role" name={['userInfo', 'userRole','id']} initialValue={initialValue}>
+            <Form.Item label="Role" name='userInfoUserRoleId' initialValue={initialValue}>
               <Select placeholder="Select a role" loading={loading}>
                 {roles.map((role) => (
                   <Select.Option key={role.id} value={role.id}>
@@ -162,6 +176,21 @@ function FormStaffCreate(props) {
                   </Select.Option>
                 ))}
               </Select>
+            </Form.Item>
+
+            <Form.Item
+              label="Ghi Chú"
+              name='note'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng điền thông tin!',
+                },
+              ]}
+            >
+              <Input.TextArea
+                autoSize={{ minRows: 3, maxRows: 6 }}
+              />
             </Form.Item>
 
             <div style={{ textAlign: 'center' }}>

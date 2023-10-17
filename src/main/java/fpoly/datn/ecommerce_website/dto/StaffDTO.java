@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.dto;
 
 import fpoly.datn.ecommerce_website.entity.UserInfo;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,6 @@ public class StaffDTO {
 
     @NotNull
     private Integer staffStatus;
-
     @NotBlank
     private String fullName;
     @NotBlank
@@ -31,11 +31,13 @@ public class StaffDTO {
     private String password;
     @NotBlank
     private String email;
-    @NotBlank
+    @NotNull
     private Integer userInfoStatus;
-    @NotBlank
     private Boolean gender;
+    private String phoneNumber;
+    private String address;
+    private String note;
 
-    private String userRoleId;
+    private String userInfoUserRoleId;
 
 }
