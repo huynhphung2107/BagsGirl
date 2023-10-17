@@ -21,7 +21,7 @@ const staffAPI = {
   },
   getOne(id) {
     const url = `/staff?id=${id}`;
-    return axiosClient.get(url);
+    return axiosClient.get(url,{id});
   },
   add(data) {
     const url = `/staff`;
