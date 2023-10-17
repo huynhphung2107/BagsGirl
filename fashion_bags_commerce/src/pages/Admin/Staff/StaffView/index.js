@@ -3,16 +3,16 @@ import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 
 
-import './voucher.css';
+import './staff.css';
 import TableContent from './Table/Table';
-import FormVoucherCreate from '../VoucherEdit/FormrCreate/FormVoucherCreate';
-// import FormBrandCreate from '../BrandEdit/FormCreate/FormBrandCreate';
+import FormStaffCreate from '../StaffEdit/FormCreate/FormStaffCreate';
+// import FormstaffCreate from '../staffEdit/FormrCreate/FormstaffCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
 
 const contentStyle = {};
 
-function VoucherView() {
+function StaffView() {
   return (
     <Layout className="layout">
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
@@ -20,11 +20,11 @@ function VoucherView() {
       </Sider>
       <Layout className="layoutContent">
         <Header className="headerStyle">
-          <HeaderContent titlePage="Danh Sách Voucher" />
+          <HeaderContent titlePage="Danh Sách staff" />
         </Header>
         <Content style={contentStyle}>
           <div>
-            <FormVoucherCreate />
+            <FormStaffCreate />
           </div>
           <TableContent />
         </Content>
@@ -35,4 +35,4 @@ function VoucherView() {
   );
 }
 
-export default VoucherView;
+export default StaffView;

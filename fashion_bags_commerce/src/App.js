@@ -17,6 +17,8 @@ import BuckleTypeView from './pages/Admin/ThuocTinhSanPham/BuckleType/BuckleType
 import CompartmentView from './pages/Admin/ThuocTinhSanPham/Compartment/CompartmentView/indexCompartmentView';
 import MaterialView from './pages/Admin/ThuocTinhSanPham/Material/MaterialView';
 import ProducerView from './pages/Admin/ThuocTinhSanPham/Producer/ProducerView/indexProducerView';
+import VoucherView from './pages/Admin/Voucher/VoucherView';
+import StaffView from './pages/Admin/Staff/StaffView';
 
 
 const dynamicRoutes = [
@@ -24,7 +26,19 @@ const dynamicRoutes = [
   { path: '/product-viewer', component: <ProductViewer />, title: 'Về chúng tôi' },
   { path: '/login', component: <Login />, title: 'Liên hệ' },
   { path: '/', component: <Home />, title: 'Liên hệ' },
-  { path: '/product-add', component: <ProductAdd />, title: 'Liên hệ' },
+  { path: '/product-add', component: <ProductAdd />, title: 'A' },
+  { path: '/shift-view', component: <ShiftViewer />, title: 'B' },
+  { path: '/color-view', component: <ColorView />, title: 'C' },
+  { path: '/brand-view', component: <BrandView />, title: 'D' },
+  { path: '/size-view', component: <SizeView />, title: 'E' },
+  { path: '/type-view', component: <TypeView />, title: 'F' },
+  { path: '/buckle-type-view', component: <BuckleTypeView />, title: 'G' },
+  { path: '/material-view', component: <MaterialView />, title: 'H' },
+  { path: '/compartment-view', component: <CompartmentView />, title: 'I' },
+  { path: '/producer-view', component: <ProducerView />, title: 'K' },
+  { path: '/voucher', component: <VoucherView />, title: 'L' },
+  { path: '/staff-view', component: <StaffView />, title: 'M' },
+
 ];
 
 function App() {
@@ -32,19 +46,6 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<Login />} ></Route>
-          <Route path="/admin" element={<Admin />}></Route>
-          <Route path="/product-viewer" element={<ProductViewer />}></Route>
-          <Route path="/shift-view" element={<ShiftViewer />}></Route>
-          <Route path="/color-view" element={<ColorView />}></Route>
-          <Route path="/brand-view" element={<BrandView />}></Route>
-          <Route path="/size-view" element={<SizeView />}></Route>
-          <Route path="/type-view" element={<TypeView />}></Route>
-          <Route path="/buckle-type-view" element={<BuckleTypeView />}></Route>
-          <Route path="/material-view" element={<MaterialView />}></Route>
-          <Route path="/compartment-view" element={<CompartmentView />}></Route>
-          <Route path="/producer-view" element={<ProducerView />}></Route>
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}

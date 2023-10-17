@@ -117,13 +117,17 @@ const items = [
     getItem('Option 12', '16'),
   ]),
   getItem('Quản lí Khuyến Mãi', 'sub6', <RedEnvelopeOutlined />, [
-    getItem('Danh sách voucher', '17'),
+    getItem( <Link style={{ textDecoration: 'none' }} to={'/voucher'}>
+    Danh sách voucher
+  </Link>,'17'),
     getItem('Option 10', '18'),
     getItem('Option 11', '19'),
     getItem('Option 12', '20'),
   ]),
   getItem('Quản lí Nhân Viên', 'sub7', <UserOutlined />, [
-    getItem('Option 9', '21'),
+    getItem(<Link style={{ textDecoration: 'none' }} to={'/staff-view'}>
+    Danh sách nhân viên
+  </Link>, '21'),
     getItem('Option 10', '22'),
     getItem('Option 11', '23'),
     getItem('Option 12', '24'),

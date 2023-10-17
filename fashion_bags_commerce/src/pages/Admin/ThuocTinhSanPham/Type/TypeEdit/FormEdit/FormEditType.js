@@ -1,4 +1,4 @@
-import '../FormEdit/FormEditType.css';
+import styles from './FormEditType.module.scss';
 import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Option, Form, Input, Row, Select, Space, notification } from 'antd';
@@ -16,10 +16,11 @@ function FormEditType(props) {
         setOpen(false);
     };
 
-    const updateFunction = async (values) => {
+    const updateFunction = async (id, typeName, typeStatus) => {
         setError(false);
         if (!error) {
-            let update = { ...values };
+            let update = { id, typeName, typeStatus };
+            console.log(update.data);
             try {
                 const response = await typeAPI.update(idUpdate, update);
                 notification.success({

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/userinfo")
+@RequestMapping("/api/manage")
 public class UserInfoRestController {
 
     @Autowired

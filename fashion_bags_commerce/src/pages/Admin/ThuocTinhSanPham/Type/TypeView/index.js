@@ -2,7 +2,7 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../TypeView/TableType/TableType';
-import './index.css';
+import styles from './type.module.scss';
 import FormTypeCreate from '../TypeEdit/FormCreate/FormCreateType';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -11,7 +11,7 @@ const contentStyle = {};
 
 function TypeView() {
     return (
-        <Layout className="layout">
+        <Layout className={styles.layout}>
             <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
                 <Sidebar keyIndex="13" openKey="sub5" />
             </Sider>

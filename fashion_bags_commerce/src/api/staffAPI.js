@@ -1,8 +1,8 @@
-import axiosClient from '../axiosClient';
+import axiosClient from './axiosClient';
 
-const brandAPI = {
+const staffAPI = {
   getAll(pageNum,pageSize) {
-    const url = '/brand/';
+    const url = '/staff/';
     return axiosClient.get(url, {
       params: {
         page: pageNum -1,
@@ -10,12 +10,17 @@ const brandAPI = {
       },
     });
   },
+
+  getRoles(params) {
+    const url = '/role';
+    return axiosClient.get(url, { params });
+  },
   get(id) {
-    const url = `/brand?id=${id}`;
+    const url = `/staff?id=${id}`;
     return axiosClient.get(url);
   },
   add(data) {
-    const url = `/brand`;
+    const url = `/staff`;
     return axiosClient.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -23,15 +28,11 @@ const brandAPI = {
     });
   },
   update(data) {
-    const url = `/brand?id=${data.id}`;
-    return axiosClient.put(url, data, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const url = `/staff?id=${data.id}`;
+    return axiosClient.put(url, data);
   },
   updateStatus(id, status) {
-    const url = `/brand/update-status?id=${id}&status=${status}`;
+    const url = `/staff/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',
@@ -39,9 +40,9 @@ const brandAPI = {
     });
   },
   delete(id) {
-    const url = `/brand?id=${id}`;
+    const url = `/staff?id=${id}`;
     return axiosClient.delete(url);
   },
 };
 
-export default brandAPI;
+export default staffAPI;
