@@ -5,6 +5,16 @@ const compartmentAPI = {
     const url = '/compartment/';
     return axiosClient.get(url);
   },
+  getAllPhanTrang(pageNum, pageSize) {
+    const url = `/compartment/phanTrang?id=${pageNum}`;
+    return axiosClient.get(url,
+      {
+        params: {
+          page: pageNum - 1,
+          size: pageSize,
+        },
+      });
+  },
   get(id) {
     const url = `/compartment?id=${id}`;
     return axiosClient.get(url);
@@ -21,8 +31,8 @@ const compartmentAPI = {
     const url = `/compartment?id=${data.id}`;
     return axiosClient.put(url, data);
   },
-  updateStatus(compartmentID, status) {
-    const url = `/compartment/update-status?compartmentID=${compartmentID}&status=${status}`;
+  updateStatus(id, status) {
+    const url = `/compartment/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',

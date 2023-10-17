@@ -88,7 +88,29 @@ const items = [
         </Link>,
         '82',
       ),
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/type-view'}>
+          Kiểu balo </Link>, '84',
+      ),
 
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/buckle-type-view'}>
+          Kiểu khóa
+        </Link>,
+        '83',
+      ),
+
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/compartment-view'}>
+          Ngăn
+        </Link>,
+        '85',),
+
+      getItem(
+        <Link style={{ textDecoration: 'none' }} to={'/producer-view'}>
+          Nhà sản xuất
+        </Link>,
+        '86',),
 
     ]),
     getItem('Option 11', '15'),

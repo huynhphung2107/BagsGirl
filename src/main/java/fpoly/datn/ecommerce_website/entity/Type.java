@@ -33,4 +33,7 @@ public class Type {
 
     @Column(name = "type_name")
     private String typeName;
+
+    @Column(name = "type_status")
+    private Integer typeStatus;
 }
