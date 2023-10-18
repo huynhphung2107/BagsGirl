@@ -1,9 +1,13 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
+import fpoly.datn.ecommerce_website.entity.Brand;
 import fpoly.datn.ecommerce_website.entity.Material;
 import fpoly.datn.ecommerce_website.repository.IMaterialRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +23,12 @@ public class MaterialServiceImpl implements ServiceGenarel<Material> {
     public List<Material> findAll() {
         return materialRepository.findAll();
     }
+
+    public Page<Material> findAllPage(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return this.materialRepository.findAll(pageable);
+    }
+
 
 
     @Override
@@ -36,6 +46,12 @@ public class MaterialServiceImpl implements ServiceGenarel<Material> {
         return materialRepository.save(material);
     }
 
+    public Material updateStatus(String id, int status) {
+        Material material = materialRepository.findById(id).get();
+        material.setMaterialStatus(status);
+        return materialRepository.save(material);
+
+    }
 
     @Override
     public List<Material> searchByName(String name) {

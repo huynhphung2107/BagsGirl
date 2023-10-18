@@ -1,11 +1,14 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
+import fpoly.datn.ecommerce_website.dto.ShiftDTO;
 import fpoly.datn.ecommerce_website.dto.TypeDTO;
+import fpoly.datn.ecommerce_website.entity.Color;
 import fpoly.datn.ecommerce_website.entity.Type;
 import fpoly.datn.ecommerce_website.service.serviceImpl.TypeServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,15 +37,25 @@ public class TypeRestController {
     @Autowired
     private TypeServiceImpl typeService;
 
+
     //GetAll
     @RequestMapping(value = "/type/", method = RequestMethod.GET)
-    public ResponseEntity<List<TypeDTO>> getAll() {
+    public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(
                 this.typeService.findAll()
                         .stream()
                         .map(type -> modelMapper.map(type, TypeDTO.class))
+                        .sorted(Comparator.comparing(TypeDTO::getTypeCode)) // Sắp xếp theo trường "name"
                         .collect(Collectors.toList())
-                , HttpStatus.OK);
+                , HttpStatus.OK
+        );
+    }
+
+    //PhanTrang
+    @RequestMapping(value = "/type/phanTrang", method = RequestMethod.GET)
+    public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
+                                       @RequestParam(name = "size", defaultValue = "10") int pageSize){
+        return ResponseEntity.ok(typeService.findAllPhanTrang(pageNum, pageSize));
     }
 
     //GetOne
@@ -61,13 +75,28 @@ public class TypeRestController {
                 , HttpStatus.OK);
     }
 
-    //Update
+//    Update
+//    @RequestMapping(value = "/type", method = RequestMethod.PUT)
+//    public ResponseEntity<Type> update(@RequestBody @Valid TypeDTO typeDTO) {
+//        Type type = modelMapper.map(typeDTO, Type.class);
+//        return new ResponseEntity<>(
+//                this.typeService.save(type)
+//                , HttpStatus.OK);
+//    }
     @RequestMapping(value = "/type", method = RequestMethod.PUT)
-    public ResponseEntity<Type> update(@RequestBody @Valid TypeDTO typeDTO) {
+    public ResponseEntity<Type> update(@Valid @RequestParam String id, @RequestBody TypeDTO typeDTO) {
         Type type = modelMapper.map(typeDTO, Type.class);
+        type.setId(id);
         return new ResponseEntity<>(
-                this.typeService.save(type)
+                this.typeService.update(id,type)
                 , HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/type/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<Type> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(typeService.updateStatus(id, status),
+                HttpStatus.OK);
+
     }
 
     //Delete

@@ -28,7 +28,11 @@ const brandAPI = {
   },
   update(data) {
     const url = `/brand?id=${data.id}`;
-    return axiosClient.put(url, data);
+    return axiosClient.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   },
   updateStatus(id, status) {
     const url = `/brand/update-status?id=${id}&status=${status}`;

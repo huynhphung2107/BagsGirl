@@ -33,7 +33,7 @@ public class BrandRestController {
     @Autowired
     private BrandServiceImpl brandService;
 
-    //GetAll
+    //GetAllPage
     @RequestMapping(value = "/brand/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,

@@ -4,6 +4,7 @@ import fpoly.datn.ecommerce_website.dto.BuckleTypeDTO;
 import fpoly.datn.ecommerce_website.dto.CompartmentDTO;
 import fpoly.datn.ecommerce_website.entity.BuckleType;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
+import fpoly.datn.ecommerce_website.service.serviceImpl.BuckleTypeServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,24 +33,30 @@ public class BuckleTypeRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ServiceGenarel<BuckleType> serviceGenarel;
+    private BuckleTypeServiceImpl buckleTypeService;
 
     //hien thi
     @RequestMapping(value = "/buckletype/", method = RequestMethod.GET)
     public ResponseEntity<List<BuckleTypeDTO>> getAll() {
         return new ResponseEntity<>(
-                this.serviceGenarel.findAll()
+                this.buckleTypeService.findAll()
                         .stream()
                         .map(buckletype -> modelMapper.map(buckletype, BuckleTypeDTO.class))
                         .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
 
+    //phan trang
+    @RequestMapping(value = "/buckletype/phanTrang", method = RequestMethod.GET)
+    public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
+                                       @RequestParam(name = "size", defaultValue = "10") int pageSize){
+        return ResponseEntity.ok(buckleTypeService.findAllPhanTrang(pageNum, pageSize));
+    }
+
     @RequestMapping(value = "/buckletype", method = RequestMethod.GET)
     public ResponseEntity<BuckleTypeDTO> getOne(@RequestParam String id) {
-
         return new ResponseEntity<>(
-                modelMapper.map(this.serviceGenarel.findById(id), BuckleTypeDTO.class)
+                modelMapper.map(this.buckleTypeService.findById(id), BuckleTypeDTO.class)
                 , HttpStatus.OK);
     }
 
@@ -59,7 +66,7 @@ public class BuckleTypeRestController {
     public ResponseEntity<?> add(@RequestBody @Valid BuckleTypeDTO buckletypeDTO
     ) {
         return new ResponseEntity<>(
-                serviceGenarel.save(
+                buckleTypeService.save(
                         modelMapper.map(buckletypeDTO, BuckleType.class))
                 , HttpStatus.OK);
 
@@ -69,16 +76,23 @@ public class BuckleTypeRestController {
     //update
     @RequestMapping(value = "/buckletype", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@Valid @RequestBody BuckleTypeDTO buckletypeDTO) {
-        return new ResponseEntity<>(serviceGenarel.save(
+        return new ResponseEntity<>(buckleTypeService.save(
                 modelMapper.map(buckletypeDTO, BuckleType.class)
 
         ), HttpStatus.OK);
     }
 
+    //update Status
+    @RequestMapping(value = "/buckletype/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(buckleTypeService.updateStatus(id, status),
+                HttpStatus.OK);
+    }
+
     //delete
     @RequestMapping(value = "/buckletype", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam("id") String id) {
-        serviceGenarel.delete(id);
+        buckleTypeService.delete(id);
         return new ResponseEntity<>("Delete Successfully!", HttpStatus.OK);
     }
 

@@ -1,5 +1,6 @@
 package fpoly.datn.ecommerce_website.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +14,11 @@ public class BuckleTypeDTO {
     private UUID id;
 
     @NotBlank(message = "Không để trống code")
-    private String code;
+    private String buckleTypeCode;
 
     @NotBlank(message = "Không để trống name")
     private String buckleTypeName;
+
+
+    private Integer buckleTypeStatus;
 }

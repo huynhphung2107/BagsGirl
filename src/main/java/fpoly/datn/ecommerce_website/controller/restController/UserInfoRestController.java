@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/userinfo")
+@RequestMapping("/api/manage")
 public class UserInfoRestController {
 
     @Autowired
