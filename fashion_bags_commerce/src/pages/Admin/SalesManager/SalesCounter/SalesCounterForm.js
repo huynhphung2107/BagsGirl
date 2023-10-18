@@ -58,6 +58,7 @@ const SalesCounterForm = () => {
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
+    const [visible, setVisible] = useState(true);
     const handleSelect = (value, option) => {
       const item = options.find((item) => item.id === value);
 
@@ -212,7 +213,9 @@ const SalesCounterForm = () => {
       });
       setSelectedItems(updatedItems);
     };
-
+    const handleTonggleSelectChange = (value) => {
+      setVisible(value === 'hiện'); // Cập nhật trạng thái dựa trên giá trị của select
+    };
     return (
       <div>
         <div>
@@ -220,254 +223,221 @@ const SalesCounterForm = () => {
         </div>
         <div>
           <Row>
-            <Col span={10} className={styles.form}>
+            <Col span={10} style={{ border: '1px solid' }} className={styles.form}>
               <div>
                 <h5>Thông tin khách hàng</h5>
               </div>
               <div>
-                <Form layout="vertical">
-                  <Row>
-                    <Col span={12}>
-                      <Form.Item
-                        label=" "
-                        name=""
-                        className={styles.item}
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input placeholder="Search By Name or Phone Number" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                      <Form.Item
-                        label="Loại Khách"
-                        name="type"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Select
-                          defaultValue="lucy"
-                          style={{
-                            width: 120,
-                          }}
-                          options={[
+                <Row>
+                  <Col span={12}>
+                    <Input placeholder="Search By Name or Phone Number" />
+                  </Col>
+                  <Col span={12}>
+                    <Select defaultValue="hiện" style={{ width: 120 }} onChange={handleTonggleSelectChange}>
+                      <Option value="hiện">Hiện</Option>
+                      <Option value="ẩn">Ẩn</Option>
+                    </Select>
+                  </Col>
+                </Row>
+                {visible && (
+                  <Form layout="vertical">
+                    <Row>
+                      <Col span={24}>
+                        <Form.Item
+                          label="MÃ HĐ"
+                          initialValue={generateCustomCode('HD', 9)}
+                          name="maHD"
+                          rules={[
                             {
-                              value: '0',
-                              label: 'Khách Lẻ',
-                            },
-                            {
-                              value: '1',
-                              label: 'Khách Thân Thiết',
+                              required: true,
+                              message: 'Please input your username!',
                             },
                           ]}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={24}>
-                      <Form.Item
-                        label="MÃ HĐ"
-                        initialValue={generateCustomCode('HD', 9)}
-                        name="maHD"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input readOnly />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={12}>
-                      <Form.Item
-                        label="Nhân Viên"
-                        name="nameStaff"
-                        initialValue={'Nguyễn Công Tuấn Anh'}
-                        className={styles.item}
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input readOnly />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                      <Form.Item
-                        label="SĐT Khách Hàng"
-                        name="phoneNumber"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={12}>
-                      <Form.Item
-                        className={styles.item}
-                        label="Địa chỉ"
-                        name="phoneNumber"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input />
-                      </Form.Item>
-                      <Form.Item
-                        className={styles.item}
-                        label=""
-                        name="huyen"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input />
-                      </Form.Item>
-                      <Form.Item
-                        className={styles.item}
-                        label=""
-                        name="phoneNumber"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                      <Form.Item
-                        label=" "
-                        name="phoneNumber"
-                        rules={[
-                          {
-                            required: false,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <TextArea rows={6} placeholder="Địa Chỉ Chi tiết" maxLength={6} />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={12}>
-                      <Form.Item
-                        label="Mã Giảm Giá (nếu có)"
-                        name="disCountCode"
-                        className={styles.item}
-                        rules={[
-                          {
-                            required: false,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input readOnly />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                      <Form.Item
-                        label="Tổng Tiền Hàng"
-                        name="totalPrice"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Input />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={12}>
-                      <Form.Item
-                        label="Phương thức Thanh Toán"
-                        name="phoneNumber"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <Select
-                          defaultValue="cash"
-                          style={{
-                            width: 280,
-                          }}
-                          options={[
+                        >
+                          <Input readOnly />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col span={12}>
+                        <Form.Item
+                          label="Nhân Viên"
+                          name="nameStaff"
+                          initialValue={'Nguyễn Công Tuấn Anh'}
+                          className={styles.item}
+                          rules={[
                             {
-                              value: 'online',
-                              label: 'Chuyển Khoản',
-                            },
-                            {
-                              value: 'cash',
-                              label: 'Tiền Mặt',
+                              required: true,
+                              message: 'Please input your username!',
                             },
                           ]}
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}></Col>
-                  </Row>
-                  <Row>
-                    <Col span={24}>
-                      <Form.Item
-                        label=""
-                        name="phoneNumber"
-                        rules={[
-                          {
-                            required: false,
-                            message: 'Please input your username!',
-                          },
-                        ]}
-                      >
-                        <TextArea rows={6} placeholder="Ghi chú" maxLength={6} />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={24}>
-                      <Form.Item>
-                        <Button>Thêm Hóa Đơn</Button>
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                </Form>
+                        >
+                          <Input readOnly />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          label="SĐT Khách Hàng"
+                          name="phoneNumber"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col span={12}>
+                        <Form.Item
+                          className={styles.item}
+                          label="Địa chỉ"
+                          name="phoneNumber"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item
+                          className={styles.item}
+                          label=""
+                          name="huyen"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item
+                          className={styles.item}
+                          label=""
+                          name="phoneNumber"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          label=" "
+                          name="phoneNumber"
+                          rules={[
+                            {
+                              required: false,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <TextArea rows={6} placeholder="Địa Chỉ Chi tiết" maxLength={6} />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col span={12}>
+                        <Form.Item
+                          label="Mã Giảm Giá (nếu có)"
+                          name="disCountCode"
+                          className={styles.item}
+                          rules={[
+                            {
+                              required: false,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <Input readOnly />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          label="Tổng Tiền Hàng"
+                          name="totalPrice"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col span={12}>
+                        <Form.Item
+                          label="Phương thức Thanh Toán"
+                          name="phoneNumber"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <Select
+                            defaultValue="cash"
+                            style={{
+                              width: 280,
+                            }}
+                            options={[
+                              {
+                                value: 'online',
+                                label: 'Chuyển Khoản',
+                              },
+                              {
+                                value: 'cash',
+                                label: 'Tiền Mặt',
+                              },
+                            ]}
+                          />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}></Col>
+                    </Row>
+                    <Row>
+                      <Col span={24}>
+                        <Form.Item
+                          label=""
+                          name="phoneNumber"
+                          rules={[
+                            {
+                              required: false,
+                              message: 'Please input your username!',
+                            },
+                          ]}
+                        >
+                          <TextArea rows={6} placeholder="Ghi chú" maxLength={6} />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col span={24}>
+                        <Form.Item>
+                          <Button>Thêm Hóa Đơn</Button>
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                  </Form>
+                )}
               </div>
             </Col>
-            <Col span={14} style={{ border: '1px solid' }}>
+            <Col span={14} style={{ border: '1px solid', minHeight: '1000px' }}>
               <div>
                 <h5>Giỏ Hàng</h5>
               </div>
