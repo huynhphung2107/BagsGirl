@@ -437,7 +437,7 @@ const SalesCounterForm = () => {
                 )}
               </div>
             </Col>
-            <Col span={14} style={{ border: '1px solid', minHeight: '1000px' }}>
+            <Col span={14} style={{ border: '1px solid', minHeight: '1400px' }}>
               <div>
                 <h5>Giỏ Hàng</h5>
               </div>

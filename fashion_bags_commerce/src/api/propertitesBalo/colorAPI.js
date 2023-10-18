@@ -6,7 +6,6 @@ const colorAPI = {
     return axiosClient.get(url, {
       params: {
         page: pageNum - 1,
-        page: pageNum - 1,
         size: pageSize,
       },
     });
