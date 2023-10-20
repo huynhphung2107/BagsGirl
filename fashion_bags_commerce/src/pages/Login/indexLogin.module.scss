@@ -7,57 +7,60 @@
 	color: white;
 	background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
   }
-  .title{
+.title{
 	font-family: 'Roboto Slab', serif;
 	font-size: 50px;
-  }
+}
   
-  .auth-form-container, .login-form, .register-form {
+.authFormContainer, .loginForm, .registerForm {
 	display: flex;
 	flex-direction: column;
-  }
+}
   
-  @media screen and (min-width: 600px) {
-	.auth-form-container {
+@media screen and (min-width: 600px) {
+.authFormContainer {
 	  padding: 5rem;
 	  border: 3px solid white;
 	  border-radius: 10px;
 	  margin: 0.5rem;
 	}
-  }
+}
   
-  label {
+.label {
 	text-align: left;
 	padding: 0.25rem 0;
-  }
+}
   
-  input {
+.input {
 	margin: 0.5rem 0;
 	padding: 1rem;
 	border: none;
 	border-radius: 10px;
-  }
+}
   
-  button {
+.button {
 	border: none;
 	background-color: white;
 	padding: 20px;
 	border-radius: 10px;
 	cursor: pointer;
 	color: #7439db;
-  }
-  .nut:hover{
+}
+.button:hover{
 	background-color: rgb(146, 195, 235);
-  }
+}
   
-  .link-btn {
+.linkBtn {
 	background: none;
 	color: white;
+	margin: 15px;
+	border: none;
 	text-decoration: underline;
-  }
-  .iconButton{
-	margin-top: 15px;
+}
+.iconButton{
+	margin: 15px;
 	background: none;
+	border: none;
 	color: white;
 	text-decoration: underline;
-  }
+}
