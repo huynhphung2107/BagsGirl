@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BaloDetailDTO;
+import fpoly.datn.ecommerce_website.dto.UserInfoDTO;
 import fpoly.datn.ecommerce_website.entity.UserInfo;
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
 import fpoly.datn.ecommerce_website.repository.IUserInfoRepository;
@@ -23,7 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/userinfo")
+@RequestMapping("/api/manage/userinfo")
 public class UserInfoRestController {
 
     @Autowired
@@ -42,7 +43,6 @@ public class UserInfoRestController {
     public List<UserInfo> getAll() {
         iRoleRepository.findAll();
         list = iUserInfoRepository.findAll();
-        System.out.println(list);
         return list;
     }
 
@@ -58,10 +58,10 @@ public class UserInfoRestController {
         return userInfo;
     }
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ResponseEntity<?> findByKeyword(@RequestParam String keyword) {
+    public ResponseEntity<?> findCustomerByKeyword(@RequestParam String keyword) {
         return new ResponseEntity<>(
-                this.userInfoService.findByKeyword(keyword) .stream()
-                        .map(baloDetail -> modelMapper.map(baloDetail, BaloDetailDTO.class))
+                this.userInfoService.findCustomerByKeyword(keyword) .stream()
+                        .map(userInfo -> modelMapper.map(userInfo, UserInfoDTO.class))
                         .collect(Collectors.toList())
                 , HttpStatus.OK);
     }

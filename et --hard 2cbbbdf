@@ -1,0 +1,155 @@
+[33m1c039fa[m[33m ([m[1;36mHEAD -> [m[1;32mTuanAnh_develop[m[33m, [m[1;31morigin/TuanAnh_develop[m[33m)[m Merge branch 'main' of https://github.com/huynhphung2107/FashionBagsEcommerce into TuanAnh_develop
+[33mc1d9146[m Merge branch 'main' of https://github.com/huynhphung2107/FashionBagsEcommerce into TuanAnh_develop
+[33m2cbbbdf[m temp commit
+[33mce12232[m fix conflicts
+[33mabf35f8[m Merge branch 'main' into Huynh_develop
+[33m7df0160[m huỳnh update chức năng add staff
+[33m9fc9bd4[m update
+[33m429868a[m no message
+[33meed9a0f[m commit
+[33mf6ae994[m Update
+[33mcda969d[m update fontend màn login
+[33m3e0910f[m Huỳnh update nhân viên
+[33mb4a5e7a[m huỳnh update crud staff
+[33me6ccda9[m Merge branch 'main' into AnhQuan_develop
+[33m36bf368[m Update CRUD COmpartment, producer
+[33m5eab794[m Huynhf update crud voucher
+[33m2ce9f31[m Merge branch 'main' into Huynh_develop
+[33m8947350[m Merge pull request #45 from huynhphung2107/Diep_develop
+[33m9f947bd[m update name package
+[33m1251f82[m[33m ([m[1;31morigin/Diep_develop[m[33m)[m diep update data
+[33m0157ece[m Update CRUD COmpartment, Producer
+[33m07ec969[m Merge branch 'main' into AnhQuan_develop
+[33mf002fac[m Update CRUD Producer, Compartment, Type
+[33m3774dfe[m update crud material
+[33ma346bd0[m Quan Add CRUD Thuoc tinh Type va BuckleType
+[33m6b0c4c7[m Update CRUD thuoc tinh Type
+[33m8b1b625[m Update CRUD Type
+[33maa2eb09[m Merge branch 'main' into AnhQuan_develop
+[33m948636e[m Merge branch 'main' of https://github.com/huynhphung2107/FashionBagsEcommerce into TuanAnh_develop
+[33mb2104ad[m Merge branch 'main' into TuanAnh_develop
+[33m44af7f3[m Merge pull request #44 from huynhphung2107/TuanAnh_develop
+[33mcf28136[m Merge branch 'main' into TuanAnh_develop
+[33mad33e3c[m update db, be: image, balodetail, delete relationship of Customer_Voucher
+[33maf3c1b1[m Quan Add CRUD thuoc tinh Type
+[33m66aed2f[m Merge branch 'main' into AnhQuan_develop
+[33m0e27618[m up
+[33mf9b3a98[m update color
+[33mdf49edc[m Merge branch 'main' into AnhQuan_develop
+[33maa4919f[m fix url
+[33mcaf32ff[m Merge branch 'main' into Huynh_develop
+[33m0e17f91[m update size
+[33ma02cf6f[m[33m ([m[1;32mmain[m[33m)[m delete apicontext thừa
+[33m50e07fd[m Merge branch 'main' of https://github.com/huynhphung2107/FashionBagsEcommerce
+[33m0e57d46[m no message
+[33m5dd19d9[m Merge branch 'main' into TuanAnh_develop
+[33mc14e930[m Merge pull request #43 from huynhphung2107/TuanAnh_develop
+[33mfdd2e7a[m change for apicontext
+[33mc2dc006[m update size
+[33mfd32690[m no message
+[33maf508ed[m Merge branch 'main' into AnhQuan_develop
+[33m355b9ee[m update color and brand
+[33m89e039b[m Merge branch 'main' into Huynh_develop
+[33mc888eb3[m Merge pull request #42 from huynhphung2107/TuanAnh_develop
+[33me920b4f[m Done Load Table Preview add Balo
+[33m55e8883[m update brand
+[33m2d6329f[m Merge pull request #41 from huynhphung2107/TuanAnh_develop
+[33mbdb1777[m update databse
+[33m473075f[m Merge branch 'main' into AnhQuan_develop
+[33mdd0f09b[m no message
+[33m13df9e3[m update brand
+[33m7d7f372[m them add color
+[33mbafd4f1[m fix lỗi conflict
+[33m6906242[m Merge branch 'main' into Huynh_develop
+[33m5a5ed96[m huynh add crud color
+[33m222d1bf[m huỳnh add crud color
+[33m1578d2e[m Merge pull request #40 from huynhphung2107/TuanAnh_develop
+[33md53546a[m Done Interface Add BaloDetails p2
+[33m7a21228[m Done Interface of BaloDetail
+[33ma782f36[m Merge branch 'TuanAnh_develop' of https://github.com/huynhphung2107/FashionBagsEcommerce into TuanAnh_develop
+[33m3dc9444[m Done Interface Add  BaloDetails
+[33m81d4fb5[m Merge pull request #38 from huynhphung2107/TuanAnh_develop
+[33m3547124[m Merge branch 'main' into TuanAnh_develop
+[33mc40befa[m Done Balo Pagination
+[33me5b7318[m Merge branch 'main' into Huynh_develop
+[33m0cf526f[m update view menu
+[33m3e30986[m Update script.sql
+[33mefb4e49[m Update README.md
+[33m35b61a5[m Merge pull request #37 from huynhphung2107/Diep_develop
+[33m5714cf9[m update shift
+[33m7488c91[m fix shift
+[33m57cba7f[m diệp mockup database
+[33mabea023[m fix 1 xius
+[33mdd570d9[m Merge branch 'main' into Huynh_develop
+[33m5ebade7[m Merge pull request #36 from huynhphung2107/TuanAnh_develop
+[33mc5120d9[m Mock Page Shopping by Tuan Anh
+[33mf62b708[m add giao ca
+[33mea75766[m update porm
+[33md6ac920[m pạvcajca
+[33m22dd3e2[m[33m ([m[1;31morigin/KieuOanh_develop[m[33m)[m Merge pull request #35 from huynhphung2107/TuanAnh_develop
+[33m8879317[m Merge branch 'main' into TuanAnh_develop
+[33m23e4d2e[m upload lần 2
+[33mf1a0c3a[m 'upload'
+[33mfb50959[m Update README.md
+[33mfb5af7d[m Update README.md
+[33m6e9d1fb[m Update README.md
+[33m722d26d[m Merge pull request #32 from huynhphung2107/AnhQuan_develop
+[33m0cc2871[m Merge pull request #34 from huynhphung2107/TuanAnh_develop
+[33m76844a4[m edit layout admin by ta
+[33m0880092[m Update README.md
+[33m5f2bc95[m Merge pull request #33 from huynhphung2107/TuanAnh_develop
+[33m0068d16[m Up Frontend UI By Ta
+[33m2a70875[m Tạo rest API + validate bảng Shift và bảng Cart. Update bảng Image và bảng Material
+[33m0f80008[m update balo detail rest api
+[33m82cd966[m rest API Balodetails
+[33mb410ed5[m updaete new db
+[33m923e3c6[m update db
+[33m804cacd[m Update Readme
+[33m5073fdb[m Merge pull request #31 from huynhphung2107/TuanAnh_develop
+[33mbdf3ac9[m Done StaffAPI and CustomerAPI, edit error at ImageAPI and MaterrialAPI, Update Database
+[33m0c21a49[m Merge branch 'main' of https://github.com/huynhphung2107/FashionBagsEcommerce into TuanAnh_develop
+[33ma75bdb7[m Done Rest API staff
+[33m8806ec5[m Update package entity + dto Cart, Tạo rest API + validate bảng Shift
+[33m90e64d4[m Rest API + validate bảng Cart
+[33me9f0055[m Merge pull request #29 from huynhphung2107/Diep_develop
+[33m8c11450[m diep validate brand and producer
+[33m502e828[m Merge pull request #27 from huynhphung2107/AnhQuan_develop
+[33m920207c[m Merge pull request #28 from huynhphung2107/KieuOanh_develop
+[33mecf978b[m Complete validate Size, Color
+[33ma1ab0b0[m Update validate bảng Image và bảng Material
+[33me134667[m Merge pull request #26 from huynhphung2107/Huynh_develop
+[33m2b4eda3[m update validate
+[33m9c6bce9[m Merge pull request #25 from huynhphung2107/TuanAnh_develop
+[33m3f9501d[m Done Validate TypeRestController BY TA
+[33meee6bc7[m Merge pull request #24 from huynhphung2107/TuanAnh_develop
+[33mf0b7bda[m Update db by TA
+[33mbc4b64f[m Merge pull request #23 from huynhphung2107/Huynh_develop
+[33md4b2618[m Update + Validate class Compartment và BuckleType
+[33m0a95f46[m Merge pull request #22 from huynhphung2107/TuanAnh_develop
+[33m4325945[m Done Validattion Balo Rest API
+[33ma8102ae[m Merge pull request #21 from huynhphung2107/TuanAnh_develop
+[33m759d2c7[m Done Balo API
+[33m58cdf7b[m Merge branch 'main' of https://github.com/huynhphung2107/FashionBagsEcommerce into TuanAnh_develop
+[33m1042429[m Commit for Type Rest
+[33m48b2551[m Merge pull request #20 from huynhphung2107/AnhQuan_develop
+[33m92bce0b[m Update Rest API bảng Image và Material
+[33m7e3826f[m Merge pull request #19 from huynhphung2107/KieuOanh_develop
+[33m544d2f3[m Complete
+[33m746f5ce[m Commit
+[33m52f71bb[m Merge pull request #17 from huynhphung2107/Diep_develop
+[33m2b1c23a[m commit lần cuối cùng
+[33me737193[m commit
+[33mf992508[m Merge pull request #15 from huynhphung2107/Diep_develop
+[33m4f8b2cb[m diep code brand and producer
+[33m00bacb2[m xóa sizeService
+[33me0aa56b[m Update size
+[33ma6eac58[m Merge branch 'main' of https://github.com/huynhphung2107/FashionBagsEcommerce
+[33maa221b8[m update Size
+[33mff1abac[m add service balo
+[33m233d60f[m Update ServiceGenarel
+[33m9109e25[m update thư muc
+[33mc0569d5[m Merge pull request #14 from huynhphung2107/TuanAnh_develop
+[33md5876f1[m Commti By TA
+[33m2dded44[m Remake Type  Rest API By TA
+[33m88e03ef[m Merge pull request #13 from huynhphung2107/TuanAnh_develop
+[33mdadb20a[m Upload by

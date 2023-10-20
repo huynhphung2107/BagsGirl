@@ -54,6 +54,8 @@ public class UserInfo {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private UserRole userRole;
 
+    @Column(name = "address")
+    private String address;
     @Column(name = "note")
     private String note;
 }
