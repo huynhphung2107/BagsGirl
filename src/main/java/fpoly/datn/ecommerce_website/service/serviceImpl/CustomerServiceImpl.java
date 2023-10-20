@@ -2,7 +2,6 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.entity.Customer;
 import fpoly.datn.ecommerce_website.repository.ICustomerRepository;
-import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,12 +25,6 @@ public class CustomerServiceImpl {
     public List<Customer> findAll() {
         return this.customerRepository.findAll();
     }
-
-
-//    public Page<Customer> findAllPage(Integer page, Integer size) {
-//        Pageable pageable = PageRequest.of(page,size);
-//        return this.customerRepository.findAllPage(pageable);
-//    }
 
 
     public Customer findById(String id) {
