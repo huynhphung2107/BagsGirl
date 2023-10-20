@@ -1,14 +1,18 @@
 import axiosClient from '../axiosClient';
 
 const sizeAPI = {
-  getAll(pageNum,pageSize) {
+  getAllPaginantion(pageNum, pageSize) {
     const url = '/size/';
     return axiosClient.get(url, {
       params: {
-        page: pageNum -1,
+        page: pageNum - 1,
         size: pageSize,
       },
     });
+  },
+  getAll() {
+    const url = '/size/get-all';
+    return axiosClient.get(url, {});
   },
   get(id) {
     const url = `/size?id=${id}`;

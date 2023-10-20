@@ -27,7 +27,7 @@ public class BaloDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private String id;
+    private String baloDetailsID;
 
     @Column(name = "import_price")
     private Float importPrice;
