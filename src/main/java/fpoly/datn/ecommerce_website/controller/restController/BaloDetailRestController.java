@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BaloDetailDTO;
+import fpoly.datn.ecommerce_website.dto.Balo_BaloDetailDTO;
 import fpoly.datn.ecommerce_website.entity.BaloDetail;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BaloDetailServiceImpl;
@@ -38,8 +39,6 @@ public class BaloDetailRestController {
     @Autowired
     private BaloDetailServiceImpl baloDetailService;
 
-
-
     @RequestMapping(value = "/balo/{baloID}/balodetails", method = RequestMethod.GET)
     public ResponseEntity<?> getAllbyBalo(@PathVariable String baloID) {
         return new ResponseEntity<>(
@@ -74,17 +73,18 @@ public class BaloDetailRestController {
 
     //add
     @RequestMapping(value = "/balo-detail", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@Valid @RequestBody BaloDetailDTO baloDetailDTO) {
+    public ResponseEntity<?> save(@Valid @RequestBody Balo_BaloDetailDTO balo_baloDetailDTO) {
+        System.out.println(balo_baloDetailDTO);
         return new ResponseEntity<>(
-                serviceGenarel.save(modelMapper.map(baloDetailDTO, BaloDetail.class))
+                serviceGenarel.save(modelMapper.map(balo_baloDetailDTO, BaloDetail.class))
                 , HttpStatus.OK);
     }
 
     //update
     @RequestMapping(value = "/balo-detail", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@Valid @RequestBody BaloDetailDTO baloDetailDTO) {
+    public ResponseEntity<?> update(@Valid @RequestBody Balo_BaloDetailDTO balo_baloDetailDTO) {
         return new ResponseEntity<>(
-                serviceGenarel.save(modelMapper.map(baloDetailDTO, BaloDetail.class))
+                serviceGenarel.save(modelMapper.map(balo_baloDetailDTO, BaloDetail.class))
                 , HttpStatus.OK);
     }
 
@@ -96,17 +96,13 @@ public class BaloDetailRestController {
     }
 
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMesssage = error.getDefaultMessage();
-            errors.put(fieldName, errorMesssage);
-        });
-
-        return errors;
+    @RequestMapping(value = "/balo-detail/search", method = RequestMethod.GET)
+    public ResponseEntity<?> findByKeyword(@RequestParam String keyword) {
+        return new ResponseEntity<>(
+               this.baloDetailService.findByKeyword(keyword) .stream()
+                       .map(baloDetail -> modelMapper.map(baloDetail, BaloDetailDTO.class))
+                       .collect(Collectors.toList())
+                , HttpStatus.OK);
     }
 
 

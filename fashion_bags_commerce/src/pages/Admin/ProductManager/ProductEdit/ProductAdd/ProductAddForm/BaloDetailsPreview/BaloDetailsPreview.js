@@ -2,11 +2,27 @@ import styles from './BaloDetailsPreview.module.scss';
 
 import React, { Fragment, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, InputNumber, Row, Select, Space, Table } from 'antd';
+import {
+  Button,
+  Col,
+  Drawer,
+  Form,
+  Input,
+  InputNumber,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+  notification,
+} from 'antd';
+import baloAPI from '~/api/baloAPI';
+import baloDetailsAPI from '~/api/baloDetailsAPI';
 
 const { Option } = Select;
 function BaloDetailsPreview(props) {
   const [loading, setLoading] = useState(false);
+
   const [baloList, setBaloList] = useState(props.baloList);
   const [baloListPreview, setBaloListPreview] = useState(props.baloListPreview);
 
@@ -139,31 +155,76 @@ function BaloDetailsPreview(props) {
       setBaloList(newDataAdd);
     }
   };
-  const save = () => {
-    const tempBalo = baloList[0];
-    const baloAdd = {
-      baloCode: tempBalo.baloCode,
-      baloName: tempBalo.baloName,
-      baloStatus: tempBalo.baloStatus,
-    };
+  const save = async () => {
+    if (baloList.length !== 0) {
+      const tempBalo = baloList[0];
+      const baloAdd = {
+        baloCode: tempBalo.baloCode,
+        baloName: tempBalo.baloName,
+        brandID: tempBalo.brandID,
+        baloStatus: tempBalo.baloStatus,
+      };
 
-    // Tạo danh sách baloDetails chứa baloColor, baloBrand, baloProducer
-    const baloDetails = baloList.map(
-      ({ brandID, buckleTypeID, colorID, compartmentID, materialID, producerID, sizeID, typeID }) => ({
-        brandID,
-        buckleTypeID,
-        colorID,
-        compartmentID,
-        materialID,
-        producerID,
-        sizeID,
-        typeID,
-      }),
-    );
-    console.log('====================================');
-    console.log(baloAdd);
-    console.log(baloDetails);
-    console.log('====================================');
+      let baloDetails = baloList.map(
+        ({
+          brandID,
+          buckleTypeID,
+          colorID,
+          compartmentID,
+          materialID,
+          producerID,
+          sizeID,
+          typeID,
+          imageUrl,
+          importPrice,
+          retailPrice,
+          baloDetailDescribe,
+          baloDetailAmount,
+        }) => ({
+          brandID,
+          buckleTypeID,
+          colorID,
+          compartmentID,
+          materialID,
+          producerID,
+          sizeID,
+          typeID,
+          imageUrl,
+          importPrice,
+          retailPrice,
+          baloDetailDescribe,
+          baloDetailAmount,
+        }),
+      );
+
+      try {
+        const response = await baloAPI.add(baloAdd);
+        const id = response.data.id;
+        baloDetails.forEach((element) => {
+          element = { ...element, baloID: id };
+          const response2 = baloDetailsAPI.add(element);
+        });
+
+        notification.success({
+          message: 'Add thành công',
+          description: 'Dữ liệu đã được thêm thành công',
+          duration: 2,
+        });
+      } catch (error) {
+        console.log(error);
+        notification.error({
+          message: 'Lỗi',
+          description: 'Vui lòng xác nhận',
+          duration: 2,
+        });
+      }
+    } else {
+      notification.error({
+        message: 'Lỗi',
+        description: 'Chưa có sản phẩm nào trong Danh sách thêm, vui lòng điền Form bên dưới để thêm',
+        duration: 2,
+      });
+    }
   };
   const start = () => {
     setLoading(true);
@@ -191,9 +252,18 @@ function BaloDetailsPreview(props) {
               </Button>
             </div>
             <div className={styles.buttonSave}>
-              <Button type="primary" onClick={save} loading={loading}>
-                Lưu
-              </Button>
+              <Popconfirm
+                title="Xác Nhận"
+                description="Bạn Có chắc chắn muốn Thêm?"
+                okText="Đồng ý"
+                cancelText="Không"
+                onConfirm={save}
+                onCancel={start}
+              >
+                <Button type="primary" loading={loading}>
+                  Lưu
+                </Button>
+              </Popconfirm>
             </div>
           </div>
           <span
