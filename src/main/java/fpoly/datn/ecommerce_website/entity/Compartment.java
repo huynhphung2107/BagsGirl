@@ -31,4 +31,7 @@ public class Compartment {
 
     @Column(name = "compartment_name")
     private String compartmentName;
+
+    @Column(name = "compartment_status")
+    private Integer compartmentStatus;
 }

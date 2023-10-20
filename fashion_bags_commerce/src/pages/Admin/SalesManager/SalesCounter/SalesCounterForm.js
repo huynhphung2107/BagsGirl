@@ -9,7 +9,7 @@ import baloDetailsAPI from '~/api/baloDetailsAPI';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import userinfoAPI from '~/api/userInfoAPI';
 import userInfoAPI from '~/api/userInfoAPI';
-import { VNDFormaterFunc } from '~/Utilities/VNDFormaterFunc';
+import VNDFormaterFunc from '~/Utilities/VNDFormaterFunc';
 const { Option } = AutoComplete;
 
 const SalesCounterForm = () => {
@@ -530,7 +530,7 @@ const SalesCounterForm = () => {
                     >
                       <AutoComplete
                         value={inputValue}
-                        style={{ width: 800 }}
+                        style={{ width: 600 }}
                         onSelect={handleSelect}
                         onChange={onSearch}
                         placeholder="Nhập từ khóa tìm kiếm"

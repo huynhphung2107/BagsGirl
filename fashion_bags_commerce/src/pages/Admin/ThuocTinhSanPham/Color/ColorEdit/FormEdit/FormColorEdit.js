@@ -78,6 +78,28 @@ function FormColorEdit(props) {
               </Row>
             </Col>
           </Row>
+
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="colorStatus"
+                label="Trạng Thái Material"
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: 'Please select an owner',
+                //   },
+                // ]}
+              >
+                <Select placeholder="Vui lòng chọn Trạng Thái Color">
+                  <Select.Option value='1'>Hoạt động</Select.Option>
+                  <Select.Option value='0'>Không hoạt động</Select.Option>
+                  <Select.Option value='-1'>Ngừng hoạt động</Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
         </Form>
       </Drawer>
 

@@ -1,8 +1,10 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
+import fpoly.datn.ecommerce_website.dto.CompartmentDTO;
 import fpoly.datn.ecommerce_website.dto.ImageDTO;
 import fpoly.datn.ecommerce_website.dto.MaterialDTO;
 import fpoly.datn.ecommerce_website.dto.TypeDTO;
+import fpoly.datn.ecommerce_website.entity.Brand;
 import fpoly.datn.ecommerce_website.entity.Image;
 import fpoly.datn.ecommerce_website.entity.Material;
 import fpoly.datn.ecommerce_website.entity.Type;
@@ -10,6 +12,7 @@ import fpoly.datn.ecommerce_website.service.serviceImpl.MaterialServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -23,7 +26,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @RequestMapping("/api/manage")
@@ -36,11 +41,27 @@ public class MaterialRestController {
     @Autowired
     private MaterialServiceImpl materialService;
 
-    //GetAll
-    @RequestMapping(value = "/material/", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    //getAll
+//    @RequestMapping(value = "/material/", method = RequestMethod.GET)
+//    public ResponseEntity<List<MaterialDTO>> getAll() {
+//        return new ResponseEntity<>(
+//                this.materialService.findAll()
+//                        .stream()
+//                        .map(material -> modelMapper.map(material, MaterialDTO.class))
+//                        .collect(Collectors.toList())
+//                , HttpStatus.OK);
+//    }
 
-        return ResponseEntity.ok(materialService.findAll());
+
+    //GetAllPage
+    @RequestMapping(value = "/material/", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllPage(
+            @RequestParam(name = "page", defaultValue = "0") int pageNum,
+            @RequestParam(name = "size", defaultValue = "10") int pageSize
+    ) {
+        Page<Material> materialPage = materialService.findAllPage(pageNum, pageSize);
+        return new ResponseEntity<>
+                (materialPage, HttpStatus.OK);
     }
 
     //GetOne
@@ -63,17 +84,7 @@ public class MaterialRestController {
                 , HttpStatus.OK);
     }
 
-    //update
-//    @RequestMapping(value = "/material", method = RequestMethod.PUT)
-//    public ResponseEntity<?> update(@RequestBody @Valid MaterialDTO materialDTO, @RequestParam String id) {
-//        if (materialService.findById(id) != null) {
-//            Material material = modelMapper.map(materialDTO, Material.class);
-//            return ResponseEntity.ok(materialService.update(material));
-//        } else {
-//            return ResponseEntity.ok("ID cần update không tồn tại, vui lòng kiểm tra lại ID !!");
-//        }
-//
-//    }
+
     @RequestMapping(value = "/material", method = RequestMethod.PUT)
     public ResponseEntity<Material> update(@RequestBody @Valid MaterialDTO materialDTO) {
         Material material = modelMapper.map(materialDTO, Material.class);
@@ -82,6 +93,12 @@ public class MaterialRestController {
                 , HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/material/update-status", method = RequestMethod.PUT)
+    public ResponseEntity<Material> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+        return new ResponseEntity<>(materialService.updateStatus(id, status),
+                HttpStatus.OK);
+
+    }
 
     //delete
     @RequestMapping(value = "/material", method = RequestMethod.DELETE)

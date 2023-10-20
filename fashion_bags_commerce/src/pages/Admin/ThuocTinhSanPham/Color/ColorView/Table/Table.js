@@ -96,7 +96,7 @@ function TableContent() {
       width: 100,
     },
   ];
-  const onCancel = () => {};
+  const onCancel = () => { };
   const reload = () => {
     setLoading(true);
     getAllBalo(currentPage, pageSize);
@@ -118,7 +118,7 @@ function TableContent() {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setBaloList(data);
-      setTimeout(() => {}, 300);
+      setTimeout(() => { }, 300);
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }

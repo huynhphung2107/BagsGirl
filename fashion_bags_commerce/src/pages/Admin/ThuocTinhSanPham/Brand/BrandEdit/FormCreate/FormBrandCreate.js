@@ -1,10 +1,10 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, notification, Modal, Popconfirm, Input, Select } from 'antd';
-import React, { Fragment, useState } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 import brandAPI from '~/api/propertitesBalo/brandAPI';
 
-function FormBrandCreate(props) {
+function FormBrandCreate(props)  {
   const [modalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(true);
   const [form] = Form.useForm();

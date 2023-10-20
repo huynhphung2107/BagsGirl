@@ -23,12 +23,16 @@ public class UserInfoDTO {
     private String account;
     @NotBlank
     private String password;
+    private String phoneNumber;
     @NotBlank
     private String email;
+    private String address;
     @NotBlank
     private Integer status;
     @NotBlank
     private Boolean gender;
     @NotBlank
-    private UserRole userRole;
+    private String userRoleName;
+    @NotBlank
+    private String userRoleCode;
 }
