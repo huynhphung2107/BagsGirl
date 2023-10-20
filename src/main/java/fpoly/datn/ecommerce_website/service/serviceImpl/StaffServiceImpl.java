@@ -7,7 +7,6 @@ import fpoly.datn.ecommerce_website.entity.UserRole;
 import fpoly.datn.ecommerce_website.repository.IStaffRepository;
 import fpoly.datn.ecommerce_website.repository.IUserInfoRepository;
 import fpoly.datn.ecommerce_website.repository.IUserRoleRepository;
-import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,9 +31,9 @@ public class StaffServiceImpl  {
         return this.staffRepository.findAll();
     }
 
-    public Page<Staff> findAllPage(Integer page, Integer size) {
+    public Page<Staff> findAllStaffsWithUserInfoUserRole(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        return staffRepository.findAll(pageable);
+        return staffRepository.findAllStaffsWithUserInfoUserRole(pageable);
     }
 
 

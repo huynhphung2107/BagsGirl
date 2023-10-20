@@ -2,16 +2,15 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 
-import './staff.css';
+import './customer.css';
 import TableContent from './Table/Table';
-import FormStaffCreate from '../StaffEdit/FormCreate/FormStaffCreate';
-// import FormstaffCreate from '../staffEdit/FormrCreate/FormstaffCreate';
+// import FormStaffCreate from '../StaffEdit/FormCreate/FormStaffCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
 
 const contentStyle = {};
 
-function StaffView() {
+function CustomerView() {
   return (
     <Layout className="layout">
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
@@ -19,12 +18,10 @@ function StaffView() {
       </Sider>
       <Layout className="layoutContent">
         <Header className="headerStyle">
-          <HeaderContent titlePage="Danh Sách Nhân Viên" />
+          <HeaderContent titlePage="Danh Sách Khách Hàng" />
         </Header>
         <Content style={contentStyle}>
-          <div>
-            <FormStaffCreate />
-          </div>
+          <div>{/* <FormStaffCreate /> */}</div>
           <TableContent />
         </Content>
 
@@ -34,4 +31,4 @@ function StaffView() {
   );
 }
 
-export default StaffView;
+export default CustomerView;

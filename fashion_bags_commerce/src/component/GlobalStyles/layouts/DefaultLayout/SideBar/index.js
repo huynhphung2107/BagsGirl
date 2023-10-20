@@ -90,7 +90,9 @@ const items = [
       ),
       getItem(
         <Link style={{ textDecoration: 'none' }} to={'/type-view'}>
-          Kiểu balo </Link>, '84',
+          Kiểu balo{' '}
+        </Link>,
+        '84',
       ),
 
       getItem(
@@ -104,36 +106,48 @@ const items = [
         <Link style={{ textDecoration: 'none' }} to={'/compartment-view'}>
           Ngăn
         </Link>,
-        '85',),
+        '85',
+      ),
 
       getItem(
         <Link style={{ textDecoration: 'none' }} to={'/producer-view'}>
           Nhà sản xuất
         </Link>,
-        '86',),
-
+        '86',
+      ),
     ]),
     getItem('Option 11', '15'),
     getItem('Option 12', '16'),
   ]),
   getItem('Quản lí Khuyến Mãi', 'sub6', <RedEnvelopeOutlined />, [
-    getItem( <Link style={{ textDecoration: 'none' }} to={'/voucher'}>
-    Danh sách voucher
-  </Link>,'17'),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/voucher'}>
+        Danh sách voucher
+      </Link>,
+      '17',
+    ),
     getItem('Option 10', '18'),
     getItem('Option 11', '19'),
     getItem('Option 12', '20'),
   ]),
   getItem('Quản lí Nhân Viên', 'sub7', <UserOutlined />, [
-    getItem(<Link style={{ textDecoration: 'none' }} to={'/staff-view'}>
-    Danh sách nhân viên
-  </Link>, '21'),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/staff-view'}>
+        Danh sách nhân viên
+      </Link>,
+      '21',
+    ),
     getItem('Option 10', '22'),
     getItem('Option 11', '23'),
     getItem('Option 12', '24'),
   ]),
-  getItem('Quản lí Tài Khoản', 'sub8', <TeamOutlined />, [
-    getItem('Option 9', '25'),
+  getItem('Quản lí khách hàng', 'sub8', <TeamOutlined />, [
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/customer-view'}>
+        Danh sách Khách Hàng
+      </Link>,
+      '25',
+    ),
     getItem('Option 10', '26'),
     getItem('Option 11', '27'),
     getItem('Option 12', '28'),

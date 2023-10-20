@@ -19,7 +19,7 @@ import MaterialView from './pages/Admin/ThuocTinhSanPham/Material/MaterialView';
 import ProducerView from './pages/Admin/ThuocTinhSanPham/Producer/ProducerView/indexProducerView';
 import VoucherView from './pages/Admin/Voucher/VoucherView';
 import StaffView from './pages/Admin/Staff/StaffView';
-
+import CustomerView from './pages/Admin/Customer/CustomerView';
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
@@ -38,7 +38,7 @@ const dynamicRoutes = [
   { path: '/producer-view', component: <ProducerView />, title: 'Nhà sản xuất' },
   { path: '/voucher', component: <VoucherView />, title: 'Khuyến mãi' },
   { path: '/staff-view', component: <StaffView />, title: 'Nhân viên' },
-
+  { path: '/customer-view', component: <CustomerView />, title: 'Khách hàng' },
 ];
 
 function App() {
@@ -49,7 +49,6 @@ function App() {
           {dynamicRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.component}></Route>
           ))}
-
         </Routes>
       </div>
     </Router>
