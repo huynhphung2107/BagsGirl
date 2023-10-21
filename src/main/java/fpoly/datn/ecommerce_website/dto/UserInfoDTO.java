@@ -16,6 +16,7 @@ import lombok.ToString;
 @Setter
 @Getter
 public class UserInfoDTO {
+    @NotBlank
     private String id;
     @NotBlank
     private String fullName;
@@ -23,13 +24,11 @@ public class UserInfoDTO {
     private String account;
     @NotBlank
     private String password;
-    private String phoneNumber;
     @NotBlank
+    private String phoneNumber;
     private String email;
     private String address;
-    @NotBlank
     private Integer status;
-    @NotBlank
     private Boolean gender;
     @NotBlank
     private String userRoleName;

@@ -144,7 +144,6 @@ const SalesCounterForm = () => {
       try {
         const response = await userInfoAPI.findByKeywork(value);
         const data = response.data;
-        console.log(data);
         setInfoList(data);
       } catch (error) {
         console.error('Đã xảy ra lỗi: ', error);
@@ -259,7 +258,6 @@ const SalesCounterForm = () => {
     const calculateTotalPrice = (items) => {
       let total = 0;
       items.forEach((item) => {
-        console.log(item.retailPrice, item.cartAmount);
         total += item.retailPrice * item.cartAmount;
       });
       const calculatedTotalPrice = total + total * 0.1 - voucherPrice;
