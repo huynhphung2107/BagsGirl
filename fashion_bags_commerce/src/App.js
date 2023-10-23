@@ -19,33 +19,12 @@ import MaterialView from './pages/Admin/ThuocTinhSanPham/Material/MaterialView';
 import ProducerView from './pages/Admin/ThuocTinhSanPham/Producer/ProducerView/indexProducerView';
 import VoucherView from './pages/Admin/Voucher/VoucherView';
 import StaffView from './pages/Admin/Staff/StaffView';
-<<<<<<< HEAD
-import CustomerView from './pages/Admin/Customer/CustomerView';
-=======
 
 import SalesCounter from './pages/Admin/SalesManager/SalesCounter';
->>>>>>> main
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
   { path: '/product-viewer', component: <ProductViewer />, title: 'Về chúng tôi' },
-<<<<<<< HEAD
-  { path: '/login', component: <Login />, title: 'Login' },
-  { path: '/', component: <Home />, title: 'Home' },
-  { path: '/product-add', component: <ProductAdd />, title: 'Thêm sản phẩm' },
-  { path: '/shift-view', component: <ShiftViewer />, title: 'Giao ca' },
-  { path: '/color-view', component: <ColorView />, title: 'Màu sắc' },
-  { path: '/brand-view', component: <BrandView />, title: 'Thương hiệu' },
-  { path: '/size-view', component: <SizeView />, title: 'Kích cỡ' },
-  { path: '/type-view', component: <TypeView />, title: 'Kiểu balo' },
-  { path: '/buckle-type-view', component: <BuckleTypeView />, title: 'Kiểu khóa' },
-  { path: '/material-view', component: <MaterialView />, title: 'Chất liệu' },
-  { path: '/compartment-view', component: <CompartmentView />, title: 'Kiểu ngăn' },
-  { path: '/producer-view', component: <ProducerView />, title: 'Nhà sản xuất' },
-  { path: '/voucher', component: <VoucherView />, title: 'Khuyến mãi' },
-  { path: '/staff-view', component: <StaffView />, title: 'Nhân viên' },
-  { path: '/customer-view', component: <CustomerView />, title: 'Khách hàng' },
-=======
   { path: '/login', component: <Login />, title: 'Liên hệ' },
   { path: '/', component: <Home />, title: 'Liên hệ' },
   { path: '/product-add', component: <ProductAdd />, title: 'A' },
@@ -63,7 +42,6 @@ const dynamicRoutes = [
 
   { path: '/product-add', component: <ProductAdd />, title: 'Liên hệ' },
   { path: '/sales-counter', component: <SalesCounter />, title: 'Liên hệ' },
->>>>>>> main
 ];
 
 function App() {
