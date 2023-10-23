@@ -1,8 +1,11 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BaloDTO;
+import fpoly.datn.ecommerce_website.dto.Balo_BrandDTO;
 import fpoly.datn.ecommerce_website.entity.Balo;
+import fpoly.datn.ecommerce_website.entity.Brand;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BaloServiceImpl;
+import fpoly.datn.ecommerce_website.service.serviceImpl.BrandServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class BaloRestController {
     private ModelMapper modelMapper;
     @Autowired
     private BaloServiceImpl baloService;
+    @Autowired
+    private BrandServiceImpl brandService;
 
     public BaloRestController(BaloServiceImpl baloService) {
         this.baloService = baloService;
@@ -33,12 +38,12 @@ public class BaloRestController {
             @RequestParam(name = "page", defaultValue = "1") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
-        Page<Balo> baloPage = baloService.findAll(pageNum, pageSize);
+        Page<BaloDTO> baloPage = baloService.findAll(pageNum, pageSize);
         return new ResponseEntity<>
                 (baloPage, HttpStatus.OK);
     }
 
-    //hien thi get one
+
     @RequestMapping(value = "/balo", method = RequestMethod.GET)
     public ResponseEntity<?> getOne(@RequestParam("id") String id) {
         return new ResponseEntity<>(
@@ -48,12 +53,12 @@ public class BaloRestController {
 
     //add
     @RequestMapping(value = "/balo", method = RequestMethod.POST)
-    public ResponseEntity<?> add(@Valid @RequestBody Balo balo) {
-        return new ResponseEntity<>(baloService.save(
-                balo
-        )
+    public ResponseEntity<?> add(@Valid @RequestBody Balo_BrandDTO baloBrandDTO) {
 
-                , HttpStatus.OK);
+        Brand brand = brandService.findById(baloBrandDTO.getBrandID());
+        Balo balo = modelMapper.map(baloBrandDTO, Balo.class);
+        balo.setBrand(brand);
+        return new ResponseEntity<>(baloService.save(balo), HttpStatus.OK);
     }
 
     //update

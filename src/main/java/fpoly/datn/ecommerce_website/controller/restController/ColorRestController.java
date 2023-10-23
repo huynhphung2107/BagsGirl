@@ -42,7 +42,7 @@ public class ColorRestController {
 
 
     @RequestMapping(value = "/color/", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll(
+    public ResponseEntity<?> getAllPaginantion(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
@@ -51,6 +51,14 @@ public class ColorRestController {
                 (colorPage, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/color/get-all", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll(
+
+    ) {
+        List<Color> colorPage = colorService.findAll();
+        return new ResponseEntity<>
+                (colorPage, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/color", method = RequestMethod.GET)
     public ResponseEntity<ColorDTO> getOne(@RequestParam String id) {

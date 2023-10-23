@@ -23,12 +23,9 @@ function ProductViewer() {
           <HeaderContent titlePage="Danh Sách Sản Phẩm" />
         </Header>
         <Content style={contentStyle}>
-          <div>
-            <TableContent />
-          </div>
+          <TableContent />
         </Content>
-
-        <Footer className="footerStyle">Đây là component của Footer</Footer>
+        <Footer className="footerStyle">Đây là component của Footer1</Footer>
       </Layout>
     </Layout>
   );

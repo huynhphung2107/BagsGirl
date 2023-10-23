@@ -13,10 +13,6 @@ function TableContent() {
     const [totalItem, setTotalItem] = useState(); // Số lượng dữ liệu tổng cộng
 
     const handleTableChange = (pagination, filters, sorter) => {
-        // console.log('Trang hiện tại:', pagination.current);
-        // console.log('Kích thước trang:', pagination.pageSize);
-        // console.log('Bộ lọc:', filters);
-        // console.log('Thông tin sắp xếp:', sorter);
     };
     const columns = [
         {
@@ -116,7 +112,8 @@ function TableContent() {
     };
     useEffect(() => {
         getAllPhanTrangType(currentPage, pageSize);
-    }, []);
+        // }, []);
+    });
     const handleDeleteType = async (id, status) => {
         try {
             await typeAPI.updateStatus(id, status);

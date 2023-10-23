@@ -1,4 +1,3 @@
-import './FormCreateType.css';
 import React, { Fragment, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, Select, notification } from 'antd';

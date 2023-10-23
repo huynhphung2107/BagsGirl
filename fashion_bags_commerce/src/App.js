@@ -19,11 +19,17 @@ import MaterialView from './pages/Admin/ThuocTinhSanPham/Material/MaterialView';
 import ProducerView from './pages/Admin/ThuocTinhSanPham/Producer/ProducerView/indexProducerView';
 import VoucherView from './pages/Admin/Voucher/VoucherView';
 import StaffView from './pages/Admin/Staff/StaffView';
+<<<<<<< HEAD
 import CustomerView from './pages/Admin/Customer/CustomerView';
+=======
+
+import SalesCounter from './pages/Admin/SalesManager/SalesCounter';
+>>>>>>> main
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
   { path: '/product-viewer', component: <ProductViewer />, title: 'Về chúng tôi' },
+<<<<<<< HEAD
   { path: '/login', component: <Login />, title: 'Login' },
   { path: '/', component: <Home />, title: 'Home' },
   { path: '/product-add', component: <ProductAdd />, title: 'Thêm sản phẩm' },
@@ -39,6 +45,25 @@ const dynamicRoutes = [
   { path: '/voucher', component: <VoucherView />, title: 'Khuyến mãi' },
   { path: '/staff-view', component: <StaffView />, title: 'Nhân viên' },
   { path: '/customer-view', component: <CustomerView />, title: 'Khách hàng' },
+=======
+  { path: '/login', component: <Login />, title: 'Liên hệ' },
+  { path: '/', component: <Home />, title: 'Liên hệ' },
+  { path: '/product-add', component: <ProductAdd />, title: 'A' },
+  { path: '/shift-view', component: <ShiftViewer />, title: 'B' },
+  { path: '/color-view', component: <ColorView />, title: 'C' },
+  { path: '/brand-view', component: <BrandView />, title: 'D' },
+  { path: '/size-view', component: <SizeView />, title: 'E' },
+  { path: '/type-view', component: <TypeView />, title: 'F' },
+  { path: '/buckle-type-view', component: <BuckleTypeView />, title: 'G' },
+  { path: '/material-view', component: <MaterialView />, title: 'H' },
+  { path: '/compartment-view', component: <CompartmentView />, title: 'I' },
+  { path: '/producer-view', component: <ProducerView />, title: 'K' },
+  { path: '/voucher', component: <VoucherView />, title: 'L' },
+  { path: '/staff-view', component: <StaffView />, title: 'M' },
+
+  { path: '/product-add', component: <ProductAdd />, title: 'Liên hệ' },
+  { path: '/sales-counter', component: <SalesCounter />, title: 'Liên hệ' },
+>>>>>>> main
 ];
 
 function App() {

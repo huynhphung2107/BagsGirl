@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './indexLogin.css';
+import styles from './indexLogin.module.scss';
 import FormLogin from "./FormLogin/FormLogin/LoginForm";
 import FormRegister from "./FormLogin/FormRegister/RegisterForm";
 import ForgotPassword from "./FormLogin/FormForgotPassword/FormForgotPassword";
@@ -14,19 +14,19 @@ function Login() {
 
     if (currentForm === 'login') {
         return (
-            <div className="formLoginne" >
+            <div className={styles.formLoginne} >
                 <FormLogin onFormSwitch={toggleForm} />
             </div>
         );
     } else if (currentForm === "register") {
         return (
-            <div className="formLoginne">
+            <div className={styles.formLoginne}>
                 <FormRegister onFormSwitch={toggleForm} />
             </div>
         );
     } else if (currentForm === "forgotPassword") {
         return (
-            <div className="formLoginne">
+            <div className={styles.formLoginne}>
                 <ForgotPassword onFormSwitch={toggleForm} />
             </div>
         );

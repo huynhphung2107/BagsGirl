@@ -2,7 +2,6 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../BuckleTypeView/TableBuckleType/TableBuckleType';
-import './index.css';
 import FormBuckleTypeCreate from '../BuckleTypeEdit/FormCreateBuckleType/FormCreateBuckleType';
 
 const { Header, Footer, Sider, Content } = Layout;

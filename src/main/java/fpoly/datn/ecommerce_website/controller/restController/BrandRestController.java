@@ -44,6 +44,14 @@ public class BrandRestController {
                 (brandPage, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/brand/get-all", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll(
+    ) {
+        List<Brand> brandPage = brandService.findAll();
+        return new ResponseEntity<>
+                (brandPage, HttpStatus.OK);
+    }
+
     //GetOne
     @RequestMapping(value = "/brand", method = RequestMethod.GET)
     public ResponseEntity<BrandDTO> getOne(@Valid @RequestParam String id) {

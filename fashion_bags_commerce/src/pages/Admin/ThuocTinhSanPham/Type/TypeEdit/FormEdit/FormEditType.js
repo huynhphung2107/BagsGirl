@@ -1,7 +1,6 @@
-import styles from './FormEditType.module.scss';
 import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Option, Form, Input, Row, Select, Space, notification } from 'antd';
+import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
 
 function FormEditType(props) {

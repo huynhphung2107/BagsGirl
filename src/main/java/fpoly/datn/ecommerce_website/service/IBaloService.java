@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.service;
 
 import fpoly.datn.ecommerce_website.dto.BaloDTO;
+import fpoly.datn.ecommerce_website.dto.Balo_BrandDTO;
 import fpoly.datn.ecommerce_website.entity.Balo;
 import org.springframework.data.domain.Page;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface IBaloService {
 
-    Page<Balo> findAll(int pageNum, int PageSize);
+    Page<BaloDTO> findAll(int pageNum, int PageSize);
 
     Balo findById(String id);
 

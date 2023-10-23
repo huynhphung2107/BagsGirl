@@ -1,7 +1,7 @@
 import axiosClient from '../axiosClient';
 
 const colorAPI = {
-  getAll(pageNum, pageSize) {
+  getAllPagination(pageNum, pageSize) {
     const url = '/color/';
     return axiosClient.get(url, {
       params: {
@@ -9,6 +9,10 @@ const colorAPI = {
         size: pageSize,
       },
     });
+  },
+  getAll() {
+    const url = '/color/get-all';
+    return axiosClient.get(url, {});
   },
   get(id) {
     const url = `/color?id=${id}`;

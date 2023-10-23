@@ -7,6 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+<<<<<<< HEAD
+import jakarta.persistence.OneToOne;
+=======
+>>>>>>> ce12232d69a288cc59dbc839c50ca08237272fed
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,10 +44,16 @@ public class Balo {
 
     @Column(name = "status")
     private int baloStatus;
+<<<<<<< HEAD
+    @ManyToOne()
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
+    private Brand brand;
+=======
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
 
+>>>>>>> ce12232d69a288cc59dbc839c50ca08237272fed
 }

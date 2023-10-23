@@ -38,7 +38,12 @@ const items = [
     getItem('Hi, Tuấn Anh', '3'),
   ]),
   getItem('Quản Lí Bán Hàng', 'sub2', <ShoppingCartOutlined />, [
-    getItem('Bán Hàng tại Quầy', '5'),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/sales-counter'}>
+        Bán Hàng Tại Quầy
+      </Link>,
+      '5',
+    ),
     getItem('Quản lí Đặt Hàng', '6'),
     getItem('Submenu', 'sub3', <AppstoreOutlined />, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
   ]),

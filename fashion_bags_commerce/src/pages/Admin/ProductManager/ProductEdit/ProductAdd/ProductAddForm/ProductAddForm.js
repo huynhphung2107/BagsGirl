@@ -25,13 +25,12 @@ import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 
 //Function Component
 function ProductAddForm() {
+  const [isFirst, setIsFirst] = useState(false);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(true);
   const [isPopconfirmVisible, setPopconfirmVisible] = useState(false);
-
   const [baloList, setBaloList] = useState([]);
   const [baloListPreview, setBaloListPreview] = useState([]);
-
   const [brand, setBrand] = useState([]);
   const [buckleType, setBuckleType] = useState([]);
   const [color, setColor] = useState([]);
@@ -152,7 +151,19 @@ function ProductAddForm() {
     });
   };
 
+  const resetForm = () => {
+    form.resetFields();
+    setIsFirst(false);
+    setBaloList([]);
+    setBaloListPreview([]);
+    notification.success({
+      message: 'Hoàn Thành',
+      description: 'Đã Reset Form thành công !!!!',
+      duration: 2,
+    });
+  };
   const onConfirm = () => {
+    setIsFirst(true);
     form.submit();
     setPopconfirmVisible(false);
   };
@@ -210,7 +221,7 @@ function ProductAddForm() {
                   },
                 ]}
               >
-                <Input />
+                <Input disabled={isFirst} />
               </Form.Item>
               <Form.Item
                 label="Balo Status"
@@ -223,6 +234,7 @@ function ProductAddForm() {
                 ]}
               >
                 <Select
+                  disabled={isFirst}
                   style={{
                     width: 200,
                   }}
@@ -449,6 +461,7 @@ function ProductAddForm() {
                   ]}
                 >
                   <Select
+                    disabled={isFirst}
                     size="large"
                     style={{
                       width: 200,
@@ -612,6 +625,18 @@ function ProductAddForm() {
                   onCancel={onCancel}
                 >
                   <Button type="primary">Thêm Chi Tiết Balo</Button>
+                </Popconfirm>
+              </Col>
+              <Col span={4}>
+                <Popconfirm
+                  title="Xác Nhận"
+                  description="Bạn Có chắc chắn muốn ResetForm và thêm Balo Khác?"
+                  okText="Đồng ý"
+                  cancelText="Không"
+                  onConfirm={resetForm}
+                  onCancel={onCancel}
+                >
+                  <Button type="primary">ResetForm</Button>
                 </Popconfirm>
               </Col>
             </Row>

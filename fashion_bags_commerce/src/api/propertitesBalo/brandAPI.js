@@ -1,14 +1,18 @@
 import axiosClient from '../axiosClient';
 
 const brandAPI = {
-  getAll(pageNum,pageSize) {
+  getAll_Pagination(pageNum, pageSize) {
     const url = '/brand/';
     return axiosClient.get(url, {
       params: {
-        page: pageNum -1,
+        page: pageNum - 1,
         size: pageSize,
       },
     });
+  },
+  getAll() {
+    const url = '/brand/get-all';
+    return axiosClient.get(url, {});
   },
   get(id) {
     const url = `/brand?id=${id}`;

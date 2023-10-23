@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class BaloDTO {
+public class Balo_BrandDTO {
 
     private String id;
     @NotBlank
@@ -24,5 +24,5 @@ public class BaloDTO {
     @NotBlank
     private String baloStatus;
     @NotBlank
-    private String brandName;
+    private String brandID;
 }
