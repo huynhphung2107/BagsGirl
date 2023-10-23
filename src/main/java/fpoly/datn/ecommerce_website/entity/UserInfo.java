@@ -38,37 +38,27 @@ public class UserInfo {
 
     @Column(name = "password")
     private String password;
-    @Column(name = "phone_number")
-    private String phoneNumber;
 
     @Column(name = "email")
     private String email;
 
     @Column(name = "userinfo_status")
-<<<<<<< HEAD
-    private Integer status;
-=======
     private Integer userInfoStatus;
->>>>>>> ce12232d69a288cc59dbc839c50ca08237272fed
 
     @Column(name = "gender")
     private Boolean gender;
 
-<<<<<<< HEAD
-=======
     @Column(name = "address")
     private String address;
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
     @Column(name = "note")
     private String note;
 
->>>>>>> ce12232d69a288cc59dbc839c50ca08237272fed
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private UserRole userRole;
 
-    @Column(name = "note")
-    private String note;
 }
