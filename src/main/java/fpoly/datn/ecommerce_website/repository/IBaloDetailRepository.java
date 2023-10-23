@@ -23,7 +23,7 @@ public interface IBaloDetailRepository extends JpaRepository<BaloDetail, String>
             "OR bd.size.sizeName LIKE %:keyword%" +
             "OR b.brand.brandName LIKE %:keyword%" +
             "OR bd.compartment.compartmentName LIKE %:keyword%" +
-            "OR bd.buckleType.buckleName LIKE %:keyword%" +
+            "OR bd.buckleType.buckleTypeName LIKE %:keyword%" +
             "OR bd.producer.producerName LIKE %:keyword%" +
             "OR CAST(bd.importPrice as string) LIKE %:keyword%" +
             "OR CAST(bd.retailPrice as string) LIKE %:keyword%"
