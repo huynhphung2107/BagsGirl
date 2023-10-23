@@ -24,41 +24,29 @@ import lombok.ToString;
 @Setter
 @Getter
 public class UserInfo {
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
-    @Column(name = "full_name")
-    private String fullName;
-
     @Column(name = "account")
     private String account;
-
+    @Column(name = "full_name")
+    private String fullName;
     @Column(name = "password")
     private String password;
-
     @Column(name = "email")
     private String email;
-
     @Column(name = "userinfo_status")
     private Integer userInfoStatus;
-
     @Column(name = "gender")
     private Boolean gender;
-
     @Column(name = "address")
     private String address;
-
     @Column(name = "phone_number")
     private String phoneNumber;
-
-    @Column(name = "note")
-    private String note;
-
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private UserRole userRole;
-
+    @Column(name = "note")
+    private String note;
 }
