@@ -10,11 +10,7 @@ function MainHeader() {
       <div className="content">
         <div className="toolLeft">
           <div className="logo">
-            <img
-              className="image"
-              alt="img"
-              src="https://www.vascara.com/uploads/web/900/Logo/Vector-Smart-Object-RED.png"
-            ></img>
+            <img className="image" alt="img" src="https://i.imgur.com/OfgyXFE.png"></img>
           </div>
         </div>
         <div className="search">
@@ -30,11 +26,11 @@ function MainHeader() {
             <div className="login">
               <ul className="horizontalLogin">
                 <li>
-                  <a href="https://www.vascara.com/register">ĐĂNG KÝ</a>
+                  <a href="/login">ĐĂNG KÝ</a>
                 </li>
                 <span> / </span>
                 <li>
-                  <a href="https://www.vascara.com/login">ĐĂNG NHẬP</a>
+                  <a href="/login">ĐĂNG NHẬP</a>
                 </li>
               </ul>
             </div>
