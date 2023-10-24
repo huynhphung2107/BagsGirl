@@ -21,6 +21,7 @@ import VoucherView from './pages/Admin/Voucher/VoucherView';
 import StaffView from './pages/Admin/Staff/StaffView';
 
 import SalesCounter from './pages/Admin/SalesManager/SalesCounter';
+import AccountView from './pages/Admin/Account/AccountView/indexAcountView';
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
@@ -42,6 +43,7 @@ const dynamicRoutes = [
 
   { path: '/product-add', component: <ProductAdd />, title: 'Liên hệ' },
   { path: '/sales-counter', component: <SalesCounter />, title: 'Liên hệ' },
+  { path: '/account-view', component: <AccountView />, title: 'Tài khoản' },
 ];
 
 function App() {

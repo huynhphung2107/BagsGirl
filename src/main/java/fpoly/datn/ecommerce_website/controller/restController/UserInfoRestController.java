@@ -1,8 +1,11 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BaloDetailDTO;
+import fpoly.datn.ecommerce_website.dto.StaffDTO;
 import fpoly.datn.ecommerce_website.dto.UserInfoDTO;
+import fpoly.datn.ecommerce_website.entity.Staff;
 import fpoly.datn.ecommerce_website.entity.UserInfo;
+import fpoly.datn.ecommerce_website.entity.UserRole;
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
 import fpoly.datn.ecommerce_website.repository.IUserInfoRepository;
 import fpoly.datn.ecommerce_website.service.serviceImpl.UserInfoServiceImpl;
@@ -25,7 +28,7 @@ import java.util.stream.Collectors;
 
 @RestController
 
-@RequestMapping("/api/manage/userinfo")
+@RequestMapping("/api/manage")
 
 public class UserInfoRestController {
 
@@ -41,25 +44,46 @@ public class UserInfoRestController {
 
     List<UserInfo> list = new ArrayList<>();
 
-    @GetMapping("/")
+    @GetMapping("/user-info/")
     public List<UserInfo> getAll() {
         iRoleRepository.findAll();
         list = iUserInfoRepository.findAll();
         return list;
     }
 
-    @PostMapping("")
-    public UserInfo add(@RequestBody UserInfo userInfo) {
-        iUserInfoRepository.save(userInfo);
-        return userInfo;
+    //Phan trang
+    @RequestMapping(value = "/user-info/phanTrang", method = RequestMethod.GET)
+    public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
+                                       @RequestParam(name = "size", defaultValue = "10") int pageSize){
+        return ResponseEntity.ok(userInfoService.findAllPhanTrang(pageNum, pageSize));
+    }
+    
+
+    //getone
+    @RequestMapping("/user-info")
+    public ResponseEntity<UserInfoDTO> getOne(@RequestParam("id") String id) {
+        UserInfo userInfo = iUserInfoRepository.findById(id).get();
+        if(userInfo == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        UserInfoDTO userInfoDTO = modelMapper.map(userInfo, UserInfoDTO.class);
+        UserRole userRole = userInfo.getUserRole();
+        if(userInfo != null){
+            userInfoDTO.setUserRoleId(userRole.getId());
+            userInfoDTO.setUserRoleName(userRole.getRoleName());
+        }
+        return new ResponseEntity<>(userInfoDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public UserInfo getOne(@PathVariable("id") String id) {
-        UserInfo userInfo = iUserInfoRepository.findById(id).get();
-        return userInfo;
+    //add
+    @RequestMapping(value = "/user-info", method = RequestMethod.POST)
+    public ResponseEntity<UserInfo> add(@RequestBody UserInfoDTO userInfoDTO) {
+        UserInfo x = modelMapper.map(userInfoDTO, UserInfo.class);
+        return new ResponseEntity<>(this.userInfoService.saveDTO(x), HttpStatus.OK);
     }
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    
+    
+    @RequestMapping(value = "/user-info/search", method = RequestMethod.GET)
     public ResponseEntity<?> findCustomerByKeyword(@RequestParam String keyword) {
         return new ResponseEntity<>(
                 this.userInfoService.findCustomerByKeyword(keyword) .stream()
