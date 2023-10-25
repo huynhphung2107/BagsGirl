@@ -11,10 +11,5 @@ import java.util.List;
 
 @Repository
 public interface IUserInfoRepository extends JpaRepository<UserInfo, String> {
-    @Query("SELECT u FROM UserInfo u join Customer c on c.userInfo.id = u.id " +
-            "WHERE u.userRole.roleCode = 'customer'" +
-            "AND (u.fullName LIKE %:keyword%" +
-            "OR u.phoneNumber LIKE %:keyword% " +
-            "OR u.email LIKE %:keyword% )")
-    List<UserInfo> findCustomerByKeyword(@Param("keyword") String keyword);
+
 }

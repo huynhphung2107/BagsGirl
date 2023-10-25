@@ -20,24 +20,9 @@ import lombok.ToString;
 public class StaffDTO {
 
     private String id;
-
     @NotNull
     private Integer staffStatus;
     @NotBlank
-    private String fullName;
-    @NotBlank
-    private String account;
-    @NotBlank
-    private String password;
-    @NotBlank
-    private String email;
-    @NotNull
-    private Integer userInfoStatus;
-    private Boolean gender;
-    private String phoneNumber;
-    private String address;
-    private String note;
-
-    private String userInfoUserRoleId;
+    private UserInfoDTO userInfo;
 
 }

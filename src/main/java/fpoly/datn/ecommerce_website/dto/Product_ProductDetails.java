@@ -30,8 +30,8 @@ public class Product_ProductDetails {
     @NotNull
     private Integer productsDetailAmount;
     @NotBlank
-    private String productDetailDescribe;
-    private Integer productDetailStatus;
+    private String productDetailsDescribe;
+    private Integer productDetailsStatus;
     
 
 }

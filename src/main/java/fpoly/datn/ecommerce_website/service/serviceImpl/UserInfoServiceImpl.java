@@ -1,37 +1,49 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
+import fpoly.datn.ecommerce_website.dto.UserInfoDTO;
 import fpoly.datn.ecommerce_website.entity.UserInfo;
+import fpoly.datn.ecommerce_website.repository.ICustomerRepository;
 import fpoly.datn.ecommerce_website.repository.IUserInfoRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class UserInfoServiceImpl implements ServiceGenarel<UserInfo> {
+public class UserInfoServiceImpl implements ServiceGenarel<UserInfoDTO> {
 
     @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
     private IUserInfoRepository userInfoRepository;
+    @Autowired
+    private ICustomerRepository customerRepository;
 
     @Override
-    public List<UserInfo> findAll() {
-        return this.userInfoRepository.findAll();
+    public List<UserInfoDTO> findAll() {
+        return this.userInfoRepository.findAll().stream()
+                .map(o -> modelMapper.map(o, UserInfoDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public UserInfo findById(String id) {
-        return this.userInfoRepository.findById(id).get();
+    public UserInfoDTO findById(String id) {
+        return modelMapper.map(this.userInfoRepository.findById(id).get(), UserInfoDTO.class);
     }
 
     @Override
-    public UserInfo save(UserInfo customer) {
-        return this.userInfoRepository.save(customer);
+    public UserInfoDTO save(UserInfoDTO customer) {
+        UserInfo userInfo = this.userInfoRepository.save(modelMapper.map(customer, UserInfo.class));
+        return modelMapper.map(userInfo, UserInfoDTO.class);
     }
 
     @Override
-    public UserInfo update(UserInfo customer) {
-        return this.userInfoRepository.save(customer);
+    public UserInfoDTO update(UserInfoDTO customer) {
+        UserInfo userInfo = this.userInfoRepository.save(modelMapper.map(customer, UserInfo.class));
+        return modelMapper.map(userInfo, UserInfoDTO.class);
     }
 
     @Override
@@ -42,10 +54,11 @@ public class UserInfoServiceImpl implements ServiceGenarel<UserInfo> {
     }
 
     @Override
-    public List<UserInfo> searchByName(String name) {
+    public List<UserInfoDTO> searchByName(String name) {
         return null;
     }
-    public List<UserInfo> findCustomerByKeyword(String keyword) {
-        return this.userInfoRepository.findCustomerByKeyword(keyword);
+    public List<UserInfoDTO> findCustomerByKeyword(String keyword) {
+        return this.customerRepository.findCustomerByKeyword(keyword).stream().map(userInfo -> modelMapper.map(userInfo, UserInfoDTO.class))
+                .collect(Collectors.toList());
     }
 }

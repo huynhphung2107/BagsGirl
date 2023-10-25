@@ -69,6 +69,8 @@ const SalesCounterForm = () => {
     const [voucherPrice, setVoucherPrice] = useState(0);
     const [VATPrice, setVATPrice] = useState(0);
     const [totalPayment, setTotalPayment] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [popConfirmVisible, setPopConfirmVisible] = useState(false);
     const [form] = Form.useForm();
 
     const handleSelect = (value, option) => {
@@ -207,10 +209,15 @@ const SalesCounterForm = () => {
         ),
       },
     ];
+    const caculatorTotalAmountFunc = () => {
+      const totalAmount = selectedItems.reduce((total, product) => total + product.cartAmount, 0);
+      setTotalAmount(totalAmount);
+    };
     const handleDelete = (key) => {
       const newSelectedItems = selectedItems.filter((item) => item !== key);
       setSelectedItems(newSelectedItems);
       setTotalPrice(calculateTotalPrice(newSelectedItems));
+      caculatorTotalAmountFunc();
     };
     const handleIncrease = (key) => {
       const updatedItems = selectedItems.map((item) => {
@@ -228,6 +235,7 @@ const SalesCounterForm = () => {
       });
       setSelectedItems(updatedItems);
       setTotalPrice(calculateTotalPrice(updatedItems));
+      caculatorTotalAmountFunc();
     };
 
     const handleDecrease = (key) => {
@@ -246,8 +254,9 @@ const SalesCounterForm = () => {
       });
       setSelectedItems(updatedItems);
       setTotalPrice(calculateTotalPrice(updatedItems));
+      caculatorTotalAmountFunc();
     };
-    const handleTonggleSelectChange = (value) => {
+    const ChanggTypeCustomerFunc = (value) => {
       if (value === '1') {
         setVisible(true); // Cập nhật trạng thái dựa trên giá trị của select
       }
@@ -266,11 +275,62 @@ const SalesCounterForm = () => {
     };
 
     const finnishPayment = () => {
-      console.log('====================================');
-      console.log(customer);
-      console.log(selectedItems);
-      console.log('====================================');
+      if (selectedItems.length === 0) {
+        notification.error({
+          message: 'Lỗi',
+          description: 'Trong giỏ hàng chưa có SP!!!!',
+        });
+      } else if (customer === null && visible === true) {
+        notification.error({
+          message: 'Lỗi',
+          description: 'Vui lòng chọn Khách Lẻ hoặc chọn thông tin KH Thân Thiết!!!',
+        });
+      } else {
+        addBillFunc();
+      }
     };
+    const addBillFunc = () => {
+      form.submit();
+    };
+    const onFinish = (values) => {
+      console.log(values);
+      console.log(selectedItems);
+      let currentDate = new Date();
+      let year = currentDate.getFullYear(); // Lấy năm
+      let month = currentDate.getMonth() + 1; // Lấy tháng (chú ý tháng bắt đầu từ 0)
+      let day = currentDate.getDate(); // Lấy ngày
+      let hours = currentDate.getHours(); // Lấy giờ
+      let minutes = currentDate.getMinutes(); // Lấy phút
+      let seconds = currentDate.getSeconds(); // Lấy giây
+      let currentDatetime = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+      let billAdd = {
+        billCode: values.billCode,
+        billCreateDate: currentDatetime,
+        billDatePayment: currentDatetime,
+        billShipDate: null,
+        billReceiverDate: currentDatetime,
+        billTotalPrice: totalPrice,
+        baloAmount: totalAmount,
+        billPriceAfterVoucher: 0,
+        shippingAddress: null,
+        billingAddress: null,
+        receiverName: null,
+        shippingPrice: null,
+        orderEmail: null,
+        orderPhone: null,
+        paymentMethod: 1,
+        note: 'bad00',
+        billStatus: 1,
+        customerID: '369085CC-E776-4CA3-852C-1701A9DC3469',
+        staffID: 'B4DF7E41-0B3C-48EB-AD07-19F733C86D2C',
+      };
+      if (customer === null) {
+        console.log('ko KH');
+      } else {
+        console.log('co KH');
+      }
+    };
+    const onAddBillCancel = () => {};
     return (
       <div className={styles.content}>
         <div>
@@ -326,7 +386,7 @@ const SalesCounterForm = () => {
                           },
                         ]}
                       >
-                        <Select defaultValue="1" style={{ width: 120 }} onChange={handleTonggleSelectChange}>
+                        <Select defaultValue="1" style={{ width: 120 }} onChange={ChanggTypeCustomerFunc}>
                           <Option value="0">Khách Lẻ</Option>
                           <Option value="1">Khách Hàng Thân Thiết</Option>
                         </Select>
@@ -334,14 +394,14 @@ const SalesCounterForm = () => {
                     </Col>
                   </Row>
                 </Form>
-                <Form layout="vertical" form={form}>
+                <Form layout="vertical" form={form} onFinish={onFinish} initialValues={{paymentType: '1'}}>
                   <Row>
                     <Col span={12}>
                       <Form.Item
                         label="MÃ HĐ"
                         initialValue={generateCustomCode('HD', 9)}
                         className={styles.item}
-                        name="maHD"
+                        name="billCode"
                         rules={[
                           {
                             required: true,
@@ -356,7 +416,7 @@ const SalesCounterForm = () => {
                       <Form.Item
                         label="Nhân Viên"
                         name="nameStaff"
-                        initialValue={'Nguyễn Công Tuấn Anh'}
+                        initialValue={'3896092B-1782-4973-92A8-0DDE36F3A2D7'}
                         className={styles.item}
                         rules={[
                           {
@@ -404,32 +464,26 @@ const SalesCounterForm = () => {
                               },
                             ]}
                           >
-                            <Input readOnly />
+                            <Input />
                           </Form.Item>
                         </Col>
                         <Col span={12}>
                           <Form.Item
                             label="Phương thức Thanh Toán"
-                            name="phoneNumber"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Please input your username!',
-                              },
-                            ]}
+                            name="paymentType"
+                            
                           >
                             <Select
-                              defaultValue="cash"
                               style={{
                                 width: 280,
                               }}
                               options={[
                                 {
-                                  value: 'online',
+                                  value: '1',
                                   label: 'Chuyển Khoản',
                                 },
                                 {
-                                  value: 'cash',
+                                  value: '0',
                                   label: 'Tiền Mặt',
                                 },
                               ]}
@@ -441,8 +495,8 @@ const SalesCounterForm = () => {
                       <Row>
                         <Col span={24}>
                           <Form.Item
-                            label=""
-                            name="phoneNumber"
+                            label="Ghi Chú"
+                            name="note"
                             rules={[
                               {
                                 required: false,
@@ -501,9 +555,16 @@ const SalesCounterForm = () => {
                 </Row>
                 <Row>
                   <Col span={24}>
-                    <Form.Item>
-                      <Button onClick={finnishPayment}>Thêm Hóa Đơn</Button>
-                    </Form.Item>
+                    <Popconfirm
+                      title="Are you sure to submit the form?"
+                      po
+                      onConfirm={finnishPayment}
+                      onCancel={onAddBillCancel}
+                      okText="Có"
+                      cancelText="No"
+                    >
+                      <Button>Thêm Hóa Đơn</Button>
+                    </Popconfirm>
                   </Col>
                 </Row>
               </div>

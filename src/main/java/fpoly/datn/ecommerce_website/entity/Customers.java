@@ -37,7 +37,7 @@ public class Customers {
     private Integer customerPoint;
 
     @OneToOne()
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private Users userInfo;
 
 

@@ -70,30 +70,9 @@ public class StaffRestController {
     @RequestMapping(value = "/staff", method = RequestMethod.GET)
     public ResponseEntity<StaffDTO> getOne(@RequestParam("id") String id) {
         Staff staff = staffService.findById(id);
-        if (staff == null) {
-            // Handle the case when no staff member is found with the given ID, for example, return a not found response.
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
 
-        // Map the Staff entity to StaffDTO
-        StaffDTO staffDTO = modelMapper.map(staff, StaffDTO.class);
 
-        // Retrieve additional information from the UserInfo entity and populate it in StaffDTO
-        UserInfo userInfo = staff.getUserInfo();
-        if (userInfo != null) {
-            staffDTO.setFullName(userInfo.getFullName());
-            staffDTO.setAccount(userInfo.getAccount());
-            staffDTO.setPassword(userInfo.getPassword());
-            staffDTO.setEmail(userInfo.getEmail());
-            staffDTO.setUserInfoStatus(userInfo.getUserInfoStatus());
-            staffDTO.setGender(userInfo.getGender());
-            staffDTO.setPhoneNumber(userInfo.getPhoneNumber());
-            staffDTO.setAddress(userInfo.getAddress());
-            staffDTO.setNote(userInfo.getNote());
-            staffDTO.setUserInfoUserRoleId(userInfo.getUserRole().getRoleCode());
-        }
-
-        return new ResponseEntity<>(staffDTO, HttpStatus.OK);
+        return new ResponseEntity<>(modelMapper.map(staff, StaffDTO.class), HttpStatus.OK);
     }
 
 
@@ -103,13 +82,6 @@ public class StaffRestController {
     }
 
 
-//    @RequestMapping(value = "/staff", method = RequestMethod.PUT)
-//    public ResponseEntity<?> updateFunc(@RequestBody StaffDTO staffDTO) {
-//        UserInfo userInfo = this.userInfoRepository.save(staffDTO.getUserInfo()); // save userInfo trước
-//        staffDTO.setUserInfo(userInfo); // Set lại user info vào staff cần save (lúc này user info đã có id)
-//        Staff staff = modelMapper.map(staffDTO, Staff.class);
-//        return new ResponseEntity<>(staff, HttpStatus.OK);
-//    }
 
     //updateStatus
     @RequestMapping(value = "/staff/update-status", method = RequestMethod.PUT)

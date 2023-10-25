@@ -19,6 +19,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -61,7 +63,7 @@ public class BillDTO {
     @NotBlank
     private Integer billStatus;
     @NotBlank
-    private String customerFullName;
+    private CustomerDTO customer;
     @NotBlank
-    private String staffFullName;
+    private StaffDTO staff;
 }

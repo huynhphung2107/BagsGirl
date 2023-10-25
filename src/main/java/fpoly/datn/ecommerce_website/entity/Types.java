@@ -25,8 +25,8 @@ public class Types {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "type_id")
+    private String typeId;
 
     @Column(name = "type_code")
     private String typeCode;
