@@ -21,7 +21,6 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private ICartRepository cartRepository;
 
-
     @Override
     public List<Carts> findAll() {
         return this.cartRepository.findAll();
@@ -29,10 +28,9 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Page<Carts> findAllPhanTrang(Integer page) {
-        Pageable pageable = PageRequest.of(page,5);
+        Pageable pageable = PageRequest.of(page, 5);
         return cartRepository.findAll(pageable);
     }
-
 
     @Override
     public Carts findById(String id) {
@@ -50,7 +48,6 @@ public class CartServiceImpl implements CartService {
         return null;
     }
 
-
     @Override
     public List<Carts> searchByName(String name) {
         return null;
@@ -59,11 +56,11 @@ public class CartServiceImpl implements CartService {
     @Override
     public Boolean delete(String id) {
         Optional<Carts> optional = cartRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             Carts kh = optional.get();
             cartRepository.delete(kh);
             return true;
-        }else{
+        } else {
             return false;
         }
     }

@@ -9,5 +9,5 @@ import java.util.List;
 public interface IBillService {
     List<BillDTO> findAllBill();
 
-    Bills save (BillAddDTO billAddDTO);
+    Bills save(BillAddDTO billAddDTO);
 }

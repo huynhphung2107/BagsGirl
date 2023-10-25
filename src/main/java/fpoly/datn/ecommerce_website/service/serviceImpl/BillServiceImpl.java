@@ -21,13 +21,14 @@ public class BillServiceImpl implements IBillService {
     private ModelMapper modelMapper;
 
     @Override
-    public List<BillDTO> findAllBill(){
+    public List<BillDTO> findAllBill() {
         return this.iBillRepository.findAll().stream()
                 .map(o -> modelMapper.map(o, BillDTO.class))
                 .collect(Collectors.toList());
     }
+
     @Override
-    public Bills save(BillAddDTO billAddDTO){
+    public Bills save(BillAddDTO billAddDTO) {
         Bills bills = modelMapper.map(billAddDTO, Bills.class);
         return iBillRepository.save(bills);
     }

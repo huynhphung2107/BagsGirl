@@ -1,6 +1,5 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
-
 import fpoly.datn.ecommerce_website.dto.ProductDetailDTO;
 import fpoly.datn.ecommerce_website.dto.Product_ProductDetailDTO;
 import fpoly.datn.ecommerce_website.entity.ProductDetails;
@@ -25,7 +24,6 @@ public class BaloDetailRestController {
     @Autowired
     private ModelMapper modelMapper;
 
-
     @Autowired
     private BaloDetailServiceImpl baloDetailService;
 
@@ -35,9 +33,8 @@ public class BaloDetailRestController {
                 this.baloDetailService.findAllByBalo(baloID)
                         .stream()
                         .map(baloDetail -> modelMapper.map(baloDetail, ProductDetailDTO.class))
-                        .collect(Collectors.toList())
-                , HttpStatus.OK
-        );
+                        .collect(Collectors.toList()),
+                HttpStatus.OK);
 
     }
 
@@ -47,53 +44,46 @@ public class BaloDetailRestController {
                 this.baloDetailService.findAll()
                         .stream()
                         .map(baloDetail -> modelMapper.map(baloDetail, ProductDetailDTO.class))
-                        .collect(Collectors.toList())
-                , HttpStatus.OK
-        );
+                        .collect(Collectors.toList()),
+                HttpStatus.OK);
     }
 
-    //getOne
+    // getOne
     @RequestMapping(value = "/balo-detail", method = RequestMethod.GET)
     public ResponseEntity<?> getOne(@RequestParam String id) {
         return new ResponseEntity<>(
-                modelMapper.map(this.baloDetailService.findById(id), ProductDetailDTO.class)
-                , HttpStatus.OK);
+                modelMapper.map(this.baloDetailService.findById(id), ProductDetailDTO.class), HttpStatus.OK);
     }
 
-
-    //add
+    // add
     @RequestMapping(value = "/balo-detail", method = RequestMethod.POST)
     public ResponseEntity<?> save(@Valid @RequestBody Product_ProductDetailDTO balo_baloDetailDTO) {
 
         return new ResponseEntity<>(
-                baloDetailService.save(modelMapper.map(balo_baloDetailDTO, ProductDetails.class))
-                , HttpStatus.OK);
+                baloDetailService.save(modelMapper.map(balo_baloDetailDTO, ProductDetails.class)), HttpStatus.OK);
     }
 
-    //update
+    // update
     @RequestMapping(value = "/balo-detail", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@Valid @RequestBody Product_ProductDetailDTO balo_baloDetailDTO) {
         return new ResponseEntity<>(
-                baloDetailService.save(modelMapper.map(balo_baloDetailDTO, ProductDetails.class))
-                , HttpStatus.OK);
+                baloDetailService.save(modelMapper.map(balo_baloDetailDTO, ProductDetails.class)), HttpStatus.OK);
     }
 
-    //delete
+    // delete
     @RequestMapping(value = "/balo-detail", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
         baloDetailService.delete(id);
         return new ResponseEntity<>("Delete successfully!", HttpStatus.OK);
     }
 
-
     @RequestMapping(value = "/balo-detail/search", method = RequestMethod.GET)
     public ResponseEntity<?> findByKeyword(@RequestParam String keyword) {
         return new ResponseEntity<>(
-               this.baloDetailService.findByKeyword(keyword) .stream()
-                       .map(baloDetail -> modelMapper.map(baloDetail, ProductDetails.class))
-                       .collect(Collectors.toList())
-                , HttpStatus.OK);
+                this.baloDetailService.findByKeyword(keyword).stream()
+                        .map(baloDetail -> modelMapper.map(baloDetail, ProductDetails.class))
+                        .collect(Collectors.toList()),
+                HttpStatus.OK);
     }
-
 
 }
