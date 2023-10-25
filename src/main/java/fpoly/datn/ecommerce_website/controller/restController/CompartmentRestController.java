@@ -1,9 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.CompartmentDTO;
-import fpoly.datn.ecommerce_website.entity.Compartment;
-import fpoly.datn.ecommerce_website.entity.Type;
-import fpoly.datn.ecommerce_website.service.ServiceGenarel;
+import fpoly.datn.ecommerce_website.entity.Compartments;
 import fpoly.datn.ecommerce_website.service.serviceImpl.CompartmentServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -47,7 +45,7 @@ public class CompartmentRestController {
     }
 
     //Phan trang
-    @RequestMapping(value = "/compartment/phanTrang", method = RequestMethod.GET)
+    @RequestMapping(value = "/compartment/panagition", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
         return ResponseEntity.ok(compartmentService.findAllPhanTrang(pageNum, pageSize));
@@ -68,7 +66,7 @@ public class CompartmentRestController {
     ) {
         return new ResponseEntity<>(
                 compartmentService.save(
-                        modelMapper.map(compartmentDTO, Compartment.class))
+                        modelMapper.map(compartmentDTO, Compartments.class))
                 , HttpStatus.OK);
 
 
@@ -78,12 +76,12 @@ public class CompartmentRestController {
     @RequestMapping(value = "/compartment", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@Valid @RequestBody CompartmentDTO compartmentDTO) {
         return new ResponseEntity<>(compartmentService.save(
-                modelMapper.map(compartmentDTO, Compartment.class)
+                modelMapper.map(compartmentDTO, Compartments.class)
 
         ), HttpStatus.OK);
     }
     @RequestMapping(value = "/compartment/update-status", method = RequestMethod.PUT)
-    public ResponseEntity<Compartment> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+    public ResponseEntity<Compartments> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(compartmentService.updateStatus(id, status),
                 HttpStatus.OK);
 
@@ -92,22 +90,8 @@ public class CompartmentRestController {
     //delete
     @RequestMapping(value = "/compartment", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam("id") String id) {
-        compartmentService.delete(compartmentService.findById(id).getId());
+        compartmentService.delete(compartmentService.findById(id).getCompartmentId());
         return new ResponseEntity<>("Delete Successfully!!!!!!", HttpStatus.OK);
     }
 
-    //validate
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMesssage = error.getDefaultMessage();
-            errors.put(fieldName, errorMesssage);
-        });
-
-        return errors;
-    }
 }

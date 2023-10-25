@@ -15,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Builder
 public class BrandDTO {
-    private UUID id;
+    private UUID brandId;
     @NotBlank
     private String brandCode;
     @NotBlank

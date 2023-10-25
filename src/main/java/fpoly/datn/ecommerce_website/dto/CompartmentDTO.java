@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 public class CompartmentDTO {
 
-    private UUID id;
+    private UUID compartmentId;
 
     @NotBlank(message = "Không để trống code")
     private String compartmentCode;

@@ -1,7 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.SizeDTO;
-import fpoly.datn.ecommerce_website.entity.Size;
+import fpoly.datn.ecommerce_website.entity.Sizes;
 import fpoly.datn.ecommerce_website.service.serviceImpl.SizeServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -34,20 +34,20 @@ public class SizeRestController {
     private SizeServiceImpl sizeService;
 
 
-    @RequestMapping(value = "/size/", method = RequestMethod.GET)
+    @RequestMapping(value = "/size/panagition", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPagination(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
-        Page<Size> sizePage = sizeService.findAllPage(pageNum, pageSize);
+        Page<Sizes> sizePage = sizeService.findAllPage(pageNum, pageSize);
         return new ResponseEntity<>
                 (sizePage, HttpStatus.OK);
     }
-    @RequestMapping(value = "/size/get-all", method = RequestMethod.GET)
+    @RequestMapping(value = "/size/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
 
     ) {
-        List<Size> sizePage = sizeService.findAll();
+        List<Sizes> sizePage = sizeService.findAll();
         return new ResponseEntity<>
                 (sizePage, HttpStatus.OK);
     }
@@ -59,8 +59,8 @@ public class SizeRestController {
     }
 
     @RequestMapping(value = "/size", method = RequestMethod.POST)
-    public ResponseEntity<Size> save(@RequestBody SizeDTO sizeDTO) {
-        Size size = modelMapper.map(sizeDTO, Size.class);
+    public ResponseEntity<Sizes> save(@RequestBody SizeDTO sizeDTO) {
+        Sizes size = modelMapper.map(sizeDTO, Sizes.class);
         return new ResponseEntity<>(
                 this.sizeService.save(size)
                 , HttpStatus.OK
@@ -69,8 +69,8 @@ public class SizeRestController {
 
 
     @RequestMapping(value = "/size", method = RequestMethod.PUT)
-    public ResponseEntity<Size> update(@RequestBody SizeDTO sizeDTO) {
-        Size size = modelMapper.map(sizeDTO, Size.class);
+    public ResponseEntity<Sizes> update(@RequestBody SizeDTO sizeDTO) {
+        Sizes size = modelMapper.map(sizeDTO, Sizes.class);
         return new ResponseEntity<>(
                 this.sizeService.save(size)
                 , HttpStatus.OK
@@ -78,7 +78,7 @@ public class SizeRestController {
     }
 
     @RequestMapping(value = "/size/update-status", method = RequestMethod.PUT)
-    public ResponseEntity<Size> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+    public ResponseEntity<Sizes> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(sizeService.updateStatus(id, status),
                 HttpStatus.OK);
 
@@ -93,16 +93,4 @@ public class SizeRestController {
         );
     }
 
-    // validate
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception) {
-        Map<String, String> errors = new HashMap<>();
-        exception.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
 }

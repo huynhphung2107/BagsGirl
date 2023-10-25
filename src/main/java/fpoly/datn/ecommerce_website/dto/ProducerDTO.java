@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 public class ProducerDTO {
 
-    private UUID id;
+    private UUID producerId;
 
     @NotBlank
     private String producerCode;

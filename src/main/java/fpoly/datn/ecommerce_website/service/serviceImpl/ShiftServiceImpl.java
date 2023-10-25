@@ -1,7 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.ShiftDTO;
-import fpoly.datn.ecommerce_website.entity.Shift;
+import fpoly.datn.ecommerce_website.entity.Shifts;
 import fpoly.datn.ecommerce_website.repository.IShiftRepository;
 import fpoly.datn.ecommerce_website.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,44 +21,44 @@ public class ShiftServiceImpl implements ShiftService {
 
 
     @Override
-    public List<Shift> findAll() {
+    public List<Shifts> findAll() {
         return this.repo.findAll();
     }
 
     @Override
-    public Page<Shift> findAllPhanTrang(Integer page) {
+    public Page<Shifts> findAllPhanTrang(Integer page) {
         Pageable pageable = PageRequest.of(page,5);
         return repo.findAll(pageable);
     }
 
 
     @Override
-    public Shift findById(String id) {
+    public Shifts findById(String id) {
         return repo.findById(id).orElse(null);
     }
 
     @Override
-    public Shift save(ShiftDTO shiftDTO) {
+    public Shifts save(ShiftDTO shiftDTO) {
 
         return null;
     }
 
     @Override
-    public Shift update(ShiftDTO shiftDTO, String id) {
+    public Shifts update(ShiftDTO shiftDTO, String id) {
         return null;
     }
 
 
     @Override
-    public List<Shift> searchByName(String name) {
+    public List<Shifts> searchByName(String name) {
         return null;
     }
 
     @Override
     public Boolean delete(String id) {
-        Optional<Shift> optional = repo.findById(id);
+        Optional<Shifts> optional = repo.findById(id);
         if(optional.isPresent()){
-            Shift kh = optional.get();
+            Shifts kh = optional.get();
             repo.delete(kh);
             return true;
         }else{

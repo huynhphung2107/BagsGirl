@@ -11,14 +11,13 @@ import java.util.UUID;
 @Getter
 public class BuckleTypeDTO {
 
-    private UUID id;
+    private UUID buckleTypeId;
 
     @NotBlank(message = "Không để trống code")
     private String buckleTypeCode;
 
     @NotBlank(message = "Không để trống name")
     private String buckleTypeName;
-
 
     private Integer buckleTypeStatus;
 }

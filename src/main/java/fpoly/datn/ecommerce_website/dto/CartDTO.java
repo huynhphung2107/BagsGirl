@@ -1,7 +1,5 @@
 package fpoly.datn.ecommerce_website.dto;
 
-import fpoly.datn.ecommerce_website.entity.Cart;
-import fpoly.datn.ecommerce_website.entity.Customer;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,20 +15,20 @@ import java.sql.Date;
 @NoArgsConstructor
 public class CartDTO {
 
-    private String id;
+    private String cartId;
 
     @NotBlank( message = "Không được để trống code")
-    private String code;
+    private String cartCode;
 
     private Date createTime;
 
     private Date paymentTime;
 
     @NotBlank( message = "Không được để trống note")
-    private String note;
+    private String cartNote;
 
     @NotBlank( message = "Không được để trống status")
-    private Integer status;
+    private Integer cartStatus;
 
     @NotBlank( message = "Không được để trống customer")
     private String customer;

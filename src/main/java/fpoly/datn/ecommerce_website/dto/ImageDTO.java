@@ -8,13 +8,13 @@ import lombok.Setter;
 @Setter
 public class ImageDTO {
 
-    private String id;
+    private String imageId;
 
     @NotBlank(message = "Không để trống code")
-    private String code;
+    private String imageCode;
 
     @NotBlank(message = "Không để trống name")
-    private String name;
+    private String imageName;
 
     @NotBlank(message = "Không để trống Hình ảnh")
     private String imageUrl;

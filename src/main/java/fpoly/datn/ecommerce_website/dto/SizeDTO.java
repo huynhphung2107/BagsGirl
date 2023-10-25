@@ -18,12 +18,12 @@ import java.util.UUID;
 @ToString
 
 public class SizeDTO {
-    private UUID id;
+    private UUID sizeId;
     private String sizeCode;
     private String sizeName;
-    private String lengthSize;
-    private String wideSize;
-    private String heightSize;
+    private String sizeLength;
+    private String sizeWidth;
+    private String sizeHeight;
     private Integer sizeStatus;
 
 }

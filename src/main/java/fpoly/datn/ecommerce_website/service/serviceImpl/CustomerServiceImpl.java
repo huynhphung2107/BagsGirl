@@ -1,6 +1,6 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.Customer;
+import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.repository.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,34 +16,34 @@ public class CustomerServiceImpl {
     @Autowired
     private ICustomerRepository customerRepository;
 
-    public Page<Customer> findAllCustomersWithUserInfoUserRole(Integer page, Integer size) {
+    public Page<Customers> findAllCustomersWithUserInfoUserRole(Integer page, Integer size) {
         Pageable pageable  =PageRequest.of(page,size);
-        return customerRepository.findAllCustomersWithUserInfoUserRole(pageable);
+        return customerRepository.findAllCustomersWithUsersRoles(pageable);
     }
 
 
-    public List<Customer> findAll() {
+    public List<Customers> findAll() {
         return this.customerRepository.findAll();
     }
 
 
-    public Customer findById(String id) {
+    public Customers findById(String id) {
         return this.customerRepository.findById(id).get();
     }
 
 
-    public Customer save(Customer customer) {
+    public Customers save(Customers customer) {
         return this.customerRepository.save(customer);
     }
 
 
-    public Customer update(Customer customer) {
+    public Customers update(Customers customer) {
         return this.customerRepository.save(customer);
     }
 
 
-    public Customer updateStatus(String id, Integer status) {
-        Customer customer = customerRepository.findById(id).get();
+    public Customers updateStatus(String id, Integer status) {
+        Customers customer = customerRepository.findById(id).get();
         customer.setCustomerStatus(status);
         return this.customerRepository.save(customer);
     }
@@ -56,7 +56,7 @@ public class CustomerServiceImpl {
     }
 
 
-    public List<Customer> searchByName(String name) {
+    public List<Customers> searchByName(String name) {
         return null;
     }
 }
