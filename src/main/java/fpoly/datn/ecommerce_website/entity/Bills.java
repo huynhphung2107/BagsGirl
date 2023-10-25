@@ -70,6 +70,6 @@ public class Bills {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customers customer;
     @ManyToOne
-    @JoinColumn(name = "staff_id", referencedColumnName = "id")
-    private Staff staff;
+    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
+    private Staffs staff;
 }

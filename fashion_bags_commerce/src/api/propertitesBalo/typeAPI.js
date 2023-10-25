@@ -1,20 +1,18 @@
 import axiosClient from '../axiosClient';
 
-
 const typeAPI = {
-  getAll(params) {
+  getAll() {
     const url = '/type/';
-    return axiosClient.get(url, { params });
+    return axiosClient.get(url);
   },
   getAllPhanTrang(pageNum, pageSize) {
     const url = `/type/phanTrang?id=${pageNum}`;
-    return axiosClient.get(url,
-      {
-        params: {
-          page: pageNum - 1,
-          size: pageSize,
-        },
-      });
+    return axiosClient.get(url, {
+      params: {
+        page: pageNum - 1,
+        size: pageSize,
+      },
+    });
   },
   get(id) {
     const url = `/type?id=${id}`;

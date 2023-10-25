@@ -18,7 +18,7 @@ import lombok.ToString;
 import java.sql.Date;
 
 @Entity
-@Table(name = "bill_detail")
+@Table(name = "bill_details")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -27,15 +27,15 @@ import java.sql.Date;
 @Getter
 public class BillDetails {
     @Id
-    @Column(name = "id")
+    @Column(name = "bill_detail_id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     @Column(name = "price")
     private Double baloPrice;
     @ManyToOne
     @JoinColumn(name = "bill_id", referencedColumnName = "id")
-    private Bill bill;
+    private Bills bill;
     @ManyToOne
-    @JoinColumn(name = "balo_detail_id", referencedColumnName = "id")
-    private BaloDetail baloDetail;
+    @JoinColumn(name = "product_detail_id", referencedColumnName = "id")
+    private ProductDetails productDetails;
 }

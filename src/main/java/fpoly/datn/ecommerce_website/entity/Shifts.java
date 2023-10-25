@@ -30,9 +30,9 @@ import java.time.LocalDateTime;
 @Getter
 public class Shifts {
     @Id
-    @Column(name = "id")
+    @Column(name = "shift_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String shiftId;
 
     @Column(name = "shift_code")
     private String shiftCode;
@@ -51,11 +51,11 @@ public class Shifts {
     @Column(name = "note")
     private String shiftNote;
 
-    @Column(name = "status")
+    @Column(name = "shift_status")
     private Integer shiftStatus;
 
     @ManyToOne
     @JoinColumn(name = "staff_id")
-    private Staff staff;
+    private Staffs staffs;
 
 }

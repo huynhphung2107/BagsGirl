@@ -8,6 +8,7 @@ import fpoly.datn.ecommerce_website.repository.IStaffRepository;
 import fpoly.datn.ecommerce_website.repository.IUserInfoRepository;
 import fpoly.datn.ecommerce_website.repository.IUserRoleRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +27,8 @@ public class StaffServiceImpl  {
     private IUserInfoRepository userInfoRepository;
     @Autowired
     private IUserRoleRepository userRoleRepository;
-
+    @Autowired
+    private ModelMapper modelMapper;
    
     public List<Staff> findAll() {
         return this.staffRepository.findAll();
@@ -45,37 +47,7 @@ public class StaffServiceImpl  {
 
 
     public Staff save(StaffDTO staffDTO) {
-        Staff staff = new Staff();
-
-        staff.setStaffStatus(1);
-
-        UserInfo userInfo = new UserInfo();
-        userInfo.setFullName(staffDTO.getFullName());
-        userInfo.setAccount(staffDTO.getAccount());
-        userInfo.setPassword(staffDTO.getPassword());
-        userInfo.setEmail(staffDTO.getEmail());
-        userInfo.setUserInfoStatus(staffDTO.getUserInfoStatus());
-        userInfo.setGender(staffDTO.getGender());
-        userInfo.setAddress(staffDTO.getAddress());
-        userInfo.setPhoneNumber(staffDTO.getPhoneNumber());
-        userInfo.setNote(staffDTO.getNote());
-
-        UserRole userRole = userRoleRepository.findById(staffDTO.getUserInfoUserRoleId()).orElse(null);
-        if (userRole == null) {
-            throw new IllegalArgumentException("User Role not found");
-        }
-
-        userInfo.setUserRole(userRole);
-
-        UserInfo savedUserInfo = userInfoRepository.save(userInfo);
-
-        if (savedUserInfo != null) {
-            staff.setUserInfo(savedUserInfo);
-
-            return staffRepository.save(staff);
-        } else {
-            throw new IllegalStateException("Failed to save UserInfo");
-        }
+            return staffRepository.save(modelMapper.map(staffDTO, Staff.class));
     }
 
 
