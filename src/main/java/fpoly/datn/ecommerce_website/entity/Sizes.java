@@ -25,24 +25,24 @@ public class Sizes {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "size_id")
-    private String sizeId;
+    private String id;
 
-    @Column(name = "size_code")
+    @Column(name = "code")
     private String sizeCode;
 
-    @Column(name = "size_name")
+    @Column(name = "name")
     private String sizeName;
 
-    @Column(name = "size_length")
+    @Column(name = "length_size")
     private String lengthSize;
 
-    @Column(name = "size_width")
+    @Column(name = "wide_size")
     private String wideSize;
 
-    @Column(name = "size_height")
+    @Column(name = "height_size")
     private String heightSize;
 
-    @Column(name = "size_status")
+    @Column(name = "size-status")
     private Integer sizeStatus;
 
 }

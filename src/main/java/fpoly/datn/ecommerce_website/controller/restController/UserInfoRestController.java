@@ -62,7 +62,9 @@ public class UserInfoRestController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ResponseEntity<?> findCustomerByKeyword(@RequestParam String keyword) {
         return new ResponseEntity<>(
-                this.userInfoService.findCustomerByKeyword(keyword)
+                this.userInfoService.findCustomerByKeyword(keyword) .stream()
+                        .map(userInfo -> modelMapper.map(userInfo, UserInfoDTO.class))
+                        .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
 }

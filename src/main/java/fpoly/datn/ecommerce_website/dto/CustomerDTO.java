@@ -23,5 +23,5 @@ public class CustomerDTO {
     @NotBlank
     private Integer point;
     @NotBlank
-    private UserInfoDTO userInfo;
+    private UserInfo userInfo;
 }

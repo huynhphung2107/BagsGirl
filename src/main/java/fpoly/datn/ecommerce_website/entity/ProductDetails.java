@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,45 +21,57 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "product_details")
-public class ProductDetails {
+@Table(name = "balo_detail")
+public class BaloDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private String productDetailsID;
+    private String baloDetailsID;
+
     @Column(name = "import_price")
     private Float importPrice;
+
     @Column(name = "retail_price")
     private Float retailPrice;
+
     @Column(name = "amount")
-    private Integer productDetailsAmount;
+    private Integer baloDetailAmount;
+
     @Column(name = "describe")
-    private String productDetailsDescribe;
-    @Column(name = "product_detail_status")
-    private Integer productDetailsStatus;
+    private String baloDetailDescribe;
+
+    @Column(name = "status")
+    private Integer baloDetailStatus;
+
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Products products;
+    @JoinColumn(name = "balo_id")
+    private Balo balo;
+
     @ManyToOne
     @JoinColumn(name = "color_id")
-    private Colors colors;
+    private Color color;
+
     @ManyToOne
     @JoinColumn(name = "type_id")
-    private Types types;
+    private Type type;
+
     @ManyToOne
     @JoinColumn(name = "material_id")
-    private Materials materials;
+    private Material material;
+
     @ManyToOne
     @JoinColumn(name = "size_id")
-    private Sizes sizes;
+    private Size size;
+
     @ManyToOne
     @JoinColumn(name = "compartment_id")
-    private Compartments compartments;
+    private Compartment compartment;
+
     @ManyToOne
     @JoinColumn(name = "buckle_type_id")
-    private BuckleTypes buckleTypes;
+    private BuckleType buckleType;
     @ManyToOne
     @JoinColumn(name = "producer_id")
-    private Producers producers;
+    private Producer producer;
 }

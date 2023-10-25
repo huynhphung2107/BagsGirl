@@ -42,19 +42,19 @@ public class MaterialRestController {
     private MaterialServiceImpl materialService;
 
     //getAll
-    @RequestMapping(value = "/material/", method = RequestMethod.GET)
-    public ResponseEntity<List<MaterialDTO>> getAll() {
-        return new ResponseEntity<>(
-                this.materialService.findAll()
-                        .stream()
-                        .map(material -> modelMapper.map(material, MaterialDTO.class))
-                        .collect(Collectors.toList())
-                , HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/material/", method = RequestMethod.GET)
+//    public ResponseEntity<List<MaterialDTO>> getAll() {
+//        return new ResponseEntity<>(
+//                this.materialService.findAll()
+//                        .stream()
+//                        .map(material -> modelMapper.map(material, MaterialDTO.class))
+//                        .collect(Collectors.toList())
+//                , HttpStatus.OK);
+//    }
 
 
     //GetAllPage
-    @RequestMapping(value = "/material/pagination", method = RequestMethod.GET)
+    @RequestMapping(value = "/material/", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPage(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize

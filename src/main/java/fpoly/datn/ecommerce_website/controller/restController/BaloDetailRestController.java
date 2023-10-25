@@ -33,6 +33,8 @@ public class BaloDetailRestController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private ServiceGenarel<BaloDetail> serviceGenarel;
 
     @Autowired
     private BaloDetailServiceImpl baloDetailService;
@@ -52,7 +54,7 @@ public class BaloDetailRestController {
     @RequestMapping(value = "/balo-detail/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(
-                this.baloDetailService.findAll()
+                this.serviceGenarel.findAll()
                         .stream()
                         .map(baloDetail -> modelMapper.map(baloDetail, BaloDetailDTO.class))
                         .collect(Collectors.toList())
@@ -64,7 +66,7 @@ public class BaloDetailRestController {
     @RequestMapping(value = "/balo-detail", method = RequestMethod.GET)
     public ResponseEntity<?> getOne(@RequestParam String id) {
         return new ResponseEntity<>(
-                modelMapper.map(this.baloDetailService.findById(id), BaloDetailDTO.class)
+                modelMapper.map(this.serviceGenarel.findById(id), BaloDetailDTO.class)
                 , HttpStatus.OK);
     }
 
@@ -74,7 +76,7 @@ public class BaloDetailRestController {
     public ResponseEntity<?> save(@Valid @RequestBody Balo_BaloDetailDTO balo_baloDetailDTO) {
         System.out.println(balo_baloDetailDTO);
         return new ResponseEntity<>(
-                baloDetailService.save(modelMapper.map(balo_baloDetailDTO, BaloDetail.class))
+                serviceGenarel.save(modelMapper.map(balo_baloDetailDTO, BaloDetail.class))
                 , HttpStatus.OK);
     }
 
@@ -82,14 +84,14 @@ public class BaloDetailRestController {
     @RequestMapping(value = "/balo-detail", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@Valid @RequestBody Balo_BaloDetailDTO balo_baloDetailDTO) {
         return new ResponseEntity<>(
-                baloDetailService.save(modelMapper.map(balo_baloDetailDTO, BaloDetail.class))
+                serviceGenarel.save(modelMapper.map(balo_baloDetailDTO, BaloDetail.class))
                 , HttpStatus.OK);
     }
 
     //delete
     @RequestMapping(value = "/balo-detail", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
-        baloDetailService.delete(id);
+        serviceGenarel.delete(id);
         return new ResponseEntity<>("Delete successfully!", HttpStatus.OK);
     }
 

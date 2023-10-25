@@ -31,14 +31,19 @@ public class Products {
     @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String productId;
+
     @Column(name = "product_code")
     private String productCode;
+
     @Column(name = "product_name")
     private String productName;
+
     @Column(name = "product_status")
     private int productStatus;
+
+
     @ManyToOne
-    @JoinColumn(name = "brand_id", referencedColumnName = "brand_id")
-    private Brands brand;
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
 
 }

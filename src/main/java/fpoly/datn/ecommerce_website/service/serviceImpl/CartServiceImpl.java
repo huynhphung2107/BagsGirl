@@ -3,7 +3,6 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 import fpoly.datn.ecommerce_website.dto.CartDTO;
 import fpoly.datn.ecommerce_website.entity.Cart;
 
-import fpoly.datn.ecommerce_website.entity.Carts;
 import fpoly.datn.ecommerce_website.entity.Customer;
 import fpoly.datn.ecommerce_website.repository.ICartRepository;
 import fpoly.datn.ecommerce_website.service.CartService;
@@ -59,9 +58,9 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Boolean delete(String id) {
-        Optional<Carts> optional = repo.findById(id);
+        Optional<Cart> optional = repo.findById(id);
         if(optional.isPresent()){
-            Carts kh = optional.get();
+            Cart kh = optional.get();
             repo.delete(kh);
             return true;
         }else{
