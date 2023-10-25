@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.ProductDTO;
+import fpoly.datn.ecommerce_website.dto.ProductsDTO;
 import fpoly.datn.ecommerce_website.entity.Products;
 import fpoly.datn.ecommerce_website.repository.IProductRepository;
 import fpoly.datn.ecommerce_website.service.IProductService;
@@ -41,12 +42,12 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Page<ProductDTO> findAll(int pageNum, int PageSize) {
+    public Page<List<ProductsDTO>> findAll(int pageNum, int PageSize) {
         PageRequest pageRequest = PageRequest.of(pageNum, PageSize);
         Page<Products> productPage = this.iproductRepository.getAllWithoutDelete(pageRequest);
 
-        List<ProductDTO> productDTOList = productPage.getContent()
-                .stream().map(product -> modelMapper.map(product, ProductDTO.class))
+        List<ProductsDTO> productDTOList = productPage.getContent()
+                .stream().map(product -> modelMapper.map(product, ProductsDTO.class))
                 .collect(Collectors.toList());
         return new PageImpl<>(productDTOList, pageRequest, productPage.getTotalElements());
     }

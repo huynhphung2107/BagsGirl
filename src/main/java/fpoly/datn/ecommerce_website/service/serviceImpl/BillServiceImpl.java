@@ -2,8 +2,8 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.BillAddDTO;
 import fpoly.datn.ecommerce_website.dto.BillDTO;
-import fpoly.datn.ecommerce_website.entity.Bill;
 import fpoly.datn.ecommerce_website.entity.Bills;
+import fpoly.datn.ecommerce_website.entity.Products;
 import fpoly.datn.ecommerce_website.repository.IBillRepository;
 import fpoly.datn.ecommerce_website.service.IBillService;
 import org.modelmapper.ModelMapper;
@@ -27,7 +27,8 @@ public class BillServiceImpl implements IBillService {
                 .collect(Collectors.toList());
     }
     @Override
-    public BillAddDTO save(BillAddDTO billAddDTO){
-        return this.iBillRepository.save(modelMapper.map(billAddDTO, Bills.class));
+    public Bills save(BillAddDTO billAddDTO){
+        Bills bills = modelMapper.map(billAddDTO, Bills.class);
+        return iBillRepository.save(bills);
     }
 }

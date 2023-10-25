@@ -1,8 +1,7 @@
 package fpoly.datn.ecommerce_website.service;
 
 import fpoly.datn.ecommerce_website.dto.BaloDTO;
-import fpoly.datn.ecommerce_website.dto.Balo_BrandDTO;
-import fpoly.datn.ecommerce_website.entity.Balo;
+import fpoly.datn.ecommerce_website.entity.Products;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -11,15 +10,15 @@ public interface IBaloService {
 
     Page<BaloDTO> findAll(int pageNum, int PageSize);
 
-    Balo findById(String id);
+    Products findById(String id);
 
-    Balo save(Balo entity);
+    Products save(Products entity);
 
-    Balo update(Balo entity);
+    Products update(Products entity);
 
-    Balo updateBaloStatus(String baloID, int status);
+    Products updateBaloStatus(String baloID, int status);
 
     String delete(String id);
 
-    List<Balo> searchByName(String name);
+    List<Products> searchByName(String name);
 }

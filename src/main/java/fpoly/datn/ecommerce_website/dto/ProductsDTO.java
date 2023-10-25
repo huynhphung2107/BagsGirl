@@ -1,17 +1,15 @@
-package fpoly.datn.ecommerce_website.entity;
+package fpoly.datn.ecommerce_website.dto;
 
+import fpoly.datn.ecommerce_website.entity.Brands;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -19,26 +17,18 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
-@Builder
-@Entity
-@Table(name = "products")
-public class Products {
+public class ProductsDTO {
 
-    @Id
-    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String productId;
-    @Column(name = "product_code")
+
     private String productCode;
-    @Column(name = "product_name")
+
     private String productName;
-    @Column(name = "product_status")
+
     private int productStatus;
-    @ManyToOne
-    @JoinColumn(name = "brand_id", referencedColumnName = "brand_id")
     private Brands brands;
+    
 
 }

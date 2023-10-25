@@ -1,8 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.BaloDTO;
-import fpoly.datn.ecommerce_website.dto.Balo_BrandDTO;
-import fpoly.datn.ecommerce_website.entity.Balo;
+import fpoly.datn.ecommerce_website.entity.Products;
 import fpoly.datn.ecommerce_website.repository.IBaloRepository;
 import fpoly.datn.ecommerce_website.service.IBaloService;
 import org.modelmapper.ModelMapper;
@@ -44,7 +43,7 @@ public class BaloServiceImpl implements IBaloService {
     @Override
     public Page<BaloDTO> findAll(int pageNum, int PageSize) {
         PageRequest pageRequest = PageRequest.of(pageNum, PageSize);
-        Page<Balo> baloPage = this.iBaloRepository.getAllWithoutDelete(pageRequest);
+        Page<Products> baloPage = this.iBaloRepository.getAllWithoutDelete(pageRequest);
 
         List<BaloDTO> baloDTOList = baloPage.getContent()
                 .stream().map(balo -> modelMapper.map(balo, BaloDTO.class))
@@ -54,23 +53,23 @@ public class BaloServiceImpl implements IBaloService {
 
 
     @Override
-    public Balo findById(String id) {
+    public Products findById(String id) {
         return this.iBaloRepository.findById(id).get();
     }
 
     @Override
-    public Balo save(Balo entity) {
+    public Products save(Products entity) {
         return iBaloRepository.save(entity);
     }
 
     @Override
-    public Balo update(Balo entity) {
+    public Products update(Products entity) {
         return iBaloRepository.save(entity);
     }
     @Override
-    public Balo updateBaloStatus(String baloID, int status) {
-        Balo balo = iBaloRepository.findById(baloID).orElse(null);
-        balo.setBaloStatus(status);
+    public Products updateBaloStatus(String baloID, int status) {
+        Products balo = iBaloRepository.findById(baloID).orElse(null);
+        balo.setProductStatus(status);
         return iBaloRepository.save(balo);
     }
 
@@ -81,7 +80,7 @@ public class BaloServiceImpl implements IBaloService {
     }
 
     @Override
-    public List<Balo> searchByName(String name) {
+    public List<Products> searchByName(String name) {
         return null;
     }
 }

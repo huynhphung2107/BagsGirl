@@ -1,10 +1,9 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.CartDTO;
-import fpoly.datn.ecommerce_website.entity.Cart;
-
 import fpoly.datn.ecommerce_website.entity.Carts;
-import fpoly.datn.ecommerce_website.entity.Customer;
+
+import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.repository.ICartRepository;
 import fpoly.datn.ecommerce_website.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,49 +19,49 @@ import java.util.Optional;
 public class CartServiceImpl implements CartService {
 
     @Autowired
-    private ICartRepository repo;
+    private ICartRepository cartRepository;
 
 
     @Override
-    public List<Cart> findAll() {
-        return this.repo.findAll();
+    public List<Carts> findAll() {
+        return this.cartRepository.findAll();
     }
 
     @Override
-    public Page<Cart> findAllPhanTrang(Integer page) {
+    public Page<Carts> findAllPhanTrang(Integer page) {
         Pageable pageable = PageRequest.of(page,5);
-        return repo.findAll(pageable);
+        return cartRepository.findAll(pageable);
     }
 
 
     @Override
-    public Cart findById(String id) {
-        return repo.findById(id).orElse(null);
+    public Carts findById(String id) {
+        return cartRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Cart save(CartDTO cartDTO) {
+    public Carts save(CartDTO cartDTO) {
 
         return null;
     }
 
     @Override
-    public Cart update(CartDTO cartDTO, String id) {
+    public Carts update(CartDTO cartDTO, String id) {
         return null;
     }
 
 
     @Override
-    public List<Cart> searchByName(String name) {
+    public List<Carts> searchByName(String name) {
         return null;
     }
 
     @Override
     public Boolean delete(String id) {
-        Optional<Carts> optional = repo.findById(id);
+        Optional<Carts> optional = cartRepository.findById(id);
         if(optional.isPresent()){
             Carts kh = optional.get();
-            repo.delete(kh);
+            cartRepository.delete(kh);
             return true;
         }else{
             return false;

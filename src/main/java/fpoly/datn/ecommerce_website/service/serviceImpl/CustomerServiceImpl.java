@@ -1,6 +1,6 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.Customer;
+import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.repository.ICustomerRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,28 +9,28 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl implements ServiceGenarel<Customer> {
+public class CustomerServiceImpl implements ServiceGenarel<Customers> {
 
     @Autowired
     private ICustomerRepository customerRepository;
 
     @Override
-    public List<Customer> findAll() {
+    public List<Customers> findAll() {
         return this.customerRepository.findAll();
     }
 
     @Override
-    public Customer findById(String id) {
+    public Customers findById(String id) {
         return this.customerRepository.findById(id).get();
     }
 
     @Override
-    public Customer save(Customer customer) {
+    public Customers save(Customers customer) {
         return this.customerRepository.save(customer);
     }
 
     @Override
-    public Customer update(Customer customer) {
+    public Customers update(Customers customer) {
         return this.customerRepository.save(customer);
     }
 
@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements ServiceGenarel<Customer> {
     }
 
     @Override
-    public List<Customer> searchByName(String name) {
+    public List<Customers> searchByName(String name) {
         return null;
     }
 }

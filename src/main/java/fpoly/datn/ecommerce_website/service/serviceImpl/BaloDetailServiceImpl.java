@@ -1,7 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.Balo;
-import fpoly.datn.ecommerce_website.entity.BaloDetail;
+
+import fpoly.datn.ecommerce_website.entity.ProductDetails;
 import fpoly.datn.ecommerce_website.repository.IBaloDetailRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,31 +11,31 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BaloDetailServiceImpl implements ServiceGenarel<BaloDetail> {
+public class BaloDetailServiceImpl implements ServiceGenarel<ProductDetails> {
 
     @Autowired
     private IBaloDetailRepository iBaloDetailRepository;
   
     @Override
-    public List<BaloDetail> findAll() {
+    public List<ProductDetails> findAll() {
         return iBaloDetailRepository.findAll();
     }
-    public  List<BaloDetail> findAllByBalo(String baloID){
+    public  List<ProductDetails> findAllByBalo(String baloID){
         return this.iBaloDetailRepository.findAllByBalo_BaloCode(baloID);
     }
     @Override
-    public BaloDetail findById(String id) {
-        Optional<BaloDetail> optional = iBaloDetailRepository.findById(id);
+    public ProductDetails findById(String id) {
+        Optional<ProductDetails> optional = iBaloDetailRepository.findById(id);
         return optional.get();
     }
 
     @Override
-    public BaloDetail save(BaloDetail entity) {
+    public ProductDetails save(ProductDetails entity) {
         return iBaloDetailRepository.save(entity);
     }
 
     @Override
-    public BaloDetail update(BaloDetail entity) {
+    public ProductDetails update(ProductDetails entity) {
         return iBaloDetailRepository.save(entity);
     }
 
@@ -46,11 +46,11 @@ public class BaloDetailServiceImpl implements ServiceGenarel<BaloDetail> {
     }
 
     @Override
-    public List<BaloDetail> searchByName(String name) {
+    public List<ProductDetails> searchByName(String name) {
         return null;
     }
 
-    public  List<BaloDetail> findByKeyword(String keyword){
+    public  List<ProductDetails> findByKeyword(String keyword){
 
         return this.iBaloDetailRepository.findByKeyword(keyword);
     }
