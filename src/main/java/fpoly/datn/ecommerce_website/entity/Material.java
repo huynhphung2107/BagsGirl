@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,32 +14,26 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "images")
+@Table(name = "material")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Images {
+public class Material {
     @Id
-    @Column(name = "image_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String imageId;
+    private String id;
 
-    @Column(name = "image_code")
-    private String imgCode;
+    @Column(name = "material_code")
+    private String materialCode;
 
-    @Column(name = "image_name")
-    private String imgName;
+    @Column(name = "material_name")
+    private String materialName;
 
-    @Column(name = "image_url")
-    private String imgUrl;
-    @Column(name = "isPrimary")
-    private String isPrimary;
-
-    @ManyToOne
-    @JoinColumn(name = "image_name", referencedColumnName = "id")
-    private  ProductDetails productDetails;
+    @Column(name = "material_status")
+    private Integer materialStatus;
 
 }

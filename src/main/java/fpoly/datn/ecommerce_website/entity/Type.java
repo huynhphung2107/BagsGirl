@@ -14,26 +14,26 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "materials")
+@Table(name = "type")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Materials {
+public class Type {
+
     @Id
-    @Column(name = "material_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String materialId;
+    @Column(name = "type_id")
+    private String typeId;
 
-    @Column(name = "material_code")
-    private String materialCode;
+    @Column(name = "type_code")
+    private String typeCode;
 
-    @Column(name = "material_name")
-    private String materialName;
+    @Column(name = "type_name")
+    private String typeName;
 
-    @Column(name = "material_status")
-    private Integer materialStatus;
-
+    @Column(name = "type_status")
+    private Integer typeStatus;
 }

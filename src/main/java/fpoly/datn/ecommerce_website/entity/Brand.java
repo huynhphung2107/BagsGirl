@@ -11,27 +11,28 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Table(name = "buckle_types")
-@Setter
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BuckleTypes {
-
+@ToString
+@Setter
+@Getter
+@Table(name = "brand")
+public class Brand {
     @Id
-    @Column(name = "buckle_type_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String buckleTypeId;
+    private String id;
 
-    @Column(name = "buckle_type_code")
-    private String buckleTypeCode;
+    @Column(name = "brand_code")
+    private String brandCode;
 
-    @Column(name = "buckle_type_name")
-    private String buckleTypeName;
+    @Column(name = "brand_name")
+    private String brandName;
 
-    @Column(name = "buckle_type_status")
-    private Integer buckleTypeStatus;
+    @Column(name = "brand_status")
+    private Integer brandStatus;
 }

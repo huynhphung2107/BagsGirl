@@ -19,18 +19,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.sql.Date;
 
 @Entity
-@Table(name = "carts")
+@Table(name = "cart")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Carts {
+public class Cart {
     @Id
-    @Column(name = "cart_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String cartId;
+    private String id;
 
     @Column(name = "cart_code")
     private String cartCode;
@@ -43,14 +43,14 @@ public class Carts {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date cartPaymentTime;
 
-    @Column(name = "cart_note")
+    @Column(name = "note")
     private String cartNote;
 
-    @Column(name = "cart_status")
+    @Column(name = "status")
     private Integer cartStatus;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
-    private Customers customers;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
 }

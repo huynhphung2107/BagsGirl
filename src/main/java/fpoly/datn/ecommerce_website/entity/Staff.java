@@ -1,38 +1,43 @@
 package fpoly.datn.ecommerce_website.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
+import lombok.ToString;
 
 @Entity
-@Table(name = "roles")
-@Setter
-@Getter
+@Table(name = "staff")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Roles implements Serializable {
+@ToString
+@Setter
+@Getter
+public class Staff {
 
     @Id
-    @Column(name = "role_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "role_code")
-    private String roleCode;
+    @Column(name = "status")
+    private Integer staffStatus;
 
-    @Column(name = "role_name")
-    private String roleName;
+    @OneToOne()
+    @JsonManagedReference
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserInfo userInfo;
+
+
 }

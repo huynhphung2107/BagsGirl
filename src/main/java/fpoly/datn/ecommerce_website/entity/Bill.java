@@ -16,32 +16,30 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Entity
-@Table(name = "bills")
+@Table(name = "bill")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Bills {
+public class Bill {
     @Id
-    @Column(name = "bill_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String billId;
+    private String id;
     @Column(name = "bill_code")
     private String billCode;
-
     @Column(name = "bill_create_date")
-    private Timestamp billCreateDate;
+    private Date billCreateDate;
     @Column(name = "bill_date_payment")
-    private Timestamp billDatePayment;
+    private Date billDatePayment;
     @Column(name = "bill_ship_date")
-    private Timestamp billShipDate;
+    private Date billShipDate;
     @Column(name = "bill_receiver_date")
-    private Timestamp billReceiverDate;
+    private Date billReceiverDate;
     @Column(name = "bill_total_price")
     private Double billTotalPrice;
     @Column(name = "balo_amount")
@@ -62,13 +60,13 @@ public class Bills {
     private Double orderPhone;
     @Column(name = "payment_method")
     private Integer paymentMethod;
-    @Column(name = "bill_note")
-    private String billNote;
-    @Column(name = "bill_status")
+    @Column(name = "note")
+    private String note;
+    @Column(name = "status")
     private Integer billStatus;
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customers customer;
+    private Customer customer;
     @ManyToOne
     @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
     private Staffs staff;

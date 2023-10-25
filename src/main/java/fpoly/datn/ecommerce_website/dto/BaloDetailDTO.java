@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @ToString
-public class ProductDetailDTO {
+public class BaloDetailDTO {
 
     private UUID id;
     private String productsCode;

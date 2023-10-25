@@ -16,16 +16,16 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_info")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Users {
+public class UserInfo {
     @Id
-    @Column(name = "user_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String userId;
     @Column(name = "account")
@@ -44,7 +44,7 @@ public class Users {
     private Boolean gender;
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private Roles userRole;
+    private UserRole userRole;
     @Column(name = "address")
     private String address;
     @Column(name = "note")

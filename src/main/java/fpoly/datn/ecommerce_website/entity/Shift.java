@@ -21,14 +21,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "shifts")
+@Table(name = "shift")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Shifts {
+public class Shift {
+    //    @Pattern(regexp = "0[0-9\\s.-]{9,9}", message = "Không quá 10 số và bắt đầu bằng 0")
     @Id
     @Column(name = "shift_id")
     @GeneratedValue(strategy = GenerationType.UUID)
