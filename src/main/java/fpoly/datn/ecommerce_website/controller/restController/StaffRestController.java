@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/manage")
@@ -43,18 +45,18 @@ public class StaffRestController {
     @Autowired
     private ModelMapper modelMapper;
 
-//    @RequestMapping("/staff/")
-////    public ResponseEntity<List<StaffDTO>> getAll() {
-////        List<Staff> list = staffService.findAll();
-////        System.out.println(list.size());
-////        return new ResponseEntity<>(
-////                list.stream().map(staff -> modelMapper.map(staff, StaffDTO.class)).collect(Collectors.toList())
-////                , HttpStatus.OK
-////        );
-////    }
+    @RequestMapping("/staff/")
+    public ResponseEntity<List<StaffDTO>> getAll() {
+        List<Staff> list = staffService.findAll();
+        System.out.println(list.size());
+        return new ResponseEntity<>(
+                list.stream().map(staff -> modelMapper.map(staff, StaffDTO.class)).collect(Collectors.toList())
+                , HttpStatus.OK
+        );
+    }
 
     //GetAllPage
-    @RequestMapping(value = "/staff/", method = RequestMethod.GET)
+    @RequestMapping(value = "/staff/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
