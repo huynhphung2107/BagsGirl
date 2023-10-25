@@ -22,20 +22,20 @@ public class StaffDTO {
     @NotNull
     private Integer staffStatus;
     @NotBlank
-    private String fullName;
+    private String usersFullName;
     @NotBlank
-    private String account;
+    private String usersAccount;
     @NotBlank
-    private String password;
+    private String usersPassword;
     @NotBlank
-    private String email;
+    private String usersEmail;
     @NotNull
     private Integer usersStatus;
-    private Boolean gender;
-    private String phoneNumber;
-    private String address;
+    private Boolean usersGender;
+    private String usersPhoneNumber;
+    private String usersAddress;
 
-    private String userNote;
+    private String usersUserNote;
 
     private String usersRolesRoleId;
 

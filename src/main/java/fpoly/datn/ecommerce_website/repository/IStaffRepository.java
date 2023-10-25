@@ -10,6 +10,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IStaffRepository extends JpaRepository<Staffs, String> {
 
-    @Query("SELECT c FROM Staffs c WHERE c.users.roles.roleCode = 'nv' OR c.users.roles.roleCode = 'admin'")
-    Page<Staffs> findAllStaffsWithUsersRoles(Pageable pageable);
+//    @Query("SELECT c FROM Staffs c WHERE c.users.roles.roleCode = 'nv' OR c.users.roles.roleCode = 'admin'")
+
+
+
+    @Query(value= """
+          SELECT * from staffs;
+""",nativeQuery = true)
+    Page<Staffs> getAll(Pageable pageable);
+
 }

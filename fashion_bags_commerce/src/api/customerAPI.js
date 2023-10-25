@@ -12,7 +12,7 @@ const customerAPI = {
   },
 
   getRoles(params) {
-    const url = '/role';
+    const url = '/role/';
     return axiosClient.get(url, { params });
   },
 

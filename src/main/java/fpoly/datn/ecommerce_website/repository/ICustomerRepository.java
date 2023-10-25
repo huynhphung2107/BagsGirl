@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICustomerRepository extends JpaRepository<Customers, String> {
 
-    @Query("SELECT c FROM Customers c WHERE c.users.roles.roleCode = 'user'")
+    @Query(value = """
+            select * from customers;
+            """,nativeQuery = true)
     Page<Customers> findAllCustomersWithUsersRoles(Pageable pageable);
 }
