@@ -24,22 +24,22 @@ import java.util.UUID;
 @ToString
 @Builder
 @Entity
-@Table(name = "balo")
-public class Balo {
+@Table(name = "products")
+public class Products {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String productId;
 
-    @Column(name = "balo_code")
-    private String baloCode;
+    @Column(name = "product_code")
+    private String productCode;
 
-    @Column(name = "balo_name")
-    private String baloName;
+    @Column(name = "product_name")
+    private String productName;
 
-    @Column(name = "status")
-    private int baloStatus;
+    @Column(name = "product_status")
+    private int productStatus;
 
 
     @ManyToOne

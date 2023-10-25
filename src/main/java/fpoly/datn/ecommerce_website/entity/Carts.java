@@ -17,46 +17,40 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "shift")
+@Table(name = "carts")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Shift {
-    //    @Pattern(regexp = "0[0-9\\s.-]{9,9}", message = "Không quá 10 số và bắt đầu bằng 0")
+public class Carts {
     @Id
-    @Column(name = "id")
+    @Column(name = "cart_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String cartId;
 
-    @Column(name = "shift_code")
-    private String shiftCode;
+    @Column(name = "cart_code")
+    private String cartCode;
 
-    @Column(name = "shift_start_time")
+    @Column(name = "cart_create_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime shiftStartTime;
+    private Date cartCreatTime;
 
-    @Column(name = "shift_end_time")
+    @Column(name = "cart_payment_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime shiftEndTime;
+    private Date cartPaymentTime;
 
-    @Column(name = "create_by")
-    private String shiftCreateBy;
+    @Column(name = "cart_note")
+    private String cartNote;
 
-    @Column(name = "note")
-    private String shiftNote;
-
-    @Column(name = "status")
-    private Integer shiftStatus;
+    @Column(name = "cart_status")
+    private Integer cartStatus;
 
     @ManyToOne
-    @JoinColumn(name = "staff_id")
-    private Staff staff;
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    private Customers customers;
 
 }

@@ -13,36 +13,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "size")
+@Table(name = "compartments")
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-
-public class Size {
+public class Compartments {
 
     @Id
+    @Column(name = "compartment_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
-    private String id;
+    private String compartmentID;
 
-    @Column(name = "code")
-    private String sizeCode;
+    @Column(name = "compartment_code")
+    private String compartmentCode;
 
-    @Column(name = "name")
-    private String sizeName;
+    @Column(name = "compartment_name")
+    private String compartmentName;
 
-    @Column(name = "length_size")
-    private String lengthSize;
-
-    @Column(name = "wide_size")
-    private String wideSize;
-
-    @Column(name = "height_size")
-    private String heightSize;
-
-    @Column(name = "size-status")
-    private Integer sizeStatus;
-
+    @Column(name = "compartment_status")
+    private Integer compartmentStatus;
 }

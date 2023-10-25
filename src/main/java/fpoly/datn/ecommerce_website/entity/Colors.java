@@ -7,33 +7,33 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
+import java.util.UUID;
+
 
 @Entity
-@Table(name = "material")
+@Table(name = "colors")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@ToString
-@Setter
 @Getter
-public class Material {
+@Setter
+
+public class Colors {
+
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @Column(name = "color_id")
+    private UUID colorId;
 
-    @Column(name = "material_code")
-    private String materialCode;
+    @Column(name = "color_code")
+    private String colorCode;
 
-    @Column(name = "material_name")
-    private String materialName;
+    @Column(name = "color_name")
+    private String colorName;
 
-    @Column(name = "material_status")
-    private Integer materialStatus;
-
+    @Column(name = "color_status")
+    private Integer colorStatus;
 }

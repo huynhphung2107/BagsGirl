@@ -1,6 +1,5 @@
 package fpoly.datn.ecommerce_website.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,26 +12,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Entity
-@Table(name = "user_role")
+@Table(name = "buckle_types")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class UserRole implements Serializable {
+public class BuckleTypes {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "buckle_type_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String buckleTypeId;
 
-    @Column(name = "role_code")
-    private String roleCode;
+    @Column(name = "buckle_type_code")
+    private String buckleTypeCode;
 
-    @Column(name = "role_name")
-    private String roleName;
+    @Column(name = "buckle_type_name")
+    private String buckleTypeName;
+
+    @Column(name = "buckle_type_status")
+    private Integer buckleTypeStatus;
 }

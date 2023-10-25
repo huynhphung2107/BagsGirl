@@ -17,40 +17,45 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "shifts")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Cart {
+public class Shifts {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "cart_code")
-    private String cartCode;
+    @Column(name = "shift_code")
+    private String shiftCode;
 
-    @Column(name = "cart_create_time")
+    @Column(name = "shift_start_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date cartCreatTime;
+    private LocalDateTime shiftStartTime;
 
-    @Column(name = "cart_payment_time")
+    @Column(name = "shift_end_time")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date cartPaymentTime;
+    private LocalDateTime shiftEndTime;
+
+    @Column(name = "create_by")
+    private String shiftCreateBy;
 
     @Column(name = "note")
-    private String cartNote;
+    private String shiftNote;
 
     @Column(name = "status")
-    private Integer cartStatus;
+    private Integer shiftStatus;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "staff_id")
+    private Staff staff;
 
 }

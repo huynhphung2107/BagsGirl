@@ -1,12 +1,13 @@
 package fpoly.datn.ecommerce_website.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,32 +17,28 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "image")
+@Table(name = "customers")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 @Setter
 @Getter
-public class Image {
+public class Customers {
+
     @Id
-    @Column(name = "id")
+    @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String customerId;
 
-    @Column(name = "image_code")
-    private String imgCode;
+    @Column(name = "customer_status")
+    private Integer customerStatus;
+    @Column(name = "customer_points")
+    private Integer customerPoint;
 
-    @Column(name = "image_name")
-    private String imgName;
+    @OneToOne()
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Users userInfo;
 
-    @Column(name = "image_url")
-    private String imgUrl;
-    @Column(name = "isPrimary")
-    private String isPrimary;
-
-    @ManyToOne
-    @JoinColumn(name = "baloDetailID")
-    private  BaloDetail baloDetail;
 
 }

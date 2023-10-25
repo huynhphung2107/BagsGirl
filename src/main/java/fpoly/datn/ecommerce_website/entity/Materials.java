@@ -11,27 +11,29 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Table(name = "compartment")
-@Setter
-@Getter
+@Table(name = "materials")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Compartment {
-
+@ToString
+@Setter
+@Getter
+public class Materials {
     @Id
-    @Column(name = "id")
+    @Column(name = "material_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String materialId;
 
-    @Column(name = "compartment_code")
-    private String compartmentCode;
+    @Column(name = "material_code")
+    private String materialCode;
 
-    @Column(name = "compartment_name")
-    private String compartmentName;
+    @Column(name = "material_name")
+    private String materialName;
 
-    @Column(name = "compartment_status")
-    private Integer compartmentStatus;
+    @Column(name = "material_status")
+    private Integer materialStatus;
+
 }
