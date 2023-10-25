@@ -4,6 +4,8 @@ import fpoly.datn.ecommerce_website.dto.BaloDTO;
 import fpoly.datn.ecommerce_website.dto.Balo_BrandDTO;
 import fpoly.datn.ecommerce_website.entity.Balo;
 import fpoly.datn.ecommerce_website.entity.Brand;
+import fpoly.datn.ecommerce_website.entity.Brands;
+import fpoly.datn.ecommerce_website.entity.Products;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BaloServiceImpl;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BrandServiceImpl;
 import jakarta.validation.Valid;
@@ -55,8 +57,8 @@ public class BaloRestController {
     @RequestMapping(value = "/balo", method = RequestMethod.POST)
     public ResponseEntity<?> add(@Valid @RequestBody Balo_BrandDTO baloBrandDTO) {
 
-        Brand brand = brandService.findById(baloBrandDTO.getBrandID());
-        Balo balo = modelMapper.map(baloBrandDTO, Balo.class);
+        Brands brand = brandService.findById(baloBrandDTO.getBrandID());
+        Products balo = modelMapper.map(baloBrandDTO, Products.class);
         balo.setBrand(brand);
         return new ResponseEntity<>(baloService.save(balo), HttpStatus.OK);
     }

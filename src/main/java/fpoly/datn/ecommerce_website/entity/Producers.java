@@ -20,12 +20,12 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "producer")
-public class Producer {
+@Table(name = "producers")
+public class Producers {
     @Id
-    @Column(name = "id")
+    @Column(name = "producer_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String producerId;
 
     @Column(name = "producer_code")
     private String producerCode;

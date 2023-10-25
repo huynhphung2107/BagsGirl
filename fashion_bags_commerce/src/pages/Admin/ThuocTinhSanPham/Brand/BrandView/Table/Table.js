@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import brandAPI from '~/api/propertitesBalo/brandAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './tableBrand.css';
+import styles from './index.module.scss';
 import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);

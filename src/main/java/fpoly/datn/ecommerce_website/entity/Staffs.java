@@ -1,37 +1,43 @@
 package fpoly.datn.ecommerce_website.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Table(name = "buckle_type")
-@Setter
-@Getter
+@Table(name = "staffs")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BuckleType {
+@ToString
+@Setter
+@Getter
+public class Staffs {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "staff_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String staffId;
 
-    @Column(name = "buckle_type_code")
-    private String buckleTypeCode;
+    @Column(name = "staff_status")
+    private Integer staffStatus;
 
-    @Column(name = "buckle_type_name")
-    private String buckleTypeName;
+    @OneToOne()
+    @JsonManagedReference
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private Users users;
 
-    @Column(name = "buckle_type_status")
-    private Integer buckleTypeStatus;
+
 }

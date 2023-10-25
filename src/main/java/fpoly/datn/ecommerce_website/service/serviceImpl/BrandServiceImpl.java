@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BrandServiceImpl implements ServiceGenarel<Brand> {
+public class BrandServiceImpl implements ServiceGenarel<Brands> {
 
     @Autowired
     private IBrandRepository iBrandRepository;

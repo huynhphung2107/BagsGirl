@@ -15,18 +15,18 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "voucher")
+@Table(name = "vouchers")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 @Builder
-public class Voucher {
+public class Vouchers {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String voucherID;
 
     @Column(name = "voucher_code")
     private String voucherCode;
