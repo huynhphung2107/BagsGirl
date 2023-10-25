@@ -2,8 +2,6 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 
-
-import './staff.css';
 import TableContent from './Table/Table';
 import FormStaffCreate from '../StaffEdit/FormCreate/FormStaffCreate';
 // import FormstaffCreate from '../staffEdit/FormrCreate/FormstaffCreate';
@@ -20,7 +18,7 @@ function StaffView() {
       </Sider>
       <Layout className="layoutContent">
         <Header className="headerStyle">
-          <HeaderContent titlePage="Danh Sách staff" />
+          <HeaderContent titlePage="Danh Sách Nhân Viên" />
         </Header>
         <Content style={contentStyle}>
           <div>

@@ -33,7 +33,7 @@ public class ProductRestController {
     }
 
     //hienthi
-    @RequestMapping(value = "/product/panagition", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "1") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize

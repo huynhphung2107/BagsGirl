@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
 import brandAPI from '~/api/propertitesBalo/brandAPI';
+// import styles from './FormBrandEdit.module.scss';
 
 function FormBrandEdit(props) {
   const [open, setOpen] = useState(false);
@@ -16,7 +17,6 @@ function FormBrandEdit(props) {
   };
 
   const updateFunc = async (values) => {
-
     setErrorText('');
     try {
       const response = await brandAPI.update(values);
@@ -44,7 +44,19 @@ function FormBrandEdit(props) {
       });
       console.log(error);
     }
+    const CircularJSON = require('circular-json');
+
+    // Tạo một vòng tròn
+
+    // Chuyển đổi đối tượng thành JSON
+    const jsonString = CircularJSON.stringify(props);
+
+    console.log(jsonString);
+
+    // Chuyển đổi JSON thành đối tượng
+    const parsedObj = CircularJSON.parse(jsonString);
   };
+
   return (
     <Fragment>
       <div style={{ color: 'red' }}>
@@ -55,7 +67,6 @@ function FormBrandEdit(props) {
           title={'Edit - ' + props.brand.brandCode}
           width={400}
           onClose={onClose}
-
           open={open}
           bodyStyle={{
             paddingBottom: 80,
@@ -106,12 +117,11 @@ function FormBrandEdit(props) {
 
             <Row gutter={16}>
               <Col span={24}>
-                <Form.Item
-                  name="brandStatus">
+                <Form.Item name="brandStatus">
                   <Select placeholder="Vui lòng chọn Trạng Thái Brand">
-                    <Select.Option value='1'>Hoạt động</Select.Option>
-                    <Select.Option value='0'>Không hoạt động</Select.Option>
-                    <Select.Option value='-1'>Ngừng hoạt động</Select.Option>
+                    <Select.Option value="1">Hoạt động</Select.Option>
+                    <Select.Option value="0">Không hoạt động</Select.Option>
+                    <Select.Option value="-1">Ngừng hoạt động</Select.Option>
                   </Select>
                 </Form.Item>
               </Col>

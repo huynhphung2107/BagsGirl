@@ -2,7 +2,7 @@ import axiosClient from './axiosClient';
 
 const customerAPI = {
   getAll(pageNum, pageSize) {
-    const url = '/customer/';
+    const url = '/customer/pagination';
     return axiosClient.get(url, {
       params: {
         page: pageNum - 1,

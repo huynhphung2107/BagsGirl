@@ -1,11 +1,11 @@
 import axiosClient from './axiosClient';
 
 const staffAPI = {
-  getAll(pageNum,pageSize) {
-    const url = '/staff/';
+  getAll(pageNum, pageSize) {
+    const url = '/staff/pagination';
     return axiosClient.get(url, {
       params: {
-        page: pageNum -1,
+        page: pageNum - 1,
         size: pageSize,
       },
     });
@@ -20,8 +20,8 @@ const staffAPI = {
     return axiosClient.get(url);
   },
   getOne(id) {
-    const url = `staff?id=${id}`;
-    return axiosClient.get(url);
+    const url = `/staff?id=${id}`;
+    return axiosClient.get(url, { id });
   },
   add(data) {
     const url = `/staff`;

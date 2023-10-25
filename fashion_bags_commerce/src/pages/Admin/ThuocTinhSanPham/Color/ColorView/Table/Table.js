@@ -10,7 +10,7 @@ function TableContent() {
   const [baloList, setBaloList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(5);
   const [totalItem, setTotalItem] = useState(); // Số lượng dữ liệu tổng cộng (tùy chỉnh)
 
   const handleTableChange = (pagination, filters, sorter) => {
@@ -82,7 +82,7 @@ function TableContent() {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              handleDeleteBalo(record.id, 0);
+              handleDeleteBalo(record.colorId, 0);
               reload();
             }}
             onCancel={onCancel}
@@ -96,7 +96,7 @@ function TableContent() {
       width: 100,
     },
   ];
-  const onCancel = () => { };
+  const onCancel = () => {};
   const reload = () => {
     setLoading(true);
     getAllBalo(currentPage, pageSize);
@@ -118,7 +118,7 @@ function TableContent() {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setBaloList(data);
-      setTimeout(() => { }, 300);
+      setTimeout(() => {}, 300);
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }

@@ -2,17 +2,13 @@ import axiosClient from '../axiosClient';
 
 const materialAPI = {
   getAllPage(pageNum, pageSize) {
-    const url = '/material/';
+    const url = '/material/pagination';
     return axiosClient.get(url, {
       params: {
         page: pageNum - 1,
         size: pageSize,
       },
     });
-  },
-  getAll() {
-    const url = '/material/';
-    return axiosClient.get(url, {});
   },
   get(id) {
     const url = `/material?id=${id}`;

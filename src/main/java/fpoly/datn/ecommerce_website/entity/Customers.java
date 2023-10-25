@@ -5,44 +5,40 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Table(name = "sizes")
+@Table(name = "customers")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
-
-public class Sizes {
+@ToString
+@Setter
+@Getter
+public class Customers {
 
     @Id
+    @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "size_id")
-    private String sizeId;
+    private String customerId;
 
-    @Column(name = "size_code")
-    private String sizeCode;
+    @Column(name = "customer_status")
+    private Integer customerStatus;
 
-    @Column(name = "size_name")
-    private String sizeName;
+    @Column(name = "customer_points")
+    private Integer customerPoint;
 
-    @Column(name = "size_length")
-    private String lengthSize;
+    @OneToOne()
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private Users users;
 
-    @Column(name = "size_width")
-    private String wideSize;
-
-    @Column(name = "size_height")
-    private String heightSize;
-
-    @Column(name = "size_status")
-    private Integer sizeStatus;
 
 }

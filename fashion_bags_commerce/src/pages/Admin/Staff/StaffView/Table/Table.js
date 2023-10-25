@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import staffAPI from '~/api/staffAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './tableStaff.css';
+import styles from './index.module.scss';
 import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
@@ -12,15 +12,13 @@ const TableContent = () => {
   const [pagesSize, setPagesSize] = useState(5);
   const [totalItem, setTotalItem] = useState();
 
-  
-
   const onCancel = () => {};
   const reload = () => {
     setLoading(true);
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   useEffect(() => {
@@ -56,25 +54,25 @@ const TableContent = () => {
     },
     {
       title: 'Họ và tên',
-      dataIndex: ['userInfo', 'fullName'],
-      sorter: (a, b) => a.userInfo.fullName.localeCompare(b.userInfo.fullName),
+      dataIndex: ['users', 'fullName'],
+      sorter: (a, b) => a.users.fullName.localeCompare(b.users.fullName),
       width: 100,
     },
     {
       title: 'Tài khoản',
-      dataIndex: ['userInfo', 'account'],
-      sorter: (a, b) => a.userInfo.account.localeCompare(b.userInfo.account),
+      dataIndex: ['users', 'account'],
+      sorter: (a, b) => a.users.account.localeCompare(b.users.account),
       width: 100,
     },
     {
       title: 'SĐT',
-      dataIndex: ['userInfo', 'phoneNumber'],
-      sorter: (a, b) => a.userInfo.phoneNumber.localeCompare(b.userInfo.phoneNumber),
+      dataIndex: ['users', 'phoneNumber'],
+      sorter: (a, b) => a.users.phoneNumber.localeCompare(b.users.phoneNumber),
       width: 100,
     },
     {
       title: 'Giới tính',
-      dataIndex: ['userInfo', 'gender'],
+      dataIndex: ['users', 'gender'],
       width: 100,
       render: (gender) => {
         return gender ? 'Nam' : 'Nữ';
@@ -83,25 +81,24 @@ const TableContent = () => {
 
     {
       title: 'Địa chỉ',
-      dataIndex: ['userInfo', 'address'],
-      sorter: (a, b) => a.userInfo.address.localeCompare(b.userInfo.address),
+      dataIndex: ['users', 'address'],
+      sorter: (a, b) => a.users.address.localeCompare(b.users.address),
       width: 100,
     },
-    
+
     {
       title: 'Chức vụ',
-      dataIndex: ['userInfo', 'userRole','roleName'],
-      sorter: (a, b) => a.userInfo.userRole.roleName.localeCompare(b.userInfo.userRole.roleName),
+      dataIndex: ['users', 'roles', 'roleName'],
+      sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
       width: 100,
     },
     {
       title: 'Ghi chú',
-      dataIndex: ['userInfo', 'note'],
-      sorter: (a, b) => a.userInfo.note.localeCompare(b.userInfo.note),
+      dataIndex: ['users', 'userNote'],
+      sorter: (a, b) => a.users.userNote.localeCompare(b.users.userNote),
       width: 100,
-      
     },
-   
+
     {
       title: 'Trạng thái',
       dataIndex: 'staffStatus',
@@ -138,8 +135,8 @@ const TableContent = () => {
       render: (_, record) => (
         <Space size="middle">
           {/* <FormvoucherEdit voucher={record} /> */}
-          <FormStaffViewDetails id={record.id}/>
-          
+          <FormStaffViewDetails id={record.id} />
+
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"
@@ -151,9 +148,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger "
-          
-            icon={<DeleteOutlined />}>
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
@@ -185,7 +180,7 @@ const TableContent = () => {
           marginBottom: 16,
         }}
       >
-        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+        <Button type="primary" onClick={reload} loading={loading} icon={<SyncOutlined />}>
           Reload
         </Button>
         <span
@@ -204,7 +199,13 @@ const TableContent = () => {
         loading={loading}
       />
 
-      <Pagination total={totalItem} onChange={onChange} defaultCurrent={1} defaultPageSize={pagesSize} />
+      <Pagination
+        className={styles.pagination}
+        total={totalItem}
+        onChange={onChange}
+        defaultCurrent={1}
+        defaultPageSize={pagesSize}
+      />
     </div>
   );
 };
@@ -212,4 +213,3 @@ const TableContent = () => {
 export default TableContent;
 
 //add nhan vien
-

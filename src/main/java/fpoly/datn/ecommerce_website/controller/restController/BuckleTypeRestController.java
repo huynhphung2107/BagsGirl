@@ -47,7 +47,7 @@ public class BuckleTypeRestController {
     }
 
     //phan trang
-    @RequestMapping(value = "/buckletype/phanTrang", method = RequestMethod.GET)
+    @RequestMapping(value = "/buckletype/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
         return ResponseEntity.ok(buckleTypeService.findAllPhanTrang(pageNum, pageSize));
@@ -67,7 +67,7 @@ public class BuckleTypeRestController {
     ) {
         return new ResponseEntity<>(
                 buckleTypeService.save(
-                        modelMapper.map(buckletypeDTO, BuckleType.class))
+                        modelMapper.map(buckletypeDTO, BuckleTypes.class))
                 , HttpStatus.OK);
 
 
@@ -77,7 +77,7 @@ public class BuckleTypeRestController {
     @RequestMapping(value = "/buckletype", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@Valid @RequestBody BuckleTypeDTO buckletypeDTO) {
         return new ResponseEntity<>(buckleTypeService.save(
-                modelMapper.map(buckletypeDTO, BuckleType.class)
+                modelMapper.map(buckletypeDTO, BuckleTypes.class)
 
         ), HttpStatus.OK);
     }
@@ -96,17 +96,4 @@ public class BuckleTypeRestController {
         return new ResponseEntity<>("Delete Successfully!", HttpStatus.OK);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMesssage = error.getDefaultMessage();
-            errors.put(fieldName, errorMesssage);
-        });
-
-        return errors;
-    }
 }
