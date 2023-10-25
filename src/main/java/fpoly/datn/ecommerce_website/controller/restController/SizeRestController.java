@@ -34,7 +34,7 @@ public class SizeRestController {
     private SizeServiceImpl sizeService;
 
 
-    @RequestMapping(value = "/size/panagition", method = RequestMethod.GET)
+    @RequestMapping(value = "/size/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPagination(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize

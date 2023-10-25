@@ -50,7 +50,7 @@ public class ShiftRestController {
     }
 
     //PhanTrang
-    @RequestMapping(value = "/shift/phanTrang", method = RequestMethod.GET)
+    @RequestMapping(value = "/shift/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(defaultValue = "0", name = "page")Integer page){
         return ResponseEntity.ok(shiftService.findAllPhanTrang(page));
     }

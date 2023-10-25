@@ -2,7 +2,7 @@ import axiosClient from '../axiosClient';
 
 const sizeAPI = {
   getAllPaginantion(pageNum, pageSize) {
-    const url = '/size/';
+    const url = '/size/pagination';
     return axiosClient.get(url, {
       params: {
         page: pageNum - 1,
@@ -11,7 +11,7 @@ const sizeAPI = {
     });
   },
   getAll() {
-    const url = '/size/get-all';
+    const url = '/size/';
     return axiosClient.get(url, {});
   },
   get(id) {

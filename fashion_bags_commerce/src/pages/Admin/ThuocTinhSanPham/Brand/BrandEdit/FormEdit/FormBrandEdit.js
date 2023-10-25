@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
 import brandAPI from '~/api/propertitesBalo/brandAPI';
-import styles from './FormBrandEdit.module.scss';
+// import styles from './FormBrandEdit.module.scss';
 
 function FormBrandEdit(props) {
   const [open, setOpen] = useState(false);
@@ -59,7 +59,7 @@ function FormBrandEdit(props) {
 
   return (
     <Fragment>
-      <div className={styles.wrapper} style={{ color: 'red' }}>
+      <div style={{ color: 'red' }}>
         <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}>
           Edit
         </Button>

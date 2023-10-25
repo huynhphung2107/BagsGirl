@@ -36,7 +36,7 @@ const TableContent = () => {
 
   const getAllBrand = async (current, pageSize) => {
     try {
-      const response = await brandAPI.getAll_Pagination(current, pageSize);
+      const response = await brandAPI.getAllPagination(current, pageSize);
       const data = response.data.content;
       console.log(data);
       setTotalItem(response.data.totalElements);
@@ -48,26 +48,26 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 100,
+      width: 150,
       render: (text, record, index) => index + 1,
     },
     {
       title: 'Code',
       dataIndex: 'brandCode',
       sorter: (a, b) => a.brandCode.localeCompare(b.brandCode),
-      width: 100,
+      width: 150,
     },
     {
       title: 'Name Brand',
       dataIndex: 'brandName',
-      width: 100,
+      width: 150,
       sorter: (a, b) => a.brandName.localeCompare(b.brandName),
     },
     {
       title: 'Status',
       dataIndex: 'brandStatus',
 
-      width: 100,
+      width: 150,
       sorter: (a, b) => a.brandStatus.localeCompare(b.brandStatus),
       render: (status) => {
         let statusText;
@@ -106,7 +106,7 @@ const TableContent = () => {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              deleteHandle(record.id, 0);
+              deleteHandle(record.colorId, 0);
               reload();
             }}
             onCancel={onCancel}
@@ -117,8 +117,7 @@ const TableContent = () => {
           </Popconfirm>
         </Space>
       ),
-
-      width: 100,
+      width: 150,
     },
   ];
 
@@ -154,6 +153,7 @@ const TableContent = () => {
       </div>
 
       <Table
+        className={styles.table}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={data}
@@ -162,7 +162,13 @@ const TableContent = () => {
         loading={loading}
       />
 
-      <Pagination total={totalItem} onChange={onChange} defaultCurrent={1} defaultPageSize={pagesSize} />
+      <Pagination
+        className={styles.pagination}
+        total={totalItem}
+        onChange={onChange}
+        defaultCurrent={1}
+        defaultPageSize={pagesSize}
+      />
     </div>
   );
 };

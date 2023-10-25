@@ -42,7 +42,7 @@ public class TypeRestController {
     }
 
     //PhanTrang
-    @RequestMapping(value = "/type/panagition", method = RequestMethod.GET)
+    @RequestMapping(value = "/type/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
         return ResponseEntity.ok(typeService.findAllPhanTrang(pageNum, pageSize));

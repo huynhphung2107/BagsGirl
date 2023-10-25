@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import voucherAPI from '~/api/voucherAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './tableVoucher.css';
+import styles from './index.module.scss';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
@@ -141,9 +141,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger "
-          
-            icon={<DeleteOutlined />}>
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
@@ -194,7 +192,13 @@ const TableContent = () => {
         loading={loading}
       />
 
-      <Pagination total={totalItem} onChange={onChange} defaultCurrent={1} defaultPageSize={pagesSize} />
+      <Pagination
+        className={styles.pagination}
+        total={totalItem}
+        onChange={onChange}
+        defaultCurrent={1}
+        defaultPageSize={pagesSize}
+      />
     </div>
   );
 };

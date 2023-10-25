@@ -37,7 +37,7 @@ public class CustomerRestController {
         );
     }
 
-    @RequestMapping(value = "/customer/panagition", method = RequestMethod.GET)
+    @RequestMapping(value = "/customer/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPage(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize

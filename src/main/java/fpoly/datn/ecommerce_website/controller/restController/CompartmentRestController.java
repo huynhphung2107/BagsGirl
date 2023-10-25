@@ -45,7 +45,7 @@ public class CompartmentRestController {
     }
 
     //Phan trang
-    @RequestMapping(value = "/compartment/panagition", method = RequestMethod.GET)
+    @RequestMapping(value = "/compartment/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
         return ResponseEntity.ok(compartmentService.findAllPhanTrang(pageNum, pageSize));

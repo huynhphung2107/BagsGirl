@@ -30,7 +30,7 @@ public class VoucherRestController {
     private ModelMapper modelMapper;
 
     //GetAllPage
-    @RequestMapping(value = "/voucher/panagition", method = RequestMethod.GET)
+    @RequestMapping(value = "/voucher/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize

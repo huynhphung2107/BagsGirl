@@ -33,7 +33,7 @@ public class Customers {
     @Column(name = "customer_status")
     private Integer customerStatus;
 
-    @Column(name = "customer_point")
+    @Column(name = "customer_points")
     private Integer customerPoint;
 
     @OneToOne()

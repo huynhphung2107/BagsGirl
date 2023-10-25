@@ -31,7 +31,7 @@ public class CartRestController {
     }
 
     //PhanTrang
-    @RequestMapping(value = "/cart/panagition", method = RequestMethod.GET)
+    @RequestMapping(value = "/cart/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(defaultValue = "0", name = "page")Integer page){
         return ResponseEntity.ok(cartService.findAllPhanTrang(page));
     }

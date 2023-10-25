@@ -36,7 +36,7 @@ public class Sizes {
     @Column(name = "size_length")
     private String sizeLength;
 
-    @Column(name = "size_wide")
+    @Column(name = "size_width")
     private String sizeWidth;
 
     @Column(name = "size_height")

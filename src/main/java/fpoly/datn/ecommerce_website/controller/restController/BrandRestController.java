@@ -27,7 +27,7 @@ public class BrandRestController {
     private BrandServiceImpl brandService;
 
     //GetAllPage
-    @RequestMapping(value = "/brand/panagition", method = RequestMethod.GET)
+    @RequestMapping(value = "/brand/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize

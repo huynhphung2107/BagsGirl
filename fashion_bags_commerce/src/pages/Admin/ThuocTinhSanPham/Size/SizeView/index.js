@@ -3,7 +3,6 @@ import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../SizeView/Table/Table'
 
-import './size.css';
 import FormSizeCreate from '../SizeEdit/FormCreate/FormSizeCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
