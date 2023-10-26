@@ -69,7 +69,7 @@ function TableContent() {
                         okText="Đồng ý"
                         cancelText="Không"
                         onConfirm={() => {
-                            handleDeleteProducer(record.id, -1);
+                            handleDeleteProducer(record.producerId, -1);
                             reload();
                         }}
                         onCancel={onCancel}
@@ -160,7 +160,7 @@ function TableContent() {
                         x: 1000,
                         y: 500,
                     }}
-                    rowKey={(record) => record.id}
+                    rowKey={(record) => record.producerId}
                     columns={columns}
                     dataSource={producerList}
                     onChange={handleTableChange}

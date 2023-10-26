@@ -69,7 +69,7 @@ function TableContent() {
                         okText="Đồng ý"
                         cancelText="Không"
                         onConfirm={() => {
-                            handleDeleteType(record.id, -1);
+                            handleDeleteType(record.typeId, -1);
                             reload();
                         }}
                         onCancel={onCancel}
@@ -160,7 +160,7 @@ function TableContent() {
                         x: 1000,
                         y: 500,
                     }}
-                    rowKey={(record) => record.id}
+                    rowKey={(record) => record.typeId}
                     columns={columns}
                     dataSource={typeList}
                     onChange={handleTableChange}

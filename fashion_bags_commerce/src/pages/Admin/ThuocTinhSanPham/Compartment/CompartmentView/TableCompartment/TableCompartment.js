@@ -69,7 +69,7 @@ function TableContent() {
                         okText="Đồng ý"
                         cancelText="Không"
                         onConfirm={() => {
-                            handleDeleteCompartment(record.id, -1);
+                            handleDeleteCompartment(record.compartmentId, -1);
                             reload();
                         }}
                         onCancel={onCancel}
@@ -160,7 +160,7 @@ function TableContent() {
                         x: 1000,
                         y: 500,
                     }}
-                    rowKey={(record) => record.id}
+                    rowKey={(record) => record.compartmentId}
                     columns={columns}
                     dataSource={compartmentList}
                     onChange={handleTableChange}
