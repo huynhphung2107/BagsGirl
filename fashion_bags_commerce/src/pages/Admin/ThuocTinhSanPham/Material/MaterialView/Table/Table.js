@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import materialAPI from '~/api/propertitesBalo/materialAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './tableMaterial.css';
+import styles from './index.module.scss';
 import FormMaterialEdit from '../../MaterialEdit/FormEdit/FormMaterialEdit';
 // import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
 const TableContent = () => {
@@ -18,7 +18,7 @@ const TableContent = () => {
     getAllPage(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 1500);
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const TableContent = () => {
     getAllPage(current, pageSize);
   };
 
-  const getAllPage= async (current, pageSize) => {
+  const getAllPage = async (current, pageSize) => {
     try {
       const response = await materialAPI.getAllPage(current, pageSize);
       const data = response.data.content;
@@ -49,26 +49,26 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 100,
+      width: 150,
       render: (text, record, index) => index + 1,
     },
     {
       title: 'Code',
       dataIndex: 'materialCode',
       sorter: (a, b) => a.materialCode.localeCompare(b.materialCode),
-      width: 100,
+      width: 150,
     },
     {
       title: 'Name ',
       dataIndex: 'materialName',
-      width: 100,
+      width: 150,
       sorter: (a, b) => a.materialName.localeCompare(b.materialName),
     },
     {
       title: 'Status',
       dataIndex: 'materialStatus',
 
-      width: 100,
+      width: 150,
       sorter: (a, b) => a.materialStatus.localeCompare(b.materialStatus),
       render: (status) => {
         let statusText;
@@ -107,21 +107,19 @@ const TableContent = () => {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              deleteHandle(record.id, 0);
+              deleteHandle(record.materialId, 0);
               reload();
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger "
-          
-            icon={<DeleteOutlined />}>
+            <Button type="primary" className="btn btn-danger " icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
         </Space>
       ),
 
-      width: 100,
+      width: 150,
     },
   ];
 
@@ -129,7 +127,7 @@ const TableContent = () => {
     const xoa = await materialAPI.updateStatus(id, status);
     notification.info({
       message: 'Hủy trạng thái',
-      description: 'Đã hủy trang thái thành công'
+      description: 'Đã hủy trang thái thành công',
     });
     getAllPage(currentPage, pagesSize);
     console.log(xoa);
@@ -165,7 +163,13 @@ const TableContent = () => {
         loading={loading}
       />
 
-      <Pagination total={totalItem} onChange={onChange} defaultCurrent={1} defaultPageSize={pagesSize} />
+      <Pagination
+        className={styles.pagination}
+        total={totalItem}
+        onChange={onChange}
+        defaultCurrent={1}
+        defaultPageSize={pagesSize}
+      />
     </div>
   );
 };

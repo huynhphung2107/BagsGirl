@@ -1,9 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.BuckleType;
-import fpoly.datn.ecommerce_website.entity.Producer;
+import fpoly.datn.ecommerce_website.entity.Producers;
 import fpoly.datn.ecommerce_website.repository.IProducerRepository;
-import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import fpoly.datn.ecommerce_website.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,43 +12,43 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProducerServiceImpl implements TypeService<Producer> {
+public class ProducerServiceImpl implements TypeService<Producers> {
 
     @Autowired
     private IProducerRepository producerRepository;
 
     @Override
-    public List<Producer> findAll() {
+    public List<Producers> findAll() {
         return producerRepository.findAll();
     }
 
-    public Page<Producer> findAllPhanTrang(Integer page, Integer size){
+    public Page<Producers> findAllPhanTrang(Integer page, Integer size){
         Pageable pageable = PageRequest.of(page,size);
         return this.producerRepository.getAllPhanTrang(pageable);
     }
 
     @Override
-    public Producer findById(String id) {
+    public Producers findById(String id) {
         return producerRepository.findById(id).get();
     }
 
     @Override
-    public Producer save(Producer entity) {
+    public Producers save(Producers entity) {
         producerRepository.save(entity);
         return entity;
     }
 
     @Override
-    public Producer update(String id, Producer entity) {
-        Producer x = producerRepository.findById(id).get();
+    public Producers update(String id, Producers entity) {
+        Producers x = producerRepository.findById(id).get();
         x.setProducerCode(entity.getProducerCode());
         x.setProducerName(entity.getProducerName());
         x.setProducerStatus(entity.getProducerStatus());
         producerRepository.save(entity);
         return entity;
     }
-    public Producer updateStatus(String id, int status) {
-        Producer x = producerRepository.findById(id).get();
+    public Producers updateStatus(String id, int status) {
+        Producers x = producerRepository.findById(id).get();
         x.setProducerStatus(status);
         return producerRepository.save(x);
     }
@@ -63,7 +61,7 @@ public class ProducerServiceImpl implements TypeService<Producer> {
     }
 
     @Override
-    public List<Producer> searchByName(String name) {
+    public List<Producers> searchByName(String name) {
         return null;
     }
 

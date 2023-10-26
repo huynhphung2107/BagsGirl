@@ -1,11 +1,8 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 
-import fpoly.datn.ecommerce_website.dto.CartDTO;
 import fpoly.datn.ecommerce_website.dto.ShiftDTO;
-import fpoly.datn.ecommerce_website.entity.Cart;
-import fpoly.datn.ecommerce_website.entity.Shift;
-import fpoly.datn.ecommerce_website.service.ShiftService;
+import fpoly.datn.ecommerce_website.entity.Shifts;
 import fpoly.datn.ecommerce_website.service.serviceImpl.ShiftServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -46,14 +43,14 @@ public class ShiftRestController {
                 this.shiftService.findAll()
                         .stream()
                         .map(shift -> modelMapper.map(shift, ShiftDTO.class))
-                        .sorted(Comparator.comparing(ShiftDTO::getCode)) // Sắp xếp theo trường "name"
+                        .sorted(Comparator.comparing(ShiftDTO::getShiftCode)) // Sắp xếp theo trường "name"
                         .collect(Collectors.toList())
                 , HttpStatus.OK
         );
     }
 
     //PhanTrang
-    @RequestMapping(value = "/shift/phanTrang", method = RequestMethod.GET)
+    @RequestMapping(value = "/shift/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(defaultValue = "0", name = "page")Integer page){
         return ResponseEntity.ok(shiftService.findAllPhanTrang(page));
     }
@@ -71,7 +68,7 @@ public class ShiftRestController {
 
     //Add
     @RequestMapping(value = "/shift", method = RequestMethod.POST)
-    public ResponseEntity<Shift> add(@RequestBody @Valid ShiftDTO shiftDTO) {
+    public ResponseEntity<Shifts> add(@RequestBody @Valid ShiftDTO shiftDTO) {
         return new ResponseEntity<>(
                 this.shiftService.save(shiftDTO)
                 , HttpStatus.OK);
@@ -97,19 +94,5 @@ public class ShiftRestController {
         }else{
             return ResponseEntity.ok("id không tồn tại để xóa!!");
         }
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMesssage = error.getDefaultMessage();
-            errors.put(fieldName, errorMesssage);
-        });
-
-        return errors;
     }
 }

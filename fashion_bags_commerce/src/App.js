@@ -19,9 +19,8 @@ import MaterialView from './pages/Admin/ThuocTinhSanPham/Material/MaterialView';
 import ProducerView from './pages/Admin/ThuocTinhSanPham/Producer/ProducerView/indexProducerView';
 import VoucherView from './pages/Admin/Voucher/VoucherView';
 import StaffView from './pages/Admin/Staff/StaffView';
-
 import SalesCounter from './pages/Admin/SalesManager/SalesCounter';
-import AccountView from './pages/Admin/Account/AccountView/indexAcountView';
+import CustomerView from './pages/Admin/Customer/CustomerView';
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
@@ -40,10 +39,10 @@ const dynamicRoutes = [
   { path: '/producer-view', component: <ProducerView />, title: 'K' },
   { path: '/voucher', component: <VoucherView />, title: 'L' },
   { path: '/staff-view', component: <StaffView />, title: 'M' },
+  { path: '/customer-view', component: <CustomerView />, title: 'M' },
 
   { path: '/product-add', component: <ProductAdd />, title: 'Liên hệ' },
   { path: '/sales-counter', component: <SalesCounter />, title: 'Liên hệ' },
-  { path: '/account-view', component: <AccountView />, title: 'Tài khoản' },
 ];
 
 function App() {

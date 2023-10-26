@@ -1,9 +1,10 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.VoucherDTO;
-import fpoly.datn.ecommerce_website.entity.Voucher;
+import fpoly.datn.ecommerce_website.entity.Vouchers;
 import fpoly.datn.ecommerce_website.service.VoucherService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,26 +30,26 @@ public class VoucherRestController {
     private ModelMapper modelMapper;
 
     //GetAllPage
-    @RequestMapping(value = "/voucher/", method = RequestMethod.GET)
+    @RequestMapping(value = "/voucher/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
-        Page<Voucher> voucherPage = voucherService.findAllPage(pageNum, pageSize);
+        Page<Vouchers> voucherPage = voucherService.findAllPage(pageNum, pageSize);
         return new ResponseEntity<>
                 (voucherPage, HttpStatus.OK);
     }
 
     //GetAllList
-//    @RequestMapping(value = "/voucher", method = RequestMethod.GET)
-//    public ResponseEntity<List<VoucherDTO>> getAll() {
-//        return new ResponseEntity<>(
-//                this.voucherService.fillAll()
-//                        .stream()
-//                        .map(voucher -> modelMapper.map(voucher, VoucherDTO.class))
-//                        .collect(Collectors.toList())
-//                , HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/voucher/", method = RequestMethod.GET)
+    public ResponseEntity<List<VoucherDTO>> getAll() {
+        return new ResponseEntity<>(
+                this.voucherService.fillAll()
+                        .stream()
+                        .map(voucher -> modelMapper.map(voucher, VoucherDTO.class))
+                        .collect(Collectors.toList())
+                , HttpStatus.OK);
+    }
 
 
     //getOne
@@ -56,8 +57,8 @@ public class VoucherRestController {
     
     //add
     @RequestMapping(value = "/voucher", method = RequestMethod.POST)
-    public ResponseEntity<Voucher> save(@Valid @RequestBody VoucherDTO voucherDTO) {
-        Voucher voucher = modelMapper.map(voucherDTO, Voucher.class);
+    public ResponseEntity<Vouchers> save(@Valid @RequestBody VoucherDTO voucherDTO) {
+        Vouchers voucher = modelMapper.map(voucherDTO, Vouchers.class);
         return new ResponseEntity<>(
                 this.voucherService.add(voucher)
                 , HttpStatus.OK);
@@ -69,7 +70,7 @@ public class VoucherRestController {
     
     //update status
     @RequestMapping(value = "/voucher/update-status", method = RequestMethod.PUT)
-    public ResponseEntity<Voucher> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+    public ResponseEntity<Vouchers> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(voucherService.updateStatus(id, status),
                 HttpStatus.OK);
 

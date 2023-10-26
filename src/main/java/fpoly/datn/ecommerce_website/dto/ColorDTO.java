@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 
 public class ColorDTO {
-    private UUID id;
+    private UUID colorId;
     private String colorCode;
     private String colorName;
     private Integer colorStatus;

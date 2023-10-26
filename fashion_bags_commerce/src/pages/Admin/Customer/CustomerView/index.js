@@ -2,7 +2,6 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 
-import './customer.css';
 import TableContent from './Table/Table';
 // import FormStaffCreate from '../StaffEdit/FormCreate/FormStaffCreate';
 

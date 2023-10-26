@@ -1,9 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.ImageDTO;
-import fpoly.datn.ecommerce_website.dto.TypeDTO;
-import fpoly.datn.ecommerce_website.entity.Image;
-import fpoly.datn.ecommerce_website.entity.Type;
+import fpoly.datn.ecommerce_website.entity.Images;
 import fpoly.datn.ecommerce_website.service.serviceImpl.ImageServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -51,8 +49,8 @@ public class ImageRestController {
 
     //Add
     @RequestMapping(value = "/image", method = RequestMethod.POST)
-    public ResponseEntity<Image> add(@RequestBody @Valid ImageDTO imageDTO) {
-        Image image = modelMapper.map(imageDTO, Image.class);
+    public ResponseEntity<Images> add(@RequestBody @Valid ImageDTO imageDTO) {
+        Images image = modelMapper.map(imageDTO, Images.class);
         return new ResponseEntity<>(
                 this.imageService.save(image)
                 , HttpStatus.OK);
@@ -69,8 +67,8 @@ public class ImageRestController {
 //        }
 //    }
     @RequestMapping(value = "/image", method = RequestMethod.PUT)
-    public ResponseEntity<Image> update(@RequestBody @Valid ImageDTO imageDTO) {
-        Image image = modelMapper.map(imageDTO, Image.class);
+    public ResponseEntity<Images> update(@RequestBody @Valid ImageDTO imageDTO) {
+        Images image = modelMapper.map(imageDTO, Images.class);
         return new ResponseEntity<>(
                 this.imageService.save(image)
                 , HttpStatus.OK);
@@ -80,17 +78,5 @@ public class ImageRestController {
     @RequestMapping(value = "/image", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@RequestParam String id) {
         return new ResponseEntity<>(this.imageService.delete(id), HttpStatus.OK);
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMesssage = error.getDefaultMessage();
-            errors.put(fieldName, errorMesssage);
-        });
-        return errors;
     }
 }

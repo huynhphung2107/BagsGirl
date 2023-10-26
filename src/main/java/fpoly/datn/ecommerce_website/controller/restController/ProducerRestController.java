@@ -1,8 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.ProducerDTO;
-import fpoly.datn.ecommerce_website.entity.Producer;
-import fpoly.datn.ecommerce_website.entity.Type;
+import fpoly.datn.ecommerce_website.entity.Producers;
 import fpoly.datn.ecommerce_website.service.serviceImpl.ProducerServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -45,7 +44,7 @@ public class ProducerRestController {
     }
 
     //Phan trang
-    @RequestMapping(value = "/producer/phanTrang", method = RequestMethod.GET)
+    @RequestMapping(value = "/producer/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
         return ResponseEntity.ok(producerService.findAllPhanTrang(pageNum, pageSize));
@@ -61,8 +60,8 @@ public class ProducerRestController {
 
     //Add
     @RequestMapping(value = "/producer", method = RequestMethod.POST)
-    public ResponseEntity<Producer> save(@Valid @RequestBody ProducerDTO producerDTO) {
-        Producer producer = modelMapper.map(producerDTO, Producer.class);
+    public ResponseEntity<Producers> save(@Valid @RequestBody ProducerDTO producerDTO) {
+        Producers producer = modelMapper.map(producerDTO, Producers.class);
         return new ResponseEntity<>(
                 this.producerService.save(producer)
                 , HttpStatus.OK);
@@ -70,14 +69,14 @@ public class ProducerRestController {
 
     //Update
     @RequestMapping(value = "/producer", method = RequestMethod.PUT)
-    public ResponseEntity<Producer> update(@Valid @RequestBody ProducerDTO producerDTO) {
-        Producer producer = modelMapper.map(producerDTO, Producer.class);
+    public ResponseEntity<Producers> update(@Valid @RequestBody ProducerDTO producerDTO) {
+        Producers producer = modelMapper.map(producerDTO, Producers.class);
         return new ResponseEntity<>(
                 this.producerService.save(producer)
                 , HttpStatus.OK);
     }
     @RequestMapping(value = "/producer/update-status", method = RequestMethod.PUT)
-    public ResponseEntity<Producer> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+    public ResponseEntity<Producers> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(producerService.updateStatus(id, status),
                 HttpStatus.OK);
 
@@ -90,22 +89,6 @@ public class ProducerRestController {
         return new ResponseEntity<>(
                 "Delete Successfuly"
                 , HttpStatus.OK);
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMesssage = error.getDefaultMessage();
-            errors.put(fieldName, errorMesssage);
-        });
-
-        return errors;
     }
 
 }

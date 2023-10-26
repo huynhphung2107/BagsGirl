@@ -1,11 +1,11 @@
 import axiosClient from './axiosClient';
 
 const voucherAPI = {
-  getAll(pageNum,pageSize) {
-    const url = '/voucher/';
+  getAll(pageNum, pageSize) {
+    const url = '/voucher/pagination';
     return axiosClient.get(url, {
       params: {
-        page: pageNum -1,
+        page: pageNum - 1,
         size: pageSize,
       },
     });

@@ -1,24 +1,24 @@
 package fpoly.datn.ecommerce_website.service;
 
 import fpoly.datn.ecommerce_website.dto.CartDTO;
-import fpoly.datn.ecommerce_website.entity.Cart;
+import fpoly.datn.ecommerce_website.entity.Carts;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 //update so với bản ServiceGenarelTwo phần findAllPhanTrang
 public interface CartService {
-    List<Cart> findAll();
+    List<Carts> findAll();
 
-    Page<Cart> findAllPhanTrang(Integer page);
+    Page<Carts> findAllPhanTrang(Integer page);
 
-    Cart findById(String id);
+    Carts findById(String id);
 
-    Cart save(CartDTO cartDTO);
+    Carts save(CartDTO cartDTO);
 
-    Cart update(CartDTO cartDTO, String id);
+    Carts update(CartDTO cartDTO, String id);
 
     Boolean delete(String id);
 
-    List<Cart> searchByName(String name);
+    List<Carts> searchByName(String name);
 }

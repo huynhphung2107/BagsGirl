@@ -1,10 +1,10 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.StaffDTO;
-import fpoly.datn.ecommerce_website.entity.Staff;
-import fpoly.datn.ecommerce_website.entity.UserInfo;
-import fpoly.datn.ecommerce_website.repository.IUserInfoRepository;
-import fpoly.datn.ecommerce_website.repository.IUserRoleRepository;
+import fpoly.datn.ecommerce_website.entity.Staffs;
+import fpoly.datn.ecommerce_website.entity.Users;
+import fpoly.datn.ecommerce_website.repository.IUserRepository;
+import fpoly.datn.ecommerce_website.repository.IRoleRepository;
 import fpoly.datn.ecommerce_website.service.serviceImpl.CustomerServiceImpl;
 import fpoly.datn.ecommerce_website.service.serviceImpl.StaffServiceImpl;
 import jakarta.validation.Valid;
@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/manage")
@@ -36,37 +38,37 @@ public class StaffRestController {
     private StaffServiceImpl staffService;
 
     @Autowired
-    private IUserRoleRepository userRoleService;
+    private IRoleRepository userRoleService;
 
     @Autowired
-    private IUserInfoRepository userInfoRepository;
+    private IUserRepository userInfoRepository;
     @Autowired
     private ModelMapper modelMapper;
 
-//    @RequestMapping("/staff/")
-////    public ResponseEntity<List<StaffDTO>> getAll() {
-////        List<Staff> list = staffService.findAll();
-////        System.out.println(list.size());
-////        return new ResponseEntity<>(
-////                list.stream().map(staff -> modelMapper.map(staff, StaffDTO.class)).collect(Collectors.toList())
-////                , HttpStatus.OK
-////        );
-////    }
+    @RequestMapping("/staff/")
+    public ResponseEntity<List<StaffDTO>> getAll() {
+        List<Staffs> list = staffService.findAll();
+        System.out.println(list.size());
+        return new ResponseEntity<>(
+                list.stream().map(staff -> modelMapper.map(staff, StaffDTO.class)).collect(Collectors.toList())
+                , HttpStatus.OK
+        );
+    }
 
     //GetAllPage
-    @RequestMapping(value = "/staff/", method = RequestMethod.GET)
+    @RequestMapping(value = "/staff/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
-        Page<Staff> staffPage = staffService.findAllStaffsWithUserInfoUserRole(pageNum, pageSize);
+        Page<Staffs> staffPage = staffService.findAllStaffsWithUserInfoUserRole(pageNum, pageSize);
         return new ResponseEntity<>
                 (staffPage, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/staff", method = RequestMethod.GET)
     public ResponseEntity<StaffDTO> getOne(@RequestParam("id") String id) {
-        Staff staff = staffService.findById(id);
+        Staffs staff = staffService.findById(id);
         if (staff == null) {
             // Handle the case when no staff member is found with the given ID, for example, return a not found response.
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -76,18 +78,18 @@ public class StaffRestController {
         StaffDTO staffDTO = modelMapper.map(staff, StaffDTO.class);
 
         // Retrieve additional information from the UserInfo entity and populate it in StaffDTO
-        UserInfo userInfo = staff.getUserInfo();
+        Users userInfo = staff.getUsers();
         if (userInfo != null) {
             staffDTO.setFullName(userInfo.getFullName());
             staffDTO.setAccount(userInfo.getAccount());
             staffDTO.setPassword(userInfo.getPassword());
             staffDTO.setEmail(userInfo.getEmail());
-            staffDTO.setUserInfoStatus(userInfo.getUserInfoStatus());
+            staffDTO.setUsersStatus(userInfo.getUserStatus());
             staffDTO.setGender(userInfo.getGender());
             staffDTO.setPhoneNumber(userInfo.getPhoneNumber());
             staffDTO.setAddress(userInfo.getAddress());
-            staffDTO.setNote(userInfo.getNote());
-            staffDTO.setUserInfoUserRoleId(userInfo.getUserRole().getRoleCode());
+            staffDTO.setUserNote(userInfo.getUserNote());
+            staffDTO.setUsersRolesRoleId(userInfo.getRoles().getRoleCode());
         }
 
         return new ResponseEntity<>(staffDTO, HttpStatus.OK);
@@ -95,7 +97,7 @@ public class StaffRestController {
 
 
     @RequestMapping(value = "/staff", method = RequestMethod.POST)
-    public ResponseEntity<Staff> add(@RequestBody StaffDTO staffDTO) {
+    public ResponseEntity<Staffs> add(@RequestBody StaffDTO staffDTO) {
         return new ResponseEntity<>(this.staffService.save(staffDTO), HttpStatus.OK);
     }
 
@@ -110,7 +112,7 @@ public class StaffRestController {
 
     //updateStatus
     @RequestMapping(value = "/staff/update-status", method = RequestMethod.PUT)
-    public ResponseEntity<Staff> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+    public ResponseEntity<Staffs> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(staffService.updateStatus(id, status),
                 HttpStatus.OK);
 

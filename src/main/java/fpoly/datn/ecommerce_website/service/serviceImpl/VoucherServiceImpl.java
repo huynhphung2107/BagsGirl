@@ -1,6 +1,6 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.Voucher;
+import fpoly.datn.ecommerce_website.entity.Vouchers;
 import fpoly.datn.ecommerce_website.repository.IVoucherRepository;
 import fpoly.datn.ecommerce_website.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +18,34 @@ public class VoucherServiceImpl implements VoucherService {
     private IVoucherRepository iVoucherRepository;
 
     @Override
-    public Page<Voucher> findAllPage(Integer page, Integer size) {
+    public Page<Vouchers> findAllPage(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         return iVoucherRepository.findAll(pageable);
     }
 
     @Override
-    public List<Voucher> fillAll() {
+    public List<Vouchers> fillAll() {
         return iVoucherRepository.findAll();
     }
 
     @Override
-    public Voucher getOne(String id) {
+    public Vouchers getOne(String id) {
         return iVoucherRepository.findById(id).get();
     }
 
     @Override
-    public Voucher add(Voucher voucher) {
+    public Vouchers add(Vouchers voucher) {
         return iVoucherRepository.save(voucher);
     }
 
     @Override
-    public Voucher update(Voucher voucher) {
+    public Vouchers update(Vouchers voucher) {
         return null;
     }
 
     @Override
-    public Voucher updateStatus(String id, int status) {
-        Voucher voucher = iVoucherRepository.findById(id).get();
+    public Vouchers updateStatus(String id, int status) {
+        Vouchers voucher = iVoucherRepository.findById(id).get();
         voucher.setVoucherStatus(status);
         return iVoucherRepository.save(voucher);
     }

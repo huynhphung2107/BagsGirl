@@ -1,12 +1,10 @@
-import './FormStaffViewDetails.css';
-
 import React, { Fragment, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
 import staffAPI from '~/api/staffAPI';
 const { Option } = Select;
 function FormStaffViewDetails(props) {
-  const { id } = props;
+  const { staffId } = props;
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -21,12 +19,10 @@ function FormStaffViewDetails(props) {
     pageSize: 10,
   });
   const fetchProducts = async () => {
-
     try {
-      const response = await staffAPI.getOne(id);
+      const response = await staffAPI.getOne(staffId);
       const data = response.data.content;
       setList(data);
-    
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }
@@ -44,7 +40,7 @@ function FormStaffViewDetails(props) {
     },
     {
       title: 'Full Name',
-      dataIndex: ['userInfo','fullName'],
+      dataIndex: ['users', 'fullName'],
       width: 300,
       fixed: 'left',
     },
@@ -79,22 +75,20 @@ function FormStaffViewDetails(props) {
       width: 100,
     },
     {
-        title: 'Ghi chú',
-        dataIndex: ['userInfo', 'note'],
-        width: 100,
-        
-      },
+      title: 'Ghi chú',
+      dataIndex: ['users', 'userNote'],
+      width: 100,
+    },
     {
-        title: 'Chức vụ',
-        dataIndex: ['userInfo', 'userRole','roleName'],
-        width: 100,
-      },
+      title: 'Chức vụ',
+      dataIndex: ['users', 'roles', 'roleName'],
+      width: 100,
+    },
   ];
-
 
   return (
     <Fragment>
-      <button className='btn btn-info'onClick={showDrawer} icon={<PlusOutlined />}>
+      <button className="btn btn-info" onClick={showDrawer} icon={<PlusOutlined />}>
         Detail
       </button>
       <Drawer
@@ -121,7 +115,6 @@ function FormStaffViewDetails(props) {
               marginBottom: 16,
             }}
           >
-          
             <span
               style={{
                 marginLeft: 8,

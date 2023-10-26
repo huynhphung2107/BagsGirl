@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './tableSize.css';
+import styles from './index.module.scss';
 // import FormsizeEdit from '../../sizeEdit/FormEdit/FormsizeEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
@@ -68,7 +68,7 @@ const TableContent = () => {
       dataIndex: 'size', // Use a single dataIndex for the combined data
       width: 100,
       sorter: (a, b) => a.lengthSize.localeCompare(b.lengthSize),
-      render: (text, record) => `${record.lengthSize} x ${record.wideSize} x ${record.heightSize}`,
+      render: (text, record) => `${record.sizeLength} x ${record.sizeWidth} x ${record.sizeHeight}`,
     },
     {
       title: 'Status',
@@ -113,12 +113,12 @@ const TableContent = () => {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              deleteHandle(record.id, 0);
+              deleteHandle(record.sizeId, 0);
               reload();
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+            <Button type="primary" className="btn btn-danger " icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
@@ -169,7 +169,13 @@ const TableContent = () => {
         loading={loading}
       />
 
-      <Pagination total={totalItem} onChange={onChange} defaultCurrent={1} defaultPageSize={pagesSize} />
+      <Pagination
+        className={styles.pagination}
+        total={totalItem}
+        onChange={onChange}
+        defaultCurrent={1}
+        defaultPageSize={pagesSize}
+      />
     </div>
   );
 };

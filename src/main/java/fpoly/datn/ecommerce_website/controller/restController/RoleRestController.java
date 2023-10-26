@@ -1,6 +1,6 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
-import fpoly.datn.ecommerce_website.entity.UserRole;
+import fpoly.datn.ecommerce_website.entity.Roles;
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +14,12 @@ import java.util.List;
 @RequestMapping("/api/manage")
 public class RoleRestController {
 
-    List<UserRole> list = new ArrayList<>();
+    List<Roles> list = new ArrayList<>();
     @Autowired
     private IRoleRepository iRoleRepository;
 
-    @GetMapping("/role")
-    public List<UserRole> getAll() {
+    @GetMapping("/role/")
+    public List<Roles> getAll() {
         list = iRoleRepository.findAll();
         return list;
     }

@@ -1,7 +1,5 @@
 package fpoly.datn.ecommerce_website.dto;
 
-import fpoly.datn.ecommerce_website.entity.Shift;
-import fpoly.datn.ecommerce_website.entity.Staff;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -21,24 +18,24 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 public class ShiftDTO {
-    private String id;
+    private String shiftId;
 
     @NotBlank( message = "Không được để trống code")
-    private String code;
+    private String shiftCode;
 
-    private LocalDateTime startTime;
+    private LocalDateTime shiftStartTime;
 
-    private LocalDateTime endTime;
+    private LocalDateTime shiftEndTime;
 
     @NotBlank( message = "Không được để trống createBy")
     private String createBy;
 
     @NotBlank( message = "Không được để trống note")
-    private String note;
+    private String shiftNote;
 
     @NotNull( message = "Không được để trống status")
-    private Integer status;
+    private Integer shiftStatus;
 
     @NotBlank( message = "Không được để trống staff")
-    private String staffUserInfoFullname;
+    private String staffUsersFullname;
 }

@@ -2,8 +2,6 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 
-
-import './voucher.css';
 import TableContent from './Table/Table';
 import FormVoucherCreate from '../VoucherEdit/FormrCreate/FormVoucherCreate';
 // import FormBrandCreate from '../BrandEdit/FormCreate/FormBrandCreate';

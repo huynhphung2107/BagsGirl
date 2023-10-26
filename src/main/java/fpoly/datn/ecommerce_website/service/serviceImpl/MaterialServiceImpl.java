@@ -1,7 +1,6 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.Brand;
-import fpoly.datn.ecommerce_website.entity.Material;
+import fpoly.datn.ecommerce_website.entity.Materials;
 import fpoly.datn.ecommerce_website.repository.IMaterialRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +13,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MaterialServiceImpl implements ServiceGenarel<Material> {
+public class MaterialServiceImpl implements ServiceGenarel<Materials> {
     @Autowired
     private IMaterialRepository materialRepository;
 
 
     @Override
-    public List<Material> findAll() {
+    public List<Materials> findAll() {
         return materialRepository.findAll();
     }
 
-    public Page<Material> findAllPage(Integer page, Integer size) {
+    public Page<Materials> findAllPage(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         return this.materialRepository.findAll(pageable);
     }
@@ -32,37 +31,37 @@ public class MaterialServiceImpl implements ServiceGenarel<Material> {
 
 
     @Override
-    public Material findById(String id) {
+    public Materials findById(String id) {
         return materialRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Material save(Material material) {
+    public Materials save(Materials material) {
         return materialRepository.save(material);
     }
 
     @Override
-    public Material update(Material material) {
+    public Materials update(Materials material) {
         return materialRepository.save(material);
     }
 
-    public Material updateStatus(String id, int status) {
-        Material material = materialRepository.findById(id).get();
+    public Materials updateStatus(String id, int status) {
+        Materials material = materialRepository.findById(id).get();
         material.setMaterialStatus(status);
         return materialRepository.save(material);
 
     }
 
     @Override
-    public List<Material> searchByName(String name) {
+    public List<Materials> searchByName(String name) {
         return null;
     }
 
     @Override
     public String delete(String id) {
-        Optional<Material> optional = materialRepository.findById(id);
+        Optional<Materials> optional = materialRepository.findById(id);
         if (optional.isPresent()) {
-            Material kh = optional.get();
+            Materials kh = optional.get();
             materialRepository.delete(kh);
             return "Delete successfully";
         } else {
