@@ -1,5 +1,6 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
+import fpoly.datn.ecommerce_website.dto.BrandDTO;
 import fpoly.datn.ecommerce_website.entity.Brands;
 import fpoly.datn.ecommerce_website.repository.IBrandRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
@@ -12,12 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BrandServiceImpl implements ServiceGenarel<Brands> {
+public class BrandServiceImpl{
 
     @Autowired
     private IBrandRepository iBrandRepository;
 
-    @Override
+
     public List<Brands> findAll() {
         return iBrandRepository.findAll();
     }
@@ -27,22 +28,23 @@ public class BrandServiceImpl implements ServiceGenarel<Brands> {
         return this.iBrandRepository.findAll(pageable);
     }
 
-    @Override
+
     public Brands findById(String id) {
         return iBrandRepository.findById(id).get();
     }
 
-    @Override
+
     public Brands save(Brands entity) {
         iBrandRepository.save(entity);
         return entity;
     }
 
-    @Override
-    public Brands update(Brands entity) {
-        Brands brand = iBrandRepository.findById(entity.getBrandId()).get();
-        brand.setBrandName(entity.getBrandName());
-        brand.setBrandStatus(entity.getBrandStatus());
+
+    public Brands update(BrandDTO brandDTO,String id) {
+        Brands brand = iBrandRepository.findById(id).get();
+        brand.setBrandCode(brandDTO.getBrandCode());
+        brand.setBrandName(brandDTO.getBrandName());
+        brand.setBrandStatus(brandDTO.getBrandStatus());
         return iBrandRepository.save(brand);
 
     }
@@ -54,14 +56,13 @@ public class BrandServiceImpl implements ServiceGenarel<Brands> {
 
     }
 
-    @Override
+   
     public String delete(String id) {
         iBrandRepository.deleteById(id);
 
         return "Delete successfully";
     }
 
-    @Override
     public List<Brands> searchByName(String name) {
         return null;
     }

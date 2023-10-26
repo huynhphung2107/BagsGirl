@@ -1,35 +1,40 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, initialValue, useEffect } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
+
+import { Button, Col, Modal, Form, Input, Row, Select, Space, notification } from 'antd';
 import brandAPI from '~/api/propertitesBalo/brandAPI';
 // import styles from './FormBrandEdit.module.scss';
 
 function FormBrandEdit(props) {
-  const [open, setOpen] = useState(false);
-  const [errorText, setErrorText] = useState('');
+  const [modalOpen, setIsModalOpen] = useState(false);
+  const [error, setErrorText] = useState(true);
+  const [form] = Form.useForm();
 
-  const showDrawer = () => {
-    setOpen(true);
+  const showModal = () => {
+    setIsModalOpen(true);
   };
 
-  const onClose = () => {
-    setOpen(false);
+  const handleOk = () => {
+    setIsModalOpen(false);
   };
 
-  const updateFunc = async (values) => {
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const updateFunc = async (props) => {
+    console.log(props);
     setErrorText('');
     try {
-      const response = await brandAPI.update(values);
+      const response = await brandAPI.update(props);
+
       notification.success({
         message: 'Update thành công',
         description: 'Dữ liệu đã được cập nhật thành công',
-        duration: 2,
+        duration: 1,
       });
-      // Loại bỏ dòng ghi log sau
-      // console.log(update)
-      // Loại bỏ dòng ghi log sau
-      // console.log(response)
-      onClose();
+
+      return response.data;
     } catch (error) {
       const errorResponse = error.response;
       if (errorResponse) {
@@ -42,93 +47,72 @@ function FormBrandEdit(props) {
         description: error.toString(),
         duration: 2,
       });
+      // console.log(error);
 
+      console.log(error);
     }
-    // const CircularJSON = require('circular-json');
-
-    // // Tạo một vòng tròn
-
-    // // Chuyển đổi đối tượng thành JSON
-    // const jsonString = CircularJSON.stringify(props);
-
-    // console.log(jsonString);
-
-    // // Chuyển đổi JSON thành đối tượng
-    // const parsedObj = CircularJSON.parse(jsonString);
   };
 
   return (
     <Fragment>
-      <div style={{ color: 'red' }}>
-        <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}>
-          Edit
-        </Button>
-        <Drawer
-          title={'Edit - ' + props.brand.brandCode}
-          width={400}
-          onClose={onClose}
-          open={open}
-          bodyStyle={{
-            paddingBottom: 80,
-          }}
-          footer={
-            <Space>
-              <Button onClick={onClose}>Cancel</Button>
-              <Button onClick={updateFunc} type="primary" className="btn btn-warning">
-                Edit
+      <Button type="primary" onClick={showModal} icon={<EditOutlined />}>
+        Edit
+      </Button>
+      <br></br>
+      <Modal title={'Edit - ' + props.brand.brandName} open={modalOpen} onCancel={handleCancel} footer={null}>
+        <div>
+          <Form
+            form={form}
+            labelCol={{
+              span: 8,
+            }}
+            style={{
+              maxWidth: 600,
+            }}
+            wrapperCol={{
+              span: 16,
+            }}
+            onFinish={updateFunc} // Xử lý khi submit form
+            initialValues={props.brand}
+          >
+            <Form.Item
+              label="Brand Name"
+              name="brandName"
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng điền Tên thương hiệu!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item label="Status" name="brandStatus">
+              <Select
+                style={{ width: 300 }}
+                placeholder="Vui lòng chọn trạng thái"
+                options={[
+                  {
+                    value: '1',
+                    label: 'Hoạt động',
+                  },
+                  {
+                    value: '0',
+                    label: 'Không Hoạt động',
+                  },
+                ]}
+              />
+            </Form.Item>
+
+            <div style={{ textAlign: 'center' }}>
+              <Button type="primary" onClick={updateFunc}>
+                Submit
               </Button>
-            </Space>
-          }
-        >
-          <Form layout="vertical" hideRequiredMark initialValues={props.brand}>
-            <Row gutter={16}>
-              <Col span={24}>
-                <Form.Item
-                  name="brandCode"
-                  label="Mã Code brand"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng điền Mã Code brand',
-                    },
-                  ]}
-                >
-                  <Input placeholder="Vui lòng điền Mã Code brand" disabled />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row gutter={16}>
-              <Col span={24}>
-                <Form.Item
-                  name="brandName"
-                  label="Tên"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng điền tên brand',
-                    },
-                  ]}
-                >
-                  <Input name="brandName" placeholder="Vui lòng điền Mã Code brand" />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row gutter={16}>
-              <Col span={24}>
-                <Form.Item name="brandStatus">
-                  <Select placeholder="Vui lòng chọn Trạng Thái Brand">
-                    <Select.Option value="1">Hoạt động</Select.Option>
-                    <Select.Option value="0">Không hoạt động</Select.Option>
-                    <Select.Option value="-1">Ngừng hoạt động</Select.Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-            </Row>
+            </div>
           </Form>
-        </Drawer>
-      </div>
+        </div>
+      </Modal>
     </Fragment>
   );
 }

@@ -143,14 +143,14 @@ const TableContent = () => {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              deleteHandle(record.id, 0);
+              deleteHandle(record.staffId, 0);
               reload();
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+            <button className="btn btn-danger " type="primary" icon={<DeleteOutlined />}>
               Delete
-            </Button>
+            </button>
           </Popconfirm>
         </Space>
       ),

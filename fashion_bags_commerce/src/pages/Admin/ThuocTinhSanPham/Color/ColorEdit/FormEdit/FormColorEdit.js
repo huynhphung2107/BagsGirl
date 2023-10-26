@@ -1,10 +1,7 @@
-import '../FormEdit/FormColorEdit.css';
-
 import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, Row, Select, Space , notification} from 'antd';
+import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
 import colorAPI from '~/api/propertitesBalo/colorAPI';
-
 
 function FormColorEdit(props) {
   const [open, setOpen] = useState(false);
@@ -16,12 +13,11 @@ function FormColorEdit(props) {
   const onClose = () => {
     setOpen(false);
   };
-    
-  
+
   return (
     <Fragment>
-      <Button type="primary" className='btn btn-warning' onClick={showDrawer} icon={<EditOutlined />}>
-       Edit
+      <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}>
+        Edit
       </Button>
 
       <Drawer
@@ -35,13 +31,13 @@ function FormColorEdit(props) {
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" className='btn btn-warning'>
+            <Button type="primary" className="btn btn-warning">
               Edit
             </Button>
           </Space>
         }
       >
-        <Form  layout="vertical" hideRequiredMark initialValues={props.color}>
+        <Form layout="vertical" hideRequiredMark initialValues={props.color}>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
@@ -92,17 +88,15 @@ function FormColorEdit(props) {
                 // ]}
               >
                 <Select placeholder="Vui lòng chọn Trạng Thái Color">
-                  <Select.Option value='1'>Hoạt động</Select.Option>
-                  <Select.Option value='0'>Không hoạt động</Select.Option>
-                  <Select.Option value='-1'>Ngừng hoạt động</Select.Option>
+                  <Select.Option value="1">Hoạt động</Select.Option>
+                  <Select.Option value="0">Không hoạt động</Select.Option>
+                  <Select.Option value="-1">Ngừng hoạt động</Select.Option>
                 </Select>
               </Form.Item>
             </Col>
           </Row>
-
         </Form>
       </Drawer>
-
     </Fragment>
   );
 }

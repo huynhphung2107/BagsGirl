@@ -20,12 +20,10 @@ public class CustomerDTO {
     private String customerId;
     private Integer customerStatus;
     private Integer customerPoint;
-    @NotNull
-    private Integer staffStatus;
     @NotBlank
-    private String fullName;
+    private String usersFullName;
     @NotBlank
-    private String account;
+    private String usersAccount;
     @NotBlank
     private String usersPassword;
     @NotBlank
@@ -36,7 +34,7 @@ public class CustomerDTO {
     private String usersPhoneNumber;
     private String usersAddress;
 
-    private String usersNote;
+    private String usersUserNote;
 
     private String usersRolesRoleId;
 

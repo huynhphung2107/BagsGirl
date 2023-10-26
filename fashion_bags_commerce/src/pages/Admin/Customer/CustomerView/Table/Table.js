@@ -66,6 +66,12 @@ const TableContent = () => {
       width: 100,
     },
     {
+      title: 'Mật khẩu',
+      dataIndex: ['users', 'password'],
+      sorter: (a, b) => a.users.password.localeCompare(b.users.password),
+      width: 100,
+    },
+    {
       title: 'SĐT',
       dataIndex: ['users', 'phoneNumber'],
       sorter: (a, b) => a.users.phoneNumber.localeCompare(b.users.phoneNumber),
@@ -87,12 +93,12 @@ const TableContent = () => {
       width: 100,
     },
 
-    {
-      title: 'Chức vụ',
-      dataIndex: ['users', 'roles', 'roleName'],
-      sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
-      width: 100,
-    },
+    // {
+    //   title: 'Chức vụ',
+    //   dataIndex: ['users', 'roles', 'roleName'],
+    //   sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
+    //   width: 100,
+    // },
     {
       title: 'Điểm',
       dataIndex: 'customerPoint',
@@ -150,7 +156,7 @@ const TableContent = () => {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              deleteHandle(record.id, 0);
+              deleteHandle(record.customerId, 0);
               reload();
             }}
             onCancel={onCancel}

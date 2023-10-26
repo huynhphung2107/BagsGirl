@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 
 import TableContent from './Table/Table';
-// import FormStaffCreate from '../StaffEdit/FormCreate/FormStaffCreate';
+import FormCustomerCreate from '../CustomerEdit/FormCreate/FormCustomerCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -20,7 +20,9 @@ function CustomerView() {
           <HeaderContent titlePage="Danh Sách Khách Hàng" />
         </Header>
         <Content style={contentStyle}>
-          <div>{/* <FormStaffCreate /> */}</div>
+          <div>
+            <FormCustomerCreate />
+          </div>
           <TableContent />
         </Content>
 
