@@ -6,7 +6,7 @@ const producerAPI = {
     return axiosClient.get(url);
   },
   getAllPhanTrang(pageNum, pageSize) {
-    const url = `/producer/phanTrang?id=${pageNum}`;
+    const url = `/producer/pagination?id=${pageNum}`;
     return axiosClient.get(url,
       {
         params: {

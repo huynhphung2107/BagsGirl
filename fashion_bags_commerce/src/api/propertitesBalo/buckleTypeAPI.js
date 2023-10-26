@@ -6,7 +6,7 @@ const buckleTypeAPI = {
     return axiosClient.get(url);
   },
   getAllPhanTrang(pageNum, pageSize) {
-    const url = `/buckletype/phanTrang?id=${pageNum}`;
+    const url = `/buckletype/pagination?id=${pageNum}`;
     return axiosClient.get(url,
       {
         params: {

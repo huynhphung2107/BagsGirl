@@ -6,7 +6,7 @@ const compartmentAPI = {
     return axiosClient.get(url);
   },
   getAllPhanTrang(pageNum, pageSize) {
-    const url = `/compartment/phanTrang?id=${pageNum}`;
+    const url = `/compartment/pagination?id=${pageNum}`;
     return axiosClient.get(url,
       {
         params: {
