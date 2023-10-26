@@ -10,22 +10,17 @@ function LayoutCarousel() {
         <Carousel draggable={true} autoplaySpeed={1500} autoplay={true}>
           <div>
             <h3 className={styles.item}>
-              <img src="https://www.vascara.com/uploads/banner/2023/September/13/17181694601451.jpg"></img>
+              <img src="https://tuixachkimlong.vn/wp-content/uploads/sale-banner.jpg"></img>
             </h3>
           </div>
           <div>
             <h3 className={styles.item}>
-              <img src="https://www.vascara.com/uploads/banner/2023/September/13/17201694602063.jpg"></img>
+              <img src="https://thoitrangthaiha.com/upload/hinhanh/slider-1208.png"></img>
             </h3>
           </div>
           <div>
             <h3 className={styles.item}>
-              <img src="https://www.vascara.com/uploads/banner/2023/September/15/17451694753281.jpg"></img>
-            </h3>
-          </div>
-          <div>
-            <h3 className={styles.item}>
-              <img src="https://www.vascara.com/uploads/banner/2023/September/14/17401694689019.jpg"></img>
+              <img src="https://balotunghai.com/wp-content/uploads/2017/09/Banner2-1.jpg"></img>
             </h3>
           </div>
         </Carousel>

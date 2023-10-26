@@ -50,14 +50,13 @@ function ProductAddForm() {
       setColor(colorData.data);
       const compartmentData = await compartmentAPI.getAll();
       setCompartment(compartmentData.data);
-      const materialData = await materialAPI.getAll();
-      setMaterial(materialData.data);
+      const materrialData = await materialAPI.getAll();
+      setMaterial(materrialData.data);
       const producerData = await producerAPI.getAll();
       setProducer(producerData.data);
       const sizeData = await sizeAPI.getAll();
       setSize(sizeData.data);
       const typeData = await typeAPI.getAll();
-      console.log(typeData.data);
       setType(typeData.data);
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);

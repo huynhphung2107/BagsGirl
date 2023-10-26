@@ -42,7 +42,19 @@ function FormBrandEdit(props) {
         description: errorText,
         duration: 2,
       });
+      console.log(error);
     }
+    const CircularJSON = require('circular-json');
+
+    // Tạo một vòng tròn
+
+    // Chuyển đổi đối tượng thành JSON
+    const jsonString = CircularJSON.stringify(props);
+
+    console.log(jsonString);
+
+    // Chuyển đổi JSON thành đối tượng
+    const parsedObj = CircularJSON.parse(jsonString);
   };
 
   return (
