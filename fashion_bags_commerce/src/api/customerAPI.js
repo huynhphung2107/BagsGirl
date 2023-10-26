@@ -1,11 +1,11 @@
 import axiosClient from './axiosClient';
 
-const staffAPI = {
-  getAll(pageNum,pageSize) {
-    const url = '/staff/';
+const customerAPI = {
+  getAll(pageNum, pageSize) {
+    const url = '/customer/';
     return axiosClient.get(url, {
       params: {
-        page: pageNum -1,
+        page: pageNum - 1,
         size: pageSize,
       },
     });
@@ -15,16 +15,17 @@ const staffAPI = {
     const url = '/role';
     return axiosClient.get(url, { params });
   },
+
   get(id) {
-    const url = `/staff?id=${id}`;
+    const url = `/customer?id=${id}`;
     return axiosClient.get(url);
   },
   getOne(id) {
-    const url = `/staff?id=${id}`;
-    return axiosClient.get(url,{id});
+    const url = `/customer?id=${id}`;
+    return axiosClient.get(url, { id });
   },
   add(data) {
-    const url = `/staff`;
+    const url = `/customer`;
     return axiosClient.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -32,11 +33,11 @@ const staffAPI = {
     });
   },
   update(data) {
-    const url = `/staff?id=${data.id}`;
+    const url = `/customer?id=${data.id}`;
     return axiosClient.put(url, data);
   },
   updateStatus(id, status) {
-    const url = `/staff/update-status?id=${id}&status=${status}`;
+    const url = `/customer/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',
@@ -44,9 +45,9 @@ const staffAPI = {
     });
   },
   delete(id) {
-    const url = `/staff?id=${id}`;
+    const url = `/customer?id=${id}`;
     return axiosClient.delete(url);
   },
 };
 
-export default staffAPI;
+export default customerAPI;

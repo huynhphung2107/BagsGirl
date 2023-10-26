@@ -41,7 +41,6 @@ public class Balo {
     @Column(name = "status")
     private int baloStatus;
 
-
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;

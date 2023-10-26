@@ -34,8 +34,6 @@ public class UserInfo {
     private String fullName;
     @Column(name = "password")
     private String password;
-    @Column(name = "phone_number")
-    private String phoneNumber;
     @Column(name = "email")
     private String email;
     @Column(name = "userinfo_status")
@@ -44,11 +42,11 @@ public class UserInfo {
     private Boolean gender;
     @Column(name = "address")
     private String address;
-    @Column(name = "birthday")
-    private String birthday;
-    @Column(name = "note")
-    private String note;
+    @Column(name = "phone_number")
+    private String phoneNumber;
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private UserRole userRole;
+    @Column(name = "note")
+    private String note;
 }

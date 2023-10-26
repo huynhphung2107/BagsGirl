@@ -33,6 +33,7 @@ public class Customer {
 
     @Column(name = "status")
     private Integer customerStatus;
+
     @Column(name = "point")
     private Integer customerPoint;
 

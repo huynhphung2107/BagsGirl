@@ -15,7 +15,7 @@ function FormStaffViewDetails(props) {
     setOpen(false);
   };
 
-  const [List, setList] = useState([]);
+  const [list, setList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
@@ -24,10 +24,9 @@ function FormStaffViewDetails(props) {
 
     try {
       const response = await staffAPI.getOne(id);
-      const data = response.data;
+      const data = response.data.content;
       setList(data);
-    console.log(data)
-    console.log(response)
+    
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }
@@ -42,62 +41,52 @@ function FormStaffViewDetails(props) {
       dataIndex: 'id',
       fixed: 'left',
       width: 100,
-      sorter: (a, b) => a.id.localeCompare(b.id),
     },
     {
       title: 'Full Name',
-      dataIndex: 'fullName',
+      dataIndex: ['userInfo','fullName'],
       width: 300,
       fixed: 'left',
-      sorter: (a, b) => a.fullName.localeCompare(b.fullName),
     },
     {
       title: 'Account',
       dataIndex: 'account',
       width: 100,
-      sorter: (a, b) => a.account.localeCompare(b.account),
     },
     {
       title: 'SDT',
       dataIndex: 'phoneNumber',
       width: 200,
-      sorter: (a, b) => a.phoneNumber.localeCompare(b.phoneNumber),
     },
     {
       title: 'Trạng thái',
       dataIndex: 'status',
       width: 100,
-      sorter: (a, b) => a.status.localeCompare(b.status),
     },
     {
       title: 'Email',
       dataIndex: 'email',
       width: 100,
-      sorter: (a, b) => a.email.localeCompare(b.email),
     },
     {
       title: 'Giới tính',
       dataIndex: 'gender',
       width: 100,
-      sorter: (a, b) => a.gender.localeCompare(b.gender),
     },
     {
       title: 'Địa chỉ',
       dataIndex: 'address',
       width: 100,
-      sorter: (a, b) => a.address.localeCompare(b.address),
     },
     {
         title: 'Ghi chú',
         dataIndex: ['userInfo', 'note'],
-        sorter: (a, b) => a.note.localeCompare(b.note),
         width: 100,
         
       },
     {
         title: 'Chức vụ',
         dataIndex: ['userInfo', 'userRole','roleName'],
-        sorter: (a, b) => a.roleName.localeCompare(b.roleName),
         width: 100,
       },
   ];
@@ -142,7 +131,7 @@ function FormStaffViewDetails(props) {
           <Table
             rowKey={(record) => record.id}
             columns={columns}
-            dataSource={List}
+            dataSource={list}
             onChange={''}
             pagination={pagination}
             scroll={{

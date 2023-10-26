@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
-import staffAPI from '~/api/staffAPI';
+import customerAPI from '~/api/customerAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import table from './tableStaff.css';
-import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
+import table from './TableCustomer.css';
+// import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
@@ -12,15 +12,13 @@ const TableContent = () => {
   const [pagesSize, setPagesSize] = useState(5);
   const [totalItem, setTotalItem] = useState();
 
-  
-
   const onCancel = () => {};
   const reload = () => {
     setLoading(true);
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    },500);
+    }, 500);
   };
 
   useEffect(() => {
@@ -39,7 +37,7 @@ const TableContent = () => {
 
   const getAll = async (current, pageSize) => {
     try {
-      const response = await staffAPI.getAll(current, pageSize);
+      const response = await customerAPI.getAll(current, pageSize);
       const data = response.data.content;
       console.log(data);
       setTotalItem(response.data.totalElements);
@@ -87,11 +85,17 @@ const TableContent = () => {
       sorter: (a, b) => a.userInfo.address.localeCompare(b.userInfo.address),
       width: 100,
     },
-    
+
     {
       title: 'Chức vụ',
-      dataIndex: ['userInfo', 'userRole','roleName'],
+      dataIndex: ['userInfo', 'userRole', 'roleName'],
       sorter: (a, b) => a.userInfo.userRole.roleName.localeCompare(b.userInfo.userRole.roleName),
+      width: 100,
+    },
+    {
+      title: 'Điểm',
+      dataIndex: 'customerPoint',
+      sorter: (a, b) => a.customerPoint.localeCompare(b.customerPoint),
       width: 100,
     },
     {
@@ -99,12 +103,11 @@ const TableContent = () => {
       dataIndex: ['userInfo', 'note'],
       sorter: (a, b) => a.userInfo.note.localeCompare(b.userInfo.note),
       width: 100,
-      
     },
-   
+
     {
       title: 'Trạng thái',
-      dataIndex: 'staffStatus',
+      dataIndex: 'customerStatus',
 
       width: 150,
       render: (status) => {
@@ -138,8 +141,8 @@ const TableContent = () => {
       render: (_, record) => (
         <Space size="middle">
           {/* <FormvoucherEdit voucher={record} /> */}
-          <FormStaffViewDetails id={record.id}/>
-          
+          {/* <FormStaffViewDetails id={record.id} /> */}
+
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"
@@ -151,10 +154,8 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger "
-          
-            icon={<DeleteOutlined />}>
-              Delete
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+              Cancel
             </Button>
           </Popconfirm>
         </Space>
@@ -165,7 +166,7 @@ const TableContent = () => {
   ];
 
   const deleteHandle = async (id, status) => {
-    const xoa = await staffAPI.updateStatus(id, status);
+    const xoa = await customerAPI.updateStatus(id, status);
     notification.info({
       message: 'Thông báo',
       description: 'Đã hủy thành công trạng thái nhân viên có id là :' + id,
@@ -212,4 +213,3 @@ const TableContent = () => {
 export default TableContent;
 
 //add nhan vien
-

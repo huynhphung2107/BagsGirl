@@ -149,6 +149,19 @@ function FormStaffCreate(props) {
             </Form.Item>
 
             <Form.Item
+              label="SĐT"
+              name='phoneNumber'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng điền thông tin!',
+                },
+              ]}
+            >
+              <Input type="text" />
+            </Form.Item>
+
+            <Form.Item
               label="Email"
               name='email'
               rules={[

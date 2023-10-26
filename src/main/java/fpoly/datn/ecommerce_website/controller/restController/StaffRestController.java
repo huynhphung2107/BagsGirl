@@ -1,15 +1,12 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.StaffDTO;
-import fpoly.datn.ecommerce_website.dto.UserInfoDTO;
 import fpoly.datn.ecommerce_website.entity.Staff;
 import fpoly.datn.ecommerce_website.entity.UserInfo;
-import fpoly.datn.ecommerce_website.entity.UserRole;
 import fpoly.datn.ecommerce_website.repository.IUserInfoRepository;
 import fpoly.datn.ecommerce_website.repository.IUserRoleRepository;
 import fpoly.datn.ecommerce_website.service.serviceImpl.CustomerServiceImpl;
 import fpoly.datn.ecommerce_website.service.serviceImpl.StaffServiceImpl;
-import fpoly.datn.ecommerce_website.service.serviceImpl.UserRoleServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +59,7 @@ public class StaffRestController {
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
-        Page<Staff> staffPage = staffService.findAllPage(pageNum, pageSize);
+        Page<Staff> staffPage = staffService.findAllStaffsWithUserInfoUserRole(pageNum, pageSize);
         return new ResponseEntity<>
                 (staffPage, HttpStatus.OK);
     }
