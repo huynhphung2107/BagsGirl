@@ -17,7 +17,7 @@ const TableContent = () => {
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 300);
   };
 
   useEffect(() => {

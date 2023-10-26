@@ -109,7 +109,7 @@ function TableContent() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 300);
   }, []);
 
   const getAllBalo = async (pageNum, pageSize) => {
