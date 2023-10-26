@@ -32,50 +32,48 @@ public class CustomerRestController {
     public ResponseEntity<List<CustomerDTO>> getAll() {
         List<Customers> list = customerService.findAll();
         return new ResponseEntity<>(
-                list.stream().map(customer -> modelMapper.map(customer, CustomerDTO.class))
-                        .collect(Collectors.toList()),
-                HttpStatus.OK);
+                list.stream().map(customer -> modelMapper.map(customer, CustomerDTO.class)).collect(Collectors.toList())
+                , HttpStatus.OK
+        );
     }
 
     @RequestMapping(value = "/customer/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPage(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
-            @RequestParam(name = "size", defaultValue = "10") int pageSize) {
-        // if(customerService.)
+            @RequestParam(name = "size", defaultValue = "10") int pageSize
+    ) {
+//        if(customerService.)
 
         Page<Customers> customerPage = customerService.findAllCustomersWithUserInfoUserRole(pageNum, pageSize);
-        return new ResponseEntity<>(customerPage, HttpStatus.OK);
+        return new ResponseEntity<>
+                (customerPage, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public ResponseEntity<CustomerDTO> getOne(@RequestParam("customerId") String id) {
         return new ResponseEntity<>(
-                modelMapper.map(customerService.findById(id), CustomerDTO.class), HttpStatus.OK);
+                modelMapper.map(customerService.findById(id), CustomerDTO.class)
+                , HttpStatus.OK
+        );
 
     }
 
-    // @RequestMapping(value = "/customer", method = RequestMethod.POST)
-    // public ResponseEntity<?> add(@RequestBody CustomerDTO customerDTO) {
-    // UserInfo userInfo = this.userInfoService.save(customerDTO.getUserInfo()); //
-    // save userInfo trước
-    // customerDTO.setUserInfo(userInfo); // Set lại user info vào staff cần save
-    // (lúc này user info đã có id)
-    // Customer customer = modelMapper.map(customerDTO, Customer.class);
-    // return new ResponseEntity<>(this.customerService.save(customer),
-    // HttpStatus.OK);
+//    @RequestMapping(value = "/customer", method = RequestMethod.POST)
+//    public ResponseEntity<?> add(@RequestBody CustomerDTO customerDTO) {
+//        UserInfo userInfo = this.userInfoService.save(customerDTO.getUserInfo()); // save userInfo trước
+//        customerDTO.setUserInfo(userInfo); // Set lại user info vào staff cần save (lúc này user info đã có id)
+//        Customer customer = modelMapper.map(customerDTO, Customer.class);
+//        return new ResponseEntity<>(this.customerService.save(customer), HttpStatus.OK);
 
-    // }
+//    }
 
-    // @RequestMapping(value = "/customer", method = RequestMethod.PUT)
-    // public ResponseEntity<?> updateFunc(@RequestBody CustomerDTO customerDTO) {
-    //// UserInfo userInfo = this.userInfoService.save(customerDTO.getUserInfo());
-    // // save userInfo trước
-    //// customerDTO.setUserInfo(userInfo); // Set lại user info vào staff cần save
-    // (lúc này user info đã có id)
-    //// Customer customer = modelMapper.map(customerDTO, Customer.class);
-    // return new ResponseEntity<>(this.customerService.save(customer),
-    // HttpStatus.OK);
-    // }
+//    @RequestMapping(value = "/customer", method = RequestMethod.PUT)
+//    public ResponseEntity<?> updateFunc(@RequestBody CustomerDTO customerDTO) {
+////        UserInfo userInfo = this.userInfoService.save(customerDTO.getUserInfo()); // save userInfo trước
+////        customerDTO.setUserInfo(userInfo); // Set lại user info vào staff cần save (lúc này user info đã có id)
+////        Customer customer = modelMapper.map(customerDTO, Customer.class);
+//        return new ResponseEntity<>(this.customerService.save(customer), HttpStatus.OK);
+//    }
 
     @RequestMapping(value = "/customer/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Customers> updateStatus(@RequestParam String id, @RequestParam int status) {

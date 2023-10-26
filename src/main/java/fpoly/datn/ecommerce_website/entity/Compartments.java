@@ -24,7 +24,7 @@ public class Compartments {
     @Id
     @Column(name = "compartment_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String compartmentID;
+    private String compartmentId;
 
     @Column(name = "compartment_code")
     private String compartmentCode;

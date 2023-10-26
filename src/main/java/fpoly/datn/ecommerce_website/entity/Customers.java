@@ -40,4 +40,5 @@ public class Customers {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private Users users;
 
+
 }

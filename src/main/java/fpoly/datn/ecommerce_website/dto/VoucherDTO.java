@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 public class VoucherDTO {
 
-    private String id;
+    private String voucherId;
     private String voucherCode;
     private String voucherName;
     private Integer discountPrice;
@@ -27,7 +27,7 @@ public class VoucherDTO {
     private Integer voucherAmount;
     private LocalDateTime voucherStartTime;
     private LocalDateTime voucherEndTime;
-    private String note;
+    private String voucherNote;
     private Integer voucherStatus;
 
 }

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IProducerRepository extends JpaRepository<Producers, String> {
-    @Query("Select p from Producer p where p.producerStatus <> -1")
+    @Query("Select p from Producers p where p.producerStatus <> -1")
     Page<Producers> getAllPhanTrang(Pageable pageable);
 }

@@ -34,19 +34,19 @@ public class Users {
     private String fullName;
     @Column(name = "password")
     private String password;
-    @Column(name = "phone_number")
-    private String phoneNumber;
     @Column(name = "email")
     private String email;
-    @Column(name = "userinfo_status")
-    private Integer userInfoStatus;
+    @Column(name = "user_status")
+    private Integer userStatus;
     @Column(name = "gender")
     private Boolean gender;
-    @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private Roles userRole;
     @Column(name = "address")
     private String address;
-    @Column(name = "note")
-    private String note;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    private Roles roles;
+    @Column(name = "user_note")
+    private String userNote;
 }

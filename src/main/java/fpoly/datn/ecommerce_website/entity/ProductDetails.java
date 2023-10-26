@@ -25,40 +25,52 @@ public class ProductDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
-    private String productDetailsID;
+    @Column(name = "product_detail_id")
+    private String productDetailId;
+
     @Column(name = "import_price")
     private Float importPrice;
+
     @Column(name = "retail_price")
     private Float retailPrice;
+
     @Column(name = "amount")
-    private Integer productDetailsAmount;
+    private Integer productDetailAmount;
+
     @Column(name = "describe")
-    private String productDetailsDescribe;
+    private String productDetailDescribe;
+
     @Column(name = "product_detail_status")
-    private Integer productDetailsStatus;
+    private Integer productDetailStatus;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Products products;
+    private Products product;
+
     @ManyToOne
     @JoinColumn(name = "color_id")
-    private Colors colors;
+    private Colors color;
+
     @ManyToOne
     @JoinColumn(name = "type_id")
-    private Types types;
+    private Types type;
+
     @ManyToOne
     @JoinColumn(name = "material_id")
-    private Materials materials;
+    private Materials material;
+
     @ManyToOne
     @JoinColumn(name = "size_id")
-    private Sizes sizes;
+    private Sizes size;
+
     @ManyToOne
     @JoinColumn(name = "compartment_id")
-    private Compartments compartments;
+    private Compartments compartment;
+
     @ManyToOne
     @JoinColumn(name = "buckle_type_id")
-    private BuckleTypes buckleTypes;
+    private BuckleTypes buckleType;
     @ManyToOne
     @JoinColumn(name = "producer_id")
-    private Producers producers;
+    private Producers producer;
 }

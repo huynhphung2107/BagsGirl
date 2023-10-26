@@ -3,7 +3,6 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 import fpoly.datn.ecommerce_website.dto.CartDTO;
 import fpoly.datn.ecommerce_website.entity.Carts;
 
-import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.repository.ICartRepository;
 import fpoly.datn.ecommerce_website.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +18,24 @@ import java.util.Optional;
 public class CartServiceImpl implements CartService {
 
     @Autowired
-    private ICartRepository cartRepository;
+    private ICartRepository repo;
+
 
     @Override
     public List<Carts> findAll() {
-        return this.cartRepository.findAll();
+        return this.repo.findAll();
     }
 
     @Override
     public Page<Carts> findAllPhanTrang(Integer page) {
-        Pageable pageable = PageRequest.of(page, 5);
-        return cartRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page,5);
+        return repo.findAll(pageable);
     }
+
 
     @Override
     public Carts findById(String id) {
-        return cartRepository.findById(id).orElse(null);
+        return repo.findById(id).orElse(null);
     }
 
     @Override
@@ -48,6 +49,7 @@ public class CartServiceImpl implements CartService {
         return null;
     }
 
+
     @Override
     public List<Carts> searchByName(String name) {
         return null;
@@ -55,12 +57,12 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Boolean delete(String id) {
-        Optional<Carts> optional = cartRepository.findById(id);
-        if (optional.isPresent()) {
+        Optional<Carts> optional = repo.findById(id);
+        if(optional.isPresent()){
             Carts kh = optional.get();
-            cartRepository.delete(kh);
+            repo.delete(kh);
             return true;
-        } else {
+        }else{
             return false;
         }
     }

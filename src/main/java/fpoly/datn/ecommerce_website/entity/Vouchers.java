@@ -24,9 +24,9 @@ import java.time.LocalDateTime;
 public class Vouchers {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "voucher_id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String voucherID;
+    private String voucherId;
 
     @Column(name = "voucher_code")
     private String voucherCode;
@@ -58,8 +58,8 @@ public class Vouchers {
     @Column(name = "voucher_end_time")
     private LocalDateTime voucherEndTime;
 
-    @Column(name = "note")
-    private String note;
+    @Column(name = "voucher_note")
+    private String voucherNote;
 
     @Column(name = "voucher_status")
     private Integer voucherStatus;

@@ -1,13 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
-import fpoly.datn.ecommerce_website.dto.CompartmentDTO;
-import fpoly.datn.ecommerce_website.dto.ImageDTO;
 import fpoly.datn.ecommerce_website.dto.MaterialDTO;
-import fpoly.datn.ecommerce_website.dto.TypeDTO;
-import fpoly.datn.ecommerce_website.entity.Brand;
-import fpoly.datn.ecommerce_website.entity.Image;
-import fpoly.datn.ecommerce_website.entity.Material;
-import fpoly.datn.ecommerce_website.entity.Type;
+import fpoly.datn.ecommerce_website.entity.Materials;
 import fpoly.datn.ecommerce_website.service.serviceImpl.MaterialServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -59,7 +53,7 @@ public class MaterialRestController {
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
-        Page<Material> materialPage = materialService.findAllPage(pageNum, pageSize);
+        Page<Materials> materialPage = materialService.findAllPage(pageNum, pageSize);
         return new ResponseEntity<>
                 (materialPage, HttpStatus.OK);
     }
@@ -77,8 +71,8 @@ public class MaterialRestController {
 
     //Add
     @RequestMapping(value = "/material", method = RequestMethod.POST)
-    public ResponseEntity<Material> add(@RequestBody @Valid MaterialDTO materialDTO) {
-        Material material = modelMapper.map(materialDTO, Material.class);
+    public ResponseEntity<Materials> add(@RequestBody @Valid MaterialDTO materialDTO) {
+        Materials material = modelMapper.map(materialDTO, Materials.class);
         return new ResponseEntity<>(
                 this.materialService.save(material)
                 , HttpStatus.OK);
@@ -86,15 +80,15 @@ public class MaterialRestController {
 
 
     @RequestMapping(value = "/material", method = RequestMethod.PUT)
-    public ResponseEntity<Material> update(@RequestBody @Valid MaterialDTO materialDTO) {
-        Material material = modelMapper.map(materialDTO, Material.class);
+    public ResponseEntity<Materials> update(@RequestBody @Valid MaterialDTO materialDTO) {
+        Materials material = modelMapper.map(materialDTO, Materials.class);
         return new ResponseEntity<>(
                 this.materialService.save(material)
                 , HttpStatus.OK);
     }
 
     @RequestMapping(value = "/material/update-status", method = RequestMethod.PUT)
-    public ResponseEntity<Material> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
+    public ResponseEntity<Materials> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(materialService.updateStatus(id, status),
                 HttpStatus.OK);
 
@@ -106,19 +100,4 @@ public class MaterialRestController {
         return new ResponseEntity<>(this.materialService.delete(id), HttpStatus.OK);
 
     }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMesssage = error.getDefaultMessage();
-            errors.put(fieldName, errorMesssage);
-        });
-
-        return errors;
-    }
-
 }

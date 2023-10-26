@@ -1,8 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.BuckleType;
+import fpoly.datn.ecommerce_website.entity.BuckleTypes;
 import fpoly.datn.ecommerce_website.repository.IBuckleTypeRepository;
-import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import fpoly.datn.ecommerce_website.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,41 +12,41 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BuckleTypeServiceImpl implements TypeService<BuckleType> {
+public class BuckleTypeServiceImpl implements TypeService<BuckleTypes> {
 
     @Autowired
     private IBuckleTypeRepository iBuckleTypeRepository;
 
     @Override
-    public List<BuckleType> findAll() {
+    public List<BuckleTypes> findAll() {
         return iBuckleTypeRepository.findAll();
     }
-    public Page<BuckleType> findAllPhanTrang(Integer page, Integer size){
+    public Page<BuckleTypes> findAllPhanTrang(Integer page, Integer size){
         Pageable pageable = PageRequest.of(page,size);
         return this.iBuckleTypeRepository.getAllPhanTrang(pageable);
     }
 
     @Override
-    public BuckleType findById(String id) {
+    public BuckleTypes findById(String id) {
         return iBuckleTypeRepository.findById(id).get();
     }
 
     @Override
-    public BuckleType save(BuckleType entity) {
+    public BuckleTypes save(BuckleTypes entity) {
         return iBuckleTypeRepository.save(entity);
     }
 
     @Override
-    public BuckleType update(String id, BuckleType entity) {
+    public BuckleTypes update(String id, BuckleTypes entity) {
 //        return iBuckleTypeRepository.save(entity);
-        BuckleType x = iBuckleTypeRepository.findById(id).get();
+        BuckleTypes x = iBuckleTypeRepository.findById(id).get();
         x.setBuckleTypeCode(entity.getBuckleTypeCode());
         x.setBuckleTypeName(entity.getBuckleTypeName());
         x.setBuckleTypeStatus(entity.getBuckleTypeStatus());
         return iBuckleTypeRepository.save(x);
     }
-    public BuckleType updateStatus(String id, int status){
-        BuckleType x = iBuckleTypeRepository.findById(id).get();
+    public BuckleTypes updateStatus(String id, int status){
+        BuckleTypes x = iBuckleTypeRepository.findById(id).get();
         x.setBuckleTypeStatus(status);
         return iBuckleTypeRepository.save(x);
     }
@@ -60,7 +59,7 @@ public class BuckleTypeServiceImpl implements TypeService<BuckleType> {
     }
 
     @Override
-    public List<BuckleType> searchByName(String name) {
+    public List<BuckleTypes> searchByName(String name) {
         return null;
     }
 }

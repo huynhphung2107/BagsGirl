@@ -1,6 +1,6 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.Brand;
+import fpoly.datn.ecommerce_website.entity.Brands;
 import fpoly.datn.ecommerce_website.repository.IBrandRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,37 +18,37 @@ public class BrandServiceImpl implements ServiceGenarel<Brands> {
     private IBrandRepository iBrandRepository;
 
     @Override
-    public List<Brand> findAll() {
+    public List<Brands> findAll() {
         return iBrandRepository.findAll();
     }
 
-    public Page<Brand> findAllPage(Integer page, Integer size) {
+    public Page<Brands> findAllPage(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         return this.iBrandRepository.findAll(pageable);
     }
 
     @Override
-    public Brand findById(String id) {
+    public Brands findById(String id) {
         return iBrandRepository.findById(id).get();
     }
 
     @Override
-    public Brand save(Brand entity) {
+    public Brands save(Brands entity) {
         iBrandRepository.save(entity);
         return entity;
     }
 
     @Override
-    public Brand update(Brand entity) {
-        Brand brand = iBrandRepository.findById(entity.getId()).get();
+    public Brands update(Brands entity) {
+        Brands brand = iBrandRepository.findById(entity.getBrandId()).get();
         brand.setBrandName(entity.getBrandName());
         brand.setBrandStatus(entity.getBrandStatus());
         return iBrandRepository.save(brand);
 
     }
 
-    public Brand updateStatus(String id, int status) {
-        Brand brand = iBrandRepository.findById(id).get();
+    public Brands updateStatus(String id, int status) {
+        Brands brand = iBrandRepository.findById(id).get();
         brand.setBrandStatus(status);
         return iBrandRepository.save(brand);
 
@@ -62,7 +62,7 @@ public class BrandServiceImpl implements ServiceGenarel<Brands> {
     }
 
     @Override
-    public List<Brand> searchByName(String name) {
+    public List<Brands> searchByName(String name) {
         return null;
     }
 

@@ -1,4 +1,4 @@
 package fpoly.datn.ecommerce_website.service;
 
-public interface IBillDetailsService {
+public interface IProductDetalisService {
 }

@@ -16,8 +16,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -29,6 +27,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 public class Shifts {
+    //    @Pattern(regexp = "0[0-9\\s.-]{9,9}", message = "Không quá 10 số và bắt đầu bằng 0")
     @Id
     @Column(name = "shift_id")
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -48,7 +47,7 @@ public class Shifts {
     @Column(name = "create_by")
     private String shiftCreateBy;
 
-    @Column(name = "note")
+    @Column(name = "shift_note")
     private String shiftNote;
 
     @Column(name = "shift_status")
@@ -56,6 +55,6 @@ public class Shifts {
 
     @ManyToOne
     @JoinColumn(name = "staff_id")
-    private Staffs staffs;
+    private Staffs staff;
 
 }

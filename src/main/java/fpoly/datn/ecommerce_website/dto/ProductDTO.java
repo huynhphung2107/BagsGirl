@@ -14,15 +14,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class BaloDTO {
+public class ProductDTO {
 
-    private String id;
+    private String productId;
     @NotBlank
-    private String baloCode;
+    private String productCode;
     @NotBlank
-    private String baloName;
+    private String productName;
     @NotBlank
-    private String baloStatus;
+    private String productStatus;
     @NotBlank
     private String brandName;
 }

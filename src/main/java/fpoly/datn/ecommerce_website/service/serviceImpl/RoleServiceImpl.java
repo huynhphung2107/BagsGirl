@@ -1,7 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.entity.UserRole;
-import fpoly.datn.ecommerce_website.repository.IUserRoleRepository;
+import fpoly.datn.ecommerce_website.entity.Roles;
+import fpoly.datn.ecommerce_website.repository.IRoleRepository;
 import fpoly.datn.ecommerce_website.service.ServiceGenarel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,28 +9,28 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserRoleServiceImpl implements ServiceGenarel<UserRole> {
+public class RoleServiceImpl implements ServiceGenarel<Roles> {
 
     @Autowired
-    private IUserRoleRepository userRoleRepository;
+    private IRoleRepository userRoleRepository;
 
     @Override
-    public List<UserRole> findAll() {
+    public List<Roles> findAll() {
         return this.userRoleRepository.findAll();
     }
 
     @Override
-    public UserRole findById(String id) {
+    public Roles findById(String id) {
         return this.userRoleRepository.findById(id).get();
     }
 
     @Override
-    public UserRole save(UserRole userRole) {
+    public Roles save(Roles userRole) {
         return this.userRoleRepository.save(userRole);
     }
 
     @Override
-    public UserRole update(UserRole userRole) {
+    public Roles update(Roles userRole) {
         return this.userRoleRepository.save(userRole);
     }
 
@@ -42,7 +42,7 @@ public class UserRoleServiceImpl implements ServiceGenarel<UserRole> {
     }
 
     @Override
-    public List<UserRole> searchByName(String name) {
+    public List<Roles> searchByName(String name) {
         return null;
     }
 }

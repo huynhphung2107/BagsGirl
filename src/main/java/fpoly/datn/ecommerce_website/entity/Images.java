@@ -37,11 +37,12 @@ public class Images {
 
     @Column(name = "image_url")
     private String imgUrl;
+
     @Column(name = "isPrimary")
     private String isPrimary;
 
     @ManyToOne
-    @JoinColumn(name = "image_name", referencedColumnName = "id")
-    private  ProductDetails productDetails;
+    @JoinColumn(name = "product_detail_id")
+    private ProductDetails productDetail;
 
 }

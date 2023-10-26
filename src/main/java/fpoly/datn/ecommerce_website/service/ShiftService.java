@@ -1,24 +1,24 @@
 package fpoly.datn.ecommerce_website.service;
 
 import fpoly.datn.ecommerce_website.dto.ShiftDTO;
-import fpoly.datn.ecommerce_website.entity.Shift;
+import fpoly.datn.ecommerce_website.entity.Shifts;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface ShiftService {
 
-    List<Shift> findAll();
+    List<Shifts> findAll();
 
-    Page<Shift> findAllPhanTrang(Integer page);
+    Page<Shifts> findAllPhanTrang(Integer page);
 
-    Shift findById(String id);
+    Shifts findById(String id);
 
-    Shift save(ShiftDTO shiftDTO);
+    Shifts save(ShiftDTO shiftDTO);
 
-    Shift update(ShiftDTO shiftDTO, String id);
+    Shifts update(ShiftDTO shiftDTO, String id);
 
     Boolean delete(String id);
 
-    List<Shift> searchByName(String name);
+    List<Shifts> searchByName(String name);
 }

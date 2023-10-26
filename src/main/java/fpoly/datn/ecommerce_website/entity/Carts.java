@@ -50,7 +50,7 @@ public class Carts {
     private Integer cartStatus;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
-    private Customers customers;
+    @JoinColumn(name = "customer_id")
+    private Customers customer;
 
 }

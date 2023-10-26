@@ -1,11 +1,10 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
-import fpoly.datn.ecommerce_website.dto.BaloDetailDTO;
-import fpoly.datn.ecommerce_website.dto.UserInfoDTO;
-import fpoly.datn.ecommerce_website.entity.UserInfo;
+import fpoly.datn.ecommerce_website.dto.UserDTO;
+import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
-import fpoly.datn.ecommerce_website.repository.IUserInfoRepository;
-import fpoly.datn.ecommerce_website.service.serviceImpl.UserInfoServiceImpl;
+import fpoly.datn.ecommerce_website.repository.IUserRepository;
+import fpoly.datn.ecommerce_website.service.serviceImpl.UserServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,44 +24,46 @@ import java.util.stream.Collectors;
 
 @RestController
 
-@RequestMapping("/api/manage/userinfo")
+@RequestMapping("/api/manage/user")
 
-public class UserInfoRestController {
+public class UserRestController {
 
     @Autowired
-    public IUserInfoRepository iUserInfoRepository;
+    public IUserRepository iUserInfoRepository;
 
     @Autowired
     public IRoleRepository iRoleRepository;
     @Autowired
-    public UserInfoServiceImpl userInfoService;
+    public UserServiceImpl userInfoService;
     @Autowired
     private ModelMapper modelMapper;
 
-    List<UserInfo> list = new ArrayList<>();
+    List<Users> list = new ArrayList<>();
 
     @GetMapping("/")
-    public List<UserInfo> getAll() {
+    public List<Users> getAll() {
         iRoleRepository.findAll();
         list = iUserInfoRepository.findAll();
         return list;
     }
 
     @PostMapping("")
-    public UserInfo add(@RequestBody UserInfo userInfo) {
+    public Users add(@RequestBody Users userInfo) {
         iUserInfoRepository.save(userInfo);
         return userInfo;
     }
 
     @GetMapping("/{id}")
-    public UserInfo getOne(@PathVariable("id") String id) {
-        UserInfo userInfo = iUserInfoRepository.findById(id).get();
+    public Users getOne(@PathVariable("userId") String id) {
+        Users userInfo = iUserInfoRepository.findById(id).get();
         return userInfo;
     }
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ResponseEntity<?> findCustomerByKeyword(@RequestParam String keyword) {
         return new ResponseEntity<>(
-                this.userInfoService.findCustomerByKeyword(keyword)
+                this.userInfoService.findCustomerByKeyword(keyword) .stream()
+                        .map(userInfo -> modelMapper.map(userInfo, UserDTO.class))
+                        .collect(Collectors.toList())
                 , HttpStatus.OK);
     }
 }
