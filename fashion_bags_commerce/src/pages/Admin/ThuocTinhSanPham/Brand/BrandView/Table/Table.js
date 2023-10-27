@@ -83,7 +83,7 @@ const TableContent = () => {
             statusClass = 'inactive-status';
             break;
           case -1:
-            statusText = 'Trạng thái khác';
+            statusText = 'Ngừng hoạt động';
             statusClass = 'other-status';
             break;
           default:
