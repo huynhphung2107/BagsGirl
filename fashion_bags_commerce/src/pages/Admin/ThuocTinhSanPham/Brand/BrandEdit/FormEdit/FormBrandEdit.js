@@ -55,7 +55,7 @@ function FormBrandEdit(props) {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showModal} icon={<EditOutlined />}>
+      <Button type="primary" className="btn btn-success" onClick={showModal} icon={<EditOutlined />}>
         Edit
       </Button>
       <br></br>
@@ -100,6 +100,10 @@ function FormBrandEdit(props) {
                   {
                     value: '0',
                     label: 'Không Hoạt động',
+                  },
+                  {
+                    value: '-1',
+                    label: 'Ngừng Hoạt động',
                   },
                 ]}
               />

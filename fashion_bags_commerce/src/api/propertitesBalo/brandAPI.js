@@ -26,12 +26,14 @@ const brandAPI = {
       },
     });
   },
-
-  update(data) {
-    const url = `/brand/${data.brandId}`;
-    return axiosClient.put(url, data);
+  update(id, data) {
+    const url = `/brand?id=${id}`;
+    return axiosClient.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   },
-
   updateStatus(id, status) {
     const url = `/brand/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {
