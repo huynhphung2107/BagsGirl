@@ -4,6 +4,7 @@ import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header
 
 import TableContent from './Table/Table';
 import FormStaffCreate from '../StaffEdit/FormCreate/FormStaffCreate';
+import FormStaffCreate1 from '../StaffEdit/FormCreate/FormStaffCreate';
 // import FormstaffCreate from '../staffEdit/FormrCreate/FormstaffCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -24,6 +25,7 @@ function StaffView() {
           <div>
             <FormStaffCreate />
           </div>
+          
           <TableContent />
         </Content>
 

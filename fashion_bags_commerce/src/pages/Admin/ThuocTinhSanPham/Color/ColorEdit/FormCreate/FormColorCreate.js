@@ -1,5 +1,4 @@
-//CSS
-import './FormColorCreate.css';
+
 //React Component
 import React, { Fragment, useContext, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';

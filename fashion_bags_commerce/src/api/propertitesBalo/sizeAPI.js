@@ -26,8 +26,8 @@ const sizeAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/size?id=${data.id}`;
+  update(id, data) {
+    const url = `/size?id=${id}`;
     return axiosClient.put(url, data);
   },
   updateStatus(id, status) {

@@ -1,20 +1,19 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
-import colorAPI from '~/api/propertitesBalo/colorAPI';
+import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 
-function FormcolorEdit(props) {
+function FormSizeEdit(props) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
-  const [data, setData] = useState(props.color);
+  const [data, setData] = useState(props.size);
   const [stringStatus, setStringStatus] = useState('');
-  const [reloadTable, setReloadTable] = useState(false);
 
   const showComponent = () => {
     setOpen(true);
-    if (data.colorStatus === 1) {
+    if (data.sizeStatus === 1) {
       setStringStatus('Hoạt động');
-    } else if (data.colorStatus === -1) {
+    } else if (data.sizeStatus === -1) {
       setStringStatus('Ngừng hoạt động');
     } else {
       setStringStatus('Không hoạt động');
@@ -30,17 +29,17 @@ function FormcolorEdit(props) {
     setData({ ...data, [name]: value });
   };
   const updateStatus = (value) => {
-    setData({ ...data, colorStatus: value });
+    setData({ ...data, sizeStatus: value });
   };
 
-  const updateFunction = async (colorId, values) => {
+  const updateFunction = async (sizeId, values) => {
     setError(false);
     let update = { ...values };
-    console.log(colorId);
+    console.log(sizeId);
     console.log(update);
     if (!error) {
       try {
-        await colorAPI.update(colorId, update);
+        await sizeAPI.update(sizeId, update);
         notification.success({
           message: 'Cập nhật thành công',
           description: 'Dữ liệu đã được cập nhật thành công',
@@ -66,7 +65,7 @@ function FormcolorEdit(props) {
           Edit
         </Button>
         <Drawer
-          title={'Edit - ' + data.colorName}
+          title={'Edit - ' + data.sizeName}
           width={400}
           onClose={closeComponent}
           open={open}
@@ -76,7 +75,7 @@ function FormcolorEdit(props) {
           extra={
             <Space>
               <Button onClick={closeComponent}>Thoát</Button>
-              <Button onClick={() => updateFunction(data.colorId, data)} type="primary" className="btn btn-warning">
+              <Button onClick={() => updateFunction(data.sizeId, data)} type="primary" className="btn btn-warning">
                 Lưu
               </Button>
             </Space>
@@ -86,7 +85,7 @@ function FormcolorEdit(props) {
             <Row gutter={16}>
               <Col span={24}>
                 <Form.Item
-                  name="colorCode"
+                  name="sizeCode"
                   label="Mã"
                   rules={[
                     {
@@ -102,7 +101,7 @@ function FormcolorEdit(props) {
             <Row gutter={16}>
               <Col span={24}>
                 <Form.Item
-                  name="colorName"
+                  name="sizeName"
                   label="Tên"
                   rules={[
                     {
@@ -112,8 +111,8 @@ function FormcolorEdit(props) {
                   ]}
                 >
                   <Input
-                    name="colorName"
-                    value={data.colorName}
+                    name="sizeName"
+                    value={data.sizeName}
                     onChange={updateData}
                     placeholder="Vui lòng điền tên kiểu"
                   />
@@ -138,4 +137,4 @@ function FormcolorEdit(props) {
   );
 }
 
-export default FormcolorEdit;
+export default FormSizeEdit;

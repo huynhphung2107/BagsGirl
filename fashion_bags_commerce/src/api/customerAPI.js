@@ -12,7 +12,7 @@ const customerAPI = {
   },
 
   getRoles(params) {
-    const url = '/role';
+    const url = '/role/';
     return axiosClient.get(url, { params });
   },
 
@@ -32,8 +32,8 @@ const customerAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/customer?id=${data.id}`;
+  update(id, data) {
+    const url = `/customer?id=${id}`;
     return axiosClient.put(url, data);
   },
   updateStatus(id, status) {

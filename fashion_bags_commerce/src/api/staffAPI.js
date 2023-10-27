@@ -12,16 +12,16 @@ const staffAPI = {
   },
 
   getRoles(params) {
-    const url = '/role';
+    const url = '/role/';
     return axiosClient.get(url, { params });
   },
-  get(id) {
+  get(id, data) {
     const url = `/staff?id=${id}`;
-    return axiosClient.get(url);
+    return axiosClient.get(url, data);
   },
-  getOne(id) {
+  getOne(id,data) {
     const url = `/staff?id=${id}`;
-    return axiosClient.get(url, { id });
+    return axiosClient.get(url, data);
   },
   add(data) {
     const url = `/staff`;
@@ -31,10 +31,10 @@ const staffAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/staff?id=${data.id}`;
-    return axiosClient.put(url, data);
-  },
+  // update(data) {
+  //   const url = `/staff?id=${data.id}`;
+  //   return axiosClient.put(url, data);
+  // },
   updateStatus(id, status) {
     const url = `/staff/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {

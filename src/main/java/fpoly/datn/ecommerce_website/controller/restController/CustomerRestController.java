@@ -2,6 +2,7 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.CustomerDTO;
 import fpoly.datn.ecommerce_website.entity.Customers;
+import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.service.serviceImpl.CustomerServiceImpl;
 import fpoly.datn.ecommerce_website.service.serviceImpl.UserServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,22 +61,18 @@ public class CustomerRestController {
 
     }
 
-//    @RequestMapping(value = "/customer", method = RequestMethod.POST)
-//    public ResponseEntity<?> add(@RequestBody CustomerDTO customerDTO) {
-//        UserInfo userInfo = this.userInfoService.save(customerDTO.getUserInfo()); // save userInfo trước
-//        customerDTO.setUserInfo(userInfo); // Set lại user info vào staff cần save (lúc này user info đã có id)
-//        Customer customer = modelMapper.map(customerDTO, Customer.class);
-//        return new ResponseEntity<>(this.customerService.save(customer), HttpStatus.OK);
+    @RequestMapping(value = "/customer", method = RequestMethod.POST)
+    public ResponseEntity<?> add(@RequestBody CustomerDTO customerDTO) {
 
-//    }
+        return new ResponseEntity<>(this.customerService.save(customerDTO), HttpStatus.OK);
 
-//    @RequestMapping(value = "/customer", method = RequestMethod.PUT)
-//    public ResponseEntity<?> updateFunc(@RequestBody CustomerDTO customerDTO) {
-////        UserInfo userInfo = this.userInfoService.save(customerDTO.getUserInfo()); // save userInfo trước
-////        customerDTO.setUserInfo(userInfo); // Set lại user info vào staff cần save (lúc này user info đã có id)
-////        Customer customer = modelMapper.map(customerDTO, Customer.class);
-//        return new ResponseEntity<>(this.customerService.save(customer), HttpStatus.OK);
-//    }
+    }
+
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateFunc(@RequestBody CustomerDTO customerDTO, @PathVariable  String id) {
+        return new ResponseEntity<>(customerService.update(id,customerDTO),
+                HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/customer/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Customers> updateStatus(@RequestParam String id, @RequestParam int status) {

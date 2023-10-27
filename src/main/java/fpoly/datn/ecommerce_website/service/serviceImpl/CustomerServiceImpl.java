@@ -1,7 +1,13 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
+import fpoly.datn.ecommerce_website.dto.CustomerDTO;
 import fpoly.datn.ecommerce_website.entity.Customers;
+import fpoly.datn.ecommerce_website.entity.Roles;
+import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.repository.ICustomerRepository;
+import fpoly.datn.ecommerce_website.repository.IRoleRepository;
+import fpoly.datn.ecommerce_website.repository.IUserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,8 +22,17 @@ public class CustomerServiceImpl {
     @Autowired
     private ICustomerRepository customerRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private IUserRepository userInfoRepository;
+    @Autowired
+    private IRoleRepository userRoleRepository;
+
+
     public Page<Customers> findAllCustomersWithUserInfoUserRole(Integer page, Integer size) {
-        Pageable pageable  =PageRequest.of(page,size);
+        Pageable pageable = PageRequest.of(page, size);
         return customerRepository.findAllCustomersWithUsersRoles(pageable);
     }
 
@@ -32,13 +47,45 @@ public class CustomerServiceImpl {
     }
 
 
-    public Customers save(Customers customer) {
-        return this.customerRepository.save(customer);
+    public Customers save(CustomerDTO customerDTO) {
+
+        Customers customer = modelMapper.map(customerDTO, Customers.class);
+        customer.setCustomerStatus(customerDTO.getCustomerStatus());
+        customer.setCustomerPoint(customerDTO.getCustomerPoint());
+        Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
+                .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
+        Users userInfo = modelMapper.map(customerDTO, Users.class);
+        userInfo.setRoles(userRole);
+        Users savedUserInfo = userInfoRepository.save(userInfo);
+        if (savedUserInfo != null) {
+            customer.setUsers(savedUserInfo);
+
+            return customerRepository.save(customer);
+        } else {
+            throw new IllegalStateException("Failed to save UserInfo");
+        }
     }
 
 
-    public Customers update(Customers customer) {
-        return this.customerRepository.save(customer);
+    public Customers update(String customerId, CustomerDTO customerDTO) {
+        Customers customers = customerRepository.findById(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+        modelMapper.map(customerDTO, customers);
+        Users userInfo = modelMapper.map(customerDTO, Users.class);
+        Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
+                .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
+        userInfo.setRoles(userRole);
+
+        Users savedUserInfo = userInfoRepository.save(userInfo);
+
+        if (savedUserInfo != null) {
+            customers.setUsers(savedUserInfo);
+
+            return customerRepository.save(customers);
+        } else {
+            throw new IllegalStateException("Failed to save UserInfo");
+
+        }
     }
 
 

@@ -26,9 +26,13 @@ const colorAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/color?id=${data.id}`;
-    return axiosClient.put(url, data);
+  update(id, data) {
+    const url = `/color?id=${id}`;
+    return axiosClient.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   },
   updateStatus(id, status) {
     const url = `/color/update-status?id=${id}&status=${status}`;

@@ -1,11 +1,10 @@
 import React, { Fragment, useState, useEffect, initialValue } from 'react';
 import { EyeFilled, EyeInvisibleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Radio, notification } from 'antd';
-import staffAPI from '~/api/staffAPI';
-import { data } from 'jquery';
+import customerAPI from '~/api/customerAPI';
 
 const { Option } = Select;
-const FormStaffCreate = () => {
+const FormCustomerCreate = () => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(true);
   const [form] = Form.useForm();
@@ -25,7 +24,7 @@ const FormStaffCreate = () => {
     if (!error) {
       let add = { ...values };
       try {
-        const response = await staffAPI.add(add);
+        const response = await customerAPI.add(add);
         notification.success({
           message: 'Add thành công',
           description: 'Dữ liệu đã được thêm thành công',
@@ -63,7 +62,7 @@ const FormStaffCreate = () => {
   // Replace this function with your actual API call to fetch roles
   const fetchRolesFromAPI = async () => {
     try {
-      const response = await staffAPI.getRoles(); // Replace with your actual API endpoint
+      const response = await customerAPI.getRoles(); // Replace with your actual API endpoint
       return response.data;
     } catch (error) {
       throw error;
@@ -73,10 +72,10 @@ const FormStaffCreate = () => {
   return (
     <Fragment>
       <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        New account
+        Tạo mới tài khoản
       </Button>
       <Drawer
-        title="Create a new account"
+        title="Tạo mới tài khoản khách hàng"
         width={720}
         onClose={onClose}
         open={open}
@@ -112,7 +111,7 @@ const FormStaffCreate = () => {
             </Col>
             <Col span={12}>
               <Form.Item
-                name="staffStatus"
+                name="customerStatus"
                 label="Trạng thái"
                 rules={[
                   {
@@ -155,7 +154,10 @@ const FormStaffCreate = () => {
                   },
                 ]}
               >
-                <Input.Password iconRender={(visible) => (visible ? <EyeInvisibleOutlined /> : <EyeFilled />)} />
+                <Input.Password
+                  placeholder="Please choose the password"
+                  iconRender={(visible) => (visible ? <EyeInvisibleOutlined /> : <EyeFilled />)}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -185,7 +187,7 @@ const FormStaffCreate = () => {
                   },
                 ]}
               >
-                <Input placeholder="Please enter number phone" />
+                <Input placeholder="Please enter number phone" type="number" />
               </Form.Item>
             </Col>
           </Row>
@@ -216,13 +218,27 @@ const FormStaffCreate = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="Role" name="usersRolesRoleId" initialValue={initialValue}>
-                <Select placeholder="Select a role" loading={loading}>
+                <Select placeholder="Select a Role" loading={loading}>
                   {roles.map((role) => (
                     <Select.Option key={role.roleId} value={role.roleId}>
                       {role.roleName}
                     </Select.Option>
                   ))}
                 </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="customerPoint"
+                label="Điểm"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please enter điểm',
+                  },
+                ]}
+              >
+                <Input placeholder="Please enter number phone" type="number" />
               </Form.Item>
             </Col>
           </Row>
@@ -252,4 +268,4 @@ const FormStaffCreate = () => {
     </Fragment>
   );
 };
-export default FormStaffCreate;
+export default FormCustomerCreate;
