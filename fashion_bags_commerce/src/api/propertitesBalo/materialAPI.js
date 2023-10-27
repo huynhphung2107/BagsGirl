@@ -22,8 +22,8 @@ const materialAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/material?id=${data.id}`;
+  update(id, data) {
+    const url = `/material?id=${id}`;
     return axiosClient.put(url, data);
   },
   updateStatus(id, status) {

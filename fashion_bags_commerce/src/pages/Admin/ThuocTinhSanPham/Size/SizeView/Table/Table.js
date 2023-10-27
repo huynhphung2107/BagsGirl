@@ -3,7 +3,7 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
-// import FormsizeEdit from '../../sizeEdit/FormEdit/FormsizeEdit';
+import FormSizeEdit from '../../SizeEdit/FormEdit/FormSizeEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -106,7 +106,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          {/* <FormsizeEdit size={record} /> */}
+          <FormSizeEdit size={record} />
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"

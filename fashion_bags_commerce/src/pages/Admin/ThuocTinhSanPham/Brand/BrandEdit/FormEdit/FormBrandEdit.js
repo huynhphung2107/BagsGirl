@@ -66,7 +66,7 @@ function FormBrandEdit(props) {
           Edit
         </Button>
         <Drawer
-          title={'Edit - ' + data.brandId}
+          title={'Edit - ' + data.brandName}
           width={400}
           onClose={closeComponent}
           open={open}
@@ -82,7 +82,7 @@ function FormBrandEdit(props) {
             </Space>
           }
         >
-          <Form layout="vertical" hbrandIdeRequiredMark initialValues={data}>
+          <Form layout="vertical" hideRequiredMark initialValues={data}>
             <Row gutter={16}>
               <Col span={24}>
                 <Form.Item

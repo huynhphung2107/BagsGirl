@@ -131,6 +131,10 @@ function FormSizeCreate(props) {
                     value: '0',
                     label: 'Không Hoạt động',
                   },
+                  {
+                    value: '-1',
+                    label: 'Ngừng Hoạt động',
+                  },
                 ]}
               />
             </Form.Item>

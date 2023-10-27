@@ -102,14 +102,11 @@ function TableContent() {
     getAllBalo(currentPage, pageSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 300);
   };
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 300);
+    reload();
   }, []);
 
   const getAllBalo = async (pageNum, pageSize) => {
