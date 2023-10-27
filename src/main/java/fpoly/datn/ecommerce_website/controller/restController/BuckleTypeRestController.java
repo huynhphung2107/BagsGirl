@@ -1,7 +1,10 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BuckleTypeDTO;
+import fpoly.datn.ecommerce_website.dto.TypeDTO;
 import fpoly.datn.ecommerce_website.entity.BuckleTypes;
+import fpoly.datn.ecommerce_website.entity.Types;
+import fpoly.datn.ecommerce_website.service.BuckleTypeService;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BuckleTypeServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -25,7 +28,7 @@ public class BuckleTypeRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private BuckleTypeServiceImpl buckleTypeService;
+    private BuckleTypeService buckleTypeService;
 
     //hien thi
     @RequestMapping(value = "/buckletype/", method = RequestMethod.GET)
@@ -42,7 +45,7 @@ public class BuckleTypeRestController {
     @RequestMapping(value = "/buckletype/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
-        return ResponseEntity.ok(buckleTypeService.findAllPhanTrang(pageNum, pageSize));
+        return ResponseEntity.ok(buckleTypeService.findAllPagination(pageNum, pageSize));
     }
 
     @RequestMapping(value = "/buckletype", method = RequestMethod.GET)
@@ -67,11 +70,12 @@ public class BuckleTypeRestController {
 
     //update
     @RequestMapping(value = "/buckletype", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@Valid @RequestBody BuckleTypeDTO buckletypeDTO) {
-        return new ResponseEntity<>(buckleTypeService.save(
-                modelMapper.map(buckletypeDTO, BuckleTypes.class)
-
-        ), HttpStatus.OK);
+    public ResponseEntity<BuckleTypes> update(@Valid @RequestParam String id, @RequestBody BuckleTypeDTO buckleTypeDTO) {
+        BuckleTypes type = modelMapper.map(buckleTypeDTO, BuckleTypes.class);
+        type.setBuckleTypeId(id);
+        return new ResponseEntity<>(
+                this.buckleTypeService.update(id,type)
+                , HttpStatus.OK);
     }
 
     //update Status

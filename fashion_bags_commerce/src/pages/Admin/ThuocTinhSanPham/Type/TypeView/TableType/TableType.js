@@ -98,6 +98,10 @@ function TableContent() {
             setLoading(false);
         }, 1000);
     }, []);
+    useEffect(() => {
+        getAllPhanTrangType(currentPage, pageSize);
+        // }, []);
+    });
 
     const getAllPhanTrangType = async (pageNum, pageSize) => {
         try {
@@ -110,10 +114,7 @@ function TableContent() {
             console.error('Đã xảy ra lỗi: ', error);
         }
     };
-    useEffect(() => {
-        getAllPhanTrangType(currentPage, pageSize);
-        // }, []);
-    });
+
     const handleDeleteType = async (id, status) => {
         try {
             await typeAPI.updateStatus(id, status);
