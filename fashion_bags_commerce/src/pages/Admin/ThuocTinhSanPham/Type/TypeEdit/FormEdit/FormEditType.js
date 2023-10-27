@@ -35,8 +35,6 @@ function FormEditType(props) {
     const updateFunction = async (typeId, values) => {
         setError(false);
         let update = { ...values };
-        console.log(typeId);
-        console.log(update);
         if (!error) {
             try {
                 await typeAPI.update(typeId, update);

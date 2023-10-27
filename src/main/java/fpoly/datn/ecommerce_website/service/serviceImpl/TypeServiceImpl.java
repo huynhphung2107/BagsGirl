@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TypeServiceImpl implements TypeService<Types> {
+public class TypeServiceImpl implements TypeService {
 
     @Autowired
     private ITypeRepository typeRepository;
@@ -22,9 +22,10 @@ public class TypeServiceImpl implements TypeService<Types> {
         return typeRepository.findAll();
     }
 
-    public Page<Types> findAllPhanTrang(Integer page, Integer size) {
+    @Override
+    public Page<Types> findAllPagination(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        return this.typeRepository.getAllphanTrang(pageable);
+        return this.typeRepository.findAllPagination(pageable);
     }
 
     @Override
@@ -46,12 +47,15 @@ public class TypeServiceImpl implements TypeService<Types> {
         type.setTypeStatus(entity.getTypeStatus());
         return typeRepository.save(type);
     }
-    public Types updateStatus(String id, int status) {
+
+    @Override
+    public Types updateStatus(String id, Integer status) {
         Types type = typeRepository.findById(id).get();
         type.setTypeStatus(status);
         return typeRepository.save(type);
-
     }
+
+
 
     @Override
     public String delete(String id) {
