@@ -148,9 +148,9 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <button className="btn btn-danger " type="primary" icon={<DeleteOutlined />}>
+            <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
-            </button>
+            </Button>
           </Popconfirm>
         </Space>
       ),

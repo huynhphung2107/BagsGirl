@@ -31,8 +31,11 @@ public class StaffDTO {
     private String usersEmail;
     @NotNull
     private Integer usersStatus;
+
     private Boolean usersGender;
+
     private String usersPhoneNumber;
+
     private String usersAddress;
 
     private String usersUserNote;

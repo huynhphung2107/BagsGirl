@@ -112,7 +112,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button type="primary" className="btn btn-danger " icon={<DeleteOutlined />}>
+             <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>

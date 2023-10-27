@@ -18,7 +18,9 @@ import lombok.ToString;
 public class CustomerDTO {
 
     private String customerId;
+
     private Integer customerStatus;
+
     private Integer customerPoint;
     @NotBlank
     private String usersFullName;
@@ -36,6 +38,6 @@ public class CustomerDTO {
 
     private String usersUserNote;
 
-    private String usersRolesRoleId;
+        private String usersRolesRoleId;
 
 }

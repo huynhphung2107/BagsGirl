@@ -15,7 +15,7 @@ public interface IStaffRepository extends JpaRepository<Staffs, String> {
 
 
     @Query(value= """
-          SELECT * from staffs;
+          SELECT * from staffs ;
 """,nativeQuery = true)
     Page<Staffs> getAll(Pageable pageable);
 

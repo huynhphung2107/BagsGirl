@@ -1,16 +1,18 @@
 import React, { Fragment, useState, useEffect, initialValue } from 'react';
-import { EyeFilled, EyeInvisibleOutlined, PlusOutlined } from '@ant-design/icons';
+import { EyeFilled, EyeInvisibleOutlined, EditOutlined, PlusOutlined, CheckOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Radio, notification } from 'antd';
-import staffAPI from '~/api/staffAPI';
-import { data } from 'jquery';
+import customerAPI from '~/api/customerAPI';
 
 const { Option } = Select;
-const FormStaffCreate = () => {
+function FormCustomerEdit(props) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(true);
   const [form] = Form.useForm();
   const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // With this line to set the initial values
+  const [data, setData] = useState(props.customerData);
 
   const showDrawer = () => {
     setOpen(true);
@@ -19,15 +21,15 @@ const FormStaffCreate = () => {
     setOpen(false);
   };
 
-  const addFunc = async (values) => {
+  const updateFunction = async (customerId, values) => {
     console.log(values);
     setError(false);
     if (!error) {
-      let add = { ...values };
+      let update = { ...values };
       try {
-        const response = await staffAPI.add(add);
+        const response = await customerAPI.updateFunction(customerId, update);
         notification.success({
-          message: 'Add thành công',
+          message: 'Update thành công',
           description: 'Dữ liệu đã được thêm thành công',
           duration: 2,
         });
@@ -63,7 +65,7 @@ const FormStaffCreate = () => {
   // Replace this function with your actual API call to fetch roles
   const fetchRolesFromAPI = async () => {
     try {
-      const response = await staffAPI.getRoles(); // Replace with your actual API endpoint
+      const response = await customerAPI.getRoles(); // Replace with your actual API endpoint
       return response.data;
     } catch (error) {
       throw error;
@@ -72,11 +74,11 @@ const FormStaffCreate = () => {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        New account
+      <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}>
+        Edit
       </Button>
       <Drawer
-        title="Create a new account"
+        title={'Update tài khoản khách hàng có id: ' + data.customerId}
         width={720}
         onClose={onClose}
         open={open}
@@ -88,17 +90,17 @@ const FormStaffCreate = () => {
         footer={
           <Space>
             {/* <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={addFunc} htmlType="submit">
+            <Button onClick={update} htmlType="submit">
               Submit
             </Button> */}
           </Space>
         }
       >
-        <Form layout="vertical" hideRequiredMark initialValues={initialValue} onFinish={addFunc}>
+        <Form layout="vertical" hideRequiredMark initialValues={data} onFinish={updateFunction}>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="usersFullName"
+                name={['users', 'fullName']}
                 label="Họ và tên"
                 rules={[
                   {
@@ -112,7 +114,7 @@ const FormStaffCreate = () => {
             </Col>
             <Col span={12}>
               <Form.Item
-                name="staffStatus"
+                name="customerStatus"
                 label="Trạng thái"
                 rules={[
                   {
@@ -132,7 +134,7 @@ const FormStaffCreate = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="usersAccount"
+                name={['users', 'account']}
                 label="Tài khoản"
                 rules={[
                   {
@@ -147,7 +149,7 @@ const FormStaffCreate = () => {
             <Col span={12}>
               <Form.Item
                 label="Password"
-                name="usersPassword"
+                name={['users', 'password']}
                 rules={[
                   {
                     required: true,
@@ -162,7 +164,7 @@ const FormStaffCreate = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="usersEmail"
+                name={['users', 'email']}
                 label="Email"
                 rules={[
                   {
@@ -176,7 +178,7 @@ const FormStaffCreate = () => {
             </Col>
             <Col span={12}>
               <Form.Item
-                name="usersPhoneNumber"
+                name={['users', 'phoneNumber']}
                 label="SĐT"
                 rules={[
                   {
@@ -185,14 +187,14 @@ const FormStaffCreate = () => {
                   },
                 ]}
               >
-                <Input placeholder="Please enter number phone" />
+                <Input placeholder="Please enter number phone" type="number" />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="usersAddress"
+                name={['users', 'address']}
                 label="Địa chỉ"
                 rules={[
                   {
@@ -205,7 +207,7 @@ const FormStaffCreate = () => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="Giới tính" name="usersGender">
+              <Form.Item label="Giới tính" name={['users', 'gender']}>
                 <Radio.Group>
                   <Radio value={true}>Nam</Radio>
                   <Radio value={false}>Nữ</Radio>
@@ -216,7 +218,7 @@ const FormStaffCreate = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="Role" name="usersRolesRoleId" initialValue={initialValue}>
-                <Select placeholder="Select a role" loading={loading}>
+                <Select placeholder="Select a Role" loading={loading}>
                   {roles.map((role) => (
                     <Select.Option key={role.roleId} value={role.roleId}>
                       {role.roleName}
@@ -225,11 +227,25 @@ const FormStaffCreate = () => {
                 </Select>
               </Form.Item>
             </Col>
+            <Col span={12}>
+              <Form.Item
+                name="customerPoint"
+                label="Điểm"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please enter điểm',
+                  },
+                ]}
+              >
+                <Input placeholder="Please enter number phone" type="number" />
+              </Form.Item>
+            </Col>
           </Row>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name="usersUserNote"
+                name={['users', 'userNote']}
                 label="Note"
                 rules={[
                   {
@@ -243,7 +259,7 @@ const FormStaffCreate = () => {
             </Col>
           </Row>
           <div>
-            <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
+            <Button type="primary" htmlType="submit" icon={<CheckOutlined />}>
               Submit
             </Button>
           </div>
@@ -251,5 +267,5 @@ const FormStaffCreate = () => {
       </Drawer>
     </Fragment>
   );
-};
-export default FormStaffCreate;
+}
+export default FormCustomerEdit;

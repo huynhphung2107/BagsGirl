@@ -24,7 +24,7 @@ public class CustomerServiceImpl {
 
     @Autowired
     private ModelMapper modelMapper;
-    
+
     @Autowired
     private IUserRepository userInfoRepository;
     @Autowired
@@ -32,7 +32,7 @@ public class CustomerServiceImpl {
 
 
     public Page<Customers> findAllCustomersWithUserInfoUserRole(Integer page, Integer size) {
-        Pageable pageable  =PageRequest.of(page,size);
+        Pageable pageable = PageRequest.of(page, size);
         return customerRepository.findAllCustomersWithUsersRoles(pageable);
     }
 
@@ -52,15 +52,11 @@ public class CustomerServiceImpl {
         Customers customer = modelMapper.map(customerDTO, Customers.class);
         customer.setCustomerStatus(customerDTO.getCustomerStatus());
         customer.setCustomerPoint(customerDTO.getCustomerPoint());
-        // Retrieve the UserRole using the provided userRoleId
         Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
                 .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
-        // Map the customerDTO to a UserInfo entity
         Users userInfo = modelMapper.map(customerDTO, Users.class);
         userInfo.setRoles(userRole);
-        // Save the UserInfo
         Users savedUserInfo = userInfoRepository.save(userInfo);
-
         if (savedUserInfo != null) {
             customer.setUsers(savedUserInfo);
 
@@ -71,8 +67,25 @@ public class CustomerServiceImpl {
     }
 
 
-    public Customers update(Customers customer) {
-        return this.customerRepository.save(customer);
+    public Customers update(String customerId, CustomerDTO customerDTO) {
+        Customers customers = customerRepository.findById(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+        modelMapper.map(customerDTO, customers);
+        Users userInfo = modelMapper.map(customerDTO, Users.class);
+        Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
+                .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
+        userInfo.setRoles(userRole);
+
+        Users savedUserInfo = userInfoRepository.save(userInfo);
+
+        if (savedUserInfo != null) {
+            customers.setUsers(savedUserInfo);
+
+            return customerRepository.save(customers);
+        } else {
+            throw new IllegalStateException("Failed to save UserInfo");
+
+        }
     }
 
 
