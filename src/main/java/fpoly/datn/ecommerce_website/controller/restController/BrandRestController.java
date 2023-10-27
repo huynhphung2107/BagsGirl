@@ -1,7 +1,9 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.BrandDTO;
+import fpoly.datn.ecommerce_website.dto.TypeDTO;
 import fpoly.datn.ecommerce_website.entity.Brands;
+import fpoly.datn.ecommerce_website.entity.Types;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BrandServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -63,15 +65,25 @@ public class BrandRestController {
                 , HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/brand/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Brands> update(@RequestBody BrandDTO brandDTO, @PathVariable("id") String id) {
-        Brands updatedBrand = this.brandService.update(brandDTO, id);
-        if (updatedBrand != null) {
-            return new ResponseEntity<>(updatedBrand, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+//    @RequestMapping(value = "/brand/{id}", method = RequestMethod.PUT)
+//    public ResponseEntity<Brands> update(@RequestBody BrandDTO brandDTO, @PathVariable("id") String id) {
+//        Brands updatedBrand = this.brandService.update(brandDTO, id);
+//        if (updatedBrand != null) {
+//            return new ResponseEntity<>(updatedBrand, HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+
+    @RequestMapping(value = "/brand", method = RequestMethod.PUT)
+    public ResponseEntity<Brands> update(@Valid @RequestParam String id, @RequestBody BrandDTO brandDTO) {
+        Brands brand = modelMapper.map(brandDTO, Brands.class);
+        brand.setBrandId(id);
+        return new ResponseEntity<>(
+                this.brandService.update(id,brand)
+                , HttpStatus.OK);
     }
+
 
     @RequestMapping(value = "/brand/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Brands> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {

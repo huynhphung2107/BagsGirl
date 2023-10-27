@@ -40,11 +40,11 @@ public class BrandServiceImpl{
     }
 
 
-    public Brands update(BrandDTO brandDTO,String id) {
+    public Brands update(String id,Brands entity) {
         Brands brand = iBrandRepository.findById(id).get();
-        brand.setBrandCode(brandDTO.getBrandCode());
-        brand.setBrandName(brandDTO.getBrandName());
-        brand.setBrandStatus(brandDTO.getBrandStatus());
+        brand.setBrandCode(entity.getBrandCode());
+        brand.setBrandName(entity.getBrandName());
+        brand.setBrandStatus(entity.getBrandStatus());
         return iBrandRepository.save(brand);
 
     }
