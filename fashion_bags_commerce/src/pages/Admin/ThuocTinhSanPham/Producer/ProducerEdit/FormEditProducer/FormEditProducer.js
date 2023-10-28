@@ -1,19 +1,19 @@
 import React, { Fragment, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
-import typeAPI from '~/api/propertitesBalo/typeAPI';
+import producerAPI from '~/api/propertitesBalo/producerAPI';
 
-function FormEditType(props) {
+function FormEditProducer(props) {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
-    const [data, setData] = useState(props.type);
+    const [data, setData] = useState(props.producer);
     const [stringStatus, setStringStatus] = useState("");
 
     const showComponent = () => {
         setOpen(true);
-        if (data.typeStatus === 1) {
+        if (data.producerStatus === 1) {
             setStringStatus("Hoạt động");
-        } else if (data.typeStatus === -1) {
+        } else if (data.producerStatus === -1) {
             setStringStatus("Ngừng hoạt động");
         } else {
             setStringStatus("Không hoạt động");
@@ -29,15 +29,15 @@ function FormEditType(props) {
         setData({ ...data, [name]: value });
     };
     const updateStatus = (value) => {
-        setData({ ...data, typeStatus: value });
+        setData({ ...data, producerStatus: value });
     };
 
-    const updateFunction = async (typeId, values) => {
+    const updateFunction = async (producerId, values) => {
         setError(false);
         let update = { ...values };
         if (!error) {
             try {
-                await typeAPI.update(typeId, update);
+                await producerAPI.update(producerId, update);
                 notification.success({
                     message: 'Cập nhật thành công',
                     description: 'Dữ liệu đã được cập nhật thành công',
@@ -64,7 +64,7 @@ function FormEditType(props) {
                     Edit
                 </Button>
                 <Drawer
-                    title={'Edit - ' + data.typeId}
+                    title={'Edit - ' + data.producerId}
                     width={400}
                     onClose={closeComponent}
                     open={open}
@@ -74,7 +74,7 @@ function FormEditType(props) {
                     footer={
                         <Space>
                             <Button onClick={closeComponent}>Thoát</Button>
-                            <Button onClick={() => updateFunction(data.typeId, data)} type="primary" className="btn btn-warning">
+                            <Button onClick={() => updateFunction(data.producerId, data)} type="primary" className="btn btn-warning">
                                 Lưu
                             </Button>
                         </Space>
@@ -84,36 +84,36 @@ function FormEditType(props) {
                         <Row gutter={16}>
                             <Col span={24}>
                                 <Form.Item
-                                    name="typeCode"
+                                    name="producerCode"
                                     label="Mã"
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Vui lòng điền Mã Kiểu',
+                                            message: 'Vui lòng điền mã nhà sản xuất',
                                         },
                                     ]}
                                 >
-                                    <Input placeholder="Vui lòng điền Mã Kiểu" disabled />
+                                    <Input placeholder="Vui lòng điền mã nhà sản xuất" disabled />
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Row gutter={16}>
                             <Col span={24}>
                                 <Form.Item
-                                    name="typeName"
+                                    name="producerName"
                                     label="Tên"
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Vui lòng điền tên Kiểu',
+                                            message: 'Vui lòng điền tên nhà sản xuất',
                                         },
                                     ]}
                                 >
                                     <Input
-                                        name="typeName"
-                                        value={data.typeName}
+                                        name="producerName"
+                                        value={data.producerName}
                                         onChange={updateData}
-                                        placeholder="Vui lòng điền tên kiểu"
+                                        placeholder="Vui lòng điền tên nhà sản xuất"
                                     />
                                 </Form.Item>
                             </Col>
@@ -140,4 +140,4 @@ function FormEditType(props) {
     );
 }
 
-export default FormEditType;
+export default FormEditProducer;

@@ -3,6 +3,7 @@ import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import producerAPI from '~/api/propertitesBalo/producerAPI';
 import styles from './index.module.scss';
+import FormEditProducer from '../../ProducerEdit/FormEditProducer/FormEditProducer';
 // import FormTypeEdit from '../../TypeEdit/FormEdit/FormEditType';
 
 function TableContent() {
@@ -62,7 +63,7 @@ function TableContent() {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    {/* <FormTypeEdit type={record} /> */}
+                    <FormEditProducer producer={record} reload={() => { setLoading(true) }} />
                     <Popconfirm
                         title="Xác Nhận"
                         description="Bạn có chắc chắn muốn xóa?"
@@ -111,9 +112,12 @@ function TableContent() {
         }
     };
     useEffect(() => {
-        getAllPhanTrangProducer(currentPage, pageSize);
-        // }, []);
-    });
+        if (loading) {
+            // Tải lại bảng khi biến trạng thái thay đổi
+            getAllPhanTrangProducer(currentPage, pageSize);
+            setLoading(false); // Reset lại trạng thái
+        }
+    }, [loading]);
     const handleDeleteProducer = async (id, status) => {
         try {
             await producerAPI.updateStatus(id, status);
@@ -143,7 +147,7 @@ function TableContent() {
                     marginBottom: 16,
                 }}
             >
-                <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+                <Button onClick={reload} loading={loading} icon={<SyncOutlined />}>
                     Reload
                 </Button>
                 <span

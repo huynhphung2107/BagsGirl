@@ -1,6 +1,6 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
 import styles from './index.module.scss';
 import FormTypeEdit from '../../TypeEdit/FormEdit/FormEditType';
@@ -62,7 +62,7 @@ function TableContent() {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <FormTypeEdit type={record} />
+                    <FormTypeEdit type={record} reload={() => { setLoading(true) }} />
                     <Popconfirm
                         title="Xác Nhận"
                         description="Bạn Có chắc chắn muốn xóa?"
@@ -99,9 +99,12 @@ function TableContent() {
         }, 1000);
     }, []);
     useEffect(() => {
-        getAllPhanTrangType(currentPage, pageSize);
-        // }, []);
-    });
+        if (loading) {
+            // Tải lại bảng khi biến trạng thái thay đổi
+            getAllPhanTrangType(currentPage, pageSize);
+            setLoading(false); // Reset lại trạng thái
+        }
+    }, [loading]);
 
     const getAllPhanTrangType = async (pageNum, pageSize) => {
         try {
@@ -144,7 +147,7 @@ function TableContent() {
                     marginBottom: 16,
                 }}
             >
-                <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+                <Button onClick={reload} loading={loading} icon={<SyncOutlined />}>
                     Reload
                 </Button>
                 <span

@@ -3,6 +3,7 @@ import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import compartmentAPI from '~/api/propertitesBalo/compartmentAPI';
 import styles from './index.module.scss';
+import FormEditCompartment from '../../CompartmentEdit/FormEditCompartment/FormEditCompartment';
 // import FormTypeEdit from '../../TypeEdit/FormEdit/FormEditType';
 
 function TableContent() {
@@ -62,7 +63,7 @@ function TableContent() {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    {/* <FormTypeEdit type={record} /> */}
+                    <FormEditCompartment compartment={record} reload={() => { setLoading(true) }} />
                     <Popconfirm
                         title="Xác Nhận"
                         description="Bạn có chắc chắn muốn xóa?"
@@ -111,9 +112,12 @@ function TableContent() {
         }
     };
     useEffect(() => {
-        getAllPhanTrangCompartment(currentPage, pageSize);
-        // }, []);
-    });
+        if (loading) {
+            // Tải lại bảng khi biến trạng thái thay đổi
+            getAllPhanTrangCompartment(currentPage, pageSize);
+            setLoading(false); // Reset lại trạng thái
+        }
+    }, [loading]);
     const handleDeleteCompartment = async (id, status) => {
         try {
             await compartmentAPI.updateStatus(id, status);
@@ -143,7 +147,7 @@ function TableContent() {
                     marginBottom: 16,
                 }}
             >
-                <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+                <Button onClick={reload} loading={loading} icon={<SyncOutlined />}>
                     Reload
                 </Button>
                 <span
