@@ -19,7 +19,6 @@ import MaterialView from './pages/Admin/ThuocTinhSanPham/Material/MaterialView';
 import ProducerView from './pages/Admin/ThuocTinhSanPham/Producer/ProducerView/indexProducerView';
 import VoucherView from './pages/Admin/Voucher/VoucherView';
 import StaffView from './pages/Admin/Staff/StaffView';
-
 import SalesCounter from './pages/Admin/SalesManager/SalesCounter';
 import CustomerView from './pages/Admin/Customer/CustomerView';
 

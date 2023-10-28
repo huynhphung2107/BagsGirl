@@ -6,7 +6,7 @@ const producerAPI = {
     return axiosClient.get(url);
   },
   getAllPhanTrang(pageNum, pageSize) {
-    const url = `/producer/phanTrang?id=${pageNum}`;
+    const url = `/producer/pagination?id=${pageNum}`;
     return axiosClient.get(url,
       {
         params: {
@@ -27,9 +27,13 @@ const producerAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/producer?id=${data.id}`;
-    return axiosClient.put(url, data);
+  update(id, data) {
+    const url = `/producer?id=${id}`;
+    return axiosClient.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   },
   updateStatus(id, status) {
     const url = `/producer/update-status?id=${id}&status=${status}`;

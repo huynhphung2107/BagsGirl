@@ -3,7 +3,7 @@ import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 import styles from './index.module.scss';
-// import FormTypeEdit from '../../TypeEdit/FormEdit/FormEditType';
+import FormEditBuckleType from '../../BuckleTypeEdit/FormEditBuckleType/FormEditBuckleType';
 
 function TableContent() {
     const [buckleTypeList, setBuckleTypeList] = useState([]);
@@ -62,14 +62,14 @@ function TableContent() {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    {/* <FormTypeEdit type={record} /> */}
+                    <FormEditBuckleType buckleType={record} reload={() => setLoading(true)} />
                     <Popconfirm
                         title="Xác Nhận"
                         description="Bạn Có chắc chắn muốn xóa?"
                         okText="Đồng ý"
                         cancelText="Không"
                         onConfirm={() => {
-                            handleDeleteBuckleType(record.id, -1);
+                            handleDeleteBuckleType(record.buckleTypeId, -1);
                             reload();
                         }}
                         onCancel={onCancel}
@@ -92,13 +92,6 @@ function TableContent() {
         }, 1000);
     };
 
-    useEffect(() => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
-    }, []);
-
     const getAllPhanTrangBuckleType = async (pageNum, pageSize) => {
         try {
             const response = await buckleTypeAPI.getAllPhanTrang(pageNum, pageSize);
@@ -111,9 +104,20 @@ function TableContent() {
         }
     };
     useEffect(() => {
-        getAllPhanTrangBuckleType(currentPage, pageSize);
-        // }, []);
-    });
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+    }, []);
+
+    useEffect(() => {
+        if (loading) {
+            // Tải lại bảng khi biến trạng thái thay đổi
+            getAllPhanTrangBuckleType(currentPage, pageSize);
+            setLoading(false); // Reset lại trạng thái
+        }
+    }, [loading]);
+
     const handleDeleteBuckleType = async (id, status) => {
         try {
             await buckleTypeAPI.updateStatus(id, status);
@@ -122,7 +126,7 @@ function TableContent() {
                 description: 'Kiểu khóa Có ID: ' + id + ' đã được xóa thành công!!!',
                 duration: 2,
             });
-            getAllPhanTrangBuckleType(currentPage, pageSize);
+            setLoading(true);
         } catch (error) {
             console.error('Đã xảy ra lỗi khi xóa kiểu khóa: ', error);
         }
@@ -143,7 +147,7 @@ function TableContent() {
                     marginBottom: 16,
                 }}
             >
-                <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+                <Button onClick={reload} loading={loading} icon={<SyncOutlined />}>
                     Reload
                 </Button>
                 <span
@@ -160,7 +164,7 @@ function TableContent() {
                         x: 1000,
                         y: 500,
                     }}
-                    rowKey={(record) => record.id}
+                    rowKey={(record) => record.buckleTypeId}
                     columns={columns}
                     dataSource={buckleTypeList}
                     onChange={handleTableChange}

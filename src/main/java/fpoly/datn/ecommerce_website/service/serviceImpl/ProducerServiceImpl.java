@@ -2,6 +2,7 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.entity.Producers;
 import fpoly.datn.ecommerce_website.repository.IProducerRepository;
+import fpoly.datn.ecommerce_website.service.ProducerService;
 import fpoly.datn.ecommerce_website.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProducerServiceImpl implements TypeService<Producers> {
+public class ProducerServiceImpl implements ProducerService {
 
     @Autowired
     private IProducerRepository producerRepository;
@@ -22,9 +23,10 @@ public class ProducerServiceImpl implements TypeService<Producers> {
         return producerRepository.findAll();
     }
 
-    public Page<Producers> findAllPhanTrang(Integer page, Integer size){
+    @Override
+    public Page<Producers> findAllPagination(Integer page, Integer size){
         Pageable pageable = PageRequest.of(page,size);
-        return this.producerRepository.getAllPhanTrang(pageable);
+        return this.producerRepository.findAllPagination(pageable);
     }
 
     @Override
@@ -47,7 +49,9 @@ public class ProducerServiceImpl implements TypeService<Producers> {
         producerRepository.save(entity);
         return entity;
     }
-    public Producers updateStatus(String id, int status) {
+
+    @Override
+    public Producers updateStatus(String id, Integer status) {
         Producers x = producerRepository.findById(id).get();
         x.setProducerStatus(status);
         return producerRepository.save(x);
