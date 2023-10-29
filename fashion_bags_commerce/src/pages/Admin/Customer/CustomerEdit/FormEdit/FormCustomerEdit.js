@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { EyeFilled, EyeInvisibleOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
+import { Button, Col, Drawer, Form, Input, Radio, Row, Select, Space, notification } from 'antd';
 import customerAPI from '~/api/customerAPI';
 
 function FormCustomerEdit(props) {
@@ -42,6 +42,9 @@ function FormCustomerEdit(props) {
   };
   const updateStatus = (value) => {
     setData({ ...data, customerStatus: value });
+  };
+  const updateGender = (value) => {
+    setData({ ...data, usersGender: value });
   };
 
   const updateFunction = async (customerId, values) => {
@@ -216,14 +219,14 @@ function FormCustomerEdit(props) {
                   placeholder="Please enter địa chỉ" />
               </Form.Item>
             </Col>
-            {/* <Col span={12}>
+            <Col span={12}>
               <Form.Item label="Giới tính" name="usersGender">
-                <Radio.Group onChange={updateGenders} >
+                <Radio.Group onChange={(e) => updateGender(JSON.parse(e.target.value))}>
                   <Radio value={true}>Nam</Radio>
                   <Radio value={false}>Nữ</Radio>
                 </Radio.Group>
               </Form.Item>
-            </Col> */}
+            </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
