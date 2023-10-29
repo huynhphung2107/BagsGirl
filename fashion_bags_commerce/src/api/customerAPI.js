@@ -34,7 +34,11 @@ const customerAPI = {
   },
   update(id, data) {
     const url = `/customer?id=${id}`;
-    return axiosClient.put(url, data);
+    return axiosClient.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   },
   updateStatus(id, status) {
     const url = `/customer/update-status?id=${id}&status=${status}`;

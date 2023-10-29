@@ -14,7 +14,7 @@ const TableContent = () => {
   const [pagesSize, setPagesSize] = useState(5);
   const [totalItem, setTotalItem] = useState();
 
-  const onCancel = () => {};
+  const onCancel = () => { };
   const reload = () => {
     setLoading(true);
     getAll(currentPage, pagesSize);
@@ -23,15 +23,26 @@ const TableContent = () => {
     }, 500);
   };
 
+  // useEffect(() => {
+  //   // Fetch voucher data using the staffAPI.getAll function
+  //   getAll(currentPage, pagesSize);
+  //   reload();
+  // }, []); // Update data when page or page size changes
   useEffect(() => {
-    // Fetch voucher data using the staffAPI.getAll function
-    getAll(currentPage, pagesSize);
-    reload();
-  }, []); // Update data when page or page size changes
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+  useEffect(() => {
+    if (loading) {
+      // Tải lại bảng khi biến trạng thái thay đổi
+      getAll(currentPage, pagesSize);
+      setLoading(false); // Reset lại trạng thái
+    }
+  }, [loading]);
 
   const onChange = (current, pageSize) => {
-    console.log(current);
-    console.log(pageSize);
     setCurrentPage(current);
     setPagesSize(pageSize);
     getAll(current, pageSize);
@@ -41,10 +52,9 @@ const TableContent = () => {
     try {
       const response = await customerAPI.getAll(current, pageSize);
       const data = response.data.content;
-      console.log(data);
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   // Define your table columns
@@ -148,7 +158,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <FormCustomerEdit customerData={record} />
+          <FormCustomerEdit customerData={record} reload={() => { setLoading(true) }} />
 
           <Popconfirm
             title="Xác Nhận"
@@ -204,7 +214,7 @@ const TableContent = () => {
       </div>
 
       <Table
-        rowKey={(record) => record.id}
+        rowKey={(record) => record.customerId}
         columns={columns}
         dataSource={data}
         pagination={false}

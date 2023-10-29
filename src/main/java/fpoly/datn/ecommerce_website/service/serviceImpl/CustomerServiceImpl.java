@@ -72,15 +72,12 @@ public class CustomerServiceImpl {
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         modelMapper.map(customerDTO, customers);
         Users userInfo = modelMapper.map(customerDTO, Users.class);
-        Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
-                .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
-        userInfo.setRoles(userRole);
-
+//        Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
+//                .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
+//        userInfo.setRoles(userRole);
         Users savedUserInfo = userInfoRepository.save(userInfo);
-
         if (savedUserInfo != null) {
-            customers.setUsers(savedUserInfo);
-
+//            customers.setUsers(savedUserInfo);
             return customerRepository.save(customers);
         } else {
             throw new IllegalStateException("Failed to save UserInfo");

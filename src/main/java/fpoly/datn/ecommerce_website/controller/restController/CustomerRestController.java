@@ -5,6 +5,7 @@ import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.service.serviceImpl.CustomerServiceImpl;
 import fpoly.datn.ecommerce_website.service.serviceImpl.UserServiceImpl;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,7 +47,6 @@ public class CustomerRestController {
             @RequestParam(name = "size", defaultValue = "10") int pageSize
     ) {
 //        if(customerService.)
-
         Page<Customers> customerPage = customerService.findAllCustomersWithUserInfoUserRole(pageNum, pageSize);
         return new ResponseEntity<>
                 (customerPage, HttpStatus.OK);
@@ -68,17 +68,24 @@ public class CustomerRestController {
 
     }
 
-    @RequestMapping(value = "/customer/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateFunc(@RequestBody CustomerDTO customerDTO, @PathVariable  String id) {
+    @RequestMapping(value = "/customer", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateFunc(@Valid @RequestParam String id, @RequestBody CustomerDTO customerDTO) {
         return new ResponseEntity<>(customerService.update(id,customerDTO),
                 HttpStatus.OK);
     }
+//    @RequestMapping(value = "/customer", method = RequestMethod.PUT)
+//    public ResponseEntity<?> updateFunc(@Valid @RequestParam String id, @RequestBody CustomerDTO customerDTO) {
+//        Customers customers = modelMapper.map(customerDTO, Customers.class);
+//        customers.setCustomerId(id);
+//        return new ResponseEntity<>(
+//                this.customerService.update(id,customers)
+//                , HttpStatus.OK);
+//    }
 
     @RequestMapping(value = "/customer/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Customers> updateStatus(@RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(customerService.updateStatus(id, status),
                 HttpStatus.OK);
-
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.DELETE)

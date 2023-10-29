@@ -1,39 +1,61 @@
-import React, { Fragment, useState, useEffect, initialValue } from 'react';
-import { EyeFilled, EyeInvisibleOutlined, EditOutlined, PlusOutlined, CheckOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, Row, Select, Space, Radio, notification } from 'antd';
+import React, { Fragment, useState } from 'react';
+import { EyeFilled, EyeInvisibleOutlined, EditOutlined } from '@ant-design/icons';
+import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
 import customerAPI from '~/api/customerAPI';
 
-const { Option } = Select;
 function FormCustomerEdit(props) {
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(true);
-  const [form] = Form.useForm();
-  const [roles, setRoles] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // With this line to set the initial values
-  const [data, setData] = useState(props.customerData);
+  const [error, setError] = useState(false);
+  const [stringStatus, setStringStatus] = useState("");
+  const [data, setData] = useState({
+    customerId: props.customerData.customerId,
+    customerStatus: props.customerData.customerStatus,
+    customerPoint: props.customerData.customerPoint,
+    usersFullName: props.customerData.users.fullName,
+    usersAccount: props.customerData.users.account,
+    usersPassword: props.customerData.users.password,
+    usersEmail: props.customerData.users.email,
+    usersGender: props.customerData.users.gender,
+    usersPhoneNumber: props.customerData.users.phoneNumber,
+    usersAddress: props.customerData.users.address,
+    usersUserNote: props.customerData.users.userNote,
+    usersRolesRoleId: props.customerData.users.roles.roleId,
+  });
 
   const showDrawer = () => {
     setOpen(true);
+    if (data.customerStatus === 1) {
+      setStringStatus("Hoạt động");
+    } else if (data.customerStatus === -1) {
+      setStringStatus("Ngừng hoạt động");
+    } else {
+      setStringStatus("Không hoạt động");
+    }
   };
   const onClose = () => {
     setOpen(false);
   };
 
+  const updateData = (event) => {
+    const { name, value } = event.target;
+    setData({ ...data, [name]: value });
+  };
+  const updateStatus = (value) => {
+    setData({ ...data, customerStatus: value });
+  };
+
   const updateFunction = async (customerId, values) => {
-    console.log(values);
     setError(false);
     if (!error) {
       let update = { ...values };
       try {
-        const response = await customerAPI.updateFunction(customerId, update);
+        await customerAPI.update(customerId, update);
         notification.success({
           message: 'Update thành công',
           description: 'Dữ liệu đã được thêm thành công',
           duration: 2,
         });
-
+        props.reload();
         onClose();
 
         // Đóng Modal sau khi thêm thành công
@@ -46,29 +68,6 @@ function FormCustomerEdit(props) {
         });
         console.log(error);
       }
-    }
-  };
-
-  useEffect(() => {
-    // Fetch the list of roles from your backend API
-    fetchRolesFromAPI()
-      .then((data) => {
-        setRoles(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching roles:', error);
-        setLoading(false);
-      });
-  }, []);
-
-  // Replace this function with your actual API call to fetch roles
-  const fetchRolesFromAPI = async () => {
-    try {
-      const response = await customerAPI.getRoles(); // Replace with your actual API endpoint
-      return response.data;
-    } catch (error) {
-      throw error;
     }
   };
 
@@ -89,18 +88,18 @@ function FormCustomerEdit(props) {
         }}
         footer={
           <Space>
-            {/* <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={update} htmlType="submit">
-              Submit
-            </Button> */}
+            <Button onClick={onClose}>Thoát</Button>
+            <Button onClick={() => updateFunction(data.customerId, data)} type="primary" className="btn btn-warning">
+              Lưu
+            </Button>
           </Space>
         }
       >
-        <Form layout="vertical" hideRequiredMark initialValues={data} onFinish={updateFunction}>
+        <Form layout="vertical" hideRequiredMark initialValues={data}>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name={['users', 'fullName']}
+                name="usersFullName"
                 label="Họ và tên"
                 rules={[
                   {
@@ -109,24 +108,19 @@ function FormCustomerEdit(props) {
                   },
                 ]}
               >
-                <Input placeholder="Please enter user name" />
+                <Input name="usersFullName" value={data.usersFullName} onChange={updateData} placeholder="Please enter user name" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                name="customerStatus"
-                label="Trạng thái"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please choose the type',
-                  },
-                ]}
-              >
-                <Select placeholder="Please choose the status">
-                  <Option value="1">Hoạt động</Option>
-                  <Option value="0">Không Hoạt động</Option>
-                  <Option value="-1">Ngừng Hoạt động</Option>
+              <Form.Item label="Trạng Thái">
+                <Select
+                  onChange={updateStatus}
+                  defaultValue={stringStatus}
+                  placeholder="Vui lòng chọn Trạng Thái"
+                >
+                  <Select.Option value="1">Hoạt động</Select.Option>
+                  <Select.Option value="0">Không hoạt động</Select.Option>
+                  <Select.Option value="-1">Ngừng hoạt động</Select.Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -134,7 +128,7 @@ function FormCustomerEdit(props) {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name={['users', 'account']}
+                name="usersAccount"
                 label="Tài khoản"
                 rules={[
                   {
@@ -143,13 +137,13 @@ function FormCustomerEdit(props) {
                   },
                 ]}
               >
-                <Input placeholder="Please enter account" />
+                <Input name="usersAccount" value={data.usersAccount} onChange={updateData} placeholder="Please enter account" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 label="Password"
-                name={['users', 'password']}
+                name="usersPassword"
                 rules={[
                   {
                     required: true,
@@ -157,14 +151,18 @@ function FormCustomerEdit(props) {
                   },
                 ]}
               >
-                <Input.Password iconRender={(visible) => (visible ? <EyeInvisibleOutlined /> : <EyeFilled />)} />
+                <Input.Password
+                  name="usersPassword"
+                  value={data.usersPassword}
+                  onChange={updateData}
+                  iconRender={(visible) => (visible ? <EyeInvisibleOutlined /> : <EyeFilled />)} />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name={['users', 'email']}
+                name="usersEmail"
                 label="Email"
                 rules={[
                   {
@@ -173,12 +171,16 @@ function FormCustomerEdit(props) {
                   },
                 ]}
               >
-                <Input placeholder="Please enter email" />
+                <Input
+                  name="usersEmail"
+                  value={data.usersEmail}
+                  onChange={updateData}
+                  placeholder="Please enter email" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name={['users', 'phoneNumber']}
+                name="usersPhoneNumber"
                 label="SĐT"
                 rules={[
                   {
@@ -187,14 +189,18 @@ function FormCustomerEdit(props) {
                   },
                 ]}
               >
-                <Input placeholder="Please enter number phone" type="number" />
+                <Input name="usersPhoneNumber"
+                  value={data.usersPhoneNumber}
+                  onChange={updateData}
+                  placeholder="Please enter number phone"
+                />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name={['users', 'address']}
+                name="usersAddress"
                 label="Địa chỉ"
                 rules={[
                   {
@@ -203,30 +209,23 @@ function FormCustomerEdit(props) {
                   },
                 ]}
               >
-                <Input placeholder="Please enter địa chỉ" />
+                <Input
+                  name="usersAddress"
+                  value={data.usersAddress}
+                  onChange={updateData}
+                  placeholder="Please enter địa chỉ" />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item label="Giới tính" name={['users', 'gender']}>
-                <Radio.Group>
+            {/* <Col span={12}>
+              <Form.Item label="Giới tính" name="usersGender">
+                <Radio.Group onChange={updateGenders} >
                   <Radio value={true}>Nam</Radio>
                   <Radio value={false}>Nữ</Radio>
                 </Radio.Group>
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label="Role" name="usersRolesRoleId" initialValue={initialValue}>
-                <Select placeholder="Select a Role" loading={loading}>
-                  {roles.map((role) => (
-                    <Select.Option key={role.roleId} value={role.roleId}>
-                      {role.roleName}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
             <Col span={12}>
               <Form.Item
                 name="customerPoint"
@@ -238,14 +237,14 @@ function FormCustomerEdit(props) {
                   },
                 ]}
               >
-                <Input placeholder="Please enter number phone" type="number" />
+                <Input name="customerPoint" onChange={updateData} placeholder="Please enter number phone" type="number" />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name={['users', 'userNote']}
+                name="usersUserNote"
                 label="Note"
                 rules={[
                   {
@@ -254,15 +253,14 @@ function FormCustomerEdit(props) {
                   },
                 ]}
               >
-                <Input.TextArea rows={4} placeholder="please enter url description" />
+                <Input.TextArea
+                  name="usersUserNote"
+                  value={data.usersUserNote}
+                  onChange={updateData}
+                  rows={4} placeholder="please enter url description" />
               </Form.Item>
             </Col>
           </Row>
-          <div>
-            <Button type="primary" htmlType="submit" icon={<CheckOutlined />}>
-              Submit
-            </Button>
-          </div>
         </Form>
       </Drawer>
     </Fragment>
