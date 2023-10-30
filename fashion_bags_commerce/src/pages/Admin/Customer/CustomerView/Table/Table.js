@@ -28,7 +28,7 @@ const TableContent = () => {
   useEffect(() => {
     setLoading(true);
     getAll(search, currentPage, pagesSize);
-    setTimeout(() => {
+    setTimeout(() => {sd
       setLoading(false);
     }, 1000);
   }, []);
