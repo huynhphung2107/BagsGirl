@@ -10,6 +10,16 @@ const customerAPI = {
       },
     });
   },
+  getSearchPagination(key, pageNum, pageSize) {
+    const url = '/customer/search';
+    return axiosClient.get(url, {
+      params: {
+        keyword: key,
+        page: pageNum - 1,
+        size: pageSize,
+      },
+    });
+  },
 
   getRoles(params) {
     const url = '/role/';

@@ -52,6 +52,17 @@ public class CustomerRestController {
                 (customerPage, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/customer/search", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllSearch(
+            @RequestParam(name = "page", defaultValue = "0") int pageNum,
+            @RequestParam(name = "size", defaultValue = "10") int pageSize,
+            @RequestParam(name ="keyword", defaultValue = "") String keyword
+    ) {
+        Page<Customers> customerSearchPage = customerService.findAllSearch(keyword, pageNum, pageSize);
+        return new ResponseEntity<>
+                (customerSearchPage, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public ResponseEntity<CustomerDTO> getOne(@RequestParam("customerId") String id) {
         return new ResponseEntity<>(
