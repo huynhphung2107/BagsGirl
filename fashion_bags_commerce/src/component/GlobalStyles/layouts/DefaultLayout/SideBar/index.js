@@ -51,76 +51,67 @@ const items = [
     getItem('Option 12', '9'),
   ]),
 
-  getItem('Quản lí Sản Phẩm', 'sub5', <CalendarOutlined />, [
+  getItem(
+    <Link style={{ textDecoration: 'none' }} to={'/product-viewer'}>
+      Quản lí Sản Phẩm
+    </Link>,
+    'sub5',
+    <CalendarOutlined />,
+  ),
+  getItem('Danh mục sản phẩm', 'sub11', <AppstoreOutlined />, [
     getItem(
-      <Link style={{ textDecoration: 'none' }} to={'/product-viewer'}>
-        Danh sách Sản Phẩm
+      <Link style={{ textDecoration: 'none' }} to={'/color-view'}>
+        Màu sắc
       </Link>,
-      '10',
+      '12',
     ),
     getItem(
-      <Link style={{ textDecoration: 'none' }} to={'/product-add'}>
-        Thêm Balo Chi Tiết
+      <Link style={{ textDecoration: 'none' }} to={'/brand-view'}>
+        Thương hiệu
       </Link>,
-      '11',
+      '13',
     ),
-    getItem('Danh mục sản phẩm', 'sub11', <AppstoreOutlined />, [
-      getItem(
-        <Link style={{ textDecoration: 'none' }} to={'/color-view'}>
-          Màu sắc
-        </Link>,
-        '12',
-      ),
-      getItem(
-        <Link style={{ textDecoration: 'none' }} to={'/brand-view'}>
-          Thương hiệu
-        </Link>,
-        '13',
-      ),
 
-      getItem(
-        <Link style={{ textDecoration: 'none' }} to={'/size-view'}>
-          Kích cỡ
-        </Link>,
-        '14',
-      ),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/size-view'}>
+        Kích cỡ
+      </Link>,
+      '14',
+    ),
 
-      getItem(
-        <Link style={{ textDecoration: 'none' }} to={'/material-view'}>
-          Chất liệu
-        </Link>,
-        '15',
-      ),
-      getItem(
-        <Link style={{ textDecoration: 'none' }} to={'/type-view'}>
-          Kiểu balo{' '}
-        </Link>,
-        '16',
-      ),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/material-view'}>
+        Chất liệu
+      </Link>,
+      '15',
+    ),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/type-view'}>
+        Kiểu balo{' '}
+      </Link>,
+      '16',
+    ),
 
-      getItem(
-        <Link style={{ textDecoration: 'none' }} to={'/buckle-type-view'}>
-          Kiểu khóa
-        </Link>,
-        '17',
-      ),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/buckle-type-view'}>
+        Kiểu khóa
+      </Link>,
+      '17',
+    ),
 
-      getItem(
-        <Link style={{ textDecoration: 'none' }} to={'/compartment-view'}>
-          Ngăn
-        </Link>,
-        '18',
-      ),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/compartment-view'}>
+        Ngăn
+      </Link>,
+      '18',
+    ),
 
-      getItem(
-        <Link style={{ textDecoration: 'none' }} to={'/producer-view'}>
-          Nhà sản xuất
-        </Link>,
-        '19',
-      ),
-    ]),
-    getItem('Option 11', '20'),
-    getItem('Option 12', '21'),
+    getItem(
+      <Link style={{ textDecoration: 'none' }} to={'/producer-view'}>
+        Nhà sản xuất
+      </Link>,
+      '19',
+    ),
   ]),
   getItem(
     <Link style={{ textDecoration: 'none' }} to={'/voucher'}>
@@ -161,7 +152,7 @@ const items = [
     getItem('Option 12', '41'),
   ]),
 ];
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9', 'sub10'];
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub6', 'sub7', 'sub8', 'sub9', 'sub10', 'sub11'];
 function Sidebar(props) {
   const { key, keyIndex, openKey } = props;
   const [openKeys, setOpenKeys] = useState([props.openKey]);

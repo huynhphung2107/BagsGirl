@@ -9,26 +9,26 @@ const { Header, Footer, Sider, Content } = Layout;
 const contentStyle = {};
 
 function ProducerView() {
-    return (
-        <Layout className="layout">
-            <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-                <Sidebar keyIndex="13" openKey="sub5" />
-            </Sider>
-            <Layout className="layoutContent">
-                <Header className="headerStyle">
-                    <HeaderContent titlePage="Danh sách nhà sản xuất" />
-                </Header>
-                <Content style={contentStyle}>
-                    <div>
-                        <FormCreateProducer />
-                    </div>
-                    <TableContent />
-                </Content>
+  return (
+    <Layout className="layout">
+      <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
+        <Sidebar keyIndex="13" openKey="sub11" />
+      </Sider>
+      <Layout className="layoutContent">
+        <Header className="headerStyle">
+          <HeaderContent titlePage="Danh sách nhà sản xuất" />
+        </Header>
+        <Content style={contentStyle}>
+          <div>
+            <FormCreateProducer />
+          </div>
+          <TableContent />
+        </Content>
 
-                <Footer className="footerStyle">Đây là component của Footer</Footer>
-            </Layout>
-        </Layout>
-    );
+        <Footer className="footerStyle">Đây là component của Footer</Footer>
+      </Layout>
+    </Layout>
+  );
 }
 
 export default ProducerView;
