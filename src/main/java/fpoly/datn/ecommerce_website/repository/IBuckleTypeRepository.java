@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IBuckleTypeRepository extends JpaRepository<BuckleTypes, String> {
     @Query("select b from BuckleTypes b where b.buckleTypeStatus <> -1 ")
-    Page<BuckleTypes>getAllPhanTrang(Pageable pageable);
+    Page<BuckleTypes>findAllPagination(Pageable pageable);
     
 }

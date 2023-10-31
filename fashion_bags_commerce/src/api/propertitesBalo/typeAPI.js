@@ -7,7 +7,7 @@ const typeAPI = {
     return axiosClient.get(url, { params });
   },
   getAllPhanTrang(pageNum, pageSize) {
-    const url = `/type/phanTrang?id=${pageNum}`;
+    const url = `/type/pagination?id=${pageNum}`;
     return axiosClient.get(url,
       {
         params: {

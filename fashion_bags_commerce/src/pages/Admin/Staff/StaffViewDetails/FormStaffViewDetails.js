@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
 import staffAPI from '~/api/staffAPI';
 const { Option } = Select;
@@ -88,8 +89,8 @@ function FormStaffViewDetails(props) {
 
   return (
     <Fragment>
-      <button className="btn btn-info" onClick={showDrawer} icon={<PlusOutlined />}>
-        Detail
+      <button className="btn btn-success" onClick={showDrawer} icon={<PlusOutlined />}>
+        Details
       </button>
       <Drawer
         title={'View Details'}

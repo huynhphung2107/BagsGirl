@@ -18,7 +18,7 @@ const TableContent = () => {
     getAllPage(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 300);
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button type="primary" className="btn btn-danger " icon={<DeleteOutlined />}>
+             <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>

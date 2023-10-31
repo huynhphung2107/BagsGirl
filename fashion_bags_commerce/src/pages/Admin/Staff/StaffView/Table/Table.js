@@ -18,7 +18,7 @@ const TableContent = () => {
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 0);
   };
 
   useEffect(() => {
@@ -143,12 +143,12 @@ const TableContent = () => {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              deleteHandle(record.id, 0);
+              deleteHandle(record.staffId, 0);
               reload();
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+            <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>

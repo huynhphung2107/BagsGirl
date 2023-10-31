@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public class TypeDTO {
 
-    private UUID typeId;
+    private String typeId;
 
     @NotBlank
     private String typeCode;

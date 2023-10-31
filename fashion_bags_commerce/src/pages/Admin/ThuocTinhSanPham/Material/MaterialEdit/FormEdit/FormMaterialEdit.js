@@ -1,95 +1,103 @@
-import '../FormEdit/FormMaterialEdit.css';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Option, Form, Input, Row, Select, Space, notification } from 'antd';
+import { Button, Col, Drawer, Form, Input, Row, Select, Space, notification } from 'antd';
 import materialAPI from '~/api/propertitesBalo/materialAPI';
 
 function FormMaterialEdit(props) {
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
+  const [data, setData] = useState(props.material);
+  const [stringStatus, setStringStatus] = useState('');
 
-  const showDrawer = () => {
+  const showComponent = () => {
     setOpen(true);
+    if (data.materialStatus === 1) {
+      setStringStatus('Hoạt động');
+    } else if (data.materialStatus === -1) {
+      setStringStatus('Ngừng hoạt động');
+    } else {
+      setStringStatus('Không hoạt động');
+    }
   };
 
-  const onClose = () => {
+  const closeComponent = () => {
     setOpen(false);
   };
 
-  const updateFunc = async (values) => {
+  const updateData = (event) => {
+    const { name, value } = event.target;
+    setData({ ...data, [name]: value });
+  };
+  const updateStatus = (value) => {
+    setData({ ...data, materialStatus: value });
+  };
+
+  const updateFunction = async (materialId, values) => {
     setError(false);
+    let update = { ...values };
+    console.log(materialId);
+    console.log(update);
     if (!error) {
-      let update = { ...values };
       try {
-        const response = await materialAPI.update(update);
+        await materialAPI.update(materialId, update);
         notification.success({
-          message: 'Update thành công',
+          message: 'Cập nhật thành công',
           description: 'Dữ liệu đã được cập nhật thành công',
           duration: 2,
         });
-        console.log(update)
-        console.log(response)
-
-        // Đóng Modal sau khi cập nhật thành công
-        onClose();
+        closeComponent();
       } catch (error) {
+        console.log(error);
         setError(true);
         notification.error({
-          message: 'Lỗi',
-          description: 'Vui lòng xác nhận',
+          message: 'Cập nhật thất bại',
+          description: 'Dữ liệu không được cập nhật',
           duration: 2,
         });
       }
     }
   };
 
-
   return (
-    <Fragment >
-
+    <Fragment>
       <div style={{ color: 'red' }}>
-        <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}>
+        <Button type="primary" className="btn btn-warning" onClick={showComponent} icon={<EditOutlined />}>
           Edit
         </Button>
-
         <Drawer
-          title={'Edit - ' + props.material.materialCode}
+          title={'Edit - ' + data.materialName}
           width={400}
-          onClose={onClose}
-          open={open} // Sửa thành visible
+          onClose={closeComponent}
+          open={open}
           style={{
             paddingBottom: 80,
           }}
-          footer={
+          extra={
             <Space>
-              <Button onClick={onClose}>Cancel</Button>
-              <Button onClick={updateFunc} type="primary" className="btn btn-warning">
-                Edit
+              <Button onClick={closeComponent}>Thoát</Button>
+              <Button onClick={() => updateFunction(data.materialId, data)} type="primary" className="btn btn-warning">
+                Lưu
               </Button>
             </Space>
           }
         >
-          <Form layout="vertical" hideRequiredMark initialValues={props.material}
-
-          >
+          <Form layout="vertical" hideRequiredMark initialValues={data}>
             <Row gutter={16}>
               <Col span={24}>
                 <Form.Item
                   name="materialCode"
-                  label="Mã Code Material"
-
+                  label="Mã"
                   rules={[
                     {
                       required: true,
-                      message: 'Vui lòng điền Mã Code Material',
+                      message: 'Vui lòng điền Mã Kiểu',
                     },
                   ]}
                 >
-                  <Input placeholder="Vui lòng điền Mã Code Material" disabled />
+                  <Input placeholder="Vui lòng điền Mã Kiểu" disabled />
                 </Form.Item>
               </Col>
             </Row>
-
             <Row gutter={16}>
               <Col span={24}>
                 <Form.Item
@@ -98,31 +106,26 @@ function FormMaterialEdit(props) {
                   rules={[
                     {
                       required: true,
-                      message: 'Vui lòng điền tên Material',
+                      message: 'Vui lòng điền tên Kiểu',
                     },
                   ]}
                 >
-                  <Input name="materialName" placeholder="Vui lòng điền Mã Code Material" />
+                  <Input
+                    name="materialName"
+                    value={data.materialName}
+                    onChange={updateData}
+                    placeholder="Vui lòng điền tên kiểu"
+                  />
                 </Form.Item>
               </Col>
             </Row>
-
             <Row gutter={16}>
               <Col span={24}>
-                <Form.Item
-                  name="materialStatus"
-                  label="Trạng Thái Material"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: 'Please select an owner',
-                //   },
-                // ]}
-                >
-                  <Select placeholder="Vui lòng chọn Trạng Thái Material">
-                    <Select.Option value='1'>Hoạt động</Select.Option>
-                    <Select.Option value='0'>Không hoạt động</Select.Option>
-                    <Select.Option value='-1'>Ngừng hoạt động</Select.Option>
+                <Form.Item label="Trạng Thái">
+                  <Select onChange={updateStatus} defaultValue={stringStatus} placeholder="Vui lòng chọn Trạng Thái">
+                    <Select.Option value="1">Hoạt động</Select.Option>
+                    <Select.Option value="0">Không hoạt động</Select.Option>
+                    <Select.Option value="-1">Ngừng hoạt động</Select.Option>
                   </Select>
                 </Form.Item>
               </Col>

@@ -2,6 +2,7 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.entity.BuckleTypes;
 import fpoly.datn.ecommerce_website.repository.IBuckleTypeRepository;
+import fpoly.datn.ecommerce_website.service.BuckleTypeService;
 import fpoly.datn.ecommerce_website.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BuckleTypeServiceImpl implements TypeService<BuckleTypes> {
+public class BuckleTypeServiceImpl implements BuckleTypeService {
 
     @Autowired
     private IBuckleTypeRepository iBuckleTypeRepository;
@@ -21,9 +22,11 @@ public class BuckleTypeServiceImpl implements TypeService<BuckleTypes> {
     public List<BuckleTypes> findAll() {
         return iBuckleTypeRepository.findAll();
     }
-    public Page<BuckleTypes> findAllPhanTrang(Integer page, Integer size){
+
+    @Override
+    public Page<BuckleTypes> findAllPagination(Integer page, Integer size){
         Pageable pageable = PageRequest.of(page,size);
-        return this.iBuckleTypeRepository.getAllPhanTrang(pageable);
+        return this.iBuckleTypeRepository.findAllPagination(pageable);
     }
 
     @Override
@@ -45,7 +48,9 @@ public class BuckleTypeServiceImpl implements TypeService<BuckleTypes> {
         x.setBuckleTypeStatus(entity.getBuckleTypeStatus());
         return iBuckleTypeRepository.save(x);
     }
-    public BuckleTypes updateStatus(String id, int status){
+
+    @Override
+    public BuckleTypes updateStatus(String id, Integer status){
         BuckleTypes x = iBuckleTypeRepository.findById(id).get();
         x.setBuckleTypeStatus(status);
         return iBuckleTypeRepository.save(x);

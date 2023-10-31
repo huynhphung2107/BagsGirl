@@ -27,6 +27,7 @@ public class StaffDTO {
     private String phoneNumber;
     private String address;
     private String userNote;
+
     private String usersRolesRoleId;
 
 }

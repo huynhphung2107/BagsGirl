@@ -12,7 +12,9 @@ import java.util.List;
 @Repository
 public interface ICustomerRepository extends JpaRepository<Customers, String> {
 
-    @Query("SELECT c FROM Customers c WHERE c.users.roles.roleCode = 'user'")
+    @Query(value = """
+            select * from customers;
+            """,nativeQuery = true)
     Page<Customers> findAllCustomersWithUsersRoles(Pageable pageable);
 
     @Query("SELECT c FROM Customers c join Users u on c.users.userId = u.userId " +

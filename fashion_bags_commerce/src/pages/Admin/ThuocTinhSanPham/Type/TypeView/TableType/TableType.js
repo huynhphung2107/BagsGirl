@@ -1,6 +1,6 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
 import styles from './index.module.scss';
 import FormTypeEdit from '../../TypeEdit/FormEdit/FormEditType';
@@ -62,14 +62,14 @@ function TableContent() {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <FormTypeEdit type={record} />
+                    <FormTypeEdit type={record} reload={() => { setLoading(true) }} />
                     <Popconfirm
                         title="Xác Nhận"
                         description="Bạn Có chắc chắn muốn xóa?"
                         okText="Đồng ý"
                         cancelText="Không"
                         onConfirm={() => {
-                            handleDeleteType(record.id, -1);
+                            handleDeleteType(record.typeId, -1);
                             reload();
                         }}
                         onCancel={onCancel}
@@ -98,6 +98,13 @@ function TableContent() {
             setLoading(false);
         }, 1000);
     }, []);
+    useEffect(() => {
+        if (loading) {
+            // Tải lại bảng khi biến trạng thái thay đổi
+            getAllPhanTrangType(currentPage, pageSize);
+            setLoading(false); // Reset lại trạng thái
+        }
+    }, [loading]);
 
     const getAllPhanTrangType = async (pageNum, pageSize) => {
         try {
@@ -110,10 +117,7 @@ function TableContent() {
             console.error('Đã xảy ra lỗi: ', error);
         }
     };
-    useEffect(() => {
-        getAllPhanTrangType(currentPage, pageSize);
-        // }, []);
-    });
+
     const handleDeleteType = async (id, status) => {
         try {
             await typeAPI.updateStatus(id, status);
@@ -143,7 +147,7 @@ function TableContent() {
                     marginBottom: 16,
                 }}
             >
-                <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+                <Button onClick={reload} loading={loading} icon={<SyncOutlined />}>
                     Reload
                 </Button>
                 <span
@@ -160,7 +164,7 @@ function TableContent() {
                         x: 1000,
                         y: 500,
                     }}
-                    rowKey={(record) => record.id}
+                    rowKey={(record) => record.typeId}
                     columns={columns}
                     dataSource={typeList}
                     onChange={handleTableChange}

@@ -17,7 +17,7 @@ const TableContent = () => {
     getAllBrand(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 300);
   };
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const TableContent = () => {
             statusClass = 'inactive-status';
             break;
           case -1:
-            statusText = 'Trạng thái khác';
+            statusText = 'Ngừng hoạt động';
             statusClass = 'other-status';
             break;
           default:
@@ -99,7 +99,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <FormBrandEdit brand={record} />
+          <FormBrandEdit brand={record}  />
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"
@@ -111,7 +111,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
+           <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>

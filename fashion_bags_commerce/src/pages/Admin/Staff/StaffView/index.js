@@ -4,6 +4,7 @@ import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header
 
 import TableContent from './Table/Table';
 import FormStaffCreate from '../StaffEdit/FormCreate/FormStaffCreate';
+import FormStaffCreate1 from '../StaffEdit/FormCreate/FormStaffCreate';
 // import FormstaffCreate from '../staffEdit/FormrCreate/FormstaffCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -14,7 +15,7 @@ function StaffView() {
   return (
     <Layout className="layout">
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="13" openKey="sub5" />
+        <Sidebar keyIndex="13" openKey="sub7" />
       </Sider>
       <Layout className="layoutContent">
         <Header className="headerStyle">
@@ -24,6 +25,7 @@ function StaffView() {
           <div>
             <FormStaffCreate />
           </div>
+
           <TableContent />
         </Content>
 

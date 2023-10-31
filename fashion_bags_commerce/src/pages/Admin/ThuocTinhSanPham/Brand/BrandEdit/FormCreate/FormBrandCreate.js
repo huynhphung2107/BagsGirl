@@ -4,7 +4,7 @@ import React, { Component, Fragment, useState } from 'react';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 import brandAPI from '~/api/propertitesBalo/brandAPI';
 
-function FormBrandCreate(props)  {
+function FormBrandCreate(props) {
   const [modalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(true);
   const [form] = Form.useForm();
@@ -32,9 +32,9 @@ function FormBrandCreate(props)  {
           description: 'Dữ liệu đã được thêm thành công',
           duration: 2,
         });
-        
-        handleCancel(); 
-        
+
+        handleCancel();
+
         // Đóng Modal sau khi thêm thành công
       } catch (error) {
         setError(true);
@@ -49,7 +49,7 @@ function FormBrandCreate(props)  {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showModal} icon={ <PlusOutlined />}>
+      <Button type="primary" onClick={showModal} icon={<PlusOutlined />}>
         Thêm thương hiệu
       </Button>
       <br></br>
@@ -68,13 +68,16 @@ function FormBrandCreate(props)  {
             }}
             onFinish={addFunc} // Xử lý khi submit form
           >
-            <Form.Item label="Brand Name" name="brandName"
-             rules={[
-              {
-                required: true,
-                message: 'Vui lòng điền Tên thương hiệu!',
-              },
-            ]}>
+            <Form.Item
+              label="Brand Name"
+              name="brandName"
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng điền Tên thương hiệu!',
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
 
@@ -91,15 +94,18 @@ function FormBrandCreate(props)  {
                     value: '0',
                     label: 'Không Hoạt động',
                   },
+                  {
+                    value: '-1',
+                    label: 'Ngừng Hoạt động',
+                  },
                 ]}
               />
             </Form.Item>
 
             <div style={{ textAlign: 'center' }}>
-           
-            <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
             </div>
           </Form>
         </div>

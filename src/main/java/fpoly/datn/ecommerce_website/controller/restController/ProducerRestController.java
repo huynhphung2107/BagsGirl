@@ -1,7 +1,10 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.ProducerDTO;
+import fpoly.datn.ecommerce_website.dto.TypeDTO;
 import fpoly.datn.ecommerce_website.entity.Producers;
+import fpoly.datn.ecommerce_website.entity.Types;
+import fpoly.datn.ecommerce_website.service.ProducerService;
 import fpoly.datn.ecommerce_website.service.serviceImpl.ProducerServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -30,7 +33,7 @@ public class ProducerRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ProducerServiceImpl producerService;
+    private ProducerService producerService;
 
     //GetAll
     @RequestMapping(value = "/producer/", method = RequestMethod.GET)
@@ -47,7 +50,7 @@ public class ProducerRestController {
     @RequestMapping(value = "/producer/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
-        return ResponseEntity.ok(producerService.findAllPhanTrang(pageNum, pageSize));
+        return ResponseEntity.ok(producerService.findAllPagination(pageNum, pageSize));
     }
 
     //GetOne
@@ -69,12 +72,15 @@ public class ProducerRestController {
 
     //Update
     @RequestMapping(value = "/producer", method = RequestMethod.PUT)
-    public ResponseEntity<Producers> update(@Valid @RequestBody ProducerDTO producerDTO) {
-        Producers producer = modelMapper.map(producerDTO, Producers.class);
+    public ResponseEntity<Producers> update(@Valid @RequestParam String id, @RequestBody ProducerDTO producerDTO) {
+        Producers producers = modelMapper.map(producerDTO, Producers.class);
+        producers.setProducerId(id);
         return new ResponseEntity<>(
-                this.producerService.save(producer)
+                this.producerService.update(id,producers)
                 , HttpStatus.OK);
     }
+
+
     @RequestMapping(value = "/producer/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Producers> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(producerService.updateStatus(id, status),
