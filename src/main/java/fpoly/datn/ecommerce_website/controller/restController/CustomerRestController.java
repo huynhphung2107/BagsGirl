@@ -52,16 +52,6 @@ public class CustomerRestController {
                 (customerPage, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/customer/search", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllSearch(
-            @RequestParam(name = "page", defaultValue = "0") int pageNum,
-            @RequestParam(name = "size", defaultValue = "10") int pageSize,
-            @RequestParam(name ="keyword", defaultValue = "") String keyword
-    ) {
-        Page<Customers> customerSearchPage = customerService.findAllSearch(keyword, pageNum, pageSize);
-        return new ResponseEntity<>
-                (customerSearchPage, HttpStatus.OK);
-    }
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public ResponseEntity<CustomerDTO> getOne(@RequestParam("customerId") String id) {
@@ -104,12 +94,24 @@ public class CustomerRestController {
         return new ResponseEntity<>(this.customerService.delete(id), HttpStatus.OK);
     }
 
+//    @RequestMapping(value = "/customer/search", method = RequestMethod.GET)
+//    public ResponseEntity<?> findCustomerByKeyword(@RequestParam String keyword) {
+//        return new ResponseEntity<>(
+//                this.customerService.findByKeyword(keyword).stream()
+//                        .map(userInfo -> modelMapper.map(userInfo, CustomerDTO.class))
+//                        .collect(Collectors.toList())
+//                , HttpStatus.OK);
+//    }
+
+
     @RequestMapping(value = "/customer/search", method = RequestMethod.GET)
-    public ResponseEntity<?> findCustomerByKeyword(@RequestParam String keyword) {
-        return new ResponseEntity<>(
-                this.customerService.findByKeyword(keyword).stream()
-                        .map(userInfo -> modelMapper.map(userInfo, CustomerDTO.class))
-                        .collect(Collectors.toList())
-                , HttpStatus.OK);
+    public ResponseEntity<?> getAllSearch(
+            @RequestParam(name = "page", defaultValue = "0") int pageNum,
+            @RequestParam(name = "size", defaultValue = "10") int pageSize,
+            @RequestParam(name ="keyword", defaultValue = "") String keyword
+    ) {
+        Page<Customers> customerSearchPage = customerService.findAllSearch(keyword, pageNum, pageSize);
+        return new ResponseEntity<>
+                (customerSearchPage, HttpStatus.OK);
     }
 }

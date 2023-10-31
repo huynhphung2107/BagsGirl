@@ -15,9 +15,9 @@ public interface ICustomerService {
 
     Customers findById(String id);
 
-    Customers save(Customers customer);
-
-    Customers update(Customers customer);
+//    Customers save(Customers customer);
+//
+//    Customers update(Customers customer);
 
     Customers updateStatus(String id, Integer status);
 

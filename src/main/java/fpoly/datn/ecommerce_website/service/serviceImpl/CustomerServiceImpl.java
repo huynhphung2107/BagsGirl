@@ -28,10 +28,6 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private ModelMapper modelMapper;
 
-    
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Autowired
     private IUserRepository userInfoRepository;
@@ -66,7 +62,7 @@ public class CustomerServiceImpl implements ICustomerService {
         Customers customer = modelMapper.map(customerDTO, Customers.class);
         customer.setCustomerStatus(customerDTO.getCustomerStatus());
         customer.setCustomerPoint(customerDTO.getCustomerPoint());
-        Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
+        Roles userRole = userRoleRepository.findById(customerDTO.getUsers().getRoles().getRoleId())
                 .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
         Users userInfo = modelMapper.map(customerDTO, Users.class);
         userInfo.setRoles(userRole);

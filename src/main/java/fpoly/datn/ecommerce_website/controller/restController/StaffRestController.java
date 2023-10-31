@@ -80,15 +80,15 @@ public class StaffRestController {
         // Retrieve additional information from the UserInfo entity and populate it in StaffDTO
         Users userInfo = staff.getUsers();
         if (userInfo != null) {
-            staffDTO.setUsersFullName(userInfo.getFullName());
-            staffDTO.setUsersAccount(userInfo.getAccount());
-            staffDTO.setUsersPassword(userInfo.getPassword());
-            staffDTO.setUsersEmail(userInfo.getEmail());
+            staffDTO.setFullName(userInfo.getFullName());
+            staffDTO.setAccount(userInfo.getAccount());
+            staffDTO.setPassword(userInfo.getPassword());
+            staffDTO.setEmail(userInfo.getEmail());
             staffDTO.setUsersStatus(userInfo.getUserStatus());
-            staffDTO.setUsersGender(userInfo.getGender());
-            staffDTO.setUsersFullName(userInfo.getPhoneNumber());
-            staffDTO.setUsersAddress(userInfo.getAddress());
-            staffDTO.setUsersUserNote(userInfo.getUserNote());
+            staffDTO.setGender(userInfo.getGender());
+            staffDTO.setPhoneNumber(userInfo.getPhoneNumber());
+            staffDTO.setAddress(userInfo.getAddress());
+            staffDTO.setUserNote(userInfo.getUserNote());
             staffDTO.setUsersRolesRoleId(userInfo.getRoles().getRoleCode());
         }
 
