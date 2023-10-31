@@ -2,16 +2,18 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.ProductDTO;
 import fpoly.datn.ecommerce_website.dto.Product_BrandDTO;
-import fpoly.datn.ecommerce_website.entity.Products;
 import fpoly.datn.ecommerce_website.entity.Brands;
-import fpoly.datn.ecommerce_website.service.serviceImpl.ProductServiceImpl;
+import fpoly.datn.ecommerce_website.entity.Products;
+import fpoly.datn.ecommerce_website.service.IProductService;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BrandServiceImpl;
+import fpoly.datn.ecommerce_website.service.serviceImpl.ProductServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +26,7 @@ public class ProductRestController {
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
-    private ProductServiceImpl productService;
+    private IProductService productService;
     @Autowired
     private BrandServiceImpl brandService;
 
@@ -33,19 +35,23 @@ public class ProductRestController {
     }
 
     //hienthi
-    @RequestMapping(value = "/product/pagination", method = RequestMethod.GET)
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
-            @RequestParam(name = "page", defaultValue = "1") int pageNum,
-            @RequestParam(name = "size", defaultValue = "10") int pageSize
+            @RequestParam(name = "page", required = false) Integer pageNum,
+            @RequestParam(name = "size", required = false) Integer pageSize
     ) {
-        Page<ProductDTO> productPage = productService.findAll(pageNum, pageSize);
+        if (pageNum == null && pageSize == null) {
+            return new ResponseEntity<>
+                    (this.productService.findAll(), HttpStatus.OK);
+        }
+        Page<ProductDTO> productPage = productService.findAllPagination(pageNum, pageSize);
         return new ResponseEntity<>
                 (productPage, HttpStatus.OK);
     }
 
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
-    public ResponseEntity<?> getOne(@RequestParam("id") String id) {
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getOne(@PathVariable("id") String id) {
         return new ResponseEntity<>(
                 modelMapper.map(this.productService.findById(id), ProductDTO.class)
                 , HttpStatus.OK);

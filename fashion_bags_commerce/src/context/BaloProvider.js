@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import baloAPI from '~/api/baloAPI';
+import baloAPI from '~/api/productsAPI';
 
 export const BaloContext = createContext();
 

@@ -25,6 +25,7 @@ const userInfoAPI = {
   },
   add(data) {
     const url = `/user-info`;
+
     return axiosClient.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -37,6 +38,7 @@ const userInfoAPI = {
   },
   updateStatus(userInfoId, status) {
     const url = `/user-info/update-status?userInfoId=${userInfoId}&userInfoStatus=${status}`;
+
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +46,7 @@ const userInfoAPI = {
     });
   },
   delete(id) {
-    const url = `/userInfo?id=${id}`;
+    const url = `/user?id=${id}`;
     return axiosClient.delete(url);
   },
 };

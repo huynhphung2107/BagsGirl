@@ -8,7 +8,11 @@ import java.util.List;
 
 public interface IProductService {
 
-    Page<ProductDTO> findAll(int pageNum, int PageSize);
+    String GetproductStatusString(int productStatus);
+
+    Page<ProductDTO> findAllPagination(int pageNum, int PageSize);
+
+    List<ProductDTO> findAll();
 
     Products findById(String id);
 

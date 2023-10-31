@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements IProductService {
-
+    @Autowired
     private final ModelMapper modelMapper;
     @Autowired
     private IProductRepository iproductRepository;
@@ -26,7 +26,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
 
-
+    @Override
     public String GetproductStatusString(int productStatus) {
         switch (productStatus) {
             case 1:
@@ -41,7 +41,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Page<ProductDTO> findAll(int pageNum, int PageSize) {
+    public Page<ProductDTO> findAllPagination(int pageNum, int PageSize) {
         PageRequest pageRequest = PageRequest.of(pageNum, PageSize);
         Page<Products> productPage = this.iproductRepository.getAllWithoutDelete(pageRequest);
 
@@ -49,6 +49,16 @@ public class ProductServiceImpl implements IProductService {
                 .stream().map(product -> modelMapper.map(product, ProductDTO.class))
                 .collect(Collectors.toList());
         return new PageImpl<>(productDTOList, pageRequest, productPage.getTotalElements());
+    }
+
+    @Override
+    public List<ProductDTO> findAll() {
+
+
+        List<Products> productDTOList = this.iproductRepository.findAll();
+
+        return productDTOList.stream().map(product -> modelMapper.map(product, ProductDTO.class))
+                .toList();
     }
 
 
