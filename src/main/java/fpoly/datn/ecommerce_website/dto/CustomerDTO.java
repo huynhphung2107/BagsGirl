@@ -1,4 +1,5 @@
 package fpoly.datn.ecommerce_website.dto;
+import fpoly.datn.ecommerce_website.entity.Users;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,5 +40,8 @@ public class CustomerDTO {
     private String usersUserNote;
 
         private String usersRolesRoleId;
+
+    private Users users;
+
 
 }
