@@ -104,4 +104,12 @@ public class CustomerRestController {
         return new ResponseEntity<>(this.customerService.delete(id), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/customer/search", method = RequestMethod.GET)
+    public ResponseEntity<?> findCustomerByKeyword(@RequestParam String keyword) {
+        return new ResponseEntity<>(
+                this.customerService.findByKeyword(keyword).stream()
+                        .map(userInfo -> modelMapper.map(userInfo, CustomerDTO.class))
+                        .collect(Collectors.toList())
+                , HttpStatus.OK);
+    }
 }

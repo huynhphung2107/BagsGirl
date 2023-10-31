@@ -9,14 +9,14 @@ import './index.css';
 const { Header, Footer, Sider, Content } = Layout;
 
 const contentStyle = {
-  height: 'auto',
+  // height: 'auto',
 };
 
 function ProductViewer() {
   return (
     <Layout className="layout">
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="13" openKey="sub5" />
+        <Sidebar keyIndex="10" openKey="sub5" />
       </Sider>
       <Layout className="layoutContent">
         <Header className="headerStyle">

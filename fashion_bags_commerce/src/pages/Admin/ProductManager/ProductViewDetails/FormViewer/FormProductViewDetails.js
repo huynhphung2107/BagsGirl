@@ -3,13 +3,14 @@ import './FormProductViewDetails.css';
 import React, { Fragment, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
-import baloDetailsAPI from '~/api/baloDetailsAPI';
+import baloDetailsAPI from '~/api/productDetailsAPI';
 import FormProductEdit from '../../ProductEdit/FormEdit/FormProductEdit';
 const { Option } = Select;
 function FormProductViewDetails(props) {
-  const { baloCode } = props;
+  const { productCode } = props;
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
+    fetchProducts(productCode);
     setOpen(true);
   };
   const onClose = () => {
@@ -22,12 +23,15 @@ function FormProductViewDetails(props) {
     current: 1,
     pageSize: 10,
   });
-  const fetchProducts = async () => {
+
+  const fetchProducts = async (baloCode) => {
     setLoading(true);
 
     try {
-      const response = await baloDetailsAPI.getAllByBaloCode(baloCode);
+      const response = await baloDetailsAPI.getAllByProductId(baloCode);
       const data = response.data;
+      console.log(data);
+      console.log('Đây là productCode:', baloCode);
       setBaloList(data);
       setTimeout(() => {
         setLoading(false);
@@ -37,59 +41,69 @@ function FormProductViewDetails(props) {
     }
   };
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    if (productCode && open) {
+      fetchProducts(productCode);
+    }
+  }, [productCode]);
 
   const columns = [
     {
-      title: 'Balo Code',
-      dataIndex: 'baloCode',
+      title: 'STT',
+      dataIndex: 'index',
+      key: 'index',
+      width: 50,
       fixed: 'left',
-      width: 100,
-      sorter: (a, b) => a.baloCode.localeCompare(b.baloCode),
+      render: (text, record, index) => <span>{(pagination.current - 1) * pagination.pageSize + index + 1}</span>,
     },
     {
-      title: 'Name Balo',
-      dataIndex: 'baloName',
+      title: 'Balo Code',
+      dataIndex: ['product', 'productCode'],
+      width: 100,
+      fixed: 'left',
+      sorter: (a, b) => a.product.productCode.localeCompare(b.product.ButtonproductCode),
+    },
+    {
+      title: 'Balo Name',
+      dataIndex: ['product', 'productName'],
       width: 300,
       fixed: 'left',
-      sorter: (a, b) => a.baloName.localeCompare(b.baloName),
+      sorter: (a, b) => a.product.productName.localeCompare(b.product.productName),
     },
     {
-      title: 'Color Balo',
-      dataIndex: 'colorName',
+      title: 'Balo Color',
+      dataIndex: ['color', 'colorName'],
       width: 100,
-      sorter: (a, b) => a.colorName.localeCompare(b.colorName),
+      sorter: (a, b) => a.color.colorName.localeCompare(b.color.colorName),
     },
     {
       title: 'Type Balo',
-      dataIndex: 'typeName',
+      dataIndex: ['type', 'typeName'],
       width: 200,
-      sorter: (a, b) => a.typeName.localeCompare(b.typeName),
+      sorter: (a, b) => a.type.typeName.localeCompare(b.type.typeName),
     },
     {
       title: 'Material Balo',
-      dataIndex: 'materialName',
+      dataIndex: ['material', 'materialName'],
       width: 100,
-      sorter: (a, b) => a.materialName.localeCompare(b.materialName),
+      sorter: (a, b) => a.material.materialName.localeCompare(b.material.materialName),
     },
     {
       title: 'Size Balo',
-      dataIndex: 'sizeName',
+      dataIndex: ['size', 'sizeName'],
       width: 100,
-      sorter: (a, b) => a.sizeName.localeCompare(b.sizeName),
+      sorter: (a, b) => a.size.sizeName.localeCompare(b.size.sizeName),
     },
     {
       title: 'Brand Balo',
-      dataIndex: 'brandName',
+      dataIndex: ['product', 'brand', 'brandName'],
       width: 100,
-      sorter: (a, b) => a.brandName.localeCompare(b.brandName),
+      sorter: (a, b) => a.product.brand.brandName.localeCompare(b.product.brandbrandName),
     },
     {
       title: 'Compartment Balo',
-      dataIndex: 'compartmentName',
+      dataIndex: ['compartment', 'compartmentName'],
       width: 100,
-      sorter: (a, b) => a.compartmentName.localeCompare(b.compartmentName),
+      sorter: (a, b) => a.compartment.compartmentName.localeCompare(b.compartment.compartmentName),
     },
     {
       title: 'Image Url',
@@ -99,22 +113,34 @@ function FormProductViewDetails(props) {
     },
     {
       title: 'Producer Balo',
-      dataIndex: 'producerName',
+      dataIndex: ['producer', 'producerName'],
       width: 100,
-      sorter: (a, b) => a.producerName.localeCompare(b.producerName),
+      sorter: (a, b) => a.producer.producerName.localeCompare(b.producer.producerName),
     },
 
     {
       title: 'Describe',
-      dataIndex: 'baloDetailDescribe',
+      dataIndex: 'productDetailDescribe',
       width: 500,
-      sorter: (a, b) => a.baloDetailDescribe.localeCompare(b.baloDetailDescribe),
+      sorter: (a, b) => a.productDetailDescribe.localeCompare(b.productDetailDescribe),
     },
     {
       title: 'Status',
-      dataIndex: 'baloDetailStatus',
+      dataIndex: 'productDetailStatus',
       width: 100,
-      sorter: (a, b) => a.baloDetailStatus - b.baloDetailStatus,
+      sorter: (a, b) => a.productDetailStatus - b.productDetailStatus,
+      render: (productDetailStatus) => {
+        switch (productDetailStatus) {
+          case 1:
+            return 'Hoạt động';
+          case 0:
+            return 'Không hoạt động';
+          case -1:
+            return 'Trạng thái khác';
+          default:
+            return 'Không xác định';
+        }
+      },
     },
     {
       title: 'Import Price',
@@ -132,10 +158,10 @@ function FormProductViewDetails(props) {
     },
     {
       title: 'Amount',
-      dataIndex: 'baloDetailAmount',
+      dataIndex: 'productDetailAmount',
       fixed: 'right',
       width: 100,
-      sorter: (a, b) => a.baloDetailAmount - b.baloDetailAmount,
+      sorter: (a, b) => a.productDetailAmount - b.productDetailAmount,
     },
     {
       title: 'Action',
@@ -160,9 +186,9 @@ function FormProductViewDetails(props) {
 
   return (
     <Fragment>
-      <a type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
+      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
         ViewDetails
-      </a>
+      </Button>
       <Drawer
         title={'View Details'}
         placement="top"
@@ -172,14 +198,6 @@ function FormProductViewDetails(props) {
         bodyStyle={{
           paddingBottom: 80,
         }}
-        extra={
-          <Space>
-            <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={onClose} type="primary">
-              Edit
-            </Button>
-          </Space>
-        }
       >
         <div>
           <div
@@ -197,11 +215,10 @@ function FormProductViewDetails(props) {
             ></span>
           </div>
           <Table
-            rowKey={(record) => record.id}
+            rowKey={(record) => record.productDetailId}
             loading={loading}
             columns={columns}
             dataSource={baloList}
-            onChange={''}
             pagination={pagination}
             scroll={{
               x: 1500,

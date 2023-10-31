@@ -1,7 +1,9 @@
 package fpoly.datn.ecommerce_website.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,7 +29,7 @@ public class Customers {
 
     @Id
     @Column(name = "customer_id")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String customerId;
 
     @Column(name = "customer_status")
@@ -36,7 +38,7 @@ public class Customers {
     @Column(name = "customer_points")
     private Integer customerPoint;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private Users users;
 

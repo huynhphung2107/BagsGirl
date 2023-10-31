@@ -5,8 +5,12 @@ import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.entity.Roles;
 import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.repository.ICustomerRepository;
+
+import fpoly.datn.ecommerce_website.service.ICustomerService;
+
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
 import fpoly.datn.ecommerce_website.repository.IUserRepository;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,10 +21,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl {
+public class CustomerServiceImpl implements ICustomerService {
 
     @Autowired
     private ICustomerRepository customerRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    
 
     @Autowired
     private ModelMapper modelMapper;
@@ -29,8 +37,7 @@ public class CustomerServiceImpl {
     private IUserRepository userInfoRepository;
     @Autowired
     private IRoleRepository userRoleRepository;
-
-
+    @Override
     public Page<Customers> findAllCustomersWithUserInfoUserRole(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         return customerRepository.findAllCustomersWithUsersRoles(pageable);
@@ -42,11 +49,13 @@ public class CustomerServiceImpl {
     }
 
 
+    @Override
     public List<Customers> findAll() {
         return this.customerRepository.findAll();
     }
 
 
+    @Override
     public Customers findById(String id) {
         return this.customerRepository.findById(id).get();
     }
@@ -84,9 +93,11 @@ public class CustomerServiceImpl {
             throw new IllegalStateException("Failed to save UserInfo");
 
         }
+
     }
 
 
+    @Override
     public Customers updateStatus(String id, Integer status) {
         Customers customer = customerRepository.findById(id).get();
         customer.setCustomerStatus(status);
@@ -94,6 +105,7 @@ public class CustomerServiceImpl {
     }
 
 
+    @Override
     public String delete(String id) {
 
         this.customerRepository.deleteById(id);
@@ -101,7 +113,12 @@ public class CustomerServiceImpl {
     }
 
 
-    public List<Customers> searchByName(String name) {
-        return null;
+    @Override
+    public List<CustomerDTO> findByKeyword(String keyword) {
+        List<Customers> customers = this.customerRepository.findByKeyword(keyword);
+        return customers.stream()
+                .map(c -> modelMapper.map(c, CustomerDTO.class))
+                .toList();
     }
+
 }

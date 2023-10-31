@@ -1,22 +1,16 @@
 package fpoly.datn.ecommerce_website.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import fpoly.datn.ecommerce_website.entity.ProductDetails;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class ImageDTO {
-
     private String imageId;
-
-    @NotBlank(message = "Không để trống code")
-    private String imageCode;
-
-    @NotBlank(message = "Không để trống name")
-    private String imageName;
-
-    @NotBlank(message = "Không để trống Hình ảnh")
-    private String imageUrl;
-
+    private String imgCode;
+    private String imgName;
+    private String imgUrl;
+    private Boolean isPrimary;
+    private ProductDetails productDetail;
 }
