@@ -6,7 +6,7 @@ const buckleTypeAPI = {
     return axiosClient.get(url);
   },
   getAllPhanTrang(pageNum, pageSize) {
-    const url = `/buckletype/phanTrang?id=${pageNum}`;
+    const url = `/buckletype/pagination?id=${pageNum}`;
     return axiosClient.get(url,
       {
         params: {
@@ -27,9 +27,13 @@ const buckleTypeAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/buckletype?id=${data.id}`;
-    return axiosClient.put(url, data);
+  update(id, data) {
+    const url = `/buckletype?id=${id}`;
+    return axiosClient.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   },
   updateStatus(id, status) {
     const url = `/buckletype/update-status?id=${id}&status=${status}`;

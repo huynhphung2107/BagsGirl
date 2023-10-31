@@ -2,6 +2,7 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.TypeDTO;
 import fpoly.datn.ecommerce_website.entity.Types;
+import fpoly.datn.ecommerce_website.service.TypeService;
 import fpoly.datn.ecommerce_website.service.serviceImpl.TypeServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -25,7 +26,7 @@ public class TypeRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private TypeServiceImpl typeService;
+    private TypeService typeService;
 
 
     //GetAll
@@ -45,7 +46,7 @@ public class TypeRestController {
     @RequestMapping(value = "/type/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
-        return ResponseEntity.ok(typeService.findAllPhanTrang(pageNum, pageSize));
+        return ResponseEntity.ok(typeService.findAllPagination(pageNum, pageSize));
     }
 
     //GetOne

@@ -36,7 +36,7 @@ public class StaffServiceImpl  {
 
     public Page<Staffs> findAllStaffsWithUserInfoUserRole(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        return staffRepository.findAllStaffsWithUsersRoles(pageable);
+        return staffRepository.getAll(pageable);
     }
 
 
@@ -47,33 +47,8 @@ public class StaffServiceImpl  {
 
 
     public Staffs save(StaffDTO staffDTO) {
-//        Staff staff = new Staff();
-//
-//        staff.setStaffStatus(1);
-//
-//        UserInfo userInfo = new UserInfo();
-//        userInfo.setFullName(staffDTO.getFullName());
-//        userInfo.setAccount(staffDTO.getAccount());
-//        userInfo.setPassword(staffDTO.getPassword());
-//        userInfo.setEmail(staffDTO.getEmail());
-//        userInfo.setUserInfoStatus(staffDTO.getUserInfoStatus());
-//        userInfo.setGender(staffDTO.getGender());
-//        userInfo.setAddress(staffDTO.getAddress());
-//        userInfo.setPhoneNumber(staffDTO.getPhoneNumber());
-//        userInfo.setNote(staffDTO.getNote());
-//
-//        UserRole userRole = userRoleRepository.findById(staffDTO.getUserInfoUserRoleId()).orElse(null);
-//        if (userRole == null) {
-//            throw new IllegalArgumentException("User Role not found");
-//        }
-//
-//        userInfo.setUserRole(userRole);
-//
-//        UserInfo savedUserInfo = userInfoRepository.save(userInfo);
-
-
         Staffs staff = modelMapper.map(staffDTO, Staffs.class);
-        staff.setStaffStatus(staffDTO.getStaffStatus());
+        staff.setStaffStatus(1);
         // Retrieve the UserRole using the provided userRoleId
         Roles userRole = userRoleRepository.findById(staffDTO.getUsersRolesRoleId())
                 .orElseThrow(() -> new IllegalArgumentException("User Role not found"));

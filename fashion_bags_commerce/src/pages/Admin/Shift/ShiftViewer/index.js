@@ -28,7 +28,7 @@ function ShiftViewer() {
   return (
     <Layout style={{ height: '100vh', background: '#f4f3f4' }}>
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="13" openKey="sub5" />
+        <Sidebar keyIndex="13" openKey="sub10" />
       </Sider>
       <Layout style={layoutContent}>
         <Header style={headerStyle}>

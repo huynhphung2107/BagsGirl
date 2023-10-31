@@ -1,8 +1,12 @@
 import axiosClient from './axiosClient';
 
 const userInfoAPI = {
-  getAll(pageNum, pageSize) {
-    const url = '/user/';
+  getAll() {
+    const url = '/user-info/';
+    return axiosClient.get(url);
+  },
+  getAllPhanTrang(pageNum, pageSize) {
+    const url = `/user-info/phanTrang?id=${pageNum}`;
     return axiosClient.get(url, {
       params: {
         page: pageNum - 1,
@@ -11,15 +15,15 @@ const userInfoAPI = {
     });
   },
   findByKeywork(keyword) {
-    const url = `/customer/search?keyword=${keyword}`;
+    const url = `/user-info/search?keyword=${keyword}`;
     return axiosClient.get(url, { keyword });
   },
   get(id) {
-    const url = `/user?id=${id}`;
+    const url = `/user-info?id=${id}`;
     return axiosClient.get(url);
   },
   add(data) {
-    const url = `/user`;
+    const url = `/user-info`;
     return axiosClient.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -27,11 +31,11 @@ const userInfoAPI = {
     });
   },
   update(data) {
-    const url = `/user?id=${data.id}`;
+    const url = `/user-info?id=${data.id}`;
     return axiosClient.put(url, data);
   },
-  updateStatus(userInfoID, status) {
-    const url = `/user/update-status?userInfoID=${userInfoID}&status=${status}`;
+  updateStatus(userInfoId, status) {
+    const url = `/user-info/update-status?userInfoId=${userInfoId}&userInfoStatus=${status}`;
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',

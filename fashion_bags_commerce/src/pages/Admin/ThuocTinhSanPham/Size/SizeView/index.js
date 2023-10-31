@@ -1,7 +1,7 @@
 import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
-import TableContent from '../SizeView/Table/Table'
+import TableContent from '../SizeView/Table/Table';
 
 import FormSizeCreate from '../SizeEdit/FormCreate/FormSizeCreate';
 
@@ -13,7 +13,7 @@ function SizeView() {
   return (
     <Layout className="layout">
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="13" openKey="sub5" />
+        <Sidebar keyIndex="14" openKey="sub5" />
       </Sider>
       <Layout className="layoutContent">
         <Header className="headerStyle">

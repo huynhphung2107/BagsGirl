@@ -81,10 +81,9 @@ function FormSizeCreate(props) {
               <Input />
             </Form.Item>
 
-            
             <Form.Item
               label="Chiều dài"
-              name="lengthSize"
+              name="sizeLength"
               rules={[
                 {
                   required: true,
@@ -96,7 +95,7 @@ function FormSizeCreate(props) {
             </Form.Item>
             <Form.Item
               label="Chiều rộng"
-              name="wideSize"
+              name="sizeWidth"
               rules={[
                 {
                   required: true,
@@ -108,7 +107,7 @@ function FormSizeCreate(props) {
             </Form.Item>
             <Form.Item
               label="Chiều cao"
-              name="heightSize"
+              name="sizeHeight"
               rules={[
                 {
                   required: true,
@@ -131,6 +130,10 @@ function FormSizeCreate(props) {
                   {
                     value: '0',
                     label: 'Không Hoạt động',
+                  },
+                  {
+                    value: '-1',
+                    label: 'Ngừng Hoạt động',
                   },
                 ]}
               />

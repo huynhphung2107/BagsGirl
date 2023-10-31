@@ -4,6 +4,7 @@ import customerAPI from '~/api/customerAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import { tab } from '@testing-library/user-event/dist/tab';
+import FormCustomerEdit from '../../CustomerEdit/FormEdit/FormCustomerEdit';
 // import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
@@ -13,7 +14,7 @@ const TableContent = () => {
   const [pagesSize, setPagesSize] = useState(5);
   const [totalItem, setTotalItem] = useState();
 
-  const onCancel = () => {};
+  const onCancel = () => { };
   const reload = () => {
     setLoading(true);
     getAll(currentPage, pagesSize);
@@ -22,15 +23,26 @@ const TableContent = () => {
     }, 500);
   };
 
+  // useEffect(() => {
+  //   // Fetch voucher data using the staffAPI.getAll function
+  //   getAll(currentPage, pagesSize);
+  //   reload();
+  // }, []); // Update data when page or page size changes
   useEffect(() => {
-    // Fetch voucher data using the staffAPI.getAll function
-    getAll(currentPage, pagesSize);
-    reload();
-  }, []); // Update data when page or page size changes
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+  useEffect(() => {
+    if (loading) {
+      // Tải lại bảng khi biến trạng thái thay đổi
+      getAll(currentPage, pagesSize);
+      setLoading(false); // Reset lại trạng thái
+    }
+  }, [loading]);
 
   const onChange = (current, pageSize) => {
-    console.log(current);
-    console.log(pageSize);
     setCurrentPage(current);
     setPagesSize(pageSize);
     getAll(current, pageSize);
@@ -40,10 +52,9 @@ const TableContent = () => {
     try {
       const response = await customerAPI.getAll(current, pageSize);
       const data = response.data.content;
-      console.log(data);
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   // Define your table columns
@@ -63,6 +74,12 @@ const TableContent = () => {
       title: 'Tài khoản',
       dataIndex: ['users', 'account'],
       sorter: (a, b) => a.users.account.localeCompare(b.users.account),
+      width: 100,
+    },
+    {
+      title: 'Mật khẩu',
+      dataIndex: ['users', 'password'],
+      sorter: (a, b) => a.users.password.localeCompare(b.users.password),
       width: 100,
     },
     {
@@ -87,12 +104,12 @@ const TableContent = () => {
       width: 100,
     },
 
-    {
-      title: 'Chức vụ',
-      dataIndex: ['users', 'roles', 'roleName'],
-      sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
-      width: 100,
-    },
+    // {
+    //   title: 'Chức vụ',
+    //   dataIndex: ['users', 'roles', 'roleName'],
+    //   sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
+    //   width: 100,
+    // },
     {
       title: 'Điểm',
       dataIndex: 'customerPoint',
@@ -125,7 +142,7 @@ const TableContent = () => {
             statusClass = 'inactive-status';
             break;
           case -1:
-            statusText = 'Trạng thái khác';
+            statusText = 'Ngừng hoạt động';
             statusClass = 'other-status';
             break;
           default:
@@ -141,8 +158,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          {/* <FormvoucherEdit voucher={record} /> */}
-          {/* <FormStaffViewDetails id={record.id} /> */}
+          <FormCustomerEdit customerData={record} reload={() => { setLoading(true) }} />
 
           <Popconfirm
             title="Xác Nhận"
@@ -150,13 +166,13 @@ const TableContent = () => {
             okText="Đồng ý"
             cancelText="Không"
             onConfirm={() => {
-              deleteHandle(record.id, 0);
+              deleteHandle(record.customerId, 0);
               reload();
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
-              Cancel
+            <Button type="primary" danger icon={<DeleteOutlined />}>
+              Delete
             </Button>
           </Popconfirm>
         </Space>
@@ -198,7 +214,7 @@ const TableContent = () => {
       </div>
 
       <Table
-        rowKey={(record) => record.id}
+        rowKey={(record) => record.customerId}
         columns={columns}
         dataSource={data}
         pagination={false}

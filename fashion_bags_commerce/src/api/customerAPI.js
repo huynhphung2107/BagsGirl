@@ -12,7 +12,7 @@ const customerAPI = {
   },
 
   getRoles(params) {
-    const url = '/role';
+    const url = '/role/';
     return axiosClient.get(url, { params });
   },
 
@@ -32,9 +32,13 @@ const customerAPI = {
       },
     });
   },
-  update(data) {
-    const url = `/customer?id=${data.id}`;
-    return axiosClient.put(url, data);
+  update(id, data) {
+    const url = `/customer?id=${id}`;
+    return axiosClient.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   },
   updateStatus(id, status) {
     const url = `/customer/update-status?id=${id}&status=${status}`;

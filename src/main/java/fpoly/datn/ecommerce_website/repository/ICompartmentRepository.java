@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICompartmentRepository extends JpaRepository<Compartments, String> {
     @Query("Select p from Compartments p where p.compartmentStatus <> -1")
-    Page<Compartments> getAllPhanTrang(Pageable pageable);
+    Page<Compartments> findAllPagination(Pageable pageable);
 }

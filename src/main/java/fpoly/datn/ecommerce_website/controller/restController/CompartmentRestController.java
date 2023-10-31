@@ -2,6 +2,7 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.CompartmentDTO;
 import fpoly.datn.ecommerce_website.entity.Compartments;
+import fpoly.datn.ecommerce_website.service.CompartmentService;
 import fpoly.datn.ecommerce_website.service.serviceImpl.CompartmentServiceImpl;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -31,7 +32,7 @@ public class CompartmentRestController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private CompartmentServiceImpl compartmentService;
+    private CompartmentService compartmentService;
 
     //hien thi
     @RequestMapping(value = "/compartment/", method = RequestMethod.GET)
@@ -48,7 +49,7 @@ public class CompartmentRestController {
     @RequestMapping(value = "/compartment/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> phanTrang(@RequestParam(name = "page", defaultValue = "0") int pageNum,
                                        @RequestParam(name = "size", defaultValue = "10") int pageSize){
-        return ResponseEntity.ok(compartmentService.findAllPhanTrang(pageNum, pageSize));
+        return ResponseEntity.ok(compartmentService.findAllPagination(pageNum, pageSize));
     }
 
     //getOne
@@ -74,12 +75,14 @@ public class CompartmentRestController {
 
     //update
     @RequestMapping(value = "/compartment", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@Valid @RequestBody CompartmentDTO compartmentDTO) {
-        return new ResponseEntity<>(compartmentService.save(
-                modelMapper.map(compartmentDTO, Compartments.class)
-
-        ), HttpStatus.OK);
+    public ResponseEntity<?> update(@Valid @RequestParam String id, @RequestBody CompartmentDTO compartmentDTO) {
+        Compartments compartments = modelMapper.map(compartmentDTO, Compartments.class);
+        compartments.setCompartmentId(id);
+        return new ResponseEntity<>(
+                this.compartmentService.update(id,compartments)
+                , HttpStatus.OK);
     }
+
     @RequestMapping(value = "/compartment/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Compartments> updateStatus(@Valid @RequestParam String id, @RequestParam int status) {
         return new ResponseEntity<>(compartmentService.updateStatus(id, status),

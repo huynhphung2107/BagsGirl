@@ -3,7 +3,7 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
-// import FormsizeEdit from '../../sizeEdit/FormEdit/FormsizeEdit';
+import FormSizeEdit from '../../SizeEdit/FormEdit/FormSizeEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ const TableContent = () => {
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 300);
   };
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          {/* <FormsizeEdit size={record} /> */}
+          <FormSizeEdit size={record} />
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"
@@ -118,7 +118,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button type="primary" className="btn btn-danger " icon={<DeleteOutlined />}>
+           <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
