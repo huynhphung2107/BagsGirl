@@ -10,6 +10,16 @@ const customerAPI = {
       },
     });
   },
+  getSearchPagination(key, pageNum, pageSize) {
+    const url = '/customer/search';
+    return axiosClient.get(url, {
+      params: {
+        keyword: key,
+        page: pageNum - 1,
+        size: pageSize,
+      },
+    });
+  },
 
   getRoles(params) {
     const url = '/role/';
@@ -51,6 +61,10 @@ const customerAPI = {
   delete(id) {
     const url = `/customer?id=${id}`;
     return axiosClient.delete(url);
+  },
+  findByKeywork(keyword) {
+    const url = `/customer/search?keyword=${keyword}`;
+    return axiosClient.get(url, { keyword });
   },
 };
 

@@ -35,6 +35,7 @@ public class SizeServiceImpl implements ServiceGenarel<Sizes> {
 
     @Override
     public Sizes save(Sizes size) {
+     
         return iSizeReponsitory.save(size);
     }
 
@@ -50,7 +51,7 @@ public class SizeServiceImpl implements ServiceGenarel<Sizes> {
         return iSizeReponsitory.save(size);
 
     }
-    
+
     @Override
     public List<Sizes> searchByName(String name) {
         return null;

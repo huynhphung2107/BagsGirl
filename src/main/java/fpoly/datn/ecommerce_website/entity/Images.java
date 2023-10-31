@@ -39,7 +39,7 @@ public class Images {
     private String imgUrl;
 
     @Column(name = "isPrimary")
-    private String isPrimary;
+    private Boolean isPrimary;
 
     @ManyToOne
     @JoinColumn(name = "product_detail_id")

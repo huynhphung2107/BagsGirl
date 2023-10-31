@@ -22,7 +22,7 @@ public class ProductDTO {
     @NotBlank
     private String productName;
     @NotBlank
-    private String productStatus;
+    private Integer productStatus;
     @NotBlank
     private String brandName;
 }

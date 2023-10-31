@@ -5,6 +5,7 @@ import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import { tab } from '@testing-library/user-event/dist/tab';
 import FormCustomerEdit from '../../CustomerEdit/FormEdit/FormCustomerEdit';
+import SearchForm from './FormSearch/SearchForm';
 // import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
@@ -13,49 +14,55 @@ const TableContent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pagesSize, setPagesSize] = useState(5);
   const [totalItem, setTotalItem] = useState();
+  const [search, setSearch] = useState('');
 
   const onCancel = () => { };
   const reload = () => {
     setLoading(true);
-    getAll(currentPage, pagesSize);
+    getAll(search, currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
     }, 500);
   };
 
-  // useEffect(() => {
-  //   // Fetch voucher data using the staffAPI.getAll function
-  //   getAll(currentPage, pagesSize);
-  //   reload();
-  // }, []); // Update data when page or page size changes
   useEffect(() => {
     setLoading(true);
+    getAll(search, currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, []);
+
   useEffect(() => {
     if (loading) {
       // Tải lại bảng khi biến trạng thái thay đổi
-      getAll(currentPage, pagesSize);
-      setLoading(false); // Reset lại trạng thái
+      getAll(search, currentPage, pagesSize);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
   }, [loading]);
 
   const onChange = (current, pageSize) => {
     setCurrentPage(current);
     setPagesSize(pageSize);
-    getAll(current, pageSize);
+    getAll(search, current, pageSize);
   };
 
-  const getAll = async (current, pageSize) => {
+  const handleSearchChange = (newFilter) => {
+    setSearch(newFilter);
+    setLoading(true);
+    setCurrentPage(1);
+  }
+  const getAll = async (keyword, page, size) => {
     try {
-      const response = await customerAPI.getAll(current, pageSize);
+      const response = await customerAPI.getSearchPagination(keyword, page, size);
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setData(data);
     } catch (error) { }
-  };
+  }
+
 
   // Define your table columns
   const columns = [
@@ -188,9 +195,10 @@ const TableContent = () => {
       message: 'Thông báo',
       description: 'Đã hủy thành công trạng thái nhân viên có id là :' + id,
     });
-    getAll(currentPage, pagesSize);
-    console.log(xoa);
+    reload();
   };
+
+
 
   return (
     <div
@@ -206,6 +214,7 @@ const TableContent = () => {
         <Button type="primary" onClick={reload} loading={loading} icon={<SyncOutlined />}>
           Reload
         </Button>
+        <SearchForm onSubmit={handleSearchChange} />
         <span
           style={{
             marginLeft: 8,
@@ -227,6 +236,7 @@ const TableContent = () => {
         total={totalItem}
         onChange={onChange}
         defaultCurrent={1}
+        current={currentPage}
         defaultPageSize={pagesSize}
       />
     </div>
