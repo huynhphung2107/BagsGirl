@@ -1,38 +1,37 @@
 package fpoly.datn.ecommerce_website.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import fpoly.datn.ecommerce_website.entity.BuckleTypes;
+import fpoly.datn.ecommerce_website.entity.Colors;
+import fpoly.datn.ecommerce_website.entity.Compartments;
+import fpoly.datn.ecommerce_website.entity.Materials;
+import fpoly.datn.ecommerce_website.entity.Producers;
+import fpoly.datn.ecommerce_website.entity.Products;
+import fpoly.datn.ecommerce_website.entity.Sizes;
+import fpoly.datn.ecommerce_website.entity.Types;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.UUID;
+import java.math.BigDecimal;
 
 @Setter
 @Getter
 @ToString
 public class ProductDetailDTO {
-
-    private UUID productDetailId;
-    private String productCode;
-    private String productName;
-    private String colorName;
-    private String typeName;
-    private String materialName;
-    private String sizeName;
-    private String productBrandName;
-    private String compartmentName;
-    private String buckleTypeName;
-    private String producerName;
-    @NotNull
-    private Float importPrice;
-    @NotNull
-    private Float retailPrice;
-    @NotNull
+    private String productDetailId;
+    private BigDecimal importPrice;
+    private BigDecimal retailPrice;
     private Integer productDetailAmount;
-    @NotBlank
     private String productDetailDescribe;
     private Integer productDetailStatus;
-    
+    private Products product;
+    private Colors color;
+    private Types type;
+    private Materials material;
+    private Sizes size;
+    private Compartments compartment;
+    private BuckleTypes buckleType;
+    private Producers producer;
+
 
 }

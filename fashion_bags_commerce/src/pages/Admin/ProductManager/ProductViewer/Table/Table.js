@@ -2,7 +2,7 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import { useEffect, useState, useContext } from 'react';
 import FormProductEdit from '../../ProductEdit/FormEdit/FormProductEdit';
 import FormProductViewDetails from '../../ProductViewDetails/FormViewer/FormProductViewDetails';
-import baloAPI from '~/api/baloAPI';
+import baloAPI from '~/api/productsAPI';
 
 import styles from './index.module.scss';
 import FormBaloEditTonggle from '../../ProductEdit/FormCreate/FormBaloEditTonggle';
@@ -15,26 +15,35 @@ function TableContent() {
   const [totalItem, setTotalItem] = useState();
 
   const handleTableChange = (pagination, filters, sorter) => {
-    console.log('Trang hiện tại:', pagination.current);
+    console.log('Trang hiện tại:', pagination);
     console.log('Kích thước trang:', pagination.pageSize);
     console.log('Bộ lọc:', filters);
     console.log('Thông tin sắp xếp:', sorter);
   };
   const columns = [
     {
+      title: 'Số thứ tự',
+      dataIndex: 'index',
+      key: 'index',
+      width: 50,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
+    },
+    {
       title: 'Code',
-      dataIndex: 'baloCode',
-      sorter: (a, b) => a.baloCode.localeCompare(b.baloCode),
-      width: '100px',
+      dataIndex: 'productCode',
+      width: 100,
+      sorter: (a, b) => a.productCode.localeCompare(b.productCode),
     },
     {
       title: 'Name Balo',
-      dataIndex: 'baloName',
-      sorter: (a, b) => a.baloName.localeCompare(b.baloName),
+      dataIndex: 'productName',
+      width: 300,
+      sorter: (a, b) => a.productName.localeCompare(b.productName),
     },
     {
       title: 'Status',
-      dataIndex: 'baloStatus',
+      dataIndex: 'productStatus',
+      width: 100,
       render: (status) => {
         switch (status) {
           case 1:
@@ -48,14 +57,14 @@ function TableContent() {
         }
       },
       sorter: (a, b) => a.baloStatusString.localeCompare(b.baloStatusString),
-      width: 300,
     },
     {
       title: 'Action',
       key: 'action',
+      width: 150,
       render: (_, record) => (
         <Space size="middle">
-          <FormProductViewDetails baloCode={record.baloCode} />
+          <FormProductViewDetails productCode={record.productCode} />
           <FormProductEdit balo={record} />
           <Popconfirm
             title="Xác Nhận"
@@ -72,7 +81,6 @@ function TableContent() {
           </Popconfirm>
         </Space>
       ),
-      width: 300,
     },
   ];
   const onCancel = () => {};
@@ -93,7 +101,6 @@ function TableContent() {
     try {
       const response = await baloAPI.getAll(pageNum, pageSize);
       const data = response.data.content;
-
       setTotalItem(response.data.totalElements);
       setBaloList(data);
       setTimeout(() => {}, 300);
@@ -129,7 +136,7 @@ function TableContent() {
     handleLoading();
   };
   const onHandlePageNum = (current, pageSize) => {
-    setCurrentPage(1);
+    setCurrentPage(current);
     setPagesSize(pageSize);
     getAllBalo(current, pageSize);
     handleLoading();
@@ -165,7 +172,7 @@ function TableContent() {
               x: 1000,
               y: 700,
             }}
-            rowKey={(record) => record.id}
+            rowKey={(record) => record.productCode}
             columns={columns}
             dataSource={baloList}
             onChange={handleTableChange}

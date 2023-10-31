@@ -1,5 +1,6 @@
 package fpoly.datn.ecommerce_website.dto;
 
+import fpoly.datn.ecommerce_website.entity.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,17 +17,11 @@ import lombok.ToString;
 public class CustomerDTO {
 
     private String customerId;
+
     private Integer customerStatus;
+
     private Integer customerPoint;
-    private String fullName;
-    private String account;
-    private String password;
-    private String email;
-    private Integer userInfoStatus;
-    private Boolean gender;
-    private String phoneNumber;
-    private String address;
-    private String customerNote;
-    private String usersRolesRoleId;
+
+    private Users users;
 
 }

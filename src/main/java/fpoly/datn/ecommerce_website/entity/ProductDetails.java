@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -29,10 +31,10 @@ public class ProductDetails {
     private String productDetailId;
 
     @Column(name = "import_price")
-    private Float importPrice;
+    private BigDecimal importPrice;
 
     @Column(name = "retail_price")
-    private Float retailPrice;
+    private BigDecimal retailPrice;
 
     @Column(name = "amount")
     private Integer productDetailAmount;

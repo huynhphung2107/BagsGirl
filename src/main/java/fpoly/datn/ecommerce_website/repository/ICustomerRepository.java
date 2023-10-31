@@ -7,9 +7,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ICustomerRepository extends JpaRepository<Customers, String> {
 
     @Query("SELECT c FROM Customers c WHERE c.users.roles.roleCode = 'user'")
     Page<Customers> findAllCustomersWithUsersRoles(Pageable pageable);
+
+    @Query("SELECT c FROM Customers c join Users u on c.users.userId = u.userId " +
+            "where c.customerId LIKE %:keyword%" +
+            "or  u.userId LIKE %:keyword%" +
+            "or u.fullName LIKE %:keyword%" +
+            "or u.account LIKE %:keyword%" +
+            "or u.email LIKE %:keyword%" +
+            "or u.phoneNumber LIKE %:keyword%")
+    List<Customers> findByKeyword(String keyword);
 }

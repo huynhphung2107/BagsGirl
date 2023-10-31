@@ -1,15 +1,32 @@
+import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
-import { AutoComplete, Button, Col, Form, Input, Popconfirm, Row, Select, Table, Tabs, notification } from 'antd';
+import {
+  AutoComplete,
+  Button,
+  Col,
+  Form,
+  Input,
+  Popconfirm,
+  Row,
+  Select,
+  Table,
+  Tabs,
+  message,
+  notification,
+} from 'antd';
 import TableContent from '../../ProductManager/ProductViewer/Table/Table';
 import styles from './index.module.scss';
 import Title from 'antd/es/skeleton/Title';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 import TextArea from 'antd/es/input/TextArea';
-import baloDetailsAPI from '~/api/baloDetailsAPI';
+import baloDetailsAPI from '~/api/productDetailsAPI';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import userinfoAPI from '~/api/userInfoAPI';
 import userInfoAPI from '~/api/userInfoAPI';
 import VNDFormaterFunc from '~/Utilities/VNDFormaterFunc';
+import customerAPI from '~/api/customerAPI';
+import billsAPI from '~/api/BillApi';
+import billDetailsAPI from '~/api/BillApi copy';
 const { Option } = AutoComplete;
 
 const SalesCounterForm = () => {
@@ -59,7 +76,7 @@ const SalesCounterForm = () => {
 
   function Content(props) {
     const [customer, setCustomer] = useState(null);
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState('abc');
     const [inputUserInfo, setInputUserInfo] = useState('');
     const [options, setOptions] = useState([]);
     const [infoList, setInfoList] = useState([]);
@@ -67,67 +84,89 @@ const SalesCounterForm = () => {
     const [visible, setVisible] = useState(true);
     const [totalPrice, setTotalPrice] = useState(0);
     const [voucherPrice, setVoucherPrice] = useState(0);
-    const [VATPrice, setVATPrice] = useState(0);
+    const [VAT, setVAT] = useState(0.1);
     const [totalPayment, setTotalPayment] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [staffId, setStaffId] = useState('');
+    const [billInfo, setBillInfo] = useState({});
     const [form] = Form.useForm();
+    const searchInputRef = useRef(null);
+
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const handleCacuTotalAmount = () => {
+      const total = selectedItems.reduce((total, product) => total + product.cartAmount, 0);
+
+      setTotalAmount(total);
+      return total;
+    };
 
     const handleSelect = (value, option) => {
-      const item = options.find((item) => item.id === value);
-
-      if (isItemAlreadyAdded(item)) {
-        const updatedItems = selectedItems.map((o) => {
-          if (o.id === item.id) {
-            const newCartAmount = o.cartAmount + 1;
-            if (newCartAmount <= item.baloDetailAmount) {
-              return { ...o, cartAmount: newCartAmount };
-            } else {
-              notification.error({
-                message: 'Lỗi',
-                description: `Số lượng vượt quá giới hạn. Số lượng tối đa: ${item.baloDetailAmount}`,
-              });
-              return o;
-            }
-          }
-          return o;
-        });
-        setSelectedItems(updatedItems);
-        setInputValue(item.baloCode);
-        setTotalPrice(calculateTotalPrice(updatedItems));
-        notification.success({
-          message: 'Thành Công',
-          description: 'Số lượng đã được Update!!!!',
-          duration: 2,
+      const item = options.find((item) => item.productDetailId === value);
+      console.log(item);
+      setInputValue(item.product.productCode);
+      if (item.productDetailAmount <= 0) {
+        notification.error({
+          message: 'Lỗi',
+          description: `Hiện tại Sản Phẩm đang hết hàng!!!!`,
         });
       } else {
-        const newItem = { ...item, cartAmount: 1 };
-        setSelectedItems(selectedItems.concat(newItem));
-        setTotalPrice(calculateTotalPrice(selectedItems.concat(newItem)));
-        setInputValue(item.baloCode);
+        if (isItemAlreadyAdded(item)) {
+          const updatedItems = selectedItems.map((o) => {
+            if (o.productDetailId === item.productDetailId) {
+              const newCartAmount = o.cartAmount + 1;
+              if (newCartAmount <= item.productDetailAmount) {
+                return { ...o, cartAmount: newCartAmount };
+              } else {
+                notification.error({
+                  message: 'Lỗi',
+                  description: `Số lượng vượt quá giới hạn. Số lượng tối đa: ${item.productDetailAmount}`,
+                });
+                return o;
+              }
+            }
+            return o;
+          });
+          setSelectedItems(updatedItems);
+          setInputValue(item.product.productCode);
+          setTotalPrice(calculateTotalPrice(updatedItems));
+          notification.success({
+            message: 'Thành Công',
+            description: 'Số lượng đã được Update!!!!',
+            duration: 2,
+          });
+        } else {
+          const newItem = { ...item, cartAmount: 1 };
+          setSelectedItems(selectedItems.concat(newItem));
+          setTotalPrice(calculateTotalPrice(selectedItems.concat(newItem)));
+          setInputValue(item.productCode);
 
-        notification.success({
-          message: 'Thành Công',
-          description: 'Sản Phẩm đã được thêm!!!!',
-          duration: 2,
-        });
+          notification.success({
+            message: 'Thành Công',
+            description: 'Sản Phẩm đã được thêm!!!!',
+            duration: 2,
+          });
+        }
       }
 
       // setSelectedItems(selectedItems.concat(item));
-      // setInputValue(item.baloCode);
+      // setInputValue(item.productCode);
     };
     const handleSelectInfo = (value, option) => {
       setVisible(true);
-      const item = infoList.find((item) => item.id === value);
+      const item = infoList.find((item) => item.customerId === value);
+
       setCustomer(item);
       setInputUserInfo(option.children);
       form.setFieldsValue({
-        fullName: item.fullName,
-        phoneNumber: item.phoneNumber,
-        address: item.address,
+        fullName: item.users.fullName,
+        phoneNumber: item.users.phoneNumber,
+        address: item.users.address,
       });
     };
 
     const isItemAlreadyAdded = (item) => {
-      return selectedItems.some((selectedItem) => selectedItem.id === item.id);
+      return selectedItems.some((selectedItem) => selectedItem.productDetailId === item.productDetailId);
     };
     const onSearch = async (value) => {
       setInputValue(value);
@@ -142,9 +181,8 @@ const SalesCounterForm = () => {
     const onSearchInfo = async (value) => {
       setInputUserInfo(value);
       try {
-        const response = await userInfoAPI.findByKeywork(value);
+        const response = await customerAPI.findByKeywork(value);
         const data = response.data;
-        console.log(data);
         setInfoList(data);
       } catch (error) {
         console.error('Đã xảy ra lỗi: ', error);
@@ -153,24 +191,24 @@ const SalesCounterForm = () => {
     const columns = [
       {
         title: 'Balo Code',
-        dataIndex: 'baloCode',
+        dataIndex: ['product', 'productCode'],
 
         width: 200,
-        sorter: (a, b) => a.baloCode.localeCompare(b.baloCode),
+        sorter: (a, b) => a.product.productCode.localeCompare(b.product.productCode),
       },
       {
         title: 'Name Balo',
-        dataIndex: 'baloName',
+        dataIndex: ['product', 'productName'],
         width: 500,
 
-        sorter: (a, b) => a.baloName.localeCompare(b.baloName),
+        sorter: (a, b) => a.product.productName.localeCompare(b.product.productName),
       },
 
       {
         title: 'Size Balo',
-        dataIndex: 'sizeName',
+        dataIndex: ['size', 'sizeName'],
         width: 100,
-        sorter: (a, b) => a.sizeName.localeCompare(b.sizeName),
+        sorter: (a, b) => a.size.sizeName.localeCompare(b.size.sizeName),
       },
       {
         title: 'Retails Price',
@@ -216,10 +254,10 @@ const SalesCounterForm = () => {
     const handleIncrease = (key) => {
       const updatedItems = selectedItems.map((item) => {
         if (item === key) {
-          if (item.cartAmount >= item.baloDetailAmount) {
+          if (item.cartAmount >= item.productDetailAmount) {
             notification.error({
               message: 'Lỗi',
-              description: `Chỉ còn lại ${item.baloDetailAmount} Sản phẩm trong Cửa hàng`,
+              description: `Chỉ còn lại ${item.productDetailAmount} Sản phẩm trong Cửa hàng`,
             });
           } else {
             return { ...item, cartAmount: item.cartAmount + 1 };
@@ -249,17 +287,16 @@ const SalesCounterForm = () => {
       setTotalPrice(calculateTotalPrice(updatedItems));
     };
     const handleTonggleSelectChange = (value) => {
-      if (value === '1') {
+      if (value === 0) {
         setVisible(true); // Cập nhật trạng thái dựa trên giá trị của select
       }
-      if (value === '0') {
+      if (value === 1) {
         setVisible(false); // Cập nhật trạng thái dựa trên giá trị của select
       }
     };
     const calculateTotalPrice = (items) => {
       let total = 0;
       items.forEach((item) => {
-        console.log(item.retailPrice, item.cartAmount);
         total += item.retailPrice * item.cartAmount;
       });
       const calculatedTotalPrice = total + total * 0.1 - voucherPrice;
@@ -268,13 +305,82 @@ const SalesCounterForm = () => {
     };
 
     const finnishPayment = () => {
-      console.log('====================================');
-      console.log(customer);
-      console.log(selectedItems);
-      console.log('====================================');
+      form.submit();
+    };
+    const onHandleAddBill = async (values) => {
+      var currentDate = new Date();
+      var formattedDate = dayjs(currentDate).format('YYYY-MM-DD HH:mm:ss');
+      if (customer == null && visible === true) {
+        messageApi.error('Vui lòng Chọn Khách lẻ hoặc Điền KH Thân Thiết!!!');
+      } else if (selectedItems.length === 0) {
+        messageApi.error('Vui lòng chọn Sản Phẩm!!');
+      } else {
+        let addBill = {
+          staff: {
+            staffId: values.staffId,
+          },
+          customer: {
+            customerId: customer.customerId,
+          },
+          voucher: null,
+          billCode: values.billCode,
+          billCreateDate: formattedDate,
+          billDatePayment: formattedDate,
+          billShipDate: null,
+          billReceiverDate: formattedDate,
+          billTotalPrice: totalPrice + totalPrice * VAT - voucherPrice,
+          productAmount: handleCacuTotalAmount(),
+          billPriceAfterVoucher: totalPrice + totalPrice * VAT - voucherPrice,
+          shippingAddress: null,
+          billingAddress: null,
+          receiverName: null,
+          shipPrice: null,
+          orderEmail: null,
+          orderPhone: null,
+          paymentMethod: values.paymentMethod,
+          billNote: values.billNote,
+          billStatus: 1,
+        };
+
+        const addedBill = await handleAddBills(addBill);
+        console.log(addedBill);
+        await Promise.all(
+          selectedItems.map(async (o) => {
+            let billDetail = {
+              bills: {
+                billId: addedBill.billId,
+              },
+              productDetails: {
+                productDetailId: o.productDetailId,
+              },
+              amount: o.cartAmount,
+              price: o.retailPrice,
+            };
+            const billDetails = await handleAddBillDetails(billDetail); // Thêm thông tin chi tiết hóa đơn
+            console.log(billDetails);
+          }),
+        );
+      }
+      setBillInfo(values);
+    };
+    async function handleAddBills(bill) {
+      const response = await billsAPI.add(bill);
+      return response.data;
+    }
+    async function handleAddBillDetails(billDetails) {
+      const response = await billDetailsAPI.add(billDetails);
+      return response.data;
+    }
+    const onFocusInput = () => {
+      if (searchInputRef.current) {
+        const currentInput = searchInputRef.current;
+        console.log(currentInput);
+        // currentInput.setSelectionRange(0, currentInput.value.length);
+      }
     };
     return (
       <div className={styles.content}>
+        {contextHolder}
         <div>
           <h1 className={styles.title}>Hóa Đơn {props.tabNum}</h1>
         </div>
@@ -285,7 +391,12 @@ const SalesCounterForm = () => {
                 <h5>Thông tin khách hàng</h5>
               </div>
               <div>
-                <Form layout="vertical">
+                <Form
+                  layout="vertical"
+                  initialValues={{
+                    customerType: 0,
+                  }}
+                >
                   <Row>
                     <Col span={24}>
                       <Form.Item
@@ -302,14 +413,25 @@ const SalesCounterForm = () => {
                         <div className={styles.item}>
                           <AutoComplete
                             value={inputUserInfo}
-                            style={{ width: 600 }}
+                            style={{
+                              width: 600,
+                            }}
                             onSelect={handleSelectInfo}
                             onChange={onSearchInfo}
                             placeholder="Nhập từ khóa tìm kiếm"
+                            disabled={!visible}
                           >
                             {infoList.map((o) => (
-                              <Option key={o.id} value={o.id}>
-                                {o.fullName + ' - ' + o.phoneNumber + ' - ' + o.email}
+                              <Option key={o.customerId} value={o.customerId}>
+                                {o.users.fullName +
+                                  ' - ' +
+                                  o.users.phoneNumber +
+                                  ' - ' +
+                                  o.users.email +
+                                  ' - ' +
+                                  o.users.account +
+                                  ' - ' +
+                                  o.users.address}
                               </Option>
                             ))}
                           </AutoComplete>
@@ -328,22 +450,43 @@ const SalesCounterForm = () => {
                           },
                         ]}
                       >
-                        <Select defaultValue="1" style={{ width: 120 }} onChange={handleTonggleSelectChange}>
-                          <Option value="0">Khách Lẻ</Option>
-                          <Option value="1">Khách Hàng Thân Thiết</Option>
-                        </Select>
+                        <Select
+                          style={{
+                            width: 240,
+                          }}
+                          options={[
+                            {
+                              value: 1,
+                              label: 'Khách Lẻ',
+                            },
+                            {
+                              value: 0,
+                              label: 'KH Thân Thiết',
+                            },
+                          ]}
+                          onChange={handleTonggleSelectChange}
+                        ></Select>
                       </Form.Item>
                     </Col>
                   </Row>
                 </Form>
-                <Form layout="vertical" form={form}>
+                <Form
+                  layout="vertical"
+                  form={form}
+                  onFinish={onHandleAddBill}
+                  initialValues={{
+                    staffId: '3896092B-1782-4973-92A8-0DDE36F3A2D7',
+                    paymentMethod: 1,
+                    billNote: '',
+                  }}
+                >
                   <Row>
                     <Col span={12}>
                       <Form.Item
                         label="MÃ HĐ"
                         initialValue={generateCustomCode('HD', 9)}
                         className={styles.item}
-                        name="maHD"
+                        name="billCode"
                         rules={[
                           {
                             required: true,
@@ -357,8 +500,7 @@ const SalesCounterForm = () => {
                     <Col span={12}>
                       <Form.Item
                         label="Nhân Viên"
-                        name="nameStaff"
-                        initialValue={'Nguyễn Công Tuấn Anh'}
+                        name="staffId"
                         className={styles.item}
                         rules={[
                           {
@@ -367,7 +509,12 @@ const SalesCounterForm = () => {
                           },
                         ]}
                       >
-                        <Input readOnly />
+                        <Input
+                          readOnly
+                          onChange={(value) => {
+                            setStaffId(value);
+                          }}
+                        />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -411,40 +558,9 @@ const SalesCounterForm = () => {
                         </Col>
                         <Col span={12}>
                           <Form.Item
-                            label="Phương thức Thanh Toán"
-                            name="phoneNumber"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Please input your username!',
-                              },
-                            ]}
-                          >
-                            <Select
-                              defaultValue="cash"
-                              style={{
-                                width: 280,
-                              }}
-                              options={[
-                                {
-                                  value: 'online',
-                                  label: 'Chuyển Khoản',
-                                },
-                                {
-                                  value: 'cash',
-                                  label: 'Tiền Mặt',
-                                },
-                              ]}
-                            />
-                          </Form.Item>
-                        </Col>
-                      </Row>
-
-                      <Row>
-                        <Col span={24}>
-                          <Form.Item
-                            label=""
-                            name="phoneNumber"
+                            label="Loại Khách Hàng"
+                            className={styles.item}
+                            name="paymentMethod"
                             rules={[
                               {
                                 required: false,
@@ -452,62 +568,91 @@ const SalesCounterForm = () => {
                               },
                             ]}
                           >
-                            <TextArea rows={6} placeholder="Ghi chú" maxLength={6} />
+                            <Select
+                              style={{
+                                width: 240,
+                              }}
+                              options={[
+                                {
+                                  value: 1,
+                                  label: 'Tiền Mặt',
+                                },
+                                {
+                                  value: 0,
+                                  label: 'Chuyển Khoản',
+                                },
+                              ]}
+                              onChange={handleTonggleSelectChange}
+                            ></Select>
                           </Form.Item>
                         </Col>
                       </Row>
                     </div>
                   )}
-                </Form>
-                <Row>
-                  <Col span={12}>
-                    <div className={styles.item}>
-                      <h6>Tổng tiền Sản Phẩm (1)</h6>
-                    </div>
-                  </Col>
-                  <Col span={12}>
-                    <div>
-                      <h6>+ {VNDFormaterFunc(totalPrice)}</h6>
-                    </div>
-                  </Col>
-                  <Col span={12}>
-                    <div className={styles.item}>
-                      <h6>Voucher (nếu có) (2)</h6>
-                    </div>
-                  </Col>
-                  <Col span={12}>
-                    <div>
-                      <h6>- {VNDFormaterFunc(voucherPrice)}</h6>
-                    </div>
-                  </Col>
-                  <Col span={12}>
-                    <div className={styles.item}>
-                      <h6>Thuế VAT 10 % (3) (~ {VNDFormaterFunc(totalPrice * 0.1)})</h6>
-                    </div>
-                  </Col>
-                  <Col span={12}>
-                    <div>
-                      <h6>+ {VNDFormaterFunc(totalPrice * 0.1)}</h6>
-                    </div>
-                  </Col>
-                  <Col span={12}>
-                    <div className={styles.item}>
-                      <h3>Tổng Tiền (1 - 2 + 3)</h3>
-                    </div>
-                  </Col>
-                  <Col span={12}>
-                    <div>
-                      <h3>= {VNDFormaterFunc(totalPrice + totalPrice * 0.1 - voucherPrice)}</h3>
-                    </div>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={24}>
-                    <Form.Item>
+                  <Row>
+                    <Col span={24}>
+                      <Form.Item
+                        label=""
+                        name="billNote"
+                        rules={[
+                          {
+                            required: false,
+                            message: 'Please input your username!',
+                          },
+                        ]}
+                      >
+                        <TextArea rows={6} placeholder="Ghi chú" maxLength={6} />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span={12}>
+                      <div className={styles.item}>
+                        <h6>Tổng tiền Sản Phẩm (1)</h6>
+                      </div>
+                    </Col>
+                    <Col span={12}>
+                      <div>
+                        <h6>+ {VNDFormaterFunc(totalPrice)}</h6>
+                      </div>
+                    </Col>
+                    <Col span={12}>
+                      <div className={styles.item}>
+                        <h6>Voucher (nếu có) (2)</h6>
+                      </div>
+                    </Col>
+                    <Col span={12}>
+                      <div>
+                        <h6>- {VNDFormaterFunc(voucherPrice)}</h6>
+                      </div>
+                    </Col>
+                    <Col span={12}>
+                      <div className={styles.item}>
+                        <h6>Thuế VAT 10 % (3) (~ {VNDFormaterFunc(totalPrice * VAT)})</h6>
+                      </div>
+                    </Col>
+                    <Col span={12}>
+                      <div>
+                        <h6>+ {VNDFormaterFunc(totalPrice * 0.1)}</h6>
+                      </div>
+                    </Col>
+                    <Col span={12}>
+                      <div className={styles.item}>
+                        <h3>Tổng Tiền (1 - 2 + 3)</h3>
+                      </div>
+                    </Col>
+                    <Col span={12}>
+                      <div>
+                        <h3>= {VNDFormaterFunc(totalPrice + totalPrice * VAT - voucherPrice)}</h3>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span={24}>
                       <Button onClick={finnishPayment}>Thêm Hóa Đơn</Button>
-                    </Form.Item>
-                  </Col>
-                </Row>
+                    </Col>
+                  </Row>
+                </Form>
               </div>
             </Col>
             <Col span={14} style={{ border: '1px solid', minHeight: '1000px' }} className={styles.form}>
@@ -516,45 +661,36 @@ const SalesCounterForm = () => {
               </div>
               <div>
                 <div style={{ width: 'auto' }}>
-                  <Form layout="vertical">
-                    <Form.Item
-                      label="Tìm kiếm Khách Hàng"
-                      className={styles.item}
-                      name="searchUserInfo"
-                      rules={[
-                        {
-                          required: false,
-                          message: 'Please input your username!',
-                        },
-                      ]}
-                    >
-                      <AutoComplete
-                        value={inputValue}
-                        style={{ width: 600 }}
-                        onSelect={handleSelect}
-                        onChange={onSearch}
-                        placeholder="Nhập từ khóa tìm kiếm"
-                      >
-                        {options.map((option) => (
-                          <Option key={option.id} value={option.id}>
-                            {option.baloName +
-                              ' - ' +
-                              option.retailPrice +
-                              ' - ' +
-                              option.sizeName +
-                              ' - ' +
-                              option.colorName +
-                              ' - ' +
-                              option.baloBrandName +
-                              ' - ' +
-                              option.compartmentName}
-                          </Option>
-                        ))}
-                      </AutoComplete>
-                    </Form.Item>
-                  </Form>
+                  <AutoComplete
+                    style={{ width: 600 }}
+                    onSelect={handleSelect}
+                    onChange={onSearch}
+                    value={inputValue}
+                    placeholder="Nhập từ khóa tìm kiếm"
+                    onFocus={onFocusInput}
+                    ref={searchInputRef}
+                  >
+                    {options.map((option) => (
+                      <Option key={option.productDetailId} value={option.productDetailId}>
+                        {option.product.productName +
+                          ' - ' +
+                          option.retailPrice +
+                          ' - ' +
+                          option.size.sizeName +
+                          ' - ' +
+                          option.color.colorName +
+                          ' - ' +
+                          option.product.brand.brandName +
+                          ' - ' +
+                          option.compartment.compartmentName}
+                      </Option>
+                    ))}
+                  </AutoComplete>
+
                   <Table
-                    rowKey={(record) => record && record.retailPrice}
+                    rowKey={(record) =>
+                      record && record.retailPrice && record.color.colorName && record.product.productName
+                    }
                     dataSource={selectedItems}
                     columns={columns}
                     style={{ marginTop: '20px' }}

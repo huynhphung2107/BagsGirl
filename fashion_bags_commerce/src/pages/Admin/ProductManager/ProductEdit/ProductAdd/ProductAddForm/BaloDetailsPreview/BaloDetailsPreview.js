@@ -16,8 +16,8 @@ import {
   Table,
   notification,
 } from 'antd';
-import baloAPI from '~/api/baloAPI';
-import baloDetailsAPI from '~/api/baloDetailsAPI';
+import baloAPI from '~/api/productsAPI';
+import baloDetailsAPI from '~/api/productDetailsAPI';
 
 const { Option } = Select;
 function BaloDetailsPreview(props) {
@@ -29,23 +29,23 @@ function BaloDetailsPreview(props) {
   const columns = [
     {
       title: 'Balo Code',
-      dataIndex: 'baloCode',
+      dataIndex: 'productCode',
       fixed: 'left',
       width: 100,
-      sorter: (a, b) => a.baloCode.localeCompare(b.baloCode),
+      sorter: (a, b) => a.productCode.localeCompare(b.productCode),
     },
     {
       title: 'Name Balo',
-      dataIndex: 'baloName',
+      dataIndex: 'productName',
       width: 300,
       fixed: 'left',
-      sorter: (a, b) => a.baloName.localeCompare(b.baloName),
+      sorter: (a, b) => a.productName.localeCompare(b.productName),
     },
     {
       title: 'Color Balo',
-      dataIndex: 'colorName',
+      dataIndex: 'productColor',
       width: 100,
-      sorter: (a, b) => a.colorName.localeCompare(b.colorName),
+      sorter: (a, b) => a.productColor.localeCompare(b.productColor),
     },
     {
       title: 'Type Balo',
@@ -109,7 +109,7 @@ function BaloDetailsPreview(props) {
       width: 100,
       sorter: (a, b) => a.importPrice - b.importPrice,
       render: (text, record) => (
-        <InputNumber value={text} onChange={(value) => handleEditChange(value, record.baloCode, 'importPrice')} />
+        <InputNumber value={text} onChange={(value) => handleEditChange(value, record.productCode, 'importPrice')} />
       ),
     },
     {
@@ -119,7 +119,7 @@ function BaloDetailsPreview(props) {
       width: 100,
       sorter: (a, b) => a.retailPrice - b.retailPrice,
       render: (text, record) => (
-        <InputNumber value={text} onChange={(value) => handleEditChange(value, record.baloCode, 'retailPrice')} />
+        <InputNumber value={text} onChange={(value) => handleEditChange(value, record.productCode, 'retailPrice')} />
       ),
     },
     {
@@ -129,7 +129,10 @@ function BaloDetailsPreview(props) {
       width: 100,
       sorter: (a, b) => a.baloDetailAmount - b.baloDetailAmount,
       render: (text, record) => (
-        <InputNumber value={text} onChange={(value) => handleEditChange(value, record.baloCode, 'baloDetailAmount')} />
+        <InputNumber
+          value={text}
+          onChange={(value) => handleEditChange(value, record.productCode, 'baloDetailAmount')}
+        />
       ),
     },
     {
@@ -142,14 +145,14 @@ function BaloDetailsPreview(props) {
 
   const handleEditChange = (value, key, field) => {
     const newData = [...baloListPreview];
-    const target = newData.find((item) => item.baloCode === key);
+    const target = newData.find((item) => item.productCode === key);
     if (target) {
       target[field] = value;
       setBaloListPreview(newData);
     }
 
     const newDataAdd = [...baloList];
-    const targetAdd = newDataAdd.find((item) => item.baloCode === key);
+    const targetAdd = newDataAdd.find((item) => item.productCode === key);
     if (targetAdd) {
       targetAdd[field] = value;
       setBaloList(newDataAdd);
@@ -159,8 +162,8 @@ function BaloDetailsPreview(props) {
     if (baloList.length !== 0) {
       const tempBalo = baloList[0];
       const baloAdd = {
-        baloCode: tempBalo.baloCode,
-        baloName: tempBalo.baloName,
+        productCode: tempBalo.productCode,
+        productName: tempBalo.productName,
         brandID: tempBalo.brandID,
         baloStatus: tempBalo.baloStatus,
       };
@@ -273,7 +276,7 @@ function BaloDetailsPreview(props) {
           ></span>
         </div>
         <Table
-          rowKey={(record) => record.baloCode}
+          rowKey={(record) => record.productCode}
           loading={loading}
           columns={columns}
           dataSource={baloListPreview}

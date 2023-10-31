@@ -2,12 +2,25 @@
 import styles from './index.module.scss';
 //React Component
 import React, { Fragment, memo, useContext, useEffect, useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Form, InputNumber, Modal, Popconfirm, Row, Select, Typography, notification } from 'antd';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import {
+  Button,
+  Col,
+  Form,
+  InputNumber,
+  Modal,
+  Popconfirm,
+  Row,
+  Select,
+  Table,
+  Typography,
+  Upload,
+  notification,
+} from 'antd';
 import Input from 'antd/es/input/Input';
 
 //API
-import baloAPI from '~/api/baloAPI';
+import baloAPI from '~/api/productsAPI';
 // Utils
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 import BaloDetailsPreview from './BaloDetailsPreview/BaloDetailsPreview';
@@ -22,9 +35,19 @@ import producerAPI from '~/api/propertitesBalo/producerAPI';
 import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
+import { useDropzone } from 'react-dropzone';
+import imageAPI from '~/api/ImageAPI';
 
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 //Function Component
 function ProductAddForm() {
+  const [images, setImages] = useState([]);
   const [isFirst, setIsFirst] = useState(false);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(true);
@@ -63,7 +86,6 @@ function ProductAddForm() {
     }
   };
 
-  console.log('render');
   useEffect(() => {
     viewBaloProps();
   }, []);
@@ -171,6 +193,20 @@ function ProductAddForm() {
   const onCancel = () => {
     setPopconfirmVisible(false); // Đóng Popconfirm sau khi xác nhận
   };
+  const [fileList, setFileList] = useState([]);
+
+  const handleUpload = () => {
+    try {
+      const response = imageAPI.upload(fileList, null, generateCustomCode('img', 9));
+      console.log('====================================');
+      console.log(response.data);
+      console.log('====================================');
+    } catch (error) {
+      console.log(error);
+    }
+
+    setFileList([]);
+  };
   return (
     <Fragment>
       <div>
@@ -181,6 +217,14 @@ function ProductAddForm() {
           <Row>
             <h1 className={styles.titleInfo}>Thông Tin Balo Chi tiết</h1>
           </Row>
+        </div>
+        <div>
+          <Upload beforeUpload={() => false} fileList={fileList} onChange={({ fileList }) => setFileList(fileList)}>
+            <Button icon={<UploadOutlined />}>Select Files</Button>
+          </Upload>
+          <Button onClick={handleUpload} disabled={fileList.length === 0} style={{ marginTop: 16 }}>
+            Upload
+          </Button>
         </div>
         <Form
           onFinish={handleAddBaloDetails}

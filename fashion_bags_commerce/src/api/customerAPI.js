@@ -48,6 +48,10 @@ const customerAPI = {
     const url = `/customer?id=${id}`;
     return axiosClient.delete(url);
   },
+  findByKeywork(keyword) {
+    const url = `/customer/search?keyword=${keyword}`;
+    return axiosClient.get(url, { keyword });
+  },
 };
 
 export default customerAPI;
