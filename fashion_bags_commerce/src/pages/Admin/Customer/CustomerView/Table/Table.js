@@ -16,7 +16,7 @@ const TableContent = () => {
   const [totalItem, setTotalItem] = useState();
   const [search, setSearch] = useState('');
 
-  const onCancel = () => { };
+  const onCancel = () => {};
   const reload = () => {
     setLoading(true);
     getAll(search, currentPage, pagesSize);
@@ -26,20 +26,13 @@ const TableContent = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    getAll(search, currentPage, pagesSize);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    reload();
   }, []);
 
   useEffect(() => {
     if (loading) {
       // Tải lại bảng khi biến trạng thái thay đổi
-      getAll(search, currentPage, pagesSize);
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
+      reload();
     }
   }, [loading]);
 
@@ -53,16 +46,15 @@ const TableContent = () => {
     setSearch(newFilter);
     setLoading(true);
     setCurrentPage(1);
-  }
+  };
   const getAll = async (keyword, page, size) => {
     try {
       const response = await customerAPI.getSearchPagination(keyword, page, size);
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) { }
-  }
-
+    } catch (error) {}
+  };
 
   // Define your table columns
   const columns = [
@@ -165,7 +157,12 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <FormCustomerEdit customerData={record} reload={() => { setLoading(true) }} />
+          <FormCustomerEdit
+            customerData={record}
+            reload={() => {
+              setLoading(true);
+            }}
+          />
 
           <Popconfirm
             title="Xác Nhận"
@@ -197,8 +194,6 @@ const TableContent = () => {
     });
     reload();
   };
-
-
 
   return (
     <div
