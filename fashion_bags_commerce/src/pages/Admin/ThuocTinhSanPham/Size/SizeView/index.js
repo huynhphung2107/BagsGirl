@@ -21,7 +21,6 @@ function SizeView() {
         </Header>
         <Content style={contentStyle}>
           <div>
-            <FormSizeCreate />
           </div>
           <TableContent />
         </Content>

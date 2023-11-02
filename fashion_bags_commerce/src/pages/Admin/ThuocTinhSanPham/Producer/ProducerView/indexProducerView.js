@@ -20,7 +20,6 @@ function ProducerView() {
         </Header>
         <Content style={contentStyle}>
           <div>
-            <FormCreateProducer />
           </div>
           <TableContent />
         </Content>

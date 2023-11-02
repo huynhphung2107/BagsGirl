@@ -19,9 +19,7 @@ function ColorView() {
           <HeaderContent titlePage="Danh Sách Màu sắc" />
         </Header>
         <Content style={contentStyle}>
-          <div>
-            <FormcolorEditTonggle />
-          </div>
+          
           <TableContent />
         </Content>
 

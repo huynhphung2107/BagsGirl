@@ -4,6 +4,7 @@ import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormSizeEdit from '../../SizeEdit/FormEdit/FormSizeEdit';
+import FormSizeCreate from '../../SizeEdit/FormCreate/FormSizeCreate';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -118,7 +119,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-           <Button type="primary" danger icon={<DeleteOutlined />}>
+            <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
@@ -150,9 +151,7 @@ const TableContent = () => {
           marginBottom: 16,
         }}
       >
-        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button>
+        <FormSizeCreate onClick={reload} loading={loading} reload={reload} />
         <span
           style={{
             marginLeft: 8,

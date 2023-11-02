@@ -4,6 +4,7 @@ import materialAPI from '~/api/propertitesBalo/materialAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormMaterialEdit from '../../MaterialEdit/FormEdit/FormMaterialEdit';
+import FormMaterialCreate from '../../MaterialEdit/FormCreate/FormMaterialCreate';
 // import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
@@ -112,7 +113,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-             <Button type="primary" danger icon={<DeleteOutlined />}>
+            <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
@@ -144,9 +145,11 @@ const TableContent = () => {
           marginBottom: 16,
         }}
       >
-        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+        {/* <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
           Reload
-        </Button>
+        </Button> */}
+        <div>{<FormMaterialCreate />}</div>
+
         <span
           style={{
             marginLeft: 8,

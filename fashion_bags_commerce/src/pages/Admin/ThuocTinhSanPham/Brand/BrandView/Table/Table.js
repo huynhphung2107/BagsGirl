@@ -4,6 +4,7 @@ import brandAPI from '~/api/propertitesBalo/brandAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
+import FormBrandCreate from '../../BrandEdit/FormCreate/FormBrandCreate';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -99,7 +100,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <FormBrandEdit brand={record}  />
+          <FormBrandEdit brand={record} />
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"
@@ -111,7 +112,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-           <Button type="primary" danger icon={<DeleteOutlined />}>
+            <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
@@ -142,9 +143,8 @@ const TableContent = () => {
           marginBottom: 16,
         }}
       >
-        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button>
+        <FormBrandCreate onClick={reload} loading={loading} />
+       
         <span
           style={{
             marginLeft: 8,

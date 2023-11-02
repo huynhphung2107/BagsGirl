@@ -20,9 +20,7 @@ function BrandView() {
           <HeaderContent titlePage="Danh Sách Thương Hiệu" />
         </Header>
         <Content style={contentStyle}>
-          <div>
-            <FormBrandCreate />
-          </div>
+          
           <TableContent />
         </Content>
 

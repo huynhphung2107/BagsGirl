@@ -18,7 +18,6 @@ function MaterialView() {
           <HeaderContent titlePage="Danh Sách Chất liệu" />
         </Header>
         <Content style={contentStyle}>
-          <div>{<FormMaterialCreate />}</div>
           <TableContent />
         </Content>
 

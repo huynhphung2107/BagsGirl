@@ -5,6 +5,7 @@ import { useEffect, useState, useContext } from 'react';
 import colorAPI from '~/api/propertitesBalo/colorAPI';
 import styles from './index.module.scss';
 import FormColorEdit from '../../ColorEdit/FormEdit/FormColorEdit';
+import FormcolorEditTonggle from '../../ColorEdit/FormCreate/FormColorCreate';
 
 function TableContent() {
   const [baloList, setBaloList] = useState([]);
@@ -87,7 +88,7 @@ function TableContent() {
             }}
             onCancel={onCancel}
           >
-           <Button type="primary" danger icon={<DeleteOutlined />}>
+            <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
@@ -152,9 +153,8 @@ function TableContent() {
           marginBottom: 16,
         }}
       >
-        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button>
+        <FormcolorEditTonggle onClick={reload} loading={loading} />
+
         <span
           style={{
             marginLeft: 8,

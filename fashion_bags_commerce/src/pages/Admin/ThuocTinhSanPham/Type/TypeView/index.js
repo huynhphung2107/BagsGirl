@@ -21,7 +21,6 @@ function TypeView() {
         </Header>
         <Content style={contentStyle}>
           <div>
-            <FormTypeCreate />
           </div>
           <TableContent />
         </Content>

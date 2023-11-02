@@ -668,7 +668,7 @@ function ProductAddForm() {
                   onConfirm={onConfirm}
                   onCancel={onCancel}
                 >
-                  <Button type="primary">Thêm Chi Tiết Balo</Button>
+                  <Button type="primary">Thêm Sản Phẩm</Button>
                 </Popconfirm>
               </Col>
               <Col span={4}>

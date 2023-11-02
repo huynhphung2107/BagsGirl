@@ -11,7 +11,7 @@ function TableContent() {
   const [baloList, setBaloList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(10);
+  const [pagesSize, setPagesSize] = useState(5);
   const [totalItem, setTotalItem] = useState();
 
   const handleTableChange = (pagination, filters, sorter) => {
@@ -153,9 +153,9 @@ function TableContent() {
           marginBottom: 16,
         }}
       >
-        <Button type="primary" onClick={reload} loading={loading}>
+        {/* <Button type="primary" onClick={reload} loading={loading}>
           Reload
-        </Button>
+        </Button> */}
         <span
           style={{
             marginLeft: 8,
@@ -165,9 +165,9 @@ function TableContent() {
       <Spin spinning={loading}>
         <div>
           <Table
-            style={{
-              minHeight: ' 700px',
-            }}
+            // style={{
+            //   minHeight: ' 700px',
+            // }}
             scroll={{
               x: 1000,
               y: 700,
