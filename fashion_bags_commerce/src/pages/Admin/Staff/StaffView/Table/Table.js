@@ -4,7 +4,7 @@ import staffAPI from '~/api/staffAPI';
 import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
-// import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
+import FormStaffEdit from '../../StaffEdit/FormEdit/FormStaffEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const TableContent = () => {
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 0);
+    }, 500);
   };
 
   useEffect(() => {
@@ -134,7 +134,12 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          {/* <FormvoucherEdit voucher={record} /> */}
+          <FormStaffEdit
+            staffData={record}
+            reload={() => {
+              setLoading(true);
+            }}
+          />
           <FormStaffViewDetails id={record.id} />
 
           <Popconfirm
@@ -212,4 +217,3 @@ const TableContent = () => {
 
 export default TableContent;
 
-//add nhan vien

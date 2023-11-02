@@ -1,6 +1,8 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
+import fpoly.datn.ecommerce_website.dto.CustomerDTO1;
 import fpoly.datn.ecommerce_website.dto.StaffDTO;
+import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.entity.Staffs;
 import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.entity.Roles;
@@ -68,9 +70,20 @@ public class StaffServiceImpl  {
     }
 
 
-    
-    public Staffs update(Staffs staff) {
-        return this.staffRepository.save(staff);
+
+    public Staffs update(String staffId, StaffDTO staffDTO) {
+        Staffs staffs = staffRepository.findById(staffId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+        modelMapper.map(staffDTO, staffs);
+        Users userInfo = modelMapper.map(staffDTO, Users.class);
+        Users savedUserInfo = userInfoRepository.save(userInfo);
+        if (savedUserInfo != null) {
+            return staffRepository.save(staffs);
+        } else {
+            throw new IllegalStateException("Failed to save UserInfo");
+
+        }
+
     }
 
     public Staffs updateStatus(String id, Integer status){

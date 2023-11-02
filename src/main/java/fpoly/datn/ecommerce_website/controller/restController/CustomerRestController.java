@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.CustomerDTO;
+import fpoly.datn.ecommerce_website.dto.CustomerDTO1;
 import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.service.serviceImpl.CustomerServiceImpl;
@@ -63,25 +64,17 @@ public class CustomerRestController {
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
-    public ResponseEntity<?> add(@RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<?> add(@RequestBody CustomerDTO1 customerDTO) {
 
         return new ResponseEntity<>(this.customerService.save(customerDTO), HttpStatus.OK);
 
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateFunc(@Valid @RequestParam String id, @RequestBody CustomerDTO customerDTO) {
-        return new ResponseEntity<>(customerService.update(id,customerDTO),
+    public ResponseEntity<?> update(@Valid @RequestParam String id, @RequestBody CustomerDTO1 customerDTO1) {
+        return new ResponseEntity<>(customerService.update(id,customerDTO1),
                 HttpStatus.OK);
     }
-//    @RequestMapping(value = "/customer", method = RequestMethod.PUT)
-//    public ResponseEntity<?> updateFunc(@Valid @RequestParam String id, @RequestBody CustomerDTO customerDTO) {
-//        Customers customers = modelMapper.map(customerDTO, Customers.class);
-//        customers.setCustomerId(id);
-//        return new ResponseEntity<>(
-//                this.customerService.update(id,customers)
-//                , HttpStatus.OK);
-//    }
 
     @RequestMapping(value = "/customer/update-status", method = RequestMethod.PUT)
     public ResponseEntity<Customers> updateStatus(@RequestParam String id, @RequestParam int status) {

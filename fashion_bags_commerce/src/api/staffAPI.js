@@ -19,7 +19,7 @@ const staffAPI = {
     const url = `/staff?id=${id}`;
     return axiosClient.get(url, data);
   },
-  getOne(id,data) {
+  getOne(id, data) {
     const url = `/staff?id=${id}`;
     return axiosClient.get(url, data);
   },
@@ -31,10 +31,14 @@ const staffAPI = {
       },
     });
   },
-  // update(data) {
-  //   const url = `/staff?id=${data.id}`;
-  //   return axiosClient.put(url, data);
-  // },
+  update(id, data) {
+    const url = `/staff?id=${id}`;
+    return axiosClient.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  },
   updateStatus(id, status) {
     const url = `/staff/update-status?id=${id}&status=${status}`;
     return axiosClient.put(url, null, {

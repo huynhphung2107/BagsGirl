@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.CustomerDTO;
+import fpoly.datn.ecommerce_website.dto.CustomerDTO1;
 import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.entity.Roles;
 import fpoly.datn.ecommerce_website.entity.Users;
@@ -57,12 +58,12 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
 
-    public Customers save(CustomerDTO customerDTO) {
+    public Customers save(CustomerDTO1 customerDTO) {
 
         Customers customer = modelMapper.map(customerDTO, Customers.class);
         customer.setCustomerStatus(customerDTO.getCustomerStatus());
         customer.setCustomerPoint(customerDTO.getCustomerPoint());
-        Roles userRole = userRoleRepository.findById(customerDTO.getUsers().getRoles().getRoleId())
+        Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
                 .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
         Users userInfo = modelMapper.map(customerDTO, Users.class);
         userInfo.setRoles(userRole);
@@ -77,7 +78,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
 
-    public Customers update(String customerId, CustomerDTO customerDTO) {
+    public Customers update(String customerId, CustomerDTO1 customerDTO) {
         Customers customers = customerRepository.findById(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         modelMapper.map(customerDTO, customers);

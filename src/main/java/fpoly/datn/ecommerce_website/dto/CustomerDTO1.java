@@ -1,7 +1,7 @@
 package fpoly.datn.ecommerce_website.dto;
 
+import fpoly.datn.ecommerce_website.entity.Users;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,11 +15,13 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class StaffDTO {
+public class CustomerDTO1 {
 
-    private String staffId;
-    @NotNull
-    private Integer staffStatus;
+    private String customerId;
+
+    private Integer customerStatus;
+
+    private Integer customerPoint;
     @NotBlank
     private String usersFullName;
     @NotBlank
@@ -32,15 +34,13 @@ public class StaffDTO {
     private String usersEmail;
     @NotBlank
     private String usersAddress;
-    @NotNull
+    @NotBlank
     private Integer userStatus;
     @NotBlank
     private Boolean usersGender;
-    @NotBlank
+
     private String usersUserNote;
     @NotBlank
     private String usersRolesRoleId;
-
-    private String usersRolesRoleName;
 
 }
