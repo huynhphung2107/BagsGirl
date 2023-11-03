@@ -6,6 +6,7 @@ import styles from './index.module.scss';
 import { tab } from '@testing-library/user-event/dist/tab';
 import FormCustomerEdit from '../../CustomerEdit/FormEdit/FormCustomerEdit';
 import SearchForm from './FormSearch/SearchForm';
+import FormCustomerCreate from '../../CustomerEdit/FormCreate/FormCustomerCreate';
 // import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
@@ -22,7 +23,7 @@ const TableContent = () => {
     getAll(search, currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 0);
   };
 
   useEffect(() => {
@@ -206,9 +207,11 @@ const TableContent = () => {
           marginBottom: 16,
         }}
       >
-        <Button type="primary" onClick={reload} loading={loading} icon={<SyncOutlined />}>
+        {/* <Button type="primary" onClick={reload} loading={loading} icon={<SyncOutlined />}>
           Reload
-        </Button>
+        </Button> */}
+        <FormCustomerCreate />
+
         <SearchForm onSubmit={handleSearchChange} />
         <span
           style={{

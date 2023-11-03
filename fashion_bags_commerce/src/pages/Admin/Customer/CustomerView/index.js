@@ -22,7 +22,6 @@ function CustomerView() {
         </Header>
         <Content style={contentStyle}>
           <div>
-            <FormCustomerCreate />
           </div>
 
           <TableContent />
