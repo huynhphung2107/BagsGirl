@@ -49,10 +49,7 @@ function FormSizeCreate(props) {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showModal} icon={<PlusOutlined />}>
-        Thêm Kích cỡ
-      </Button>
-      <br></br>
+      <Button type="primary" onClick={showModal} style={{ width: '100px' }} icon={<PlusOutlined />}></Button>
       <Modal title="Thêm kích cỡ" open={modalOpen} onCancel={handleCancel} footer={null}>
         <div>
           <Form

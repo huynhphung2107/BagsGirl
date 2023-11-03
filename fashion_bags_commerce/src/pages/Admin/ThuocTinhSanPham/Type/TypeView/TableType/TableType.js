@@ -10,15 +10,15 @@ function TableContent() {
   const [typeList, setTypeList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(15);
   const [totalItem, setTotalItem] = useState(); // Số lượng dữ liệu tổng cộng
 
   const handleTableChange = (pagination, filters, sorter) => {};
   const columns = [
     {
       title: 'STT',
-      width: 100,
-      render: (text, record, index) => index + 1,
+      width: 40,
+      render: (text, record, index) => <span>{(currentPage - 1) * pageSize + index + 1}</span>,
     },
     {
       title: 'Name Type',
@@ -79,9 +79,7 @@ function TableContent() {
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
-              Delete
-            </Button>
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -147,36 +145,18 @@ function TableContent() {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <FormTypeCreate />
-
-        {/* <Button onClick={reload} loading={loading} icon={<SyncOutlined />}>
-                    Reload
-                </Button> */}
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
+      <FormTypeCreate />
       <Spin spinning={loading}>
         <Table
-          size="middle"
-          className="table table-striped"
           scroll={{
             x: 1000,
-            y: 500,
+            y: 640,
           }}
           rowKey={(record) => record.typeId}
           columns={columns}
           dataSource={typeList}
           onChange={handleTableChange}
           pagination={false}
-          title={() => <div className="red-table-title">Danh sách kiểu balo</div>}
         />
         <div className={styles.pagination}>
           <Pagination

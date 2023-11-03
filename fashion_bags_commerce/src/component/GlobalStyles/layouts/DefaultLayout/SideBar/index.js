@@ -9,13 +9,14 @@ import {
   TeamOutlined,
   UserOutlined,
   ContactsOutlined,
+  HomeOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import Avartar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/Avartar';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import './index.module.scss';
+import style from './index.module.scss';
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -29,22 +30,22 @@ function getItem(label, key, icon, children, type) {
 const items = [
   getItem(
     <Link style={{ textDecoration: 'none' }} to={'/admin'}>
-      Welcome
+      Trang chủ
     </Link>,
     'sub1',
-    <MenuFoldOutlined />,
+    <HomeOutlined />,
   ),
-  getItem('Quản Lí Bán Hàng', 'sub2', <ShoppingCartOutlined />, [
+  getItem('Quản lý Bán Hàng', 'sub2', <ShoppingCartOutlined />, [
     getItem(
       <Link style={{ textDecoration: 'none' }} to={'/sales-counter'}>
         Bán Hàng Tại Quầy
       </Link>,
       '4',
     ),
-    getItem('Quản lí Đặt Hàng', '5'),
+    getItem('Quản lý Đặt Hàng', '5'),
     getItem('Submenu', 'sub3', <AppstoreOutlined />, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
   ]),
-  getItem('Quản lí Hóa Đơn', 'sub4', <PaperClipOutlined />, [
+  getItem('Quản lý Hóa Đơn', 'sub4', <PaperClipOutlined />, [
     getItem('Hóa Đơn hôm nay', '6'),
     getItem('Chỉnh sửa Hóa Đơn', '7'),
     getItem('Xuất Hóa Đơn', '8'),
@@ -53,7 +54,7 @@ const items = [
 
   getItem(
     <Link style={{ textDecoration: 'none' }} to={'/product-viewer'}>
-      Quản lí Sản Phẩm
+      Quản lý Sản Phẩm
     </Link>,
     'sub5',
     <CalendarOutlined />,
@@ -114,7 +115,7 @@ const items = [
     ),
   ]),
   getItem(
-    <Link style={{ textDecoration: 'none' }} to={'/voucher'}>
+    <Link style={{ textDecoration: 'none' }} to={'/voucher-view'}>
       Quản lý Voucher
     </Link>,
     'sub6',
@@ -145,7 +146,7 @@ const items = [
     getItem('Option 11', '36'),
     getItem('Option 12', '37'),
   ]),
-  getItem('Thống Kê và Phân Tích', 'sub9', <BarChartOutlined />, [
+  getItem('Thống Kê ', 'sub9', <BarChartOutlined />, [
     getItem('Option 9', '38'),
     getItem('Option 10', '39'),
     getItem('Option 11', '40'),
@@ -166,13 +167,13 @@ function Sidebar(props) {
   };
 
   return (
-    <div style={{ height: '100vh' }}>
+    <div className={style.sidebar} style={{ height: '100vh' }}>
       <div style={{ padding: ' 0px 30px' }}>
         <Avartar />
         <hr />
       </div>
       <Menu
-        className="menuCustom"
+        className={style.menuCustom}
         mode="inline"
         openKeys={openKeys}
         onOpenChange={onOpenChange}

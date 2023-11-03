@@ -9,7 +9,7 @@ const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
 
   const onCancel = () => {};
@@ -49,8 +49,8 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 100,
-      render: (text, record, index) => index + 1,
+      width: 49,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
       title: 'Code',
@@ -119,9 +119,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button type="primary" danger icon={<DeleteOutlined />}>
-              Delete
-            </Button>
+            <Button type="primary" danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -146,20 +144,13 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <FormSizeCreate onClick={reload} loading={loading} reload={reload} />
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
+      <FormSizeCreate onClick={reload} loading={loading} reload={reload} />
 
       <Table
+        scroll={{
+          x: 1000,
+          y: 640,
+        }}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={data}

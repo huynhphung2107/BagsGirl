@@ -1,7 +1,7 @@
 import '../FormEdit/FormProductEdit.css';
 
 import React, { Fragment, useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
+import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd';
 const { Option } = Select;
 function FormProductEdit(props) {
@@ -14,9 +14,7 @@ function FormProductEdit(props) {
   };
   return (
     <Fragment>
-      <button className="btn btn-warning" onClick={showDrawer} icon={<PlusOutlined />}>
-        Edit
-      </button>
+      <Button className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}></Button>
       <Drawer
         title={'Edit - ' + props.balo.baloCode}
         width={360}

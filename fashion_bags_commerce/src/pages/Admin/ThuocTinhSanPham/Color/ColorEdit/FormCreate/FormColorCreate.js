@@ -1,4 +1,3 @@
-
 //React Component
 import React, { Fragment, useContext, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
@@ -65,9 +64,7 @@ function FormcolorEditTonggle(props) {
   };
   return (
     <Fragment>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        Thêm màu sắc
-      </Button>
+      <Button type="primary" onClick={showDrawer} style={{ width: '100px' }} icon={<PlusOutlined />}></Button>
       <Modal title="Thêm Màu Sắc" visible={open} onCancel={onClose} footer={null}>
         <div>
           <Form
@@ -88,7 +85,6 @@ function FormcolorEditTonggle(props) {
               maxWidth: 600,
             }}
             onFinish={addFunc}
-
           >
             <Form.Item
               label="Color Name"

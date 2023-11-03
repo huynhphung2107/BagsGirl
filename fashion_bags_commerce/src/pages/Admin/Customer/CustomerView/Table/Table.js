@@ -7,13 +7,12 @@ import { tab } from '@testing-library/user-event/dist/tab';
 import FormCustomerEdit from '../../CustomerEdit/FormEdit/FormCustomerEdit';
 import SearchForm from './FormSearch/SearchForm';
 import FormCustomerCreate from '../../CustomerEdit/FormCreate/FormCustomerCreate';
-// import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
-// import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
+
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
   const [search, setSearch] = useState('');
 
@@ -23,7 +22,7 @@ const TableContent = () => {
     getAll(search, currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 0);
+    }, 500);
   };
 
   useEffect(() => {
@@ -61,8 +60,8 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 100,
-      render: (text, record, index) => index + 1,
+      width: 40,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
       title: 'Họ và tên',
@@ -176,9 +175,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button type="primary" danger icon={<DeleteOutlined />}>
-              Delete
-            </Button>
+            <Button type="primary" danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -202,25 +199,13 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        {/* <Button type="primary" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button> */}
-        <FormCustomerCreate />
-
-        <SearchForm onSubmit={handleSearchChange} />
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
-
+      <SearchForm onSubmit={handleSearchChange} />
+      <FormCustomerCreate />
       <Table
+        scroll={{
+          x: 550,
+          y: 570,
+        }}
         rowKey={(record) => record.customerId}
         columns={columns}
         dataSource={data}

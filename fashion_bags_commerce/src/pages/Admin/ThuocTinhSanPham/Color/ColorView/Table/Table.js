@@ -11,7 +11,7 @@ function TableContent() {
   const [baloList, setBaloList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(15);
   const [totalItem, setTotalItem] = useState(); // Số lượng dữ liệu tổng cộng (tùy chỉnh)
 
   const handleTableChange = (pagination, filters, sorter) => {
@@ -25,8 +25,8 @@ function TableContent() {
       title: 'STT',
       // dataIndex: 'count+1',
       // sorter: (a, b) => a.colorCode.localeCompare(b.colorCode),
-      width: 100,
-      render: (text, record, index) => index + 1,
+      width: 40,
+      render: (text, record, index) => <span>{(currentPage - 1) * pageSize + index + 1}</span>,
     },
     {
       title: 'Code',
@@ -88,9 +88,7 @@ function TableContent() {
             }}
             onCancel={onCancel}
           >
-            <Button type="primary" danger icon={<DeleteOutlined />}>
-              Delete
-            </Button>
+            <Button type="primary" danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -148,33 +146,19 @@ function TableContent() {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <FormcolorEditTonggle onClick={reload} loading={loading} />
-
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
       <Spin spinning={loading}>
+        <FormcolorEditTonggle onClick={reload} loading={loading} />
         <Table
-          size="middle"
           className="table table-striped"
           scroll={{
             x: 1000,
-            y: 500,
+            y: 630,
           }}
           rowKey={(record) => record.id}
           columns={columns}
           dataSource={baloList}
           onChange={handleTableChange}
           pagination={false}
-          title={() => <div className="red-table-title">Danh sách màu sắc</div>}
         />
         <div className={styles.pagination}>
           <Pagination

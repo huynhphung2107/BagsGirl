@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import shiftApi from '~/api/shiftAPI';
 import ShiftEdit from '../../ShiftEdit/FormEdit/shiftEdit';
 
+import styles from './index.model.scss';
 function TableContent() {
   //const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ function TableContent() {
   const [tableParams, setTableParams] = useState({
     pagination: {
       current: 1,
-      pageSize: 5,
+      pageSize: 15,
     },
   });
   const fetchProducts = async () => {
@@ -46,7 +47,7 @@ function TableContent() {
 
     // `dataSource` is useless since `pageSize` changed
     if (pagination.pageSize !== tableParams.pagination?.pageSize) {
-        setShiftList([]);
+      setShiftList([]);
     }
   };
   const columns = [
@@ -65,25 +66,25 @@ function TableContent() {
       sorter: true,
     },
     {
-        title: 'Tạo bởi',
-        dataIndex: 'createBy',
-        sorter: true,
-      },
-      {
-        title: 'Trạng thái',
-        dataIndex: 'status',
-        sorter: true,
-      },
-      {
-        title: 'Note',
-        dataIndex: 'note',
-        sorter: true,
-      },
-      {
-        title: 'Nhân viên nhận ca',
-        dataIndex: 'staffUserInfoFullname',
-        sorter: true,
-      },
+      title: 'Tạo bởi',
+      dataIndex: 'createBy',
+      sorter: true,
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      sorter: true,
+    },
+    {
+      title: 'Note',
+      dataIndex: 'note',
+      sorter: true,
+    },
+    {
+      title: 'Nhân viên nhận ca',
+      dataIndex: 'staffUserInfoFullname',
+      sorter: true,
+    },
     {
       title: 'Action',
       key: 'action',
@@ -106,21 +107,15 @@ function TableContent() {
 
   return (
     <div>
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button type="primary" onClick={start} loading={loading}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
+      <Button type="primary" onClick={start} loading={loading}>
+        Reload
+      </Button>
       <Table
+        scroll={{
+          x: 1000,
+          y: 590,
+        }}
+        className={styles.tables}
         rowKey={(record) => record.code}
         loading={loading}
         columns={columns}

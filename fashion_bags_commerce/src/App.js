@@ -37,7 +37,7 @@ const dynamicRoutes = [
   { path: '/material-view', component: <MaterialView />, title: 'H' },
   { path: '/compartment-view', component: <CompartmentView />, title: 'I' },
   { path: '/producer-view', component: <ProducerView />, title: 'K' },
-  { path: '/voucher', component: <VoucherView />, title: 'L' },
+  { path: '/voucher-view', component: <VoucherView />, title: 'L' },
   { path: '/staff-view', component: <StaffView />, title: 'M' },
   { path: '/customer-view', component: <CustomerView />, title: 'j' },
   { path: '/product-add', component: <ProductAdd />, title: 'aa' },

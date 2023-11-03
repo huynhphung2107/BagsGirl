@@ -3,19 +3,23 @@ import Meta from 'antd/es/card/Meta';
 function Avartar() {
   return (
     <div style={{ padding: '0px 0px 50px 0px' }}>
-      <hr></hr>
+      <hr />
+      <br />
+
       <Card
         hoverable
         style={{
           width: 200,
           height: 180,
           padding: '0px 0px 10px 0px',
+          backgroundColor: 'lightsteelblue',
+          borderRadius: '20% 5% 20% 5%',
         }}
         cover={
           <img
-            alt="example"
-            style={{ padding: '2px 20px', width: '200px' }}
-            src="https://phunugioi.com/wp-content/uploads/2020/10/avatar-doremon-va-nobita.jpg"
+            alt="avatar shop"
+            style={{ width: '180px', height: '160px', borderRadius: '20% 5% 20% 5%', margin: '10px 10px 10px 10px' }}
+            src="https://i.imgur.com/7b05uoj.png"
           />
         }
       >

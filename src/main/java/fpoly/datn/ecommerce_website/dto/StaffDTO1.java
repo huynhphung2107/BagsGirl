@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class StaffDTO {
+public class StaffDTO1 {
 
     private String staffId;
     @NotNull

@@ -61,7 +61,7 @@ function FormEditType(props) {
         <Fragment>
             <div style={{ color: 'red' }}>
                 <Button type="primary" className="btn btn-warning" onClick={showComponent} icon={<EditOutlined />}>
-                    Edit
+                    
                 </Button>
                 <Drawer
                     title={'Edit - ' + data.typeId}

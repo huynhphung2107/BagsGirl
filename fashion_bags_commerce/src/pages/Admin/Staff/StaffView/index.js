@@ -8,28 +8,48 @@ import FormStaffCreate1 from '../StaffEdit/FormCreate/FormStaffCreate';
 // import FormstaffCreate from '../staffEdit/FormrCreate/FormstaffCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
-
-const contentStyle = {};
+const headerStyle = {
+  borderLeft: '270px',
+  color: '#fff',
+  height: 'auto',
+  paddingInline: 0,
+  lineHeight: '64px',
+  backgroundColor: '#f3f4f3',
+  margin: '10px 10px 10px 0px',
+};
+const contentStyle = {
+  // lineHeight: '120px',
+  margin: '0 20px 10px 10px',
+  color: 'black',
+  backgroundColor: 'lightgray',
+};
+const footerStyle = {
+  margin: '0 10px 10px 20px',
+  borderLeft: '270px',
+  color: 'black',
+  backgroundColor: '#fff',
+};
+const layoutContent = {
+  marginLeft: '270px',
+  flexGrow: '1',
+  backgroundColor: '#f3f4f3',
+};
 
 function StaffView() {
   return (
-    <Layout className="layout">
+    <Layout style={{ height: '100vh', background: '#f4f3f4' }}>
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="13" openKey="sub7" />
+        <Sidebar keyIndex="sub7" openKey="sub7" />
       </Sider>
-      <Layout className="layoutContent">
-        <Header className="headerStyle">
+      <Layout style={layoutContent}>
+        <Header style={headerStyle}>
           <HeaderContent titlePage="Danh Sách Nhân Viên" />
         </Header>
         <Content style={contentStyle}>
-          <div>
-            <FormStaffCreate />
-          </div>
-
-          <TableContent />
+          <TableContent style={{ boder: 'black solid 1px' }} />
         </Content>
 
-        <Footer className="footerStyle">Đây là component của Footer</Footer>
+        {/* <Footer className="footerStyle">Đây là component của Footer</Footer> */}
       </Layout>
     </Layout>
   );

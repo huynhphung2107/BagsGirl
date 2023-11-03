@@ -11,6 +11,17 @@ const staffAPI = {
     });
   },
 
+  getSearchPagination(key, pageNum, pageSize) {
+    const url = '/staff/search';
+    return axiosClient.get(url, {
+      params: {
+        keyword: key,
+        page: pageNum - 1,
+        size: pageSize,
+      },
+    });
+  },
+
   getRoles(params) {
     const url = '/role/';
     return axiosClient.get(url, { params });

@@ -5,12 +5,15 @@ import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 import FormStaffEdit from '../../StaffEdit/FormEdit/FormStaffEdit';
+import SearchForm from './FormSearch/SearchForm';
+import FormStaffCreate from '../../StaffEdit/FormCreate/FormStaffCreate';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
+  const [search, setSearch] = useState('');
 
   const onCancel = () => {};
   const reload = () => {
@@ -19,6 +22,11 @@ const TableContent = () => {
     setTimeout(() => {
       setLoading(false);
     }, 500);
+  };
+  const handleSearchChange = (newFilter) => {
+    setSearch(newFilter);
+    setLoading(true);
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -49,8 +57,8 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 100,
-      render: (text, record, index) => index + 1,
+      width: 40,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
       title: 'Họ và tên',
@@ -103,7 +111,7 @@ const TableContent = () => {
       title: 'Trạng thái',
       dataIndex: 'staffStatus',
 
-      width: 150,
+      width: 100,
       render: (status) => {
         let statusText;
         let statusClass;
@@ -153,9 +161,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button type="primary" danger icon={<DeleteOutlined />}>
-              Delete
-            </Button>
+            <Button type="primary" danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -180,22 +186,13 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button type="primary" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
-
+      <SearchForm onSubmit={handleSearchChange} />
+      <FormStaffCreate />
       <Table
+        scroll={{
+          x: 1000,
+          y: 590,
+        }}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={data}
@@ -216,4 +213,3 @@ const TableContent = () => {
 };
 
 export default TableContent;
-

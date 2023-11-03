@@ -10,7 +10,7 @@ const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
 
   const onCancel = () => {};
@@ -50,8 +50,8 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 150,
-      render: (text, record, index) => index + 1,
+      width: 40,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
       title: 'Code',
@@ -140,24 +140,13 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        {/* <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button> */}
-        <div>{<FormMaterialCreate />}</div>
-
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
+      <div>{<FormMaterialCreate />}</div>
 
       <Table
+        scroll={{
+          x: 1000,
+          y: 640,
+        }}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={data}

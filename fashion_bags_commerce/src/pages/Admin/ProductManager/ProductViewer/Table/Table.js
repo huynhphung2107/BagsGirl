@@ -6,12 +6,13 @@ import baloAPI from '~/api/productsAPI';
 
 import styles from './index.module.scss';
 import FormBaloEditTonggle from '../../ProductEdit/FormCreate/FormBaloEditTonggle';
+import { DeleteOutlined } from '@ant-design/icons';
 
 function TableContent() {
   const [baloList, setBaloList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
 
   const handleTableChange = (pagination, filters, sorter) => {
@@ -22,10 +23,10 @@ function TableContent() {
   };
   const columns = [
     {
-      title: 'Số thứ tự',
+      title: 'STT',
       dataIndex: 'index',
       key: 'index',
-      width: 50,
+      width: 40,
       render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
@@ -77,7 +78,7 @@ function TableContent() {
             }}
             onCancel={onCancel}
           >
-            <Button>Xóa</Button>
+            <Button type="primary" danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -147,30 +148,14 @@ function TableContent() {
         padding: '10px',
       }}
     >
-      <FormBaloEditTonggle reload={reload} />
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        {/* <Button type="primary" onClick={reload} loading={loading}>
-          Reload
-        </Button> */}
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
       <Spin spinning={loading}>
         <div>
+          <FormBaloEditTonggle reload={reload} />
+
           <Table
-            // style={{
-            //   minHeight: ' 700px',
-            // }}
             scroll={{
               x: 1000,
-              y: 700,
+              y: 650,
             }}
             rowKey={(record) => record.productCode}
             columns={columns}

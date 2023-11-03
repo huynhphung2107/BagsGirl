@@ -1,7 +1,6 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
-import fpoly.datn.ecommerce_website.dto.CustomerDTO1;
-import fpoly.datn.ecommerce_website.dto.StaffDTO;
+import fpoly.datn.ecommerce_website.dto.StaffDTO1;
 import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.entity.Staffs;
 import fpoly.datn.ecommerce_website.entity.Users;
@@ -36,10 +35,16 @@ public class StaffServiceImpl  {
         return this.staffRepository.findAll();
     }
 
-    public Page<Staffs> findAllStaffsWithUserInfoUserRole(Integer page, Integer size) {
+    public Page<Staffs> findAllPage(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        return staffRepository.getAll(pageable);
+        return staffRepository.getAllPage(pageable);
     }
+
+    public Page<Staffs> findAllSearch(String search, Integer page, Integer size){
+        Pageable pageable = PageRequest.of(page, size);
+        return staffRepository.findallSearch(search, pageable);
+    }
+
 
 
     public Staffs findById(String id) {
@@ -48,7 +53,7 @@ public class StaffServiceImpl  {
     }
 
 
-    public Staffs save(StaffDTO staffDTO) {
+    public Staffs save(StaffDTO1 staffDTO) {
         Staffs staff = modelMapper.map(staffDTO, Staffs.class);
         staff.setStaffStatus(1);
         // Retrieve the UserRole using the provided userRoleId
@@ -71,7 +76,7 @@ public class StaffServiceImpl  {
 
 
 
-    public Staffs update(String staffId, StaffDTO staffDTO) {
+    public Staffs update(String staffId, StaffDTO1 staffDTO) {
         Staffs staffs = staffRepository.findById(staffId)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         modelMapper.map(staffDTO, staffs);

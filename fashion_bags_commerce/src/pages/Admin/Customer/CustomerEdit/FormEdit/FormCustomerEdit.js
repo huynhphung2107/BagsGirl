@@ -77,7 +77,7 @@ function FormCustomerEdit(props) {
   return (
     <Fragment>
       <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}>
-        Edit
+       
       </Button>
       <Drawer
         title={'Update tài khoản khách hàng có id: ' + data.customerId}
