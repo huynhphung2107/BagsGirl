@@ -33,7 +33,7 @@ public class VoucherRestController {
     @RequestMapping(value = "/voucher/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
-            @RequestParam(name = "size", defaultValue = "10") int pageSize
+            @RequestParam(name = "size", defaultValue = "15") int pageSize
     ) {
         Page<Vouchers> voucherPage = voucherService.findAllPage(pageNum, pageSize);
         return new ResponseEntity<>

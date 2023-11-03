@@ -31,7 +31,7 @@ public class SizeRestController {
     @RequestMapping(value = "/size/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPagination(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
-            @RequestParam(name = "size", defaultValue = "10") int pageSize
+            @RequestParam(name = "size", defaultValue = "15") int pageSize
     ) {
         Page<Sizes> sizePage = sizeService.findAllPage(pageNum, pageSize);
         return new ResponseEntity<>

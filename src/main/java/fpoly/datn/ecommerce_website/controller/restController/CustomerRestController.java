@@ -45,7 +45,7 @@ public class CustomerRestController {
     @RequestMapping(value = "/customer/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPage(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
-            @RequestParam(name = "size", defaultValue = "10") int pageSize
+            @RequestParam(name = "size", defaultValue = "15") int pageSize
     ) {
 //        if(customerService.)
         Page<Customers> customerPage = customerService.findAllCustomersWithUserInfoUserRole(pageNum, pageSize);
