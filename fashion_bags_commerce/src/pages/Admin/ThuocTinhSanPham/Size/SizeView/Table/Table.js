@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import sizeAPI from '~/api/propertitesBalo/sizeAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormSizeEdit from '../../SizeEdit/FormEdit/FormSizeEdit';
 import FormSizeCreate from '../../SizeEdit/FormCreate/FormSizeCreate';
@@ -18,7 +18,7 @@ const TableContent = () => {
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 300);
+    }, 500);
   };
 
   useEffect(() => {
@@ -144,8 +144,8 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <FormSizeCreate onClick={reload} loading={loading} reload={reload} />
-
+      <FormSizeCreate />
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
       <Table
         scroll={{
           x: 1000,
@@ -156,7 +156,7 @@ const TableContent = () => {
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
+        // loading={loading}
       />
 
       <Pagination

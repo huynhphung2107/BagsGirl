@@ -6,7 +6,7 @@ import baloAPI from '~/api/productsAPI';
 
 import styles from './index.module.scss';
 import FormBaloEditTonggle from '../../ProductEdit/FormCreate/FormBaloEditTonggle';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 
 function TableContent() {
   const [baloList, setBaloList] = useState([]);
@@ -90,7 +90,7 @@ function TableContent() {
     getAllBalo(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   useEffect(() => {
@@ -104,7 +104,7 @@ function TableContent() {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setBaloList(data);
-      setTimeout(() => {}, 300);
+      setTimeout(() => {}, 500);
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }
@@ -148,32 +148,31 @@ function TableContent() {
         padding: '10px',
       }}
     >
-      <Spin spinning={loading}>
-        <div>
-          <FormBaloEditTonggle reload={reload} />
+      <div>
+        <FormBaloEditTonggle reload={reload} />
+        <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
 
-          <Table
-            scroll={{
-              x: 1000,
-              y: 650,
-            }}
-            rowKey={(record) => record.productCode}
-            columns={columns}
-            dataSource={baloList}
-            onChange={handleTableChange}
-            pagination={false}
+        <Table
+          scroll={{
+            x: 1000,
+            y: 650,
+          }}
+          rowKey={(record) => record.productCode}
+          columns={columns}
+          dataSource={baloList}
+          onChange={handleTableChange}
+          pagination={false}
+        />
+        <div className={styles.pagination}>
+          <Pagination
+            showSizeChanger
+            onShowSizeChange={onHandleSizeChange}
+            onChange={onHandlePageNum}
+            defaultCurrent={1}
+            total={totalItem}
           />
-          <div className={styles.pagination}>
-            <Pagination
-              showSizeChanger
-              onShowSizeChange={onHandleSizeChange}
-              onChange={onHandlePageNum}
-              defaultCurrent={1}
-              total={totalItem}
-            />
-          </div>
         </div>
-      </Spin>
+      </div>
     </div>
   );
 }

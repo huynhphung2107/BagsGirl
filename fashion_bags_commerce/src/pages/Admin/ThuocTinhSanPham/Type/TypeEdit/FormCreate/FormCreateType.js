@@ -47,7 +47,6 @@ function FormTypeCreate(props) {
       <Button type="primary" onClick={showComponent} style={{ width: '100px' }} icon={<PlusOutlined />}>
         {' '}
       </Button>
-      <br />
       <Modal title="Thêm kiểu balo" open={openComponent} onCancel={handleCancel} footer={null}>
         <div>
           <Form

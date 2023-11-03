@@ -52,7 +52,6 @@ function FormVoucherCreate(props) {
   return (
     <Fragment>
       <Button type="primary" onClick={showModal} style={{ width: '100px' }} icon={<PlusOutlined />}></Button>
-      <br></br>
       <Modal title="Thêm voucher" open={modalOpen} onCancel={handleCancel} footer={null}>
         <div>
           <Form

@@ -1,6 +1,6 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState, useContext } from 'react';
 import colorAPI from '~/api/propertitesBalo/colorAPI';
 import styles from './index.module.scss';
@@ -8,7 +8,7 @@ import FormColorEdit from '../../ColorEdit/FormEdit/FormColorEdit';
 import FormcolorEditTonggle from '../../ColorEdit/FormCreate/FormColorCreate';
 
 function TableContent() {
-  const [baloList, setBaloList] = useState([]);
+  const [list, setlist] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(15);
@@ -98,29 +98,29 @@ function TableContent() {
   const onCancel = () => {};
   const reload = () => {
     setLoading(true);
-    getAllBalo(currentPage, pageSize);
+    getAll(currentPage, pageSize);
     setTimeout(() => {
       setLoading(false);
-    }, 300);
+    }, 500);
   };
 
   useEffect(() => {
     reload();
   }, []);
 
-  const getAllBalo = async (pageNum, pageSize) => {
+  const getAll = async (pageNum, pageSize) => {
     try {
       const response = await colorAPI.getAllPagination(pageNum, pageSize);
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
-      setBaloList(data);
+      setlist(data);
       setTimeout(() => {}, 300);
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }
   };
   useEffect(() => {
-    getAllBalo(currentPage, pageSize);
+    getAll(currentPage, pageSize);
   }, []);
   const handleDeleteBalo = async (id, status) => {
     try {
@@ -130,7 +130,7 @@ function TableContent() {
         description: 'Sản Phẩm Có ID: ' + id + ' đã được xóa thành công!!!',
         duration: 2,
       });
-      getAllBalo(currentPage, pageSize);
+      getAll(currentPage, pageSize);
     } catch (error) {
       console.error('Đã xảy ra lỗi khi xóa sản phẩm: ', error);
     }
@@ -138,7 +138,7 @@ function TableContent() {
   const onShowSizeChange = (current, pageSize) => {
     setPageSize(pageSize);
     setCurrentPage(current);
-    getAllBalo(current, pageSize);
+    getAll(current, pageSize);
   };
   return (
     <div
@@ -146,30 +146,29 @@ function TableContent() {
         padding: '10px',
       }}
     >
-      <Spin spinning={loading}>
-        <FormcolorEditTonggle onClick={reload} loading={loading} />
-        <Table
-          className="table table-striped"
-          scroll={{
-            x: 1000,
-            y: 630,
-          }}
-          rowKey={(record) => record.id}
-          columns={columns}
-          dataSource={baloList}
-          onChange={handleTableChange}
-          pagination={false}
+      <FormcolorEditTonggle />
+      <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
+      <Table
+        className="table table-striped"
+        scroll={{
+          x: 1000,
+          y: 630,
+        }}
+        rowKey={(record) => record.id}
+        columns={columns}
+        dataSource={list}
+        onChange={handleTableChange}
+        pagination={false}
+      />
+      <div className={styles.pagination}>
+        <Pagination
+          showSizeChanger
+          onShowSizeChange={onShowSizeChange}
+          onChange={onShowSizeChange}
+          defaultCurrent={1}
+          total={totalItem}
         />
-        <div className={styles.pagination}>
-          <Pagination
-            showSizeChanger
-            onShowSizeChange={onShowSizeChange}
-            onChange={onShowSizeChange}
-            defaultCurrent={1}
-            total={totalItem}
-          />
-        </div>
-      </Spin>
+      </div>
     </div>
   );
 }

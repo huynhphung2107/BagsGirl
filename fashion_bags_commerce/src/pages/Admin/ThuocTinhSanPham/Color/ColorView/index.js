@@ -2,7 +2,6 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../ColorView/Table/Table';
-import FormcolorEditTonggle from '../ColorEdit/FormCreate/FormColorCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
 

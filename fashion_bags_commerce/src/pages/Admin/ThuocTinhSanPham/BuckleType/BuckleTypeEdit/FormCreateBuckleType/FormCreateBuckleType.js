@@ -47,7 +47,6 @@ function FormBuckleTypeCreate(props) {
     <Fragment>
       <Button type="primary" style={{ width: '100px' }} onClick={showComponent} icon={<PlusOutlined />}></Button>
 
-      <br />
       <Modal title="Thêm kiểu khóa" open={openComponent} onCancel={closeComponent} footer={null}>
         <div>
           <Form

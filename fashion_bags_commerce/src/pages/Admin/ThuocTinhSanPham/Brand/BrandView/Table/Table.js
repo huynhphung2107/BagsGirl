@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import brandAPI from '~/api/propertitesBalo/brandAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
 import FormBrandCreate from '../../BrandEdit/FormCreate/FormBrandCreate';
@@ -18,7 +18,7 @@ const TableContent = () => {
     getAllBrand(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 300);
+    }, 500);
   };
 
   useEffect(() => {
@@ -137,6 +137,8 @@ const TableContent = () => {
       }}
     >
       <FormBrandCreate onClick={reload} loading={loading} />
+      <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
+
       <Table
         scroll={{ x: 1000, y: 640 }}
         className={styles.table}
@@ -145,7 +147,7 @@ const TableContent = () => {
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
+        // loading={loading}
       />
 
       <Pagination

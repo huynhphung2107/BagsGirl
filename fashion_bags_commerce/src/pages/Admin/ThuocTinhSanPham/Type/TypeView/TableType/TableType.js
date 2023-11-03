@@ -1,5 +1,5 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
 import styles from './index.module.scss';
@@ -92,14 +92,14 @@ function TableContent() {
     getAllPhanTrangType(currentPage, pageSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
   useEffect(() => {
     if (loading) {
@@ -115,7 +115,7 @@ function TableContent() {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setTypeList(data);
-      setTimeout(() => {}, 300);
+      setTimeout(() => {}, 500);
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }
@@ -146,28 +146,27 @@ function TableContent() {
       }}
     >
       <FormTypeCreate />
-      <Spin spinning={loading}>
-        <Table
-          scroll={{
-            x: 1000,
-            y: 640,
-          }}
-          rowKey={(record) => record.typeId}
-          columns={columns}
-          dataSource={typeList}
-          onChange={handleTableChange}
-          pagination={false}
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
+      <Table
+        scroll={{
+          x: 1000,
+          y: 640,
+        }}
+        rowKey={(record) => record.typeId}
+        columns={columns}
+        dataSource={typeList}
+        onChange={handleTableChange}
+        pagination={false}
+      />
+      <div className={styles.pagination}>
+        <Pagination
+          showSizeChanger
+          onShowSizeChange={onShowSizeChange}
+          onChange={onShowSizeChange}
+          defaultCurrent={1}
+          total={totalItem}
         />
-        <div className={styles.pagination}>
-          <Pagination
-            showSizeChanger
-            onShowSizeChange={onShowSizeChange}
-            onChange={onShowSizeChange}
-            defaultCurrent={1}
-            total={totalItem}
-          />
-        </div>
-      </Spin>
+      </div>
     </div>
   );
 }

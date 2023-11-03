@@ -1,5 +1,5 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import compartmentAPI from '~/api/propertitesBalo/compartmentAPI';
 import styles from './index.module.scss';
@@ -92,14 +92,14 @@ function TableContent() {
     getAllPhanTrangCompartment(currentPage, pageSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   const getAllPhanTrangCompartment = async (pageNum, pageSize) => {
@@ -108,7 +108,7 @@ function TableContent() {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setCompartmentList(data);
-      setTimeout(() => {}, 300);
+      setTimeout(() => {}, 500);
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }
@@ -145,6 +145,7 @@ function TableContent() {
       }}
     >
       <FormCreateCompartment />
+      <Button icon={<ReloadOutlined />}  onClick={reload} loading={loading}></Button>
 
       <Spin spinning={loading}>
         <Table

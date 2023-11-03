@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import voucherAPI from '~/api/voucherAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormVoucherCreate from '../../VoucherEdit/FormrCreate/FormVoucherCreate';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
@@ -18,7 +18,7 @@ const TableContent = () => {
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 100);
+    }, 500);
   };
 
   useEffect(() => {
@@ -168,6 +168,7 @@ const TableContent = () => {
       }}
     >
       <FormVoucherCreate />
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
       <Table
         scroll={{
           x: 1000,
@@ -178,7 +179,6 @@ const TableContent = () => {
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
       />
 
       <Pagination

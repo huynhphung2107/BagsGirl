@@ -43,10 +43,9 @@ function FormCompartmentCreate(props) {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showComponent} style={{ width: '100px'}} icon={<PlusOutlined />}>
+      <Button type="primary" onClick={showComponent} style={{ width: '100px' }} icon={<PlusOutlined />}>
         {' '}
       </Button>
-      <br />
       <Modal title="Thêm ngăn" open={openComponent} onCancel={closeComponent} footer={null}>
         <div>
           <Form

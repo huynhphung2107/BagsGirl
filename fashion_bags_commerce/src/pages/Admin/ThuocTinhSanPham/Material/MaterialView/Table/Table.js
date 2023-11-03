@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import materialAPI from '~/api/propertitesBalo/materialAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormMaterialEdit from '../../MaterialEdit/FormEdit/FormMaterialEdit';
 import FormMaterialCreate from '../../MaterialEdit/FormCreate/FormMaterialCreate';
@@ -140,8 +140,8 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div>{<FormMaterialCreate />}</div>
-
+      <FormMaterialCreate />
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
       <Table
         scroll={{
           x: 1000,
@@ -152,16 +152,17 @@ const TableContent = () => {
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
+        // loading={loading}
       />
-
-      <Pagination
-        className={styles.pagination}
-        total={totalItem}
-        onChange={onChange}
-        defaultCurrent={1}
-        defaultPageSize={pagesSize}
-      />
+      <div className={styles.pagination}>
+        <Pagination
+          className={styles.pagination}
+          total={totalItem}
+          onChange={onChange}
+          defaultCurrent={1}
+          defaultPageSize={pagesSize}
+        />
+      </div>
     </div>
   );
 };

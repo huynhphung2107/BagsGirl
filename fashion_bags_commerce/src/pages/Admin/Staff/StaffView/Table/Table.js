@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import staffAPI from '~/api/staffAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 import FormStaffEdit from '../../StaffEdit/FormEdit/FormStaffEdit';
@@ -188,6 +188,8 @@ const TableContent = () => {
     >
       <SearchForm onSubmit={handleSearchChange} />
       <FormStaffCreate />
+      <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
+
       <Table
         scroll={{
           x: 1000,
@@ -198,7 +200,6 @@ const TableContent = () => {
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
       />
 
       <Pagination

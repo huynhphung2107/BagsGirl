@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import customerAPI from '~/api/customerAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import { tab } from '@testing-library/user-event/dist/tab';
 import FormCustomerEdit from '../../CustomerEdit/FormEdit/FormCustomerEdit';
@@ -201,6 +201,8 @@ const TableContent = () => {
     >
       <SearchForm onSubmit={handleSearchChange} />
       <FormCustomerCreate />
+      <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
+
       <Table
         scroll={{
           x: 550,
@@ -211,7 +213,6 @@ const TableContent = () => {
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
       />
 
       <Pagination

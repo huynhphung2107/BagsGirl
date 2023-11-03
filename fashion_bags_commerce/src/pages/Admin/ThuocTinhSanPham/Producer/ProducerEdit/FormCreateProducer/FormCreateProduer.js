@@ -44,7 +44,6 @@ function FormProducerCreate(props) {
   return (
     <Fragment>
       <Button type="primary" onClick={showComponent} style={{ width: '100px' }} icon={<PlusOutlined />}></Button>
-      <br />
       <Modal title="Thêm nhà sản xuất" open={openComponent} onCancel={closeComponent} footer={null}>
         <div>
           <Form

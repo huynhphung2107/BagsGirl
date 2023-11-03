@@ -1,5 +1,5 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 import styles from './index.module.scss';
@@ -87,7 +87,7 @@ function TableContent() {
     getAllPhanTrangBuckleType(currentPage, pageSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   const getAllPhanTrangBuckleType = async (pageNum, pageSize) => {
@@ -96,7 +96,7 @@ function TableContent() {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setBuckleTypeList(data);
-      setTimeout(() => {}, 300);
+      setTimeout(() => {}, 500);
     } catch (error) {
       console.error('Đã xảy ra lỗi: ', error);
     }
@@ -105,7 +105,7 @@ function TableContent() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   useEffect(() => {
@@ -140,31 +140,31 @@ function TableContent() {
         padding: '10px',
       }}
     >
-      <Spin spinning={loading}>
-        <FormBuckleTypeCreate />
-        <Table
-          size="middle"
-          className="table table-striped"
-          scroll={{
-            x: 1000,
-            y: 630,
-          }}
-          rowKey={(record) => record.buckleTypeId}
-          columns={columns}
-          dataSource={buckleTypeList}
-          onChange={handleTableChange}
-          pagination={false}
+      <FormBuckleTypeCreate />
+      <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
+
+      <Table
+        size="middle"
+        className="table table-striped"
+        scroll={{
+          x: 1000,
+          y: 630,
+        }}
+        rowKey={(record) => record.buckleTypeId}
+        columns={columns}
+        dataSource={buckleTypeList}
+        onChange={handleTableChange}
+        pagination={false}
+      />
+      <div className={styles.pagination}>
+        <Pagination
+          showSizeChanger
+          onShowSizeChange={onShowSizeChange}
+          onChange={onShowSizeChange}
+          defaultCurrent={1}
+          total={totalItem}
         />
-        <div className={styles.pagination}>
-          <Pagination
-            showSizeChanger
-            onShowSizeChange={onShowSizeChange}
-            onChange={onShowSizeChange}
-            defaultCurrent={1}
-            total={totalItem}
-          />
-        </div>
-      </Spin>
+      </div>
     </div>
   );
 }
