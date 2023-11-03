@@ -11,7 +11,7 @@ const header = {
   // backgroundColor: '#ffffff',
   padding: '20px 0 0 40px',
   margin: '10px',
-  backgroundColor: 'lightgray',
+  backgroundColor: 'lightblue',
 };
 
 const headerIcons = {

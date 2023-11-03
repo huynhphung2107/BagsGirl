@@ -17,7 +17,7 @@ const contentStyle = {
   margin: '0 10px 10px 20px',
 
   color: 'black',
-  backgroundColor: 'gray',
+  backgroundColor: 'lightblue',
 };
 const footerStyle = {
   margin: '0 10px 10px 20px',
@@ -43,7 +43,7 @@ function Admin() {
         </Header>
         <Content style={contentStyle}>Đây là component của content</Content>
 
-        <Footer style={footerStyle}>Đây là component của Footer</Footer>
+        {/* <Footer style={footerStyle}>Đây là component của Footer</Footer> */}
       </Layout>
     </Layout>
   );

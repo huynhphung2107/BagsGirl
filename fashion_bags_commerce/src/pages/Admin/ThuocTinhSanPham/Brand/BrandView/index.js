@@ -21,6 +21,7 @@ const contentStyle = {
   margin: '0 20px 10px 10px',
   color: 'black',
   backgroundColor: 'lightgray',
+  backgroundColor: 'lightblue',
 };
 const footerStyle = {
   margin: '0 10px 10px 20px',
