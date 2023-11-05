@@ -31,7 +31,6 @@ const TableContent = () => {
 
   useEffect(() => {
     if (loading) {
-      // Tải lại bảng khi biến trạng thái thay đổi
       reload();
     }
   }, [loading]);

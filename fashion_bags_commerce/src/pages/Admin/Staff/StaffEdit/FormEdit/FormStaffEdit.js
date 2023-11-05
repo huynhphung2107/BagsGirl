@@ -19,6 +19,7 @@ function FormStaffEdit(props) {
     usersAddress: props.staffData.users.address,
     usersUserNote: props.staffData.users.userNote,
     usersRolesRoleId: props.staffData.users.roles.roleId,
+    usersRolesRoleName: props.staffData.users.roles.roleName
   });
 
   const showDrawer = () => {
