@@ -2,7 +2,7 @@
 import styles from './index.module.scss';
 //React Component
 import React, { Fragment, memo, useContext, useEffect, useState } from 'react';
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { InboxOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import {
   Button,
   Col,
@@ -15,9 +15,12 @@ import {
   Table,
   Typography,
   Upload,
+  message,
   notification,
 } from 'antd';
 import Input from 'antd/es/input/Input';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '~/firebase/firebase';
 
 //API
 import baloAPI from '~/api/productsAPI';
@@ -37,6 +40,8 @@ import typeAPI from '~/api/propertitesBalo/typeAPI';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 // import { useDropzone } from 'react-dropzone';
 import imageAPI from '~/api/ImageAPI';
+import { async } from '@firebase/util';
+import Dragger from 'antd/es/upload/Dragger';
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -62,6 +67,7 @@ function ProductAddForm() {
   const [producer, setProducer] = useState([]);
   const [size, setSize] = useState([]);
   const [type, setType] = useState([]);
+  const [downloadedURL, setDownloadedURL] = useState([]);
 
   const viewBaloProps = async () => {
     try {
@@ -73,8 +79,8 @@ function ProductAddForm() {
       setColor(colorData.data);
       const compartmentData = await compartmentAPI.getAll();
       setCompartment(compartmentData.data);
-      const materrialData = await materialAPI.getAll();
-      setMaterial(materrialData.data);
+      const materialData = await materialAPI.getAll();
+      setMaterial(materialData.data);
       const producerData = await producerAPI.getAll();
       setProducer(producerData.data);
       const sizeData = await sizeAPI.getAll();
@@ -131,29 +137,29 @@ function ProductAddForm() {
   const handleAddBaloDetails = (values) => {
     const genCodeAuto = generateCustomCode('baloCode', 9);
 
-    let addBalo = { ...values, baloCode: genCodeAuto };
+    let addBalo = { ...values, productCode: genCodeAuto };
     setBaloList([...baloList, addBalo]);
 
-    let colorSelected = color.find((option) => option.id === values.colorID);
+    let colorSelected = color.find((option) => option.colorId === values.colorID);
     const colorSelectedName = colorSelected.colorName;
-    let brandSelected = brand.find((option) => option.id === values.brandID);
+    let brandSelected = brand.find((option) => option.brandId === values.brandID);
     const brandSelectedName = brandSelected.brandName;
-    let typeSelected = type.find((option) => option.id === values.typeID);
+    let typeSelected = type.find((option) => option.typeId === values.typeID);
     const typeSelectedName = typeSelected.typeName;
-    let materialSelected = material.find((option) => option.id === values.materialID);
+    let materialSelected = material.find((option) => option.materialId === values.materialID);
     const materialSelectedName = materialSelected.materialName;
-    let compartmentSelected = compartment.find((option) => option.id === values.compartmentID);
+    let compartmentSelected = compartment.find((option) => option.compartmentId === values.compartmentID);
     const compartmentSelectedName = compartmentSelected.compartmentName;
-    let sizeSelected = size.find((option) => option.id === values.sizeID);
+    let sizeSelected = size.find((option) => option.sizeId === values.sizeID);
     const sizeSelectedName = sizeSelected.sizeName;
-    let producerSelected = producer.find((option) => option.id === values.producerID);
+    let producerSelected = producer.find((option) => option.producerId === values.producerID);
     const producerSelectedName = producerSelected.producerName;
-    let buckleTypeSelected = buckleType.find((option) => option.id === values.buckleTypeID);
+    let buckleTypeSelected = buckleType.find((option) => option.buckleTypeId === values.buckleTypeID);
     const buckleTypeSelectedName = buckleTypeSelected.buckleTypeName;
 
     let tempBalo = {
       ...values,
-      baloCode: genCodeAuto,
+      productCode: genCodeAuto,
       colorName: colorSelectedName,
       brandName: brandSelectedName,
       typeName: typeSelectedName,
@@ -193,20 +199,82 @@ function ProductAddForm() {
   const onCancel = () => {
     setPopconfirmVisible(false); // Đóng Popconfirm sau khi xác nhận
   };
+
   const [fileList, setFileList] = useState([]);
-
-  const handleUpload = () => {
-    try {
-      const response = imageAPI.upload(fileList, null, generateCustomCode('img', 9));
-      console.log('====================================');
-      console.log(response.data);
-      console.log('====================================');
-    } catch (error) {
-      console.log(error);
-    }
-
-    setFileList([]);
+  const handleAdd = async (options) => {
+    // const { file } = options;
   };
+
+  const handleUpload = async () => {
+    const newList = [];
+    if (fileList.length === 0) {
+      message.info('Vui lòng chọn ảnh!!!!');
+    }
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      console.log(file);
+      const storageRef = ref(storage, `mulitpleFiles/${file.name}`);
+
+      try {
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+        console.log('Upload thành công:');
+        // console.log(downloadURL); // Log đường dẫn URL của tệp đã tải lên
+
+        newList.push(downloadURL);
+
+        message.success('Tải lên hình ảnh thành công');
+      } catch (error) {
+        console.log('Lỗi khi tải lên:', error);
+        message.error('Lỗi khi tải lên hình ảnh');
+      }
+    }
+    console.log(newList);
+    setDownloadedURL(newList);
+    return newList;
+  };
+  const handlTest = () => {
+    console.log(downloadedURL);
+  };
+  useEffect(() => {
+    let err = '';
+
+    if (fileList.length >= 6) {
+      err = 'Chỉ được chọn tối đa 6 ảnh , vui lòng chọn lại!!!!';
+      setFileList([]);
+    } else {
+      let isTrue = true;
+      for (let i = 0; i < fileList.length; i++) {
+        const element = fileList[i];
+
+        if (element.size / 1024 / 1024 > 5) {
+          err = 'Size ảnh quá lớn, vui lòng chọn lại';
+          isTrue = false;
+          setFileList([]);
+          break;
+        }
+        if (!(element.type === 'image/jpg' || element.type === 'image/png')) {
+          err = 'Vui lòng chọn ảnh có định dạng PNG/JPG';
+          isTrue = false;
+          setFileList([]);
+          break;
+        }
+      }
+    }
+    if (err !== '') {
+      message.error(err);
+      err = '';
+    }
+  }, [fileList]);
+  const addFileImg = (fileLists) => {
+    setFileList(fileLists);
+    console.log('file');
+  };
+  const beforeUpload = (file, fileLists) => {
+    addFileImg(fileLists);
+    return false;
+  };
+  console.log(fileList);
   return (
     <Fragment>
       <div>
@@ -219,66 +287,375 @@ function ProductAddForm() {
           </Row>
         </div>
         <div>
-          <Upload beforeUpload={() => false} fileList={fileList} onChange={({ fileList }) => setFileList(fileList)}>
-            <Button icon={<UploadOutlined />}>Select Files</Button>
-          </Upload>
-          <Button onClick={handleUpload} disabled={fileList.length === 0} style={{ marginTop: 16 }}>
-            Upload
-          </Button>
+          <input multiple type="file" onChange={(e) => console.log(e.target.files)}></input>
         </div>
-        <Form
-          onFinish={handleAddBaloDetails}
-          initialValues={{
-            colorName: '',
-            typeName: '',
-            materialName: '',
-            sizeName: '',
-            brandName: '',
-            compartmentName: '',
-            buckleTypeName: '',
-            producerName: '',
-            baloDetailStatus: '',
-            baloDetailDescribe: '',
-            imageUrl: '',
-          }}
-          form={form}
-          name="basic"
-          onFinishFailed={onFinishFailed}
-          autoComplete="on"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          style={{}}
-        >
+        <Dragger multiple name="files" showUploadList={false} beforeUpload={beforeUpload}>
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">Kéo thả hình ảnh vào đây</p>
+        </Dragger>
+        <button onClick={handleUpload}>Send</button>
+        <button onClick={handlTest}>Test</button>
+      </div>
+      <Form
+        onFinish={handleAddBaloDetails}
+        initialValues={{
+          colorName: '',
+          typeName: '',
+          materialName: '',
+          sizeName: '',
+          brandName: '',
+          compartmentName: '',
+          buckleTypeName: '',
+          producerName: '',
+          baloDetailStatus: '',
+          baloDetailDescribe: '',
+          imageUrl: '',
+        }}
+        form={form}
+        name="basic"
+        onFinishFailed={onFinishFailed}
+        autoComplete="on"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        style={{}}
+      >
+        <Row>
+          <Col span={8}>
+            <Form.Item
+              label="Balo Name"
+              name="productName"
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng điền Tên Balo!',
+                },
+              ]}
+            >
+              <Input disabled={isFirst} />
+            </Form.Item>
+            <Form.Item
+              label="Balo Status"
+              name="baloStatus"
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng chọn trạng thái Balo!',
+                },
+              ]}
+            >
+              <Select
+                disabled={isFirst}
+                style={{
+                  width: 200,
+                }}
+                options={[
+                  {
+                    value: '1',
+                    label: 'Hoạt Động',
+                  },
+                  {
+                    value: '0',
+                    label: 'Không Hoạt Động',
+                  },
+                ]}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <div>
+          <hr></hr>
           <Row>
             <Col span={8}>
               <Form.Item
-                label="Balo Name"
-                name="baloName"
+                label="Giá Nhập"
+                name="importPrice"
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng điền Tên Balo!',
+                    message: 'Vui lòng Điền giá nhập!',
                   },
                 ]}
               >
-                <Input disabled={isFirst} />
+                <InputNumber
+                  size="large"
+                  style={{ width: 200 }}
+                  step={1000}
+                  addonAfter="VND"
+                  formatter={(value) => ` ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  parser={(value) => value.replace(/\₫\s?|(,*)/g, '')}
+                />
               </Form.Item>
+            </Col>
+            <Col span={8}>
               <Form.Item
-                label="Balo Status"
-                name="baloStatus"
+                label="Giá Bán"
+                name="retailPrice"
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng chọn trạng thái Balo!',
+                    message: 'Vui lòng điền giá Bán!',
+                  },
+                ]}
+              >
+                <InputNumber
+                  size="large"
+                  style={{ width: 200 }}
+                  step={1000}
+                  addonAfter="VND"
+                  formatter={(value) => ` ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  parser={(value) => value.replace(/\₫\s?|(,*)/g, '')}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Số lượng"
+                name="baloDetailAmount"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng điền Số lượng!',
+                  },
+                ]}
+              >
+                <InputNumber
+                  size="large"
+                  style={{ width: 200 }}
+                  step={5}
+                  addonAfter="Cái"
+                  formatter={(value) => ` ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  parser={(value) => value.replace(/\₫\s?|(,*)/g, '')}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <Form.Item
+                label="Màu sắc"
+                name="colorID"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng chọn màu sắc Balo!',
+                  },
+                ]}
+              >
+                <Select
+                  size="large"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  {color.map((o) => (
+                    <Select.Option key={o.colorId} value={o.colorId}>
+                      {o.colorName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Kiểu Balo"
+                name="typeID"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng chọn Kiểu Balo!',
+                  },
+                ]}
+              >
+                <Select
+                  size="large"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  {type.map((o) => (
+                    <Select.Option key={o.typeId} value={o.typeId}>
+                      {o.typeName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Chất liệu Balo"
+                name="materialID"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng chọn Chất Liệu Balo!',
+                  },
+                ]}
+              >
+                <Select
+                  size="large"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  {material.map((o) => (
+                    <Select.Option key={o.materialId} value={o.materialId}>
+                      {o.materialName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={8}>
+              <Form.Item
+                label="Kiểu Ngăn"
+                name="compartmentID"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng chọn Kiểu ngăn Balo!',
+                  },
+                ]}
+              >
+                <Select
+                  size="large"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  {compartment.map((o) => (
+                    <Select.Option key={o.compartmentId} value={o.compartmentId}>
+                      {o.compartmentName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Balo Size"
+                name="sizeID"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng chọn Size!',
+                  },
+                ]}
+              >
+                <Select
+                  size="large"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  {size.map((o) => (
+                    <Select.Option key={o.sizeId} value={o.sizeId}>
+                      {o.sizeName} - {o.lengthSize}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Thương Hiệu"
+                name="brandID"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng chọn Thương Hiệu!',
                   },
                 ]}
               >
                 <Select
                   disabled={isFirst}
+                  size="large"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  {brand.map((o) => (
+                    <Select.Option key={o.brandId} value={o.brandId}>
+                      {o.brandName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <Form.Item
+                label="Nhà Sản Xuất"
+                name="producerID"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng Chọn NSX!',
+                  },
+                ]}
+              >
+                <Select
+                  size="large"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  {producer.map((o) => (
+                    <Select.Option key={o.producerId} value={o.producerId}>
+                      {o.producerName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Kiểu Khóa"
+                name="buckleTypeID"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng Chọn Kiếu Khóa!',
+                  },
+                ]}
+              >
+                <Select
+                  size="large"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  {buckleType.map((o) => (
+                    <Select.Option key={o.buckleTypeId} value={o.buckleTypeId}>
+                      {o.buckleTypeName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Trạng Thái"
+                name="baloDetailStatus"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng Chọn Kiếu Khóa!',
+                  },
+                ]}
+              >
+                <Select
+                  size="large"
                   style={{
                     width: 200,
                   }}
@@ -296,397 +673,91 @@ function ProductAddForm() {
               </Form.Item>
             </Col>
           </Row>
-
-          <div>
-            <hr></hr>
-            <Row>
-              <Col span={8}>
-                <Form.Item
-                  label="Giá Nhập"
-                  name="importPrice"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng Điền giá nhập!',
-                    },
-                  ]}
-                >
-                  <InputNumber
-                    size="large"
-                    style={{ width: 200 }}
-                    step={1000}
-                    addonAfter="VND"
-                    formatter={(value) => ` ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    parser={(value) => value.replace(/\₫\s?|(,*)/g, '')}
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Giá Bán"
-                  name="retailPrice"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng điền giá Bán!',
-                    },
-                  ]}
-                >
-                  <InputNumber
-                    size="large"
-                    style={{ width: 200 }}
-                    step={1000}
-                    addonAfter="VND"
-                    formatter={(value) => ` ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    parser={(value) => value.replace(/\₫\s?|(,*)/g, '')}
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Số lượng"
-                  name="baloDetailAmount"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng điền Số lượng!',
-                    },
-                  ]}
-                >
-                  <InputNumber
-                    size="large"
-                    style={{ width: 200 }}
-                    step={5}
-                    addonAfter="Cái"
-                    formatter={(value) => ` ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    parser={(value) => value.replace(/\₫\s?|(,*)/g, '')}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8}>
-                <Form.Item
-                  label="Màu sắc"
-                  name="colorID"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng chọn màu sắc Balo!',
-                    },
-                  ]}
-                >
-                  <Select
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                  >
-                    {color.map((o) => (
-                      <Select.Option key={o.id} value={o.id}>
-                        {o.colorName}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Kiểu Balo"
-                  name="typeID"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng chọn Kiểu Balo!',
-                    },
-                  ]}
-                >
-                  <Select
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                  >
-                    {type.map((o) => (
-                      <Select.Option key={o.id} value={o.id}>
-                        {o.typeName}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Chất liệu Balo"
-                  name="materialID"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng chọn Chất Liệu Balo!',
-                    },
-                  ]}
-                >
-                  <Select
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                  >
-                    {material.map((o) => (
-                      <Select.Option key={o.id} value={o.id}>
-                        {o.materialName}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col span={8}>
-                <Form.Item
-                  label="Kiểu Ngăn"
-                  name="compartmentID"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng chọn Kiểu ngăn Balo!',
-                    },
-                  ]}
-                >
-                  <Select
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                  >
-                    {compartment.map((o) => (
-                      <Select.Option key={o.id} value={o.id}>
-                        {o.compartmentName}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Balo Size"
-                  name="sizeID"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng chọn Size!',
-                    },
-                  ]}
-                >
-                  <Select
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                  >
-                    {size.map((o) => (
-                      <Select.Option key={o.id} value={o.id}>
-                        {o.sizeName} - {o.lengthSize}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Thương Hiệu"
-                  name="brandID"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng chọn Thương Hiệu!',
-                    },
-                  ]}
-                >
-                  <Select
-                    disabled={isFirst}
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                  >
-                    {brand.map((o) => (
-                      <Select.Option key={o.id} value={o.id}>
-                        {o.brandName}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8}>
-                <Form.Item
-                  label="Nhà Sản Xuất"
-                  name="producerID"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng Chọn NSX!',
-                    },
-                  ]}
-                >
-                  <Select
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                  >
-                    {producer.map((o) => (
-                      <Select.Option key={o.id} value={o.id}>
-                        {o.producerName}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Kiểu Khóa"
-                  name="buckleTypeID"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng Chọn Kiếu Khóa!',
-                    },
-                  ]}
-                >
-                  <Select
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                  >
-                    {buckleType.map((o) => (
-                      <Select.Option key={o.id} value={o.id}>
-                        {o.buckleTypeName}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Trạng Thái"
-                  name="baloDetailStatus"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Vui lòng Chọn Kiếu Khóa!',
-                    },
-                  ]}
-                >
-                  <Select
-                    size="large"
-                    style={{
-                      width: 200,
-                    }}
-                    options={[
-                      {
-                        value: '1',
-                        label: 'Hoạt Động',
-                      },
-                      {
-                        value: '0',
-                        label: 'Không Hoạt Động',
-                      },
-                    ]}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={8}>
-                <Form.Item
-                  label="Link Image"
-                  name="imageUrl"
-                  rules={[
-                    {
-                      required: false,
-                      message: 'Vui lòng Điền Mô tả!',
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Mô tả"
-                  name="baloDetailDescribe"
-                  rules={[
-                    {
-                      required: false,
-                      message: 'Vui lòng Điền Mô tả!',
-                    },
-                  ]}
-                >
-                  <TextArea
-                    size="large"
-                    style={{
-                      width: 500,
-                      height: 100,
-                    }}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-          </div>
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Row>
-              <Col span={4}>
-                <Popconfirm
-                  title="Xác Nhận"
-                  description="Bạn Có chắc chắn muốn Thêm?"
-                  okText="Đồng ý"
-                  cancelText="Không"
-                  onConfirm={handleAddBaloDetails}
-                  onCancel={onCancel}
-                >
-                  <Button type="primary" onClick={''}>
-                    Lưu Ngay
-                  </Button>
-                </Popconfirm>
-              </Col>
-              <Col span={4}>
-                <Popconfirm
-                  title="Xác Nhận"
-                  description="Bạn Có chắc chắn muốn Thêm?"
-                  okText="Đồng ý"
-                  cancelText="Không"
-                  onConfirm={onConfirm}
-                  onCancel={onCancel}
-                >
-                  <Button type="primary">Thêm Sản Phẩm</Button>
-                </Popconfirm>
-              </Col>
-              <Col span={4}>
-                <Popconfirm
-                  title="Xác Nhận"
-                  description="Bạn Có chắc chắn muốn ResetForm và thêm Balo Khác?"
-                  okText="Đồng ý"
-                  cancelText="Không"
-                  onConfirm={resetForm}
-                  onCancel={onCancel}
-                >
-                  <Button type="primary">ResetForm</Button>
-                </Popconfirm>
-              </Col>
-            </Row>
-          </Form.Item>
-        </Form>
-      </div>
+          <Row>
+            <Col span={8}>
+              <Form.Item
+                label="Link Image"
+                name="imageUrl"
+                rules={[
+                  {
+                    required: false,
+                    message: 'Vui lòng Điền Mô tả!',
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Mô tả"
+                name="baloDetailDescribe"
+                rules={[
+                  {
+                    required: false,
+                    message: 'Vui lòng Điền Mô tả!',
+                  },
+                ]}
+              >
+                <TextArea
+                  size="large"
+                  style={{
+                    width: 500,
+                    height: 100,
+                  }}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+        </div>
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Row>
+            <Col span={4}>
+              <Popconfirm
+                title="Xác Nhận"
+                description="Bạn Có chắc chắn muốn Thêm?"
+                okText="Đồng ý"
+                cancelText="Không"
+                onConfirm={handleAddBaloDetails}
+                onCancel={onCancel}
+              >
+                <Button type="primary" onClick={''}>
+                  Lưu Ngay
+                </Button>
+              </Popconfirm>
+            </Col>
+            <Col span={4}>
+              <Popconfirm
+                title="Xác Nhận"
+                description="Bạn Có chắc chắn muốn Thêm?"
+                okText="Đồng ý"
+                cancelText="Không"
+                onConfirm={onConfirm}
+                onCancel={onCancel}
+              >
+                <Button type="primary">Thêm Chi Tiết Balo</Button>
+              </Popconfirm>
+            </Col>
+            <Col span={4}>
+              <Popconfirm
+                title="Xác Nhận"
+                description="Bạn Có chắc chắn muốn ResetForm và thêm Balo Khác?"
+                okText="Đồng ý"
+                cancelText="Không"
+                onConfirm={resetForm}
+                onCancel={onCancel}
+              >
+                <Button type="primary">ResetForm</Button>
+              </Popconfirm>
+            </Col>
+          </Row>
+        </Form.Item>
+      </Form>
     </Fragment>
   );
 }

@@ -6,12 +6,9 @@ import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.entity.Roles;
 import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.repository.ICustomerRepository;
-
-import fpoly.datn.ecommerce_website.service.ICustomerService;
-
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
 import fpoly.datn.ecommerce_website.repository.IUserRepository;
-
+import fpoly.datn.ecommerce_website.service.ICustomerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,6 +31,7 @@ public class CustomerServiceImpl implements ICustomerService {
     private IUserRepository userInfoRepository;
     @Autowired
     private IRoleRepository userRoleRepository;
+
     @Override
     public Page<Customers> findAllCustomersWithUserInfoUserRole(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);

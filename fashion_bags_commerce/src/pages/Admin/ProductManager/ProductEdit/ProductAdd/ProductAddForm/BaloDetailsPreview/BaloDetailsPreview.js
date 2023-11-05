@@ -22,7 +22,7 @@ import baloDetailsAPI from '~/api/productDetailsAPI';
 const { Option } = Select;
 function BaloDetailsPreview(props) {
   const [loading, setLoading] = useState(false);
-
+  console.log(props.baloListPreview);
   const [baloList, setBaloList] = useState(props.baloList);
   const [baloListPreview, setBaloListPreview] = useState(props.baloListPreview);
 
@@ -43,7 +43,7 @@ function BaloDetailsPreview(props) {
     },
     {
       title: 'Color Balo',
-      dataIndex: 'productColor',
+      dataIndex: 'colorName',
       width: 100,
       sorter: (a, b) => a.productColor.localeCompare(b.productColor),
     },

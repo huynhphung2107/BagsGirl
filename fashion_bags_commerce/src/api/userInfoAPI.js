@@ -7,13 +7,12 @@ const userInfoAPI = {
   },
   getAllPhanTrang(pageNum, pageSize) {
     const url = `/user-info/phanTrang?id=${pageNum}`;
-    return axiosClient.get(url,
-      {
-        params: {
-          page: pageNum - 1,
-          size: pageSize,
-        },
-      });
+    return axiosClient.get(url, {
+      params: {
+        page: pageNum - 1,
+        size: pageSize,
+      },
+    });
   },
   findByKeywork(keyword) {
     const url = `/user-info/search?keyword=${keyword}`;
@@ -25,7 +24,6 @@ const userInfoAPI = {
   },
   add(data) {
     const url = `/user-info`;
-
     return axiosClient.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +36,6 @@ const userInfoAPI = {
   },
   updateStatus(userInfoId, status) {
     const url = `/user-info/update-status?userInfoId=${userInfoId}&userInfoStatus=${status}`;
-
     return axiosClient.put(url, null, {
       headers: {
         'Content-Type': 'application/json',

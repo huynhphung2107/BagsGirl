@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.service;
 
 import fpoly.datn.ecommerce_website.dto.ProductDTO;
+import fpoly.datn.ecommerce_website.dto.Product_BrandDTO;
 import fpoly.datn.ecommerce_website.entity.Products;
 import org.springframework.data.domain.Page;
 
@@ -13,6 +14,8 @@ public interface IProductService {
     Page<ProductDTO> findAllPagination(int pageNum, int PageSize);
 
     List<ProductDTO> findAll();
+
+    List<Product_BrandDTO> test();
 
     Products findById(String id);
 
