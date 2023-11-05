@@ -16,7 +16,7 @@ public interface IStaffRepository extends JpaRepository<Staffs, String> {
 """, nativeQuery = true)
     Page<Staffs> getAllPage(Pageable pageable);
 
-    @Query(value = "SELECT c FROM Customers c join Users i on c.users.userId = i.userId " +
+    @Query(value = "SELECT c FROM Staffs c join Users i on c.users.userId = i.userId " +
             "join Roles r on i.roles.roleId = r.roleId " +
             "where i.account like %:keyword% " +
             "or i.address like %:keyword% " +

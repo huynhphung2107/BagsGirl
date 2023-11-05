@@ -3,7 +3,7 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import staffAPI from '~/api/staffAPI';
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
-import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
+// import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
 import FormStaffEdit from '../../StaffEdit/FormEdit/FormStaffEdit';
 import SearchForm from './FormSearch/SearchForm';
 import FormStaffCreate from '../../StaffEdit/FormCreate/FormStaffCreate';
@@ -15,14 +15,21 @@ const TableContent = () => {
   const [totalItem, setTotalItem] = useState();
   const [search, setSearch] = useState('');
 
-  const onCancel = () => {};
+  const onCancel = () => { };
   const reload = () => {
     setLoading(true);
-    getAll(currentPage, pagesSize);
+    getAll(search, currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
     }, 500);
   };
+
+  const onChange = (current, pageSize) => {
+    setCurrentPage(current);
+    setPagesSize(pageSize);
+    getAll(search, current, pageSize);
+  };
+
   const handleSearchChange = (newFilter) => {
     setSearch(newFilter);
     setLoading(true);
@@ -30,27 +37,24 @@ const TableContent = () => {
   };
 
   useEffect(() => {
-    // Fetch voucher data using the staffAPI.getAll function
-    getAll(currentPage, pagesSize);
     reload();
-  }, []); // Update data when page or page size changes
+  }, []);
 
-  const onChange = (current, pageSize) => {
-    console.log(current);
-    console.log(pageSize);
-    setCurrentPage(current);
-    setPagesSize(pageSize);
-    getAll(current, pageSize);
-  };
+  useEffect(() => {
+    if (loading) {
+      reload();
+    }
+  }, [loading]);
 
-  const getAll = async (current, pageSize) => {
+
+
+  const getAll = async (keyword, current, pageSize) => {
     try {
-      const response = await staffAPI.getAll(current, pageSize);
+      const response = await staffAPI.getSearchPagination(keyword, current, pageSize);
       const data = response.data.content;
-      console.log(data);
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   // Define your table columns
@@ -148,7 +152,7 @@ const TableContent = () => {
               setLoading(true);
             }}
           />
-          <FormStaffViewDetails id={record.id} />
+          {/* <FormStaffViewDetails id={record.id} /> */}
 
           <Popconfirm
             title="Xác Nhận"
@@ -176,8 +180,7 @@ const TableContent = () => {
       message: 'Thông báo',
       description: 'Đã hủy thành công trạng thái nhân viên có id là :' + id,
     });
-    getAll(currentPage, pagesSize);
-    console.log(xoa);
+    reload();
   };
 
   return (
@@ -195,11 +198,11 @@ const TableContent = () => {
           x: 1000,
           y: 590,
         }}
-        rowKey={(record) => record.id}
+        rowKey={(record) => record.staffId}
         columns={columns}
         dataSource={data}
         pagination={false}
-        // onChange={handlePageChange} // Handle page changes
+      // onChange={handlePageChange} // Handle page changes
       />
 
       <Pagination
@@ -207,6 +210,7 @@ const TableContent = () => {
         total={totalItem}
         onChange={onChange}
         defaultCurrent={1}
+        current={currentPage}
         defaultPageSize={pagesSize}
       />
     </div>
