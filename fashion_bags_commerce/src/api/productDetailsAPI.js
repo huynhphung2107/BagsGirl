@@ -2,19 +2,19 @@ import axiosClient from './axiosClient';
 
 const productDetailsAPI = {
   getAll(params) {
-    const url = '/product-detail/';
+    const url = '/product-details/';
     return axiosClient.get(url, { params });
   },
   get(id) {
-    const url = `/product-detail?id=${id}`;
+    const url = `/product-details?id=${id}`;
     return axiosClient.get(url);
   },
   getAllByProductId(productId) {
-    const url = `/product-detail/${productId}`;
+    const url = `/product-details/${productId}`;
     return axiosClient.get(url);
   },
   add(data) {
-    const url = `/product-detail`;
+    const url = `/product-details`;
     return axiosClient.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -22,15 +22,15 @@ const productDetailsAPI = {
     });
   },
   update(data) {
-    const url = `/product-detail?id=${data.id}`;
+    const url = `/product-details?id=${data.id}`;
     return axiosClient.put(url, data);
   },
   delete(id) {
-    const url = `/product-detail?id=${id}`;
+    const url = `/product-details?id=${id}`;
     return axiosClient.delete(url);
   },
   findByKeywork(keyword) {
-    const url = `/product-detail/search?keyword=${keyword}`;
+    const url = `/product-details/search?keyword=${keyword}`;
     return axiosClient.get(url, { keyword });
   },
 };

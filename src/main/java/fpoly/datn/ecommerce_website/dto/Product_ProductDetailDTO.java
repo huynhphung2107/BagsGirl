@@ -1,12 +1,8 @@
 package fpoly.datn.ecommerce_website.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.UUID;
 
 @Setter
 @Getter
@@ -23,16 +19,16 @@ public class Product_ProductDetailDTO {
     private String compartmentId;
     private String buckleTypeId;
     private String producerId;
-    @NotNull
+
     private Float importPrice;
-    @NotNull
+
     private Float retailPrice;
-    @NotNull
+
     private Integer productDetailAmount;
-    @NotBlank
+
     private String productDetailDescribe;
 
     private Integer productDetailStatus;
-    
+
 
 }

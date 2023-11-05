@@ -10,11 +10,11 @@ const imageAPI = {
       },
     });
   },
-  upload(formData, productDetailId, imageCode) {
-    const url = `/image/upload?id=${productDetailId}&imageCode=${imageCode}`;
-    return axiosClient.post(url, formData, {
+  upload(data) {
+    const url = `/image`;
+    return axiosClient.post(url, data, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
     });
   },
