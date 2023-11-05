@@ -3,8 +3,8 @@ package fpoly.datn.ecommerce_website.controller.restController;
 import fpoly.datn.ecommerce_website.dto.StaffDTO;
 import fpoly.datn.ecommerce_website.entity.Staffs;
 import fpoly.datn.ecommerce_website.entity.Users;
-import fpoly.datn.ecommerce_website.repository.IUserRepository;
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
+import fpoly.datn.ecommerce_website.repository.IUserRepository;
 import fpoly.datn.ecommerce_website.service.serviceImpl.CustomerServiceImpl;
 import fpoly.datn.ecommerce_website.service.serviceImpl.StaffServiceImpl;
 import jakarta.validation.Valid;
@@ -79,18 +79,6 @@ public class StaffRestController {
 
         // Retrieve additional information from the UserInfo entity and populate it in StaffDTO
         Users userInfo = staff.getUsers();
-        if (userInfo != null) {
-            staffDTO.setUsersFullName(userInfo.getFullName());
-            staffDTO.setUsersAccount(userInfo.getAccount());
-            staffDTO.setUsersPassword(userInfo.getPassword());
-            staffDTO.setUsersEmail(userInfo.getEmail());
-            staffDTO.setUsersStatus(userInfo.getUserStatus());
-            staffDTO.setUsersGender(userInfo.getGender());
-            staffDTO.setUsersFullName(userInfo.getPhoneNumber());
-            staffDTO.setUsersAddress(userInfo.getAddress());
-            staffDTO.setUsersUserNote(userInfo.getUserNote());
-            staffDTO.setUsersRolesRoleId(userInfo.getRoles().getRoleCode());
-        }
 
         return new ResponseEntity<>(staffDTO, HttpStatus.OK);
     }

@@ -10,6 +10,10 @@ const materialAPI = {
       },
     });
   },
+  getAll() {
+    const url = '/material/';
+    return axiosClient.get(url);
+  },
   get(id) {
     const url = `/material?id=${id}`;
     return axiosClient.get(url);

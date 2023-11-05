@@ -2,15 +2,12 @@ package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.CustomerDTO;
 import fpoly.datn.ecommerce_website.entity.Customers;
+import fpoly.datn.ecommerce_website.entity.Roles;
+import fpoly.datn.ecommerce_website.entity.Users;
 import fpoly.datn.ecommerce_website.repository.ICustomerRepository;
-<<<<<<< HEAD
-import fpoly.datn.ecommerce_website.service.ICustomerService;
-
-import fpoly.datn.ecommerce_website.service.ICustomerService;
-
 import fpoly.datn.ecommerce_website.repository.IRoleRepository;
 import fpoly.datn.ecommerce_website.repository.IUserRepository;
-
+import fpoly.datn.ecommerce_website.service.ICustomerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,15 +25,12 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private ModelMapper modelMapper;
 
-    
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Autowired
     private IUserRepository userInfoRepository;
     @Autowired
     private IRoleRepository userRoleRepository;
+
     @Override
     public Page<Customers> findAllCustomersWithUserInfoUserRole(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
@@ -56,15 +50,6 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
 
-    @Override
-    public Customers save(Customers customer) {
-        return this.customerRepository.save(customer);
-    }
-
-
-    @Override
-    public Customers update(Customers customer) {
-        return this.customerRepository.save(customer);
     public Customers save(CustomerDTO customerDTO) {
 
         Customers customer = modelMapper.map(customerDTO, Customers.class);
@@ -90,12 +75,8 @@ public class CustomerServiceImpl implements ICustomerService {
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         modelMapper.map(customerDTO, customers);
         Users userInfo = modelMapper.map(customerDTO, Users.class);
-//        Roles userRole = userRoleRepository.findById(customerDTO.getUsersRolesRoleId())
-//                .orElseThrow(() -> new IllegalArgumentException("User Role not found"));
-//        userInfo.setRoles(userRole);
         Users savedUserInfo = userInfoRepository.save(userInfo);
         if (savedUserInfo != null) {
-//            customers.setUsers(savedUserInfo);
             return customerRepository.save(customers);
         } else {
             throw new IllegalStateException("Failed to save UserInfo");

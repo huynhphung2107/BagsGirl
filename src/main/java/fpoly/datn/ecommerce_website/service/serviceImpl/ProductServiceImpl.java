@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.ProductDTO;
+import fpoly.datn.ecommerce_website.dto.Product_BrandDTO;
 import fpoly.datn.ecommerce_website.entity.Products;
 import fpoly.datn.ecommerce_website.repository.IProductRepository;
 import fpoly.datn.ecommerce_website.service.IProductService;
@@ -61,6 +62,15 @@ public class ProductServiceImpl implements IProductService {
                 .toList();
     }
 
+    @Override
+    public List<Product_BrandDTO> test() {
+
+
+        List<Products> productDTOList = this.iproductRepository.findAll();
+
+        return productDTOList.stream().map(product -> modelMapper.map(product, Product_BrandDTO.class))
+                .toList();
+    }
 
     @Override
     public Products findById(String id) {

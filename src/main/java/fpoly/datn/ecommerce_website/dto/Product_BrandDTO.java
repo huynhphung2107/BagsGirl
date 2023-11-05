@@ -1,6 +1,6 @@
 package fpoly.datn.ecommerce_website.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import fpoly.datn.ecommerce_website.entity.Brands;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,12 +17,12 @@ import lombok.ToString;
 public class Product_BrandDTO {
 
     private String productId;
-    @NotBlank
+
     private String productCode;
-    @NotBlank
+
     private String productName;
-    @NotBlank
+
     private String productStatus;
-    @NotBlank
-    private String brandID;
+
+    private Brands brand;
 }

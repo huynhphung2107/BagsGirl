@@ -2,7 +2,6 @@ package fpoly.datn.ecommerce_website.controller.restController;
 
 import fpoly.datn.ecommerce_website.dto.ProductDTO;
 import fpoly.datn.ecommerce_website.dto.Product_BrandDTO;
-import fpoly.datn.ecommerce_website.entity.Brands;
 import fpoly.datn.ecommerce_website.entity.Products;
 import fpoly.datn.ecommerce_website.service.IProductService;
 import fpoly.datn.ecommerce_website.service.serviceImpl.BrandServiceImpl;
@@ -60,11 +59,16 @@ public class ProductRestController {
     //add
     @RequestMapping(value = "/product", method = RequestMethod.POST)
     public ResponseEntity<?> add(@Valid @RequestBody Product_BrandDTO productBrandDTO) {
-
-        Brands brand = brandService.findById(productBrandDTO.getBrandID());
         Products product = modelMapper.map(productBrandDTO, Products.class);
-        product.setBrand(brand);
+
         return new ResponseEntity<>(productService.save(product), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/product/test", method = RequestMethod.GET)
+    public ResponseEntity<?> test() {
+
+
+        return new ResponseEntity<>(productService.test(), HttpStatus.OK);
     }
 
     //update

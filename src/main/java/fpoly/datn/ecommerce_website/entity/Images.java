@@ -42,7 +42,7 @@ public class Images {
     private Boolean isPrimary;
 
     @ManyToOne
-    @JoinColumn(name = "product_detail_id")
-    private ProductDetails productDetail;
+    @JoinColumn(name = "product_id")
+    private Products products;
 
 }
