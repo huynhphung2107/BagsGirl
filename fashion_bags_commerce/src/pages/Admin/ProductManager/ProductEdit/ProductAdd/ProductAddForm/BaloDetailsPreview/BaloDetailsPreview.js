@@ -14,15 +14,18 @@ import {
   Select,
   Space,
   Table,
+  message,
   notification,
 } from 'antd';
 import baloAPI from '~/api/productsAPI';
 import baloDetailsAPI from '~/api/productDetailsAPI';
+import imageAPI from '~/api/ImageAPI';
+import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 
 const { Option } = Select;
 function BaloDetailsPreview(props) {
   const [loading, setLoading] = useState(false);
-  console.log(props.baloListPreview);
+
   const [baloList, setBaloList] = useState(props.baloList);
   const [baloListPreview, setBaloListPreview] = useState(props.baloListPreview);
 
@@ -92,13 +95,13 @@ function BaloDetailsPreview(props) {
 
     {
       title: 'Describe',
-      dataIndex: 'baloDetailDescribe',
+      dataIndex: 'productDetailDescribe',
       width: 500,
       sorter: (a, b) => a.baloDetailDescribe.localeCompare(b.baloDetailDescribe),
     },
     {
       title: 'Status',
-      dataIndex: 'baloDetailStatus',
+      dataIndex: 'productDetailStatus',
       width: 100,
       sorter: (a, b) => a.baloDetailStatus - b.baloDetailStatus,
     },
@@ -144,18 +147,22 @@ function BaloDetailsPreview(props) {
   ];
 
   const handleEditChange = (value, key, field) => {
-    const newData = [...baloListPreview];
-    const target = newData.find((item) => item.productCode === key);
-    if (target) {
-      target[field] = value;
-      setBaloListPreview(newData);
-    }
+    if (value <= 0) {
+      message.error('Giá trị không hợp lệ ! (giá trị sẽ không thay đổi)');
+    } else {
+      const newData = [...baloListPreview];
+      const target = newData.find((item) => item.productCode === key);
+      if (target) {
+        target[field] = value;
+        setBaloListPreview(newData);
+      }
 
-    const newDataAdd = [...baloList];
-    const targetAdd = newDataAdd.find((item) => item.productCode === key);
-    if (targetAdd) {
-      targetAdd[field] = value;
-      setBaloList(newDataAdd);
+      const newDataAdd = [...baloList];
+      const targetAdd = newDataAdd.find((item) => item.productCode === key);
+      if (targetAdd) {
+        targetAdd[field] = value;
+        setBaloList(newDataAdd);
+      }
     }
   };
   const save = async () => {
@@ -164,7 +171,7 @@ function BaloDetailsPreview(props) {
       const baloAdd = {
         productCode: tempBalo.productCode,
         productName: tempBalo.productName,
-        brandID: tempBalo.brandID,
+        brandId: tempBalo.brandId,
         baloStatus: tempBalo.baloStatus,
       };
 
@@ -202,10 +209,33 @@ function BaloDetailsPreview(props) {
 
       try {
         const response = await baloAPI.add(baloAdd);
-        const id = response.data.id;
+
+        const id = response.data.productId;
+
+        const result = await props.handleSendUpload();
+        result.forEach((obj) => {
+          const url = obj;
+          const now = new Date();
+          const dateString = `${
+            now.getMonth() + 1
+          }/${now.getDate()}/${now.getFullYear()},${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}`;
+          const addCodeImg = generateCustomCode('image', 5);
+          const imageAdd = {
+            imgCode: addCodeImg,
+            imgName: addCodeImg + dateString,
+            imgUrl: url,
+            isPrimary: true,
+            products: {
+              productId: id,
+            },
+          };
+          const response = imageAPI.upload(imageAdd);
+        });
+
         baloDetails.forEach((element) => {
-          element = { ...element, baloID: id };
-          const response2 = baloDetailsAPI.add(element);
+          element = { ...element, baloId: id };
+
+          // const response2 = baloDetailsAPI.add(element);
         });
 
         notification.success({
@@ -249,6 +279,17 @@ function BaloDetailsPreview(props) {
           }}
         >
           <div className={styles.handleButton}>
+            <Button
+              onClick={async () => {
+                try {
+                  const result = await props.handleSendUpload();
+                } catch (error) {
+                  console.log(error);
+                }
+              }}
+            >
+              Test
+            </Button>
             <div>
               <Button type="primary" onClick={start} loading={loading}>
                 Reload

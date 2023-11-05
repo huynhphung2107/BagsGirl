@@ -140,21 +140,21 @@ function ProductAddForm() {
     let addBalo = { ...values, productCode: genCodeAuto };
     setBaloList([...baloList, addBalo]);
 
-    let colorSelected = color.find((option) => option.colorId === values.colorID);
+    let colorSelected = color.find((option) => option.colorId === values.colorId);
     const colorSelectedName = colorSelected.colorName;
-    let brandSelected = brand.find((option) => option.brandId === values.brandID);
+    let brandSelected = brand.find((option) => option.brandId === values.brandId);
     const brandSelectedName = brandSelected.brandName;
-    let typeSelected = type.find((option) => option.typeId === values.typeID);
+    let typeSelected = type.find((option) => option.typeId === values.typeId);
     const typeSelectedName = typeSelected.typeName;
-    let materialSelected = material.find((option) => option.materialId === values.materialID);
+    let materialSelected = material.find((option) => option.materialId === values.materialId);
     const materialSelectedName = materialSelected.materialName;
-    let compartmentSelected = compartment.find((option) => option.compartmentId === values.compartmentID);
+    let compartmentSelected = compartment.find((option) => option.compartmentId === values.compartmentId);
     const compartmentSelectedName = compartmentSelected.compartmentName;
-    let sizeSelected = size.find((option) => option.sizeId === values.sizeID);
+    let sizeSelected = size.find((option) => option.sizeId === values.sizeId);
     const sizeSelectedName = sizeSelected.sizeName;
-    let producerSelected = producer.find((option) => option.producerId === values.producerID);
+    let producerSelected = producer.find((option) => option.producerId === values.producerId);
     const producerSelectedName = producerSelected.producerName;
-    let buckleTypeSelected = buckleType.find((option) => option.buckleTypeId === values.buckleTypeID);
+    let buckleTypeSelected = buckleType.find((option) => option.buckleTypeId === values.buckleTypeId);
     const buckleTypeSelectedName = buckleTypeSelected.buckleTypeName;
 
     let tempBalo = {
@@ -196,30 +196,34 @@ function ProductAddForm() {
     setPopconfirmVisible(false);
   };
 
+  const testCase = () => {
+    message.success('Đây là Test Case thử xem như nào');
+    return 'Tết đây!!!';
+  };
   const onCancel = () => {
     setPopconfirmVisible(false); // Đóng Popconfirm sau khi xác nhận
   };
 
   const [fileList, setFileList] = useState([]);
-  const handleAdd = async (options) => {
-    // const { file } = options;
-  };
 
+  const handleSendUpload = async () => {
+    const urls = await handleUpload();
+    return urls;
+  };
   const handleUpload = async () => {
     const newList = [];
     if (fileList.length === 0) {
       message.info('Vui lòng chọn ảnh!!!!');
+      return;
     }
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
-      console.log(file);
+
       const storageRef = ref(storage, `mulitpleFiles/${file.name}`);
 
       try {
         await uploadBytes(storageRef, file);
         const downloadURL = await getDownloadURL(storageRef);
-        console.log('Upload thành công:');
-        // console.log(downloadURL); // Log đường dẫn URL của tệp đã tải lên
 
         newList.push(downloadURL);
 
@@ -229,13 +233,11 @@ function ProductAddForm() {
         message.error('Lỗi khi tải lên hình ảnh');
       }
     }
-    console.log(newList);
+
     setDownloadedURL(newList);
     return newList;
   };
-  const handlTest = () => {
-    console.log(downloadedURL);
-  };
+
   useEffect(() => {
     let err = '';
 
@@ -243,19 +245,18 @@ function ProductAddForm() {
       err = 'Chỉ được chọn tối đa 6 ảnh , vui lòng chọn lại!!!!';
       setFileList([]);
     } else {
-      let isTrue = true;
       for (let i = 0; i < fileList.length; i++) {
         const element = fileList[i];
 
-        if (element.size / 1024 / 1024 > 5) {
-          err = 'Size ảnh quá lớn, vui lòng chọn lại';
-          isTrue = false;
+        if (!(element.type !== 'image/jpg' || element.type !== 'image/png')) {
+          err = 'Vui lòng chọn ảnh có định dạng PNG/JPG';
+
           setFileList([]);
           break;
         }
-        if (!(element.type === 'image/jpg' || element.type === 'image/png')) {
-          err = 'Vui lòng chọn ảnh có định dạng PNG/JPG';
-          isTrue = false;
+        if (element.size / 1024 / 1024 > 5) {
+          err = 'Size ảnh quá lớn (nhỏ hơn 5Mb), vui lòng chọn lại';
+
           setFileList([]);
           break;
         }
@@ -268,17 +269,21 @@ function ProductAddForm() {
   }, [fileList]);
   const addFileImg = (fileLists) => {
     setFileList(fileLists);
-    console.log('file');
   };
   const beforeUpload = (file, fileLists) => {
     addFileImg(fileLists);
     return false;
   };
-  console.log(fileList);
+
   return (
     <Fragment>
       <div>
-        <BaloDetailsPreview baloList={baloList} baloListPreview={baloListPreview} />
+        <BaloDetailsPreview
+          baloList={baloList}
+          baloListPreview={baloListPreview}
+          testCase={testCase}
+          handleSendUpload={handleSendUpload}
+        />
       </div>
       <div>
         <div>
@@ -286,17 +291,6 @@ function ProductAddForm() {
             <h1 className={styles.titleInfo}>Thông Tin Balo Chi tiết</h1>
           </Row>
         </div>
-        <div>
-          <input multiple type="file" onChange={(e) => console.log(e.target.files)}></input>
-        </div>
-        <Dragger multiple name="files" showUploadList={false} beforeUpload={beforeUpload}>
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-          </p>
-          <p className="ant-upload-text">Kéo thả hình ảnh vào đây</p>
-        </Dragger>
-        <button onClick={handleUpload}>Send</button>
-        <button onClick={handlTest}>Test</button>
       </div>
       <Form
         onFinish={handleAddBaloDetails}
@@ -325,51 +319,7 @@ function ProductAddForm() {
         }}
         style={{}}
       >
-        <Row>
-          <Col span={8}>
-            <Form.Item
-              label="Balo Name"
-              name="productName"
-              rules={[
-                {
-                  required: true,
-                  message: 'Vui lòng điền Tên Balo!',
-                },
-              ]}
-            >
-              <Input disabled={isFirst} />
-            </Form.Item>
-            <Form.Item
-              label="Balo Status"
-              name="baloStatus"
-              rules={[
-                {
-                  required: true,
-                  message: 'Vui lòng chọn trạng thái Balo!',
-                },
-              ]}
-            >
-              <Select
-                disabled={isFirst}
-                style={{
-                  width: 200,
-                }}
-                options={[
-                  {
-                    value: '1',
-                    label: 'Hoạt Động',
-                  },
-                  {
-                    value: '0',
-                    label: 'Không Hoạt Động',
-                  },
-                ]}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <div>
+        <div className={styles.form}>
           <hr></hr>
           <Row>
             <Col span={8}>
@@ -440,7 +390,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Màu sắc"
-                name="colorID"
+                name="colorId"
                 rules={[
                   {
                     required: true,
@@ -465,7 +415,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Kiểu Balo"
-                name="typeID"
+                name="typeId"
                 rules={[
                   {
                     required: true,
@@ -490,7 +440,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Chất liệu Balo"
-                name="materialID"
+                name="materialId"
                 rules={[
                   {
                     required: true,
@@ -518,7 +468,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Kiểu Ngăn"
-                name="compartmentID"
+                name="compartmentId"
                 rules={[
                   {
                     required: true,
@@ -543,7 +493,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Balo Size"
-                name="sizeID"
+                name="sizeId"
                 rules={[
                   {
                     required: true,
@@ -568,7 +518,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Thương Hiệu"
-                name="brandID"
+                name="brandId"
                 rules={[
                   {
                     required: true,
@@ -596,7 +546,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Nhà Sản Xuất"
-                name="producerID"
+                name="producerId"
                 rules={[
                   {
                     required: true,
@@ -621,7 +571,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Kiểu Khóa"
-                name="buckleTypeID"
+                name="buckleTypeId"
                 rules={[
                   {
                     required: true,
@@ -646,7 +596,7 @@ function ProductAddForm() {
             <Col span={8}>
               <Form.Item
                 label="Trạng Thái"
-                name="baloDetailStatus"
+                name="productDetailStatus"
                 rules={[
                   {
                     required: true,
@@ -661,11 +611,11 @@ function ProductAddForm() {
                   }}
                   options={[
                     {
-                      value: '1',
+                      value: 1,
                       label: 'Hoạt Động',
                     },
                     {
-                      value: '0',
+                      value: 0,
                       label: 'Không Hoạt Động',
                     },
                   ]}
@@ -673,40 +623,35 @@ function ProductAddForm() {
               </Form.Item>
             </Col>
           </Row>
-          <Row>
-            <Col span={8}>
-              <Form.Item
-                label="Link Image"
-                name="imageUrl"
-                rules={[
-                  {
-                    required: false,
-                    message: 'Vui lòng Điền Mô tả!',
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
+          <Row className={styles.upload}>
             <Col span={8}>
               <Form.Item
                 label="Mô tả"
-                name="baloDetailDescribe"
+                name="productDetailDescribe"
                 rules={[
                   {
                     required: false,
-                    message: 'Vui lòng Điền Mô tả!',
+                    message: 'Vui lòng điền Tên Balo!',
                   },
                 ]}
               >
-                <TextArea
-                  size="large"
-                  style={{
-                    width: 500,
-                    height: 100,
-                  }}
-                />
+                <TextArea rows={7} />
               </Form.Item>
+            </Col>
+            <Col span={16} className={styles.dragger}>
+              <Dragger
+                multiple
+                name="files"
+                showUploadList={false}
+                beforeUpload={beforeUpload}
+                height={'90%'}
+                style={{ width: '80%' }}
+              >
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">Kéo thả hình ảnh vào đây</p>
+              </Dragger>
             </Col>
           </Row>
         </div>
