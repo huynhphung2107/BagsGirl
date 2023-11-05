@@ -1,68 +1,67 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import customerAPI from '~/api/customerAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import { tab } from '@testing-library/user-event/dist/tab';
 import FormCustomerEdit from '../../CustomerEdit/FormEdit/FormCustomerEdit';
-// import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
-// import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
+import SearchForm from './FormSearch/SearchForm';
+import FormCustomerCreate from '../../CustomerEdit/FormCreate/FormCustomerCreate';
+
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
+  const [search, setSearch] = useState('');
 
-  const onCancel = () => { };
+  const onCancel = () => {};
   const reload = () => {
     setLoading(true);
-    getAll(currentPage, pagesSize);
+    getAll(search, currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
     }, 500);
   };
 
-  // useEffect(() => {
-  //   // Fetch voucher data using the staffAPI.getAll function
-  //   getAll(currentPage, pagesSize);
-  //   reload();
-  // }, []); // Update data when page or page size changes
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    reload();
   }, []);
+
   useEffect(() => {
     if (loading) {
       // Tải lại bảng khi biến trạng thái thay đổi
-      getAll(currentPage, pagesSize);
-      setLoading(false); // Reset lại trạng thái
+      reload();
     }
   }, [loading]);
 
   const onChange = (current, pageSize) => {
     setCurrentPage(current);
     setPagesSize(pageSize);
-    getAll(current, pageSize);
+    getAll(search, current, pageSize);
   };
 
-  const getAll = async (current, pageSize) => {
+  const handleSearchChange = (newFilter) => {
+    setSearch(newFilter);
+    setLoading(true);
+    setCurrentPage(1);
+  };
+  const getAll = async (keyword, page, size) => {
     try {
-      const response = await customerAPI.getAll(current, pageSize);
+      const response = await customerAPI.getSearchPagination(keyword, page, size);
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   // Define your table columns
   const columns = [
     {
       title: 'STT',
-      width: 100,
-      render: (text, record, index) => index + 1,
+      width: 40,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
       title: 'Họ và tên',
@@ -158,7 +157,12 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <FormCustomerEdit customerData={record} reload={() => { setLoading(true) }} />
+          <FormCustomerEdit
+            customerData={record}
+            reload={() => {
+              setLoading(true);
+            }}
+          />
 
           <Popconfirm
             title="Xác Nhận"
@@ -171,9 +175,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button type="primary" danger icon={<DeleteOutlined />}>
-              Delete
-            </Button>
+            <Button type="primary" danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -188,8 +190,7 @@ const TableContent = () => {
       message: 'Thông báo',
       description: 'Đã hủy thành công trạng thái nhân viên có id là :' + id,
     });
-    getAll(currentPage, pagesSize);
-    console.log(xoa);
+    reload();
   };
 
   return (
@@ -198,28 +199,20 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button type="primary" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
+      <SearchForm onSubmit={handleSearchChange} />
+      <FormCustomerCreate />
+      <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
 
       <Table
+        scroll={{
+          x: 550,
+          y: 570,
+        }}
         rowKey={(record) => record.customerId}
         columns={columns}
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
       />
 
       <Pagination
@@ -227,6 +220,7 @@ const TableContent = () => {
         total={totalItem}
         onChange={onChange}
         defaultCurrent={1}
+        current={currentPage}
         defaultPageSize={pagesSize}
       />
     </div>

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import voucherAPI from '~/api/voucherAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
+import FormVoucherCreate from '../../VoucherEdit/FormrCreate/FormVoucherCreate';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
 
   const onCancel = () => {};
@@ -17,7 +18,7 @@ const TableContent = () => {
     getAll(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   useEffect(() => {
@@ -48,8 +49,8 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 100,
-      render: (text, record, index) => index + 1,
+      width: 50,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
       title: 'Code',
@@ -141,9 +142,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-            <Button className="btn btn-danger " icon={<DeleteOutlined />}>
-              Delete
-            </Button>
+            <Button className="btn btn-danger " icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -168,28 +167,18 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
-
+      <FormVoucherCreate />
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
       <Table
+        scroll={{
+          x: 1000,
+          y: 620,
+        }}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
       />
 
       <Pagination

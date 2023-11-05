@@ -1,15 +1,16 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import materialAPI from '~/api/propertitesBalo/materialAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormMaterialEdit from '../../MaterialEdit/FormEdit/FormMaterialEdit';
+import FormMaterialCreate from '../../MaterialEdit/FormCreate/FormMaterialCreate';
 // import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
 
   const onCancel = () => {};
@@ -49,8 +50,8 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 150,
-      render: (text, record, index) => index + 1,
+      width: 40,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
       title: 'Code',
@@ -112,7 +113,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-             <Button type="primary" danger icon={<DeleteOutlined />}>
+            <Button type="primary" danger icon={<DeleteOutlined />}>
               Delete
             </Button>
           </Popconfirm>
@@ -139,37 +140,29 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
-
+      <FormMaterialCreate />
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
       <Table
+        scroll={{
+          x: 1000,
+          y: 640,
+        }}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
+        // loading={loading}
       />
-
-      <Pagination
-        className={styles.pagination}
-        total={totalItem}
-        onChange={onChange}
-        defaultCurrent={1}
-        defaultPageSize={pagesSize}
-      />
+      <div className={styles.pagination}>
+        <Pagination
+          className={styles.pagination}
+          total={totalItem}
+          onChange={onChange}
+          defaultCurrent={1}
+          defaultPageSize={pagesSize}
+        />
+      </div>
     </div>
   );
 };

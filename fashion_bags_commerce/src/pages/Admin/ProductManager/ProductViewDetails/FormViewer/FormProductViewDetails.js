@@ -1,7 +1,7 @@
 import './FormProductViewDetails.css';
 
 import React, { Fragment, useEffect, useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
+import { InfoOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
 import baloDetailsAPI from '~/api/productDetailsAPI';
 import FormProductEdit from '../../ProductEdit/FormEdit/FormProductEdit';
@@ -186,9 +186,7 @@ function FormProductViewDetails(props) {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        ViewDetails
-      </Button>
+      <Button type="" icon={<InfoOutlined />} className="btn btn-secondary" onClick={showDrawer}></Button>
       <Drawer
         title={'View Details'}
         placement="top"

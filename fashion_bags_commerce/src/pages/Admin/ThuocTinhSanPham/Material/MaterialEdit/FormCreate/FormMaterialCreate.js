@@ -4,7 +4,7 @@ import React, { Component, Fragment, useState } from 'react';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 import materialAPI from '~/api/propertitesBalo/materialAPI';
 
-function FormMaterialCreate(props)  {
+function FormMaterialCreate(props) {
   const [modalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(true);
   const [form] = Form.useForm();
@@ -32,9 +32,9 @@ function FormMaterialCreate(props)  {
           description: 'Dữ liệu đã được thêm thành công',
           duration: 2,
         });
-        
-        handleCancel(); 
-        
+
+        handleCancel();
+
         // Đóng Modal sau khi thêm thành công
       } catch (error) {
         setError(true);
@@ -49,10 +49,7 @@ function FormMaterialCreate(props)  {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showModal} icon={ <PlusOutlined />}>
-        Thêm chất liệu
-      </Button>
-      <br></br>
+      <Button type="primary" onClick={showModal} style={{ width: '100px' }} icon={<PlusOutlined />}></Button>
       <Modal title="Thêm chất liệu" open={modalOpen} onCancel={handleCancel} footer={null}>
         <div>
           <Form
@@ -68,13 +65,16 @@ function FormMaterialCreate(props)  {
             }}
             onFinish={addFunc} // Xử lý khi submit form
           >
-            <Form.Item label=" Name" name="materialName"
-             rules={[
-              {
-                required: true,
-                message: 'Vui lòng điền Tên chất liệu!',
-              },
-            ]}>
+            <Form.Item
+              label=" Name"
+              name="materialName"
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng điền Tên chất liệu!',
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
 
@@ -96,10 +96,9 @@ function FormMaterialCreate(props)  {
             </Form.Item>
 
             <div style={{ textAlign: 'center' }}>
-           
-            <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
             </div>
           </Form>
         </div>

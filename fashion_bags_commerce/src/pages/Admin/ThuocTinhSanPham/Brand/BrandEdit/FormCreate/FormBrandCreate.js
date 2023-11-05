@@ -49,10 +49,7 @@ function FormBrandCreate(props) {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showModal} icon={<PlusOutlined />}>
-        Thêm thương hiệu
-      </Button>
-      <br></br>
+      <Button type="primary" style={{ width: '100px' }} onClick={showModal} icon={<PlusOutlined />}></Button>
       <Modal title="Thêm thương hiệu" open={modalOpen} onCancel={handleCancel} footer={null}>
         <div>
           <Form

@@ -26,7 +26,7 @@ import lombok.ToString;
 public class Users {
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String userId;
     @Column(name = "account")
     private String account;

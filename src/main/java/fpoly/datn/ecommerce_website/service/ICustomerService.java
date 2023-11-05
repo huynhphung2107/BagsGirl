@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-
 public interface ICustomerService {
 
     Page<Customers> findAllCustomersWithUserInfoUserRole(Integer page, Integer size);
@@ -14,7 +13,6 @@ public interface ICustomerService {
     List<Customers> findAll();
 
     Customers findById(String id);
-
 
     Customers updateStatus(String id, Integer status);
 

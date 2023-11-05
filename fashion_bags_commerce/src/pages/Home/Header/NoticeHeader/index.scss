@@ -1,9 +1,10 @@
 .carouselHeader {
-  height: 30px;
-  padding: 5 px;
+  height: 50px;
+  padding: 5px;
   font-family: ttcommons-light;
-  background-color: yellow;
-  .carouselContent {
+  background-color: rgb(132, 217, 232);
+    .carouselContent {
+      padding-top: 5px;
   }
   text-align: center;
   color: black;
@@ -13,7 +14,9 @@
   }
   .highlightText {
     color: red;
+    font-size: 16pt;
   }
+
   .highlightLink {
     color: red;
     cursor: pointer;

@@ -51,10 +51,7 @@ function FormVoucherCreate(props) {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showModal} icon={<PlusOutlined />}>
-        Thêm Voucher
-      </Button>
-      <br></br>
+      <Button type="primary" onClick={showModal} style={{ width: '100px' }} icon={<PlusOutlined />}></Button>
       <Modal title="Thêm voucher" open={modalOpen} onCancel={handleCancel} footer={null}>
         <div>
           <Form
@@ -95,7 +92,7 @@ function FormVoucherCreate(props) {
             >
               <Input />
             </Form.Item>
-            
+
             <Form.Item label="Ngày tạo" name="voucherCreateDate">
               <DatePicker format="YYYY-MM-DD" />
             </Form.Item>
@@ -107,7 +104,6 @@ function FormVoucherCreate(props) {
             <Form.Item label="Ngày kết thúc" name="voucherEndTime">
               <DatePicker format="YYYY-MM-DD" />
             </Form.Item>
-
 
             <Form.Item label="Kiểu voucher" name="voucherType">
               <Select

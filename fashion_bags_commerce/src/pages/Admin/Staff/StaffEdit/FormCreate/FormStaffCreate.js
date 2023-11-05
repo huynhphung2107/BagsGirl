@@ -72,9 +72,8 @@ const FormStaffCreate = () => {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        New account
-      </Button>
+      {' '}
+      <Button style={{ width: '100px' }} type="primary" onClick={showDrawer} icon={<PlusOutlined />}></Button>
       <Drawer
         title="Create a new account"
         width={720}

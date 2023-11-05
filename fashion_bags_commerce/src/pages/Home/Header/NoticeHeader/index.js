@@ -6,12 +6,12 @@ import '../NoticeHeader/index.scss';
 function NoticeHeader() {
   return (
     <div className="carouselHeader">
-      <Carousel className="carouselContent" dots={false} draggable={true} autoplaySpeed={1500} autoplay={true}>
+      <Carousel className="carouselContent" dots={false} draggable={true} autoplaySpeed={2000} autoplay={true}>
         <div>
           <b>
             <p>
-              <span className="highlightText">GIAO HÀNG TRONG NGÀY</span> ÁP DỤNG CHO TẤT CẢ CÁC CỬA HÀNG TRÊN TOÀN
-              QUỐC. <span className="highlightText">LIÊN HỆ: 1900 8198</span>
+              <span className="highlightText">Xin trân trọng giới thiệu</span> ÁP DỤNG CHO TẤT CẢ CÁC CỬA HÀNG TRÊN TOÀN
+              QUỐC. <span className="highlightText">LIÊN HỆ: 0354903402</span>
             </p>
           </b>
         </div>

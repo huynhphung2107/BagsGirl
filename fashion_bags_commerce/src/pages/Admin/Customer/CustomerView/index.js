@@ -7,31 +7,51 @@ import FormCustomerCreate from '../CustomerEdit/FormCreate/FormCustomerCreate';
 import FormCustomerCreate1 from '../CustomerEdit/FormCreate/FormCustomerCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
+const headerStyle = {
+  borderLeft: '270px',
+  color: '#fff',
+  height: 'auto',
+  paddingInline: 0,
+  lineHeight: '64px',
+  backgroundColor: '#f3f4f3',
+  margin: '10px 10px 10px 0px',
+};
+const contentStyle = {
+  // lineHeight: '120px',
+  margin: '0 20px 10px 10px',
+  color: 'black',
+  backgroundColor: 'lightblue',
 
-const contentStyle = {};
+};
+const footerStyle = {
+  margin: '0 10px 10px 20px',
+  borderLeft: '270px',
+  color: 'black',
+  backgroundColor: '#fff',
+};
+const layoutContent = {
+  marginLeft: '270px',
+  flexGrow: '1',
+  backgroundColor: '#f3f4f3',
+};
 
 function CustomerView() {
   return (
-    <Layout className="layout">
+    <Layout style={{ height: '100%', background: '#f4f3f4' }}>
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="13" openKey="sub8" />
+        <Sidebar keyIndex="sub8" openKey="sub8" />
       </Sider>
-      <Layout className="layoutContent">
-        <Header className="headerStyle">
+      <Layout style={layoutContent}>
+        <Header style={headerStyle}>
           <HeaderContent titlePage="Danh Sách Khách Hàng" />
         </Header>
         <Content style={contentStyle}>
-          <div>
-            <FormCustomerCreate />
-          </div>
-
-          <TableContent />
+          <TableContent style={{ boder: 'black solid 1px' }} />
         </Content>
 
-        <Footer className="footerStyle">Đây là component của Footer</Footer>
+        {/* <Footer className="footerStyle">Đây là component của Footer</Footer> */}
       </Layout>
     </Layout>
   );
 }
-
 export default CustomerView;

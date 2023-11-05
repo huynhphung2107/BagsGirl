@@ -1,6 +1,7 @@
 import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
+
 const { Header, Footer, Sider, Content } = Layout;
 const headerStyle = {
   borderLeft: '270px',
@@ -8,36 +9,41 @@ const headerStyle = {
   height: 'auto',
   paddingInline: 0,
   lineHeight: '64px',
-  backgroundColor: '#fff',
-  padding: '30px',
+  backgroundColor: '#f3f4f3',
+  margin: '10px',
 };
 const contentStyle = {
-  lineHeight: '120px',
+  // lineHeight: '120px',
+  margin: '0 10px 10px 20px',
+
   color: 'black',
-  backgroundColor: '#f3f4f3',
+  backgroundColor: 'lightblue',
 };
 const footerStyle = {
+  margin: '0 10px 10px 20px',
   borderLeft: '270px',
   color: 'black',
   backgroundColor: '#fff',
 };
 const layoutContent = {
-  marginLeft: '260px',
+  marginLeft: '270px',
   flexGrow: '1',
+  backgroundColor: '#f3f4f3',
 };
 
 function Admin() {
   return (
     <Layout style={{ height: '100vh', background: '#f4f3f4' }}>
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="1" openKey="sub1" />
+        <Sidebar keyIndex="sub6" openKey="sub6" />
       </Sider>
       <Layout style={layoutContent}>
         <Header style={headerStyle}>
-          <HeaderContent />
+          <HeaderContent titlePage="Trang quản trị" />
         </Header>
-        <Content style={contentStyle}>Đây là component của Content</Content>
-        <Footer style={footerStyle}>Đây là component của Footer</Footer>
+        <Content style={contentStyle}>Đây là component của content</Content>
+
+        {/* <Footer style={footerStyle}>Đây là component của Footer</Footer> */}
       </Layout>
     </Layout>
   );

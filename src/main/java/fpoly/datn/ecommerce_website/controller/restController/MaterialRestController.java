@@ -51,7 +51,7 @@ public class MaterialRestController {
     @RequestMapping(value = "/material/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPage(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
-            @RequestParam(name = "size", defaultValue = "10") int pageSize
+            @RequestParam(name = "size", defaultValue = "15") int pageSize
     ) {
         Page<Materials> materialPage = materialService.findAllPage(pageNum, pageSize);
         return new ResponseEntity<>

@@ -5,10 +5,13 @@ import Title from 'antd/es/typography/Title';
 import NotificationIcon from './NotificationIcon';
 import MessageIcon from './MessageIcon';
 import PopupProfile from './PopupProfile';
+import style from './index.module.scss';
 
 const header = {
-  backgroundColor: '#ffffff',
-  padding: '10px 0',
+  // backgroundColor: '#ffffff',
+  padding: '20px 0 0 40px',
+  margin: '10px',
+  backgroundColor: 'lightblue',
 };
 
 const headerIcons = {

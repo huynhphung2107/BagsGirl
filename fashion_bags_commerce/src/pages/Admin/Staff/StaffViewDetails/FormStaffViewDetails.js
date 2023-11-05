@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
+import { InfoOutlined, PlusOutlined } from '@ant-design/icons';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
 import staffAPI from '~/api/staffAPI';
@@ -35,7 +35,7 @@ function FormStaffViewDetails(props) {
   const columns = [
     {
       title: 'Id',
-      dataIndex: 'id',
+      dataIndex: 'staffID',
       fixed: 'left',
       width: 100,
     },
@@ -47,7 +47,7 @@ function FormStaffViewDetails(props) {
     },
     {
       title: 'Account',
-      dataIndex: 'account',
+      dataIndex: 'usersAccount',
       width: 100,
     },
     {
@@ -89,9 +89,7 @@ function FormStaffViewDetails(props) {
 
   return (
     <Fragment>
-      <button className="btn btn-success" onClick={showDrawer} icon={<PlusOutlined />}>
-        Details
-      </button>
+      <Button className="btn btn-secondary" onClick={showDrawer} icon={<InfoOutlined />}></Button>
       <Drawer
         title={'View Details'}
         placement="top"

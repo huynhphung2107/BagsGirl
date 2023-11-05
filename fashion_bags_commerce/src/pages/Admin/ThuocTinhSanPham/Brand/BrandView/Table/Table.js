@@ -1,14 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import brandAPI from '~/api/propertitesBalo/brandAPI';
-import { DeleteOutlined, SyncOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
+import FormBrandCreate from '../../BrandEdit/FormCreate/FormBrandCreate';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesSize, setPagesSize] = useState(5);
+  const [pagesSize, setPagesSize] = useState(15);
   const [totalItem, setTotalItem] = useState();
 
   const onCancel = () => {};
@@ -17,7 +18,7 @@ const TableContent = () => {
     getAllBrand(currentPage, pagesSize);
     setTimeout(() => {
       setLoading(false);
-    }, 300);
+    }, 500);
   };
 
   useEffect(() => {
@@ -48,8 +49,8 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 150,
-      render: (text, record, index) => index + 1,
+      width: 40,
+      render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
       title: 'Code',
@@ -99,7 +100,7 @@ const TableContent = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <FormBrandEdit brand={record}  />
+          <FormBrandEdit brand={record} />
           <Popconfirm
             title="Xác Nhận"
             description="Bạn Có chắc chắn muốn xóa?"
@@ -111,9 +112,7 @@ const TableContent = () => {
             }}
             onCancel={onCancel}
           >
-           <Button type="primary" danger icon={<DeleteOutlined />}>
-              Delete
-            </Button>
+            <Button type="primary" danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </Space>
       ),
@@ -137,29 +136,18 @@ const TableContent = () => {
         padding: '10px',
       }}
     >
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button type="" onClick={reload} loading={loading} icon={<SyncOutlined />}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        ></span>
-      </div>
+      <FormBrandCreate onClick={reload} loading={loading} />
+      <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
 
       <Table
+        scroll={{ x: 1000, y: 640 }}
         className={styles.table}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={data}
         pagination={false}
         // onChange={handlePageChange} // Handle page changes
-        loading={loading}
+        // loading={loading}
       />
 
       <Pagination

@@ -71,9 +71,8 @@ function FormBaloEditTonggle({ reload }) {
   };
   return (
     <Fragment>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        Thêm Sản Phẩm
-      </Button>
+      <Button style={{ width: '100px' }} type="primary" onClick={showDrawer} icon={<PlusOutlined />}></Button>
+
       <Modal title="Thêm Sản Phẩm" open={open} onOk={onClose} onCancel={onClose}>
         <div>
           <Form

@@ -4,39 +4,50 @@ import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header
 
 import TableContent from '../ShiftViewer/Table/table';
 
-const { Header, Footer, Sider } = Layout;
+const { Header, Footer, Sider, Content } = Layout;
 const headerStyle = {
   borderLeft: '270px',
   color: '#fff',
   height: 'auto',
   paddingInline: 0,
   lineHeight: '64px',
-  backgroundColor: '#fff',
-  padding: '30px',
+  backgroundColor: '#f3f4f3',
+  margin: '10px 10px 10px 0px',
+};
+const contentStyle = {
+  // lineHeight: '120px',
+  margin: '0 20px 10px 10px',
+  color: 'black',
+  backgroundColor: 'lightgray',
+  backgroundColor: 'lightblue',
 };
 const footerStyle = {
+  margin: '0 10px 10px 20px',
   borderLeft: '270px',
   color: 'black',
   backgroundColor: '#fff',
 };
 const layoutContent = {
-  marginLeft: '260px',
+  marginLeft: '270px',
   flexGrow: '1',
+  backgroundColor: '#f3f4f3',
 };
 
 function ShiftViewer() {
   return (
-    <Layout style={{ height: '100vh', background: '#f4f3f4' }}>
+    <Layout style={{ height: '100%', background: '#f4f3f4' }}>
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="13" openKey="sub10" />
+        <Sidebar keyIndex="34" openKey="sub10" />
       </Sider>
       <Layout style={layoutContent}>
         <Header style={headerStyle}>
-          <HeaderContent titlePage="Quản lý giao ca" />
+          <HeaderContent titlePage="Danh Sách Ca Làm Việc" />
         </Header>
-        <TableContent />
+        <Content style={contentStyle}>
+          <TableContent style={{ boder: 'black solid 1px' }} />
+        </Content>
 
-        <Footer style={footerStyle}>Đây là component của Footer</Footer>
+        {/* <Footer className="footerStyle">Đây là component của Footer</Footer> */}
       </Layout>
     </Layout>
   );

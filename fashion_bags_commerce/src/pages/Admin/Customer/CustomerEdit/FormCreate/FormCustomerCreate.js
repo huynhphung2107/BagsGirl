@@ -71,9 +71,7 @@ const FormCustomerCreate = () => {
 
   return (
     <Fragment>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        Tạo mới tài khoản
-      </Button>
+      <Button style={{ width: '100px' }} type="primary" onClick={showDrawer} icon={<PlusOutlined />}></Button>
       <Drawer
         title="Tạo mới tài khoản khách hàng"
         width={720}

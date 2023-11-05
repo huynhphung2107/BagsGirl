@@ -1,6 +1,7 @@
 package fpoly.datn.ecommerce_website.service.serviceImpl;
 
 import fpoly.datn.ecommerce_website.dto.CustomerDTO;
+import fpoly.datn.ecommerce_website.dto.CustomerDTO1;
 import fpoly.datn.ecommerce_website.entity.Customers;
 import fpoly.datn.ecommerce_website.entity.Roles;
 import fpoly.datn.ecommerce_website.entity.Users;
@@ -37,6 +38,11 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerRepository.findAllCustomersWithUsersRoles(pageable);
     }
 
+    public Page<Customers> findAllSearch(String search, Integer page, Integer size){
+        Pageable pageable = PageRequest.of(page, size);
+        return customerRepository.findallSearch(search, pageable);
+    }
+
 
     @Override
     public List<Customers> findAll() {
@@ -50,7 +56,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
 
-    public Customers save(CustomerDTO customerDTO) {
+    public Customers save(CustomerDTO1 customerDTO) {
 
         Customers customer = modelMapper.map(customerDTO, Customers.class);
         customer.setCustomerStatus(customerDTO.getCustomerStatus());
@@ -70,7 +76,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
 
-    public Customers update(String customerId, CustomerDTO customerDTO) {
+    public Customers update(String customerId, CustomerDTO1 customerDTO) {
         Customers customers = customerRepository.findById(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         modelMapper.map(customerDTO, customers);

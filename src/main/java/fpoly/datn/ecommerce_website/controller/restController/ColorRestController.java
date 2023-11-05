@@ -39,7 +39,7 @@ public class ColorRestController {
     @RequestMapping(value = "/color/pagination", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPaginantion(
             @RequestParam(name = "page", defaultValue = "0") int pageNum,
-            @RequestParam(name = "size", defaultValue = "10") int pageSize
+            @RequestParam(name = "size", defaultValue = "15") int pageSize
     ) {
         Page<Colors> colorPage = colorService.findAllPage(pageNum, pageSize);
         return new ResponseEntity<>

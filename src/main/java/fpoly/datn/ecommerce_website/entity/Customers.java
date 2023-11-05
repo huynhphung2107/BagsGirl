@@ -29,7 +29,7 @@ public class Customers {
 
     @Id
     @Column(name = "customer_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String customerId;
 
     @Column(name = "customer_status")
