@@ -81,8 +81,7 @@ public class CustomerServiceImpl implements ICustomerService {
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         modelMapper.map(customerDTO, customers);
         Users userInfo = modelMapper.map(customerDTO, Users.class);
-        Users savedUserInfo = userInfoRepository.save(userInfo);
-        if (savedUserInfo != null) {
+        if (userInfo != null) {
             return customerRepository.save(customers);
         } else {
             throw new IllegalStateException("Failed to save UserInfo");

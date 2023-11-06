@@ -16,7 +16,7 @@ const TableContent = () => {
   const [totalItem, setTotalItem] = useState();
   const [search, setSearch] = useState('');
 
-  const onCancel = () => {};
+  const onCancel = () => { };
   const reload = () => {
     setLoading(true);
     getAll(search, currentPage, pagesSize);
@@ -52,7 +52,7 @@ const TableContent = () => {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   // Define your table columns
@@ -211,7 +211,7 @@ const TableContent = () => {
         columns={columns}
         dataSource={data}
         pagination={false}
-        // onChange={handlePageChange} // Handle page changes
+      // onChange={handlePageChange} // Handle page changes
       />
 
       <Pagination
