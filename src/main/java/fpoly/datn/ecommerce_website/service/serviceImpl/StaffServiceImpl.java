@@ -81,8 +81,7 @@ public class StaffServiceImpl  {
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         modelMapper.map(staffDTO, staffs);
         Users userInfo = modelMapper.map(staffDTO, Users.class);
-        Users savedUserInfo = userInfoRepository.save(userInfo);
-        if (savedUserInfo != null) {
+        if (userInfo != null) {
             return staffRepository.save(staffs);
         } else {
             throw new IllegalStateException("Failed to save UserInfo");
