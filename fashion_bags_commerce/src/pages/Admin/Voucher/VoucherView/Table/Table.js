@@ -183,6 +183,7 @@ const TableContent = () => {
       />
 
       <Pagination
+          showSizeChanger
         className={styles.pagination}
         total={totalItem}
         onChange={onChange}
