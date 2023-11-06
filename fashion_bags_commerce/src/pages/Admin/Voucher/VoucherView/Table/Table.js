@@ -170,9 +170,10 @@ const TableContent = () => {
       <FormVoucherCreate />
       <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
       <Table
+        className="table table-striped"
         scroll={{
           x: 1000,
-          y: 620,
+          y: 650,
         }}
         rowKey={(record) => record.id}
         columns={columns}

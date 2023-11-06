@@ -137,11 +137,11 @@ const TableContent = () => {
       }}
     >
       <FormBrandCreate onClick={reload} loading={loading} />
-      <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
 
       <Table
-        scroll={{ x: 1000, y: 640 }}
-        className={styles.table}
+        className="table table-striped"
+        scroll={{ x: 1000, y: 670 }}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={data}
@@ -149,14 +149,15 @@ const TableContent = () => {
         // onChange={handlePageChange} // Handle page changes
         // loading={loading}
       />
-
-      <Pagination
-        className={styles.pagination}
-        total={totalItem}
-        onChange={onChange}
-        defaultCurrent={1}
-        defaultPageSize={pagesSize}
-      />
+      <div className={styles.pagination}>
+        <Pagination
+         showSizeChanger
+          total={totalItem}
+          onChange={onChange}
+          defaultCurrent={1}
+          defaultPageSize={pagesSize}
+        />
+      </div>
     </div>
   );
 };

@@ -15,7 +15,7 @@ const TableContent = () => {
   const [totalItem, setTotalItem] = useState();
   const [search, setSearch] = useState('');
 
-  const onCancel = () => { };
+  const onCancel = () => {};
   const reload = () => {
     setLoading(true);
     getAll(search, currentPage, pagesSize);
@@ -46,15 +46,13 @@ const TableContent = () => {
     }
   }, [loading]);
 
-
-
   const getAll = async (keyword, current, pageSize) => {
     try {
       const response = await staffAPI.getSearchPagination(keyword, current, pageSize);
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   // Define your table columns
@@ -194,6 +192,7 @@ const TableContent = () => {
       <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
 
       <Table
+        className="table table-striped"
         scroll={{
           x: 1000,
           y: 590,
@@ -202,11 +201,12 @@ const TableContent = () => {
         columns={columns}
         dataSource={data}
         pagination={false}
-      // onChange={handlePageChange} // Handle page changes
+        // onChange={handlePageChange} // Handle page changes
       />
 
       <Pagination
         className={styles.pagination}
+        showSizeChanger
         total={totalItem}
         onChange={onChange}
         defaultCurrent={1}

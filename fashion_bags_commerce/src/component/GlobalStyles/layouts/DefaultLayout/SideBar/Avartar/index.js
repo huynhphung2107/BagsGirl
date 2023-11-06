@@ -3,7 +3,6 @@ import Meta from 'antd/es/card/Meta';
 function Avartar() {
   return (
     <div style={{ padding: '0px 0px 50px 0px' }}>
-      <hr />
       <br />
 
       <Card

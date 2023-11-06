@@ -148,9 +148,10 @@ function TableContent() {
       <FormTypeCreate />
       <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
       <Table
+        className="table table-striped"
         scroll={{
           x: 1000,
-          y: 640,
+          y: 670,
         }}
         rowKey={(record) => record.typeId}
         columns={columns}

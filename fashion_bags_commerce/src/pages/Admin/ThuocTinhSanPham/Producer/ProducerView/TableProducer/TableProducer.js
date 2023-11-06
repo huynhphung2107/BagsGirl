@@ -148,28 +148,27 @@ function TableContent() {
       <FormProducerCreate />
       <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
 
-      <Spin spinning={loading}>
-        <Table
-          scroll={{
-            x: 1000,
-            y: 640,
-          }}
-          rowKey={(record) => record.producerId}
-          columns={columns}
-          dataSource={producerList}
-          onChange={handleTableChange}
-          pagination={false}
+      <Table
+        className="table table-striped"
+        scroll={{
+          x: 1000,
+          y: 670,
+        }}
+        rowKey={(record) => record.producerId}
+        columns={columns}
+        dataSource={producerList}
+        onChange={handleTableChange}
+        pagination={false}
+      />
+      <div className={styles.pagination}>
+        <Pagination
+          showSizeChanger
+          onShowSizeChange={onShowSizeChange}
+          onChange={onShowSizeChange}
+          defaultCurrent={1}
+          total={totalItem}
         />
-        <div className={styles.pagination}>
-          <Pagination
-            showSizeChanger
-            onShowSizeChange={onShowSizeChange}
-            onChange={onShowSizeChange}
-            defaultCurrent={1}
-            total={totalItem}
-          />
-        </div>
-      </Spin>
+      </div>
     </div>
   );
 }

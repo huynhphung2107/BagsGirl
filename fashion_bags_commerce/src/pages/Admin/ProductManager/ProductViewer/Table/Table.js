@@ -148,30 +148,51 @@ function TableContent() {
         padding: '10px',
       }}
     >
-      <div>
-        <FormBaloEditTonggle reload={reload} />
-        <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
+      <FormBaloEditTonggle reload={reload} />
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
 
-        <Table
-          scroll={{
-            x: 1000,
-            y: 650,
-          }}
-          rowKey={(record) => record.productCode}
-          columns={columns}
-          dataSource={baloList}
-          onChange={handleTableChange}
-          pagination={false}
+      {/* <Table
+        className="table table-striped"
+        scroll={{
+          x: 1000,
+          y: 660,
+        }}
+        rowKey={(record) => record.productCode}
+        columns={columns}
+        dataSource={baloList}
+        onChange={handleTableChange}
+        pagination={false}
+      />
+      <div className={styles.pagination}>
+        <Pagination
+          showSizeChanger
+          onShowSizeChange={onHandleSizeChange}
+          onChange={onHandlePageNum}
+          defaultCurrent={1}
+          total={totalItem}
         />
-        <div className={styles.pagination}>
-          <Pagination
-            showSizeChanger
-            onShowSizeChange={onHandleSizeChange}
-            onChange={onHandlePageNum}
-            defaultCurrent={1}
-            total={totalItem}
-          />
-        </div>
+      </div> */}
+      <Table
+        className="table table-striped"
+        scroll={{
+          x: 1000,
+          y: 670,
+        }}
+        rowKey={(record) => record.id}
+        columns={columns}
+        dataSource={baloList}
+        onChange={handleTableChange}
+        pagination={false}
+      />
+      <div>
+        <Pagination
+          className={styles.pagination}
+          showSizeChanger
+          onShowSizeChange={onHandleSizeChange}
+          onChange={onHandlePageNum}
+          defaultCurrent={1}
+          total={totalItem}
+        />
       </div>
     </div>
   );

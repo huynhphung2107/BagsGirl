@@ -143,9 +143,11 @@ const TableContent = () => {
       <FormMaterialCreate />
       <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
       <Table
+        size="middle"
+        className="table table-striped"
         scroll={{
           x: 1000,
-          y: 640,
+          y: 670,
         }}
         rowKey={(record) => record.id}
         columns={columns}
@@ -156,7 +158,7 @@ const TableContent = () => {
       />
       <div className={styles.pagination}>
         <Pagination
-          className={styles.pagination}
+          showSizeChanger
           total={totalItem}
           onChange={onChange}
           defaultCurrent={1}

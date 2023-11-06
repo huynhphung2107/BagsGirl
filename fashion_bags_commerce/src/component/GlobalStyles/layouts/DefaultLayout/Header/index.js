@@ -10,7 +10,7 @@ import style from './index.module.scss';
 const header = {
   // backgroundColor: '#ffffff',
   padding: '20px 0 0 40px',
-  margin: '10px',
+  margin: '0 20px 10px 10px',
   backgroundColor: 'lightblue',
 };
 
