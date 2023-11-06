@@ -30,7 +30,7 @@ function SearchForm(props) {
             //     srearchTerm: e.target.value.toString(),
             // };
             onSubmit(e.target.value.toString());
-        }, 0);
+        }, 300);
 
     }
 

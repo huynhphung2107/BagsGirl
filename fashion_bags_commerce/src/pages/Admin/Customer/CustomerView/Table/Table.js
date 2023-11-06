@@ -102,12 +102,12 @@ const TableContent = () => {
       width: 100,
     },
 
-    // {
-    //   title: 'Chức vụ',
-    //   dataIndex: ['users', 'roles', 'roleName'],
-    //   sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
-    //   width: 100,
-    // },
+    {
+      title: 'Chức vụ',
+      dataIndex: ['users', 'roles', 'roleName'],
+      sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
+      width: 100,
+    },
     {
       title: 'Điểm',
       dataIndex: 'customerPoint',
