@@ -21,27 +21,28 @@ import VoucherView from './pages/Admin/Voucher/VoucherView';
 import StaffView from './pages/Admin/Staff/StaffView';
 import SalesCounter from './pages/Admin/SalesManager/SalesCounter';
 import CustomerView from './pages/Admin/Customer/CustomerView';
+import CartView from './pages/Home/Cart';
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
-  { path: '/product-viewer', component: <ProductViewer />, title: 'Về chúng tôi' },
-  { path: '/login', component: <Login />, title: 'Liên hệ' },
+  { path: '/product-viewer', component: <ProductViewer />, title: 'Trang sản Phẩm' },
+  { path: '/login', component: <Login />, title: 'Trang đăng nhập' },
   { path: '/', component: <Home />, title: 'Home' },
-  { path: '/product-add', component: <ProductAdd />, title: 'A' },
-  { path: '/shift-view', component: <ShiftViewer />, title: 'B' },
-  { path: '/color-view', component: <ColorView />, title: 'C' },
-  { path: '/brand-view', component: <BrandView />, title: 'D' },
-  { path: '/size-view', component: <SizeView />, title: 'E' },
-  { path: '/type-view', component: <TypeView />, title: 'F' },
-  { path: '/buckle-type-view', component: <BuckleTypeView />, title: 'G' },
-  { path: '/material-view', component: <MaterialView />, title: 'H' },
-  { path: '/compartment-view', component: <CompartmentView />, title: 'I' },
-  { path: '/producer-view', component: <ProducerView />, title: 'K' },
-  { path: '/voucher-view', component: <VoucherView />, title: 'L' },
-  { path: '/staff-view', component: <StaffView />, title: 'M' },
-  { path: '/customer-view', component: <CustomerView />, title: 'j' },
-  { path: '/product-add', component: <ProductAdd />, title: 'aa' },
-  { path: '/sales-counter', component: <SalesCounter />, title: 'agad' },
+  { path: '/product-add', component: <ProductAdd />, title: 'Trang thêm sản phẩm' },
+  { path: '/shift-view', component: <ShiftViewer />, title: 'Trang giao ca' },
+  { path: '/color-view', component: <ColorView />, title: 'Trang màu sắc' },
+  { path: '/brand-view', component: <BrandView />, title: 'Trang thương hiệu' },
+  { path: '/size-view', component: <SizeView />, title: 'Trang kích cỡ' },
+  { path: '/type-view', component: <TypeView />, title: 'Trang kiểu sản phẩm' },
+  { path: '/buckle-type-view', component: <BuckleTypeView />, title: 'Trang kiểu khóa' },
+  { path: '/material-view', component: <MaterialView />, title: 'Trang chất liệu' },
+  { path: '/compartment-view', component: <CompartmentView />, title: 'Trang kiểu ngăn' },
+  { path: '/producer-view', component: <ProducerView />, title: 'Trang nhà sản xuất' },
+  { path: '/voucher-view', component: <VoucherView />, title: 'Trang khuyến mại' },
+  { path: '/staff-view', component: <StaffView />, title: 'Trang nhân viên' },
+  { path: '/customer-view', component: <CustomerView />, title: 'Trang khách hàng' },
+  { path: '/sales-counter', component: <SalesCounter />, title: 'Trang bán hàng' },
+  { path: '/cart', component: <CartView />, title: 'Trang giỏ hàng' },
 ];
 
 function App() {

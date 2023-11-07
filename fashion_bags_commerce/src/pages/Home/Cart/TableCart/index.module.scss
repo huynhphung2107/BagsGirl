@@ -1,0 +1,31 @@
+.container{
+    width: 80%;
+    text-align: center;
+    justify-content: center;
+}
+
+h4{
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+}
+table{
+    border-collapse: separate; /* Đặt giá trị này thành separate để chia rời các đường biên của các ô bảng */
+    border-spacing: 30px; /* Điều chỉnh khoảng cách giữa các đường biên của các ô bảng theo ý muốn */
+    border: 1px solid gainsboro;
+    text-align: center;
+    justify-content: center;
+    width: 200px;
+    height: 400px;
+
+}
+.cart{
+    text-align: center;
+    justify-content: center
+    ;
+    display: flex;
+}
+.columns a anh{
+    width: 200px;
+    height: 400px;
+}

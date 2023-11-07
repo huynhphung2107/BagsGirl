@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Header from './Header';
 
 import './index.scss';
+import LoginForm from '../Login/FormLogin/FormLogin/LoginForm';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function Home() {
