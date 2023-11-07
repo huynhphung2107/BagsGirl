@@ -21,8 +21,8 @@ function CartView() {
               <span>Tiếp tục mua sắm...</span>
             </a>
           </div>
-          {/* <TableCart /> */}
-          <ShoppingCart />
+          <TableCart />
+          {/* <ShoppingCart /> */}
         </ContentLayout>
 
         <FooterLayout>
