@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Table, Button } from 'antd';
 
-import './index.module.scss';
-import { DeleteOutlined } from '@ant-design/icons';
+import styles from './index.module.scss';
+import { DeleteFilled, DeleteOutlined } from '@ant-design/icons';
 
 const columns = [
   {
@@ -14,25 +14,29 @@ const columns = [
   {
     title: 'Tên Sản Phẩm',
     dataIndex: 'ten',
-    width: 300,
+    width: 400,
   },
   {
     title: 'Đơn giá (VNĐ)',
     dataIndex: 'gia',
+    width: 200,
   },
   {
     title: 'Số lượng',
     dataIndex: 'soLuong',
+    width: 200,
   },
   {
     title: 'Thành tiền (VNĐ)',
     dataIndex: 'thanhTien',
     render: (_, record) => record.gia * record.soLuong,
+    width: 200,
   },
   {
     title: 'Xóa',
     dataIndex: 'xoa',
-    render: () => <Button type="danger" icon={<DeleteOutlined />} />,
+    render: () => <Button type="danger" icon={<DeleteFilled />} />,
+    width: 200,
   },
 ];
 
@@ -55,12 +59,63 @@ const data = [
 
 const TableCart = () => (
   <Fragment>
-    <div className="container">
+    <div className={styles.container}>
       <h4>Giỏ hàng của bạn</h4>
       <div className="cart">
-        <Table className="table_cart" columns={columns} dataSource={data} size="large" />
+        <Table className={styles.table_cart} columns={columns} dataSource={data} size="large" bordered />
       </div>
     </div>
+
+    {/* <div>
+      <div className="row">
+        <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div id="div-cartitemmoreforgift" class="cus-note"></div>
+          <div className="pp_notify">
+            <div className="item-promotion"></div>
+          </div>
+        </div>
+        <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <ul className={styles.total_price}>
+            <li>Số lượng</li>
+            <li className="price quantitytotal">2</li>
+          </ul>
+          <ul className={styles.total_price}>
+            <li>Giá trị hàng hóa</li>
+            <li className={styles.price}>
+              <span className="amount pricesellingtotal">2.097.700</span>
+              <span className="currency">đ</span>
+            </li>
+          </ul>
+          <ul className={styles.total_price}>
+            <li>Phí vận chuyển</li>
+            <li className={styles.price}>
+              <i>Chưa có</i>
+            </li>
+          </ul>
+          <ul className={styles.total_price}>
+            <li>Giảm tiền</li>
+            <li className="price sale">
+              <span className="amount promotiondiscount">0</span>
+              <span className="currency">đ</span>
+            </li>
+          </ul>
+          <ul className={styles.total_price}>
+            <li>
+              Thành tiền <span>(đã bao gồm VAT)</span>
+            </li>
+            <li className={styles.price}>
+              <span className="amount pricetotal" total="2097700">
+                2.097.700
+              </span>
+              <span className="currency">đ</span>
+            </li>
+          </ul>
+          <a href="javascript:void(0)" className="checkout-cart">
+            Tiến hành thanh toán
+          </a>
+        </div>
+      </div>
+    </div> */}
   </Fragment>
 );
 

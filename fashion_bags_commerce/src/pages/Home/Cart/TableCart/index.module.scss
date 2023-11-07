@@ -1,8 +1,12 @@
-.container{
+.container {
     width: 80%;
+    margin: 0 auto; 
     text-align: center;
-    justify-content: center;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    height: 100vh;
+  }
 
 h4{
     text-align: left;
@@ -10,22 +14,68 @@ h4{
     color: black;
 }
 table{
-    border-collapse: separate; /* Đặt giá trị này thành separate để chia rời các đường biên của các ô bảng */
-    border-spacing: 30px; /* Điều chỉnh khoảng cách giữa các đường biên của các ô bảng theo ý muốn */
-    border: 1px solid gainsboro;
+    // border-collapse: separate; 
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
     text-align: center;
     justify-content: center;
-    width: 200px;
-    height: 400px;
 
 }
-.cart{
+.centered-table-header {
     text-align: center;
-    justify-content: center
-    ;
-    display: flex;
+  }
+.table_cart th {
+    border: 1px solid gray; /* Đổi màu và độ đậm tùy ý */
+   
+    text-align: center;
+  }
+  .table_cart td {
+    border: 1px solid gray; /* Đổi màu và độ đậm tùy ý */
+    text-align: center;
+  }
+  
+.cart{
+   
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    justify-content: center;
 }
-.columns a anh{
-    width: 200px;
-    height: 400px;
-}
+
+
+// .col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12{
+//     border: 1px black solid;
+// }
+// ul {
+//     list-style: none;
+// }
+// li {
+//     display: list-item;
+//     text-align: -webkit-match-parent;
+// }
+// .cart-page .cart-button .total_price {
+//     display: -webkit-box;
+//     display: -webkit-flex;
+//     display: -ms-flexbox;
+//     display: flex;
+//     border: 1px solid #ebebeb;
+// }
+// .total_price {
+//     display: -webkit-box;
+//     display: -webkit-flex;
+//     display: -ms-flexbox;
+//     display: flex;
+//     border: 1px solid #ebebeb;
+// }
+// .total_price li.price {
+//     width: 40%;
+//     font-weight: bold;
+//     text-align: right;
+//     border-left: 1px solid #ebebeb;
+// }
+// .cart-page .cart-button .total_price li {
+//     display: inline-block;
+//     width: 60%;
+//     padding: 12px 20px;
+//     line-height: 1;
+// }

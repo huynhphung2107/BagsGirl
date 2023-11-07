@@ -59,7 +59,7 @@ const TableContent = () => {
   const columns = [
     {
       title: 'STT',
-      width: 40,
+      width: 50,
       render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
