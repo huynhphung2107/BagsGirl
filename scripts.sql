@@ -1,4 +1,6 @@
+Create database [FashionBagsEcommerceDB]
 USE [FashionBagsEcommerceDB]
+
 GO
 /****** Object:  Table [dbo].[bill_details]    Script Date: 07/11/2023 4:53:22 PM ******/
 SET ANSI_NULLS ON
