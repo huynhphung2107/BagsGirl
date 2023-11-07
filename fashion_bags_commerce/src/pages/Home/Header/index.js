@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import './index.scss';
+import styles from './index.module.scss';
 import { Carousel } from 'antd';
 import { Link } from 'react-router-dom';
 import NoticeHeader from './NoticeHeader';
@@ -9,7 +9,7 @@ import NavMenu from './NavMenu';
 function Header() {
   return (
     <Fragment>
-      <div className="header">
+      <div className={styles.fixed_header}>
         <NoticeHeader />
         <MainHeader />
         <NavMenu />

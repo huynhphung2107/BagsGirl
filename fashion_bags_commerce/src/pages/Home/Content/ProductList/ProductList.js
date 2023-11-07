@@ -32,7 +32,7 @@ function ProductList({ titleContent }) {
                   <div className={styles.describer}>
                     <span className={styles.productPrice}>
                       <ins>
-                        <span className={styles.amount}>9384</span>
+                        <span className={styles.productTitle}>9384</span>
                         <span>đ</span>
                       </ins>
                     </span>
@@ -102,6 +102,9 @@ function ProductList({ titleContent }) {
                 </div>
               </div>
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
 
             <div className="row">
               <div className="col-3">
