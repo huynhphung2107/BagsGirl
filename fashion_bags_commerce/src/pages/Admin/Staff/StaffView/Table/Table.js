@@ -31,9 +31,17 @@ const TableContent = () => {
   };
 
   const handleSearchChange = (newFilter) => {
-    setSearch(newFilter);
-    setLoading(true);
-    setCurrentPage(1);
+    if (newFilter === undefined || newFilter.trim().length === 0) {
+      setSearch('');
+      setLoading(true);
+      setCurrentPage(1);
+    } else {
+      setSearch(newFilter.trim());
+      setLoading(true);
+      setCurrentPage(1);
+    };
+
+
   };
 
   useEffect(() => {

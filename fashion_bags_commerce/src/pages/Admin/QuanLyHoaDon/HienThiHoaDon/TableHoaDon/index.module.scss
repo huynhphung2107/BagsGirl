@@ -1,0 +1,224 @@
+.buttonAll {
+
+    background-color   : #4D4AE8;
+    background-image   : linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+    border             : 1px solid #4D4AE8;
+    border-radius      : 1rem;
+    box-shadow         : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+    box-sizing         : border-box;
+    color              : #FFFFFF;
+    cursor             : pointer;
+    display            : inline-block;
+    font-family        : Inter, sans-serif;
+    font-size          : 16px;
+    font-weight        : 550;
+    line-height        : 1.5;
+    margin             : 5px;
+    text-align         : center;
+    text-transform     : none;
+    transition         : color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    user-select        : none;
+    -webkit-user-select: none;
+    touch-action       : manipulation;
+    vertical-align     : middle;
+
+    &Red {
+        background-color   : red;
+        background-image   : linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+        border             : 1px solid #e84a4a;
+        border-radius      : 1rem;
+        box-shadow         : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+        box-sizing         : border-box;
+        color              : #FFFFFF;
+        cursor             : pointer;
+        display            : inline-block;
+        font-family        : Inter, sans-serif;
+        font-size          : 16px;
+        font-weight        : 550;
+        line-height        : 1.5;
+        margin             : 5px;
+        text-align         : center;
+        text-transform     : none;
+        transition         : color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        user-select        : none;
+        -webkit-user-select: none;
+        touch-action       : manipulation;
+        vertical-align     : middle;
+
+        &:focus:not(:focus-visible),
+        &:focus {
+            outline: 0;
+        }
+
+        &:hover {
+            background-color: #e53357;
+            border-color    : #e53368;
+        }
+
+        &:focus {
+            background-color: #c53f70;
+            border-color    : #ba3b76;
+            box-shadow      : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+            transform       : translateY(10px);
+        }
+    }
+
+    &Yellow {
+        background-color   : rgb(0, 234, 255);
+        background-image   : linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+        border             : 1px solid rgb(0, 234, 255);
+        border-radius      : 1rem;
+        box-shadow         : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+        box-sizing         : border-box;
+        color              : #FFFFFF;
+        cursor             : pointer;
+        display            : inline-block;
+        font-family        : Inter, sans-serif;
+        font-size          : 16px;
+        font-weight        : 550;
+        line-height        : 1.5;
+        margin             : 5px;
+        text-align         : center;
+        text-transform     : none;
+        transition         : color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        user-select        : none;
+        -webkit-user-select: none;
+        touch-action       : manipulation;
+        vertical-align     : middle;
+
+        &:focus:not(:focus-visible),
+        &:focus {
+            outline: 0;
+        }
+
+        &:hover {
+            background-color: #33b0e5;
+            border-color    : #33a1e5;
+        }
+
+        &:focus {
+            background-color: #33b0e5;
+            border-color    : #33b0e5;
+            box-shadow      : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+            transform       : translateY(10px);
+        }
+    }
+
+    &Green {
+        background-color   : rgb(0, 166, 255);
+        background-image   : linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+        border             : 1px solid rgb(0, 166, 255);
+        border-radius      : 1rem;
+        box-shadow         : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+        box-sizing         : border-box;
+        color              : #FFFFFF;
+        cursor             : pointer;
+        display            : inline-block;
+        font-family        : Inter, sans-serif;
+        font-size          : 16px;
+        font-weight        : 550;
+        line-height        : 1.5;
+        margin             : 5px;
+        text-align         : center;
+        text-transform     : none;
+        transition         : color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        user-select        : none;
+        -webkit-user-select: none;
+        touch-action       : manipulation;
+        vertical-align     : middle;
+
+        &:focus:not(:focus-visible),
+        &:focus {
+            outline: 0;
+        }
+
+        &:hover {
+            background-color: rgb(0, 166, 255);
+            border-color    : rgb(0, 166, 255);
+        }
+
+        &:focus {
+            background-color: rgb(0, 166, 255);
+            border-color    : rgb(0, 166, 255);
+            box-shadow      : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+            transform       : translateY(10px);
+        }
+    }
+
+    &Done {
+        background-color   : rgb(0, 4, 255);
+        background-image   : linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+        border             : 1px solid rgb(0, 4, 255);
+        border-radius      : 1rem;
+        box-shadow         : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+        box-sizing         : border-box;
+        color              : #FFFFFF;
+        cursor             : pointer;
+        display            : inline-block;
+        font-family        : Inter, sans-serif;
+        font-size          : 16px;
+        font-weight        : 550;
+        line-height        : 1.5;
+        margin             : 5px;
+        text-align         : center;
+        text-transform     : none;
+        transition         : color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        user-select        : none;
+        -webkit-user-select: none;
+        touch-action       : manipulation;
+        vertical-align     : middle;
+
+        &:focus:not(:focus-visible),
+        &:focus {
+            outline: 0;
+        }
+
+        &:hover {
+            background-color: #3733E5;
+            border-color    : #3733E5;
+        }
+
+        &:focus {
+            background-color: #413FC5;
+            border-color    : #3E3BBA;
+            box-shadow      : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+            transform       : translateY(10px);
+        }
+    }
+
+
+    &:focus:not(:focus-visible),
+    &:focus {
+        outline: 0;
+    }
+
+    &:hover {
+        background-color: #3733E5;
+        border-color    : #3733E5;
+    }
+
+    &:focus {
+        background-color: #413FC5;
+        border-color    : #3E3BBA;
+        box-shadow      : rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+        transform       : translateY(10px);
+    }
+
+    // &:active {
+    //     background-color: #3E3BBA;
+    //     background-image: none;
+    //     border-color    : #3A38AE;
+    //     box-shadow      : rgba(46, 54, 80, 0.125) 0 3px 5px inset;
+    // }
+
+    // &:active:focus {
+    //     box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+    // }
+
+    // &:disabled {
+    //     background-image: none;
+    //     box-shadow      : none;
+    //     opacity         : .65;
+    //     pointer-events  : none;
+    // }
+}

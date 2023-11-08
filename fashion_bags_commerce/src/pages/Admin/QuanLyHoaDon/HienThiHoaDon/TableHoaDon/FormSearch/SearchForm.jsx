@@ -19,12 +19,16 @@ function SearchForm(props) {
         setSearchTerm(e.target.value.toString());
         if (!onSubmit) return;
 
+        // set 100 -> clear, set 300 -> submit
+        //set 300 => submit
         if (typingTimeoutRef.current) {
             clearTimeout(typingTimeoutRef.current);
         }
 
         typingTimeoutRef.current = setTimeout(() => {
-
+            // const formValues = {
+            //     srearchTerm: e.target.value.toString(),
+            // };
             onSubmit(e.target.value.toString());
         }, 500);
 

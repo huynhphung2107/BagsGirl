@@ -21,6 +21,7 @@ import VoucherView from './pages/Admin/Voucher/VoucherView';
 import StaffView from './pages/Admin/Staff/StaffView';
 import SalesCounter from './pages/Admin/SalesManager/SalesCounter';
 import CustomerView from './pages/Admin/Customer/CustomerView';
+import HoaDonView from './pages/Admin/QuanLyHoaDon/HienThiHoaDon/indexHoaDonView';
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
@@ -42,6 +43,7 @@ const dynamicRoutes = [
   { path: '/customer-view', component: <CustomerView />, title: 'j' },
   { path: '/product-add', component: <ProductAdd />, title: 'aa' },
   { path: '/sales-counter', component: <SalesCounter />, title: 'agad' },
+  { path: '/bill-view', component: <HoaDonView />, title: 'hoaDon' },
 ];
 
 function App() {
