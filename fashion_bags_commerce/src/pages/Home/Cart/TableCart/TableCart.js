@@ -8,7 +8,7 @@ const columns = [
   {
     title: 'Ảnh',
     dataIndex: 'anh',
-    render: (anh) => <img src={anh} alt="Ảnh sản phẩm" width={195} height={266} />,
+    render: (anh) => <img src={anh} alt="Ảnh sản phẩm" width={195} height={266}  />,
     width: 200,
   },
   {

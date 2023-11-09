@@ -4,12 +4,19 @@
 }
 .content {
   height: fit-content;
-  background-color: #fff;
+  background-color: white;
 }
 .footer {
   height: fit-content;
-  background-color: #fff;
+  background-color: white;
 }
+.row {
+  margin-bottom: 30px;
+}
+.container {
+  background-color: white;
+}
+
 .container-fluid {
   background-color: white;
 }

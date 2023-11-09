@@ -9,7 +9,7 @@ import LoginForm from '../Login/FormLogin/FormLogin/LoginForm';
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function Home() {
   return (
-    <div>
+    <div className='container-fluid'>
       <Layout>
         <Header></Header>
         <ContentLayout className="content">

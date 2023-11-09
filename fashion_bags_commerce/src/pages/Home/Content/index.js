@@ -7,14 +7,16 @@ import ExtendContent from './ExtendContent';
 function Content() {
   return (
     <Fragment>
-      <div className={styles.block}>
-        <LayoutCarousel />
-      </div>
-      <div className={styles.block}>
-        <ProductList titleContent={'NEW ARRIVAL'}></ProductList>
-        <ProductList titleContent={'ONLINE DEAL (16.09 - 24.09)'}></ProductList>
-        <ProductList titleContent={'SẢN PHẨM KHUYẾN MÃI'}></ProductList>
-        <ExtendContent titleContent={'EVENT/TÀI TRỢ'}></ExtendContent>
+      <div className="container-fluid">
+        <div className={styles.block}>
+          <LayoutCarousel />
+        </div>
+        <div className={styles.block}>
+          <ProductList titleContent={'NEW ARRIVAL'}></ProductList>
+          <ProductList titleContent={'ONLINE DEAL (16.09 - 24.09)'}></ProductList>
+          <ProductList titleContent={'SẢN PHẨM KHUYẾN MÃI'}></ProductList>
+          <ExtendContent titleContent={'EVENT/TÀI TRỢ'}></ExtendContent>
+        </div>
       </div>
     </Fragment>
   );

@@ -1,0 +1,25 @@
+.navFilterContent {
+  width: 300px;
+  text-align: center;
+  font-size: 17pt;
+  font-weight: lighter;
+}
+.navFilter {
+  text-align: left;
+  margin-left: 50px;
+  display: flex;
+  height: 100%;
+  width: 300px;
+  border: 1px white solid;
+}
+.filterTitle {
+  margin-left: 50px;
+  margin: 20px 0 10px 50px;
+  font-weight: initial;
+  padding-left: 10px;
+}
+.checkbox-item {
+  width: 100px; /* Adjust the width as needed */
+  display: flex; /* To ensure even spacing */
+  align-items: center; /* To vertically align the checkbox content */
+}

@@ -6,24 +6,26 @@ import styles from './index.module.scss';
 function LayoutCarousel() {
   return (
     <Fragment>
-      <div className={styles.carouselContent}>
-        <Carousel draggable={true} autoplaySpeed={1500} autoplay={true}>
-          <div>
-            <h3 className={styles.item}>
-              <img src="https://thoitrangthaiha.com/upload/hinhanh/slider-1208.png"></img>
-            </h3>
-          </div>
-          <div>
-            <h3 className={styles.item}>
-              <img src="https://tuixachkimlong.vn/wp-content/uploads/sale-banner.jpg"></img>
-            </h3>
-          </div>
-          <div>
-            <h3 className={styles.item}>
-              <img src="https://balotunghai.com/wp-content/uploads/2017/09/Banner2-1.jpg"></img>
-            </h3>
-          </div>
-        </Carousel>
+      <div className="container-fluid">
+        <div className={styles.carouselContent}>
+          <Carousel draggable={true} autoplaySpeed={1500} autoplay={true}>
+            <div>
+              <h3 className={styles.item}>
+                <img src="https://thoitrangthaiha.com/upload/hinhanh/slider-1208.png"></img>
+              </h3>
+            </div>
+            <div>
+              <h3 className={styles.item}>
+                <img src="https://tuixachkimlong.vn/wp-content/uploads/sale-banner.jpg"></img>
+              </h3>
+            </div>
+            <div>
+              <h3 className={styles.item}>
+                <img src="https://balotunghai.com/wp-content/uploads/2017/09/Banner2-1.jpg"></img>
+              </h3>
+            </div>
+          </Carousel>
+        </div>
       </div>
       <div className={styles.collectionBanner}>
         <div className={styles.container}>

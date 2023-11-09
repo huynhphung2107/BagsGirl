@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, initialValue } from 'react';
 import { EyeFilled, EyeInvisibleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, Row, Select, Space, Radio, notification } from 'antd';
+import { Button, Col, Drawer, Form, Input, Row, Select, Space, Radio, notification, Tooltip } from 'antd';
 import staffAPI from '~/api/staffAPI';
 import { data } from 'jquery';
 
@@ -73,9 +73,11 @@ const FormStaffCreate = () => {
   return (
     <Fragment>
       {' '}
-      <Button style={{ width: '100px' }} type="primary" onClick={showDrawer} icon={<PlusOutlined />}></Button>
+      <Tooltip title="Thêm mới nhân viên">
+        <Button style={{ width: '100px' }} type="primary" onClick={showDrawer} icon={<PlusOutlined />}></Button>
+      </Tooltip>
       <Drawer
-        title="Create a new account"
+        title="Thêm mới nhân viên"
         width={720}
         onClose={onClose}
         open={open}
