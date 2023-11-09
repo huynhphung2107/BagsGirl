@@ -22,49 +22,49 @@
       text-decoration: none;
     }
   }
-
-  .productList {
-    .container {
-      margin: 0px 100px;
-      padding: 20px;
-      //   background-color: red;
-
-      .producItem {
-        // background-color: blue;
-        max-width: 600px;
-        display: flex;
-        flex-direction: column; /* Đặt hướng dọc */
-        justify-content: center; /* Căn giữa theo hướng ngang */
-        align-items: center;
-        .productImage {
-          max-width: 400px;
-          a {
-            .contentImage {
-              width: 420px;
-
-              position: relative;
-            }
-            img {
-              max-width: 100%;
-            }
-          }
-        }
-
-        .describer {
-          align-self: start;
-          padding: 20px 10px;
-          .productPrice {
-            ins {
-              text-decoration: none;
-              color: black;
-              font-size: 27px;
-            }
-          }
-          .productTitle {
-            font-size: 24px;
-          }
-        }
-      }
-    }
-  }
 }
+//   .productList {
+//     .container {
+//       margin: 0px 100px;
+//       padding: 20px;
+//       //   background-color: red;
+
+//       .producItem {
+//         // background-color: blue;
+//         max-width: 600px;
+//         display: flex;
+//         flex-direction: column; /* Đặt hướng dọc */
+//         justify-content: center; /* Căn giữa theo hướng ngang */
+//         align-items: center;
+//         .productImage {
+//           max-width: 400px;
+//           a {
+//             .contentImage {
+//               width: 420px;
+
+//               position: relative;
+//             }
+//             img {
+//               max-width: 100%;
+//             }
+//           }
+//         }
+
+//         .describer {
+//           align-self: start;
+//           padding: 20px 10px;
+//           .productPrice {
+//             ins {
+//               text-decoration: none;
+//               color: black;
+//               font-size: 27px;
+//             }
+//           }
+//           .productTitle {
+//             font-size: 24px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

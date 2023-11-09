@@ -15,8 +15,10 @@ function Content() {
           <ProductList titleContent={'NEW ARRIVAL'}></ProductList>
           <ProductList titleContent={'ONLINE DEAL (16.09 - 24.09)'}></ProductList>
           <ProductList titleContent={'SẢN PHẨM KHUYẾN MÃI'}></ProductList>
-          <ExtendContent titleContent={'EVENT/TÀI TRỢ'}></ExtendContent>
         </div>
+      </div>
+      <div className="container">
+        <ExtendContent titleContent={'EVENT/TÀI TRỢ'}></ExtendContent>
       </div>
     </Fragment>
   );

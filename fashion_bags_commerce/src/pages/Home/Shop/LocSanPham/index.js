@@ -8,6 +8,9 @@ const hang = ['adidas', 'nike', 'lumbur'];
 const mauSac = ['đỏ', 'đen', 'vàng'];
 const kichCo = ['size S', 'size XL', 'size XXL'];
 const chatLieu = ['vải cotton', 'vải lụa', 'vải nhung', 'vải nhung'];
+const kieuNgan = ['vải cotton', 'vải lụa', 'vải nhung', 'vải nhung'];
+const kieuBalo = ['vải cotton', 'vải lụa', 'vải nhung', 'vải nhung'];
+const nhaSanXuat = ['vải cotton', 'vải lụa', 'vải nhung', 'vải nhung'];
 
 const items = [
   {
@@ -23,7 +26,7 @@ const items = [
     key: '1',
     label: 'Hãng',
     children: hang.map((item, index) => (
-      <div key={index}  className="checkbox-item">
+      <div key={index} className="checkbox-item">
         <Checkbox>{item}</Checkbox>
         <br />
       </div>
@@ -34,7 +37,7 @@ const items = [
     key: '2',
     label: 'Màu sắc',
     children: mauSac.map((item, index) => (
-      <div key={index}  className="checkbox-item">
+      <div key={index} className="checkbox-item">
         <Checkbox>{item}</Checkbox>
         <br />
       </div>
@@ -45,7 +48,7 @@ const items = [
     key: '3',
     label: 'Kích cỡ',
     children: kichCo.map((item, index) => (
-      <div key={index}  className="checkbox-item">
+      <div key={index} className="checkbox-item">
         <Checkbox>{item}</Checkbox>
         <br />
       </div>
@@ -56,7 +59,40 @@ const items = [
     key: '4',
     label: 'Chất liệu',
     children: chatLieu.map((item, index) => (
-      <div key={index}  className="checkbox-item">
+      <div key={index} className="checkbox-item">
+        <Checkbox>{item}</Checkbox>
+        <br />
+      </div>
+    )),
+    width: 100,
+  },
+  {
+    key: '5',
+    label: 'Kiểu balo',
+    children: kieuBalo.map((item, index) => (
+      <div key={index} className="checkbox-item">
+        <Checkbox>{item}</Checkbox>
+        <br />
+      </div>
+    )),
+    width: 100,
+  },
+  {
+    key: '6',
+    label: 'Kiểu ngăn',
+    children: kieuNgan.map((item, index) => (
+      <div key={index} className="checkbox-item">
+        <Checkbox>{item}</Checkbox>
+        <br />
+      </div>
+    )),
+    width: 100,
+  },
+  {
+    key: '7',
+    label: 'Nhà sản xuất',
+    children: nhaSanXuat.map((item, index) => (
+      <div key={index} className="checkbox-item">
         <Checkbox>{item}</Checkbox>
         <br />
       </div>

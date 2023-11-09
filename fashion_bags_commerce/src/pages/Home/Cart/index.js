@@ -13,7 +13,19 @@ function CartView() {
     <div>
       <Layout>
         <Header className={styles.header}></Header>
+        <div className="duongDan">
+          <ul className="ul">
+            <span>
+              <Link to={'/'}>
+                <li className="li">Trang chủ-- </li>
+              </Link>
 
+              <Link to={'/cart'}>
+                <li className="li">giỏ hàng</li>
+              </Link>
+            </span>
+          </ul>
+        </div>
         <ContentLayout className="content">
           <div style={{ textAlign: 'center' }}>
             <h5 className={styles.title}>Hiện chưa có sản phẩm nào trong giỏ hàng của bạn</h5>

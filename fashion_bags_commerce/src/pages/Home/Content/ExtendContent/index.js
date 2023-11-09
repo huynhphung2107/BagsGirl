@@ -21,7 +21,7 @@ function ExtendContent({ titleContent }) {
           <div className={styles.productList}>
             <div className={styles.container}>
               <div className="row">
-                <div className="col-4">
+                <div className="col-3">
                   <div className={styles.producItem}>
                     <div className={styles.productImage}>
                       <a>
@@ -32,7 +32,7 @@ function ExtendContent({ titleContent }) {
                     </div>
                   </div>
                 </div>
-                <div className="col-4">
+                <div className="col-3">
                   <div className={styles.producItem}>
                     <div className={styles.productImage}>
                       <a>
@@ -43,12 +43,23 @@ function ExtendContent({ titleContent }) {
                     </div>
                   </div>
                 </div>
-                <div className="col-4">
+                <div className="col-3">
                   <div className={styles.producItem}>
                     <div className={styles.productImage}>
                       <a>
                         <div className={styles.contentImage}>
                           <Image src="https://www.vascara.com/uploads/page/2023/April/14/19601681461167.jpg"></Image>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-3">
+                  <div className={styles.producItem}>
+                    <div className={styles.productImage}>
+                      <a>
+                        <div className={styles.contentImage}>
+                          <Image src="https://www.vascara.com/uploads/page/2023/May/26/19981685090294.jpg"></Image>
                         </div>
                       </a>
                     </div>

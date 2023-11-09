@@ -6,7 +6,7 @@ import { SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 function MainHeader() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="mainHeader">
         <div className="content">
           <div className="toolLeft">
@@ -27,11 +27,11 @@ function MainHeader() {
               <div className="login">
                 <ul className="horizontalLogin">
                   <li>
-                    <a href="/login">ĐĂNG KÝ</a>
+                    <Link to={'/login'}>ĐĂNG NHẬP</Link>
                   </li>
                   <span> / </span>
                   <li>
-                    <a href="/login">ĐĂNG NHẬP</a>
+                    <Link to={'/login'}>ĐĂNG KÝ</Link>
                   </li>
                 </ul>
               </div>

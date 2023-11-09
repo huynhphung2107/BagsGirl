@@ -5,15 +5,29 @@ import ShopView from './ShopView';
 
 import './index.scss';
 import LocSanPham from './LocSanPham';
+import { Link } from 'react-router-dom';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function Shop() {
   return (
-    <div className="container-fluid">
-      <Layout  className="container-fluid">
+    <div>
+      <Layout>
         <Header></Header>
-        <ContentLayout className="">
-          <div className="container">
+        <div className="duongDan">
+          <ul className="ul">
+            <span>
+              <Link to={'/'}>
+                <li className="li">Trang chủ-- </li>
+              </Link>
+
+              <Link to={'/shop'}>
+                <li className="li"> cửa hàng</li>
+              </Link>
+            </span>
+          </ul>
+        </div>
+        <ContentLayout>
+          <div className="container-fluid">
             <div className="row">
               <div className="col-4">
                 <LocSanPham />
