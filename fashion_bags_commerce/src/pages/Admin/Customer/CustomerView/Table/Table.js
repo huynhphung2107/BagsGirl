@@ -16,7 +16,7 @@ const TableContent = () => {
   const [totalItem, setTotalItem] = useState();
   const [search, setSearch] = useState('');
 
-  const onCancel = () => { };
+  const onCancel = () => {};
   const reload = () => {
     setLoading(true);
     getAll(search, currentPage, pagesSize);
@@ -59,14 +59,14 @@ const TableContent = () => {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   // Define your table columns
   const columns = [
     {
       title: 'STT',
-      width: 40,
+      width: 50,
       render: (text, record, index) => <span>{(currentPage - 1) * pagesSize + index + 1}</span>,
     },
     {
@@ -109,12 +109,12 @@ const TableContent = () => {
       width: 100,
     },
 
-    // {
-    //   title: 'Chức vụ',
-    //   dataIndex: ['users', 'roles', 'roleName'],
-    //   sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
-    //   width: 100,
-    // },
+    {
+      title: 'Chức vụ',
+      dataIndex: ['users', 'roles', 'roleName'],
+      sorter: (a, b) => a.users.roles.roleName.localeCompare(b.users.roles.roleName),
+      width: 100,
+    },
     {
       title: 'Điểm',
       dataIndex: 'customerPoint',
@@ -210,6 +210,7 @@ const TableContent = () => {
       <Button icon={<ReloadOutlined />} className="" onClick={reload} loading={loading}></Button>
 
       <Table
+        className="table table-striped"
         scroll={{
           x: 550,
           y: 570,
@@ -218,11 +219,12 @@ const TableContent = () => {
         columns={columns}
         dataSource={data}
         pagination={false}
-      // onChange={handlePageChange} // Handle page changes
+        // onChange={handlePageChange} // Handle page changes
       />
 
       <Pagination
         className={styles.pagination}
+        showSizeChanger
         total={totalItem}
         onChange={onChange}
         defaultCurrent={1}

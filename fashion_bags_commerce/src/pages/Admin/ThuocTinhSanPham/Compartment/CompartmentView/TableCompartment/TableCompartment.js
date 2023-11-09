@@ -145,14 +145,14 @@ function TableContent() {
       }}
     >
       <FormCreateCompartment />
-      <Button icon={<ReloadOutlined />}  onClick={reload} loading={loading}></Button>
+      <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}></Button>
 
       <Spin spinning={loading}>
         <Table
           className="table table-striped"
           scroll={{
             x: 1000,
-            y: 640,
+            y: 670,
           }}
           rowKey={(record) => record.compartmentId}
           columns={columns}

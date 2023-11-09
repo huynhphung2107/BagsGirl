@@ -13,9 +13,9 @@ const headerStyle = {
   margin: '10px',
 };
 const contentStyle = {
-  // lineHeight: '120px',
-  margin: '0 10px 10px 20px',
-
+  lineHeight: '120px',
+  margin: '0 30px 10px 20px',
+  height: '800px',
   color: 'black',
   backgroundColor: 'lightblue',
 };
@@ -33,9 +33,9 @@ const layoutContent = {
 
 function Admin() {
   return (
-    <Layout style={{ height: '100vh', background: '#f4f3f4' }}>
+    <Layout style={{ height: '100%', background: '#f4f3f4' }}>
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
-        <Sidebar keyIndex="sub6" openKey="sub6" />
+        <Sidebar keyIndex="sub1" openKey="sub1" />
       </Sider>
       <Layout style={layoutContent}>
         <Header style={headerStyle}>

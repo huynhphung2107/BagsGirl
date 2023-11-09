@@ -1,6 +1,7 @@
 .block {
   font-family: sans-serif;
   padding: 30px 0px;
+  margin: 0 auto;
 
   //   background: red;
   .titleBlock {
@@ -30,7 +31,8 @@
       //   background-color: red;
 
       .producItem {
-        // background-color: blue;
+        padding-top: 20px;
+        background-color: lightblue;
         max-width: 600px;
         display: flex;
         flex-direction: column; /* Đặt hướng dọc */
@@ -46,6 +48,7 @@
             }
             img {
               max-width: 100%;
+              width: auto;
             }
           }
         }
@@ -62,6 +65,8 @@
           }
           .productTitle {
             font-size: 24px;
+            padding-left: 30px;
+            
           }
         }
       }

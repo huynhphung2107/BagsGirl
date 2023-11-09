@@ -3,17 +3,14 @@ import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
 import TableContent from '../BrandView/Table/Table';
 
-
 const { Header, Footer, Sider, Content } = Layout;
 
 const headerStyle = {
   borderLeft: '270px',
-  color: '#fff',
   height: 'auto',
   paddingInline: 0,
   lineHeight: '64px',
   backgroundColor: '#f3f4f3',
-  margin: '10px 10px 10px 0px',
 };
 const contentStyle = {
   // lineHeight: '120px',

@@ -14,7 +14,6 @@ const headerStyle = {
   paddingInline: 0,
   lineHeight: '64px',
   backgroundColor: '#f3f4f3',
-  margin: '10px 10px 10px 0px',
 };
 const contentStyle = {
   // lineHeight: '120px',
@@ -37,7 +36,7 @@ const layoutContent = {
 
 function VoucherView() {
   return (
-    <Layout style={{ height: '100vh', background: '#f4f3f4' }}>
+    <Layout style={{ height: '100%', background: '#f4f3f4' }}>
       <Sider width={260} style={{ background: '#fff', zIndex: '999', position: 'fixed', overflowY: 'auto' }}>
         <Sidebar keyIndex="sub6" openKey="sub6" />
       </Sider>

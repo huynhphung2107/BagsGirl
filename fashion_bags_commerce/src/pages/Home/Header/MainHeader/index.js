@@ -1,7 +1,7 @@
 import { Badge, Carousel } from 'antd';
 import { Link } from 'react-router-dom';
 
-import '../MainHeader/index.scss';
+import styles from '../MainHeader/index.scss';
 import { SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 function MainHeader() {
@@ -36,9 +36,11 @@ function MainHeader() {
             </div>
           </div>
           <div className="cart">
-            <Badge className="cartBadge" count="1">
-              <ShoppingCartOutlined className="cartIcon" />
-            </Badge>
+            <a href="/cart">
+              <Badge className="cartBadge" count="1">
+                <ShoppingCartOutlined href="/cart" className="cartIcon" />
+              </Badge>
+            </a>
           </div>
         </div>
       </div>
