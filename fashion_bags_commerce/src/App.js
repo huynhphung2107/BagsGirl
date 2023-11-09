@@ -23,6 +23,7 @@ import SalesCounter from './pages/Admin/SalesManager/SalesCounter';
 import CustomerView from './pages/Admin/Customer/CustomerView';
 import HoaDonView from './pages/Admin/QuanLyHoaDon/HienThiHoaDon/indexHoaDonView';
 import CartView from './pages/Home/Cart';
+import Shop from './pages/Home/Shop/shop';
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
@@ -47,6 +48,8 @@ const dynamicRoutes = [
   { path: '/sales-counter', component: <SalesCounter />, title: 'Trang bán hàng' },
   { path: '/cart', component: <CartView />, title: 'Trang giỏ hàng' },
   { path: '/bill-view', component: <HoaDonView />, title: 'Trang hóa đơn' },
+  { path: '/shop', component: <Shop />, title: 'Trang cửa hàng' },
+  { path: '/login1', component: <Login />, title: 'Trang đăng nhập' },
 ];
 
 function App() {

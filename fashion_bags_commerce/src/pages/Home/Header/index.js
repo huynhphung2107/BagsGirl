@@ -9,10 +9,14 @@ import NavMenu from './NavMenu';
 function Header() {
   return (
     <Fragment>
-      <div className={styles.fixed_header}>
-        <NoticeHeader />
-        <MainHeader />
-        <NavMenu />
+      <NoticeHeader />
+      <div className="container-fluid">
+        <div style={{ backgroundColor: 'white' }}>
+          <div className={styles.fixed_header}>
+            <MainHeader />
+            <NavMenu />
+          </div>
+        </div>
       </div>
     </Fragment>
   );

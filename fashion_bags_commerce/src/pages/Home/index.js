@@ -5,13 +5,23 @@ import Header from './Header';
 
 import './index.scss';
 import LoginForm from '../Login/FormLogin/FormLogin/LoginForm';
+import { Link } from 'react-router-dom';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function Home() {
   return (
-    <div>
+    <div className="container-fluid">
       <Layout>
-        <Header></Header>
+        <Header></Header>{' '}
+        <div className="duongDan">
+          <ul className="ul">
+            <span>
+              <Link to={'/'}>
+                <li className="li">Trang chủ</li>
+              </Link>
+            </span>
+          </ul>
+        </div>
         <ContentLayout className="content">
           <Content />
         </ContentLayout>

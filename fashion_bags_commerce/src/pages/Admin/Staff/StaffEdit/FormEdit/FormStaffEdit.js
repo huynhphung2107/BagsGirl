@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { EyeFilled, EyeInvisibleOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Col, Drawer, Form, Input, Radio, Row, Select, Space, notification } from 'antd';
+import { Button, Col, Drawer, Form, Input, Radio, Row, Select, Space, Tooltip, notification } from 'antd';
 import staffAPI from '~/api/staffAPI';
 
 function FormStaffEdit(props) {
@@ -19,7 +19,7 @@ function FormStaffEdit(props) {
     usersAddress: props.staffData.users.address,
     usersUserNote: props.staffData.users.userNote,
     usersRolesRoleId: props.staffData.users.roles.roleId,
-    usersRolesRoleName: props.staffData.users.roles.roleName
+    usersRolesRoleName: props.staffData.users.roles.roleName,
   });
 
   const showDrawer = () => {
@@ -76,7 +76,9 @@ function FormStaffEdit(props) {
 
   return (
     <Fragment>
-      <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}></Button>
+      <Tooltip title="Sửa nhân viên">
+        <Button type="primary" className="btn btn-warning" onClick={showDrawer} icon={<EditOutlined />}></Button>
+      </Tooltip>
       <Drawer
         title={'Update tài khoản nhân viên có id: ' + data.staffId}
         width={720}

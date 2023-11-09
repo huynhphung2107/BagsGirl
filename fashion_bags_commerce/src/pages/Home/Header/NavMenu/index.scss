@@ -1,6 +1,6 @@
 .navContent {
   padding: 20px;
-
+  background-color: white;
   .centeredMenu {
     .menu {
       display: flex;
@@ -17,4 +17,10 @@
 }
 .ant-menu-overflow-item {
   margin: 0px 28px;
+}
+.navMenu {
+  color: black;
+}
+.navMenu:hover {
+  background-color: red;
 }
