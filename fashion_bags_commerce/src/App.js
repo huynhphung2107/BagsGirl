@@ -45,7 +45,7 @@ const dynamicRoutes = [
   { path: '/sales-counter', component: <SalesCounter />, title: 'Trang bán hàng' },
   { path: '/cart', component: <CartView />, title: 'Trang giỏ hàng' },
   { path: '/shop', component: <Shop />, title: 'Trang cửa hàng' },
-  { path: '/login1', component: <Login />, title: 'Trang đăng nhập' },
+  { path: '/login', component: <Login />, title: 'Trang đăng nhập' },
 ];
 
 function App() {
