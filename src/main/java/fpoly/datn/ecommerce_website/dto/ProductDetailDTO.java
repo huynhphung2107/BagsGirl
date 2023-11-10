@@ -18,24 +18,17 @@ import java.math.BigDecimal;
 @Getter
 @ToString
 public class ProductDetailDTO {
-//    private String productDetailId;
-//    private BigDecimal importPrice;
-//    private BigDecimal retailPrice;
-//    private Integer productDetailAmount;
-//    private String productDetailDescribe;
-//    private Integer productDetailStatus;
-//    private Products product;
-//    private Colors color;
-//    private Types type;
-//    private Materials material;
-//    private Sizes size;
-//    private Compartments compartment;
-//    private BuckleTypes buckleType;
-//    private Producers producer;
 
     private String productDetailId;
     private BigDecimal importPrice;
     private BigDecimal retailPrice;
+    private String colorName;
+    private String typeName;
+    private String materialName;
+    private String sizeName;
+    private String producerName;
+    private String compartmentName;
+    private String buckleTypeName;
     private Integer productDetailAmount;
     private String productDetailDescribe;
     private Integer productDetailStatus;

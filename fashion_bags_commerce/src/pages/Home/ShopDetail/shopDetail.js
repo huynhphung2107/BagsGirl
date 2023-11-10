@@ -1,29 +1,34 @@
 import { Layout } from 'antd';
-import Content from './Content';
-import Footer from './Footer';
-import Header from './Header';
-
-import './index.scss';
-import LoginForm from '../Login/FormLogin/FormLogin/LoginForm';
 import { Link } from 'react-router-dom';
+import Header from '../Header';
+import Footer from '../Footer';
+import ShopDetailView from './ShopDetailView';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
-function Home() {
+function ShopDetail() {
   return (
-    <div className="container-fluid" >
+    <div>
       <Layout>
-        <Header></Header>{' '}
+        <Header></Header>
         <div className="duongDan">
           <ul className="ul">
             <span>
               <Link to={'/'}>
-                <li className="li">Trang chủ</li>
+                <li className="li">Trang chủ-- </li>
+              </Link>
+
+              <Link to={'/shop/detail'}>
+                <li className="li">Chi tiết sản phẩm</li>
               </Link>
             </span>
           </ul>
         </div>
-        <ContentLayout className="content">
-          <Content />
+        <ContentLayout>
+          <div className="container-fluid">
+
+            
+          </div>
+          <ShopDetailView/>
         </ContentLayout>
         <FooterLayout>
           <Footer></Footer>
@@ -33,4 +38,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default ShopDetail;

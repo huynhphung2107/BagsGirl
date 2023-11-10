@@ -1,0 +1,21 @@
+.detail-product {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+.container{
+  max-width: 1600px;
+  width: 85%;
+}
+.custom-row{
+  display: table !important;
+}
+.col-x1-7{
+  float: left;
+  width: 58.33333%;
+}
