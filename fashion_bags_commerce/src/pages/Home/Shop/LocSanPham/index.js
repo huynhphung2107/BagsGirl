@@ -106,11 +106,10 @@ function LocSanPham() {
     console.log(key);
   };
   return (
-    <div>
+    <div className="container" style={{ margin: '20px' }}>
       <div className={styles.navFilter}>
-        <Collapse className={styles.navFilterContent} onChange={onChange} items={items} />;
+        <Collapse className={styles.navFilterContent} onChange={onChange} items={items} />
       </div>
-      {/* <ShopView/> */}
     </div>
   );
 }

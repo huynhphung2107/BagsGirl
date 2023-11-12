@@ -35,31 +35,34 @@ function NavMenu() {
     <Fragment>
       <div className="navContent">
         <div className="centeredMenu">
-          <Menu className="menu" mode="horizontal"
-           selectedKeys={selectedKeys}
-           onClick={({ key }) => handleMenuClick(key)}>
+          <Menu
+            className="menu"
+            mode="horizontal"
+            selectedKeys={selectedKeys}
+            onClick={({ key }) => handleMenuClick(key)}
+          >
             <Link key={1} className="submenu" to={'/'}>
-              <SubMenu key={'subMenu${1}'}  title="TRANG CHỦ">
+              <SubMenu key={'subMenu${1}'} title="TRANG CHỦ">
                 {/* <Menu.Item key="1.1">NEW ARRIVAL</Menu.Item>
                 <Menu.Item key="1.2">COLLECTION</Menu.Item> */}
               </SubMenu>
             </Link>
-            <Link className="submenu"to={'/shop'}>
+            <Link className="submenu" to={'/shop'}>
               <SubMenu key="subMenu2" title="CỬA HÀNG"></SubMenu>
             </Link>
 
-            <Link className="submenu"to={'/cart'}>
+            <Link className="submenu" to={'/shop/detail'}>
               <SubMenu key="subMenu3" title="GIỚI THIỆU">
                 {/* <Menu.Item key="3.1">#GIRLS</Menu.Item>
                 <Menu.Item key="3.2">#BOYS</Menu.Item> */}
               </SubMenu>
             </Link>
 
-            <Link className="submenu"to={'/shop'}>
+            <Link className="submenu" to={'/shop'}>
               <SubMenu key="subMenu4" title="LIÊN HỆ"></SubMenu>
             </Link>
 
-            <Link className="submenu"to={'/cart'}>
+            <Link className="submenu" to={'/cart'}>
               <SubMenu key="subMenu5" title="GIỎ HÀNG"></SubMenu>
             </Link>
           </Menu>

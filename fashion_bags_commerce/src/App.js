@@ -24,6 +24,7 @@ import CustomerView from './pages/Admin/Customer/CustomerView';
 import HoaDonView from './pages/Admin/QuanLyHoaDon/HienThiHoaDon/indexHoaDonView';
 import CartView from './pages/Home/Cart';
 import Shop from './pages/Home/Shop/shop';
+import ShopDetail from './pages/Home/ShopDetail/shopDetail';
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
@@ -49,6 +50,7 @@ const dynamicRoutes = [
   { path: '/cart', component: <CartView />, title: 'Trang giỏ hàng' },
   { path: '/bill-view', component: <HoaDonView />, title: 'Trang hóa đơn' },
   { path: '/shop', component: <Shop />, title: 'Trang cửa hàng' },
+  { path: '/shop/detail', component: <ShopDetail />, title: 'Trang chi tiết sản phẩm' },
   { path: '/login', component: <Login />, title: 'Trang đăng nhập' },
 ];
 
