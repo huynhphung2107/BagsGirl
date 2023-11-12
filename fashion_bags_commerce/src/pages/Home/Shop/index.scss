@@ -30,8 +30,8 @@
 
 .ul {
   list-style: none;
-  line-height: 1;
-  justify-content: center;
+  // line-height: 1;
+  // justify-content: center;
 }
 .ul .li {
   float: left;
@@ -40,8 +40,16 @@
   font-family: 'Times New Roman', Times, serif;
 }
 .duongDan {
+  // justify-content: center;
+  // background-color: white;
+  // padding-bottom: 15px;
+  // padding-left: 800px;
+
+  margin: 0;
+  display: flex;
   justify-content: center;
+  align-items: center;
   background-color: white;
-  padding-bottom: 15px;
-  padding-left: 800px;
+  text-align: center;
+  margin-bottom: 10px;
 }
