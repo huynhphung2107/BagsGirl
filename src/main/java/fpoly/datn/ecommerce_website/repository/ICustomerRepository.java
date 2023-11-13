@@ -26,6 +26,7 @@ public interface ICustomerRepository extends JpaRepository<Customers, String> {
             "or i.phoneNumber like %:keyword%"
             )
     Page<Customers> findallSearch(@Param("keyword") String keyword, Pageable pageable);
+
     @Query("SELECT c FROM Customers c join Users u on c.users.userId = u.userId " +
             "where c.customerId LIKE %:keyword%" +
             "or  u.userId LIKE %:keyword%" +

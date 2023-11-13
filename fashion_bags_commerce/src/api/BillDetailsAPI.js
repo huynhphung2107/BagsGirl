@@ -10,6 +10,17 @@ const billDetailsAPI = {
       },
     });
   },
+  getAllPaginationStatus(search, status, pageNum, pageSize) {
+    const url = '/bill-details/pagination';
+    return axiosClient.get(url, {
+      params: {
+        search: search,
+        status: status,
+        page: pageNum - 1,
+        size: pageSize,
+      },
+    });
+  },
   get(id) {
     const url = `/billDetails?id=${id}`;
     return axiosClient.get(url);
