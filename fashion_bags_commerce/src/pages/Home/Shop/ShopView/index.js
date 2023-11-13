@@ -28,10 +28,27 @@ function ShopView({ titleContent }) {
     try {
       const response = await fullProductAPI.getAll();
       const data = response.data;
-
       setData(data);
     } catch (error) {
       console.error('Error fetching data:', error);
+    }
+  };
+
+  const detailProduct = async (productId) => {
+    try {
+      const response = await fullProductAPI.findById(productId);
+      const data = response.data;
+
+      // Process or use the product data as needed
+      console.log('Product details:', data);
+
+      // You can return the data if needed
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+
+      // You might want to handle the error or return an error message
+      throw new Error('Error fetching product details');
     }
   };
 
@@ -45,9 +62,9 @@ function ShopView({ titleContent }) {
                 <div key={product.productId} className="col-4">
                   <div className={styles.producItem}>
                     <div className={styles.productImage}>
-                      <a>
+                      <Link to={`/shop/detail/${product.productId}`}>
                         <div className={styles.contentImage}>
-                          <Image  src={product.imagesImgUrl}></Image>
+                          <Image src={product.imagesImgUrl}></Image>
                           <div className={styles.cartIcon}>
                             {/* Icon giỏ hàng */}
                             <Link style={{ color: 'white' }} to={'/cart'}>
@@ -55,7 +72,7 @@ function ShopView({ titleContent }) {
                             </Link>{' '}
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div className={styles.describer}>
                       <span className={styles.productPrice}>

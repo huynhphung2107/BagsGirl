@@ -16,4 +16,5 @@ public class FullProductDTO {
     private String imagesImgUrl;
     private String imagesImgCode;
     private ProductDetailDTO productDetail;
+
 }

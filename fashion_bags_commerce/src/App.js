@@ -46,7 +46,7 @@ const dynamicRoutes = [
   { path: '/sales-counter', component: <SalesCounter />, title: 'Trang bán hàng' },
   { path: '/cart', component: <CartView />, title: 'Trang giỏ hàng' },
   { path: '/shop', component: <Shop />, title: 'Trang cửa hàng' },
-  { path: '/shop/detail', component: <ShopDetail />, title: 'Trang chi tiết sản phẩm' },
+  { path:  `/shop/detail/:productId` , component: <ShopDetail />, title: 'Trang chi tiết sản phẩm' },
   { path: '/login', component: <Login />, title: 'Trang đăng nhập' },
 ];
 

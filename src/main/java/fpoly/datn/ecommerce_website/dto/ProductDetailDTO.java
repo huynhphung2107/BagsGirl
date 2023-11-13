@@ -26,6 +26,9 @@ public class ProductDetailDTO {
     private String typeName;
     private String materialName;
     private String sizeName;
+    private String sizeWidth;
+    private String sizeHeight;
+    private String sizeLength;
     private String producerName;
     private String compartmentName;
     private String buckleTypeName;
