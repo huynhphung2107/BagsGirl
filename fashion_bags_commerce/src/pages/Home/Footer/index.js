@@ -4,11 +4,11 @@ import styles from './index.module.scss';
 function Footer() {
   return (
     <Fragment>
-      <div className="container-fluid">
-        <div className={styles.footer}>
-          <div className={styles.mainFooter}>
-            <div className={styles.container}>
-              <div className="row">
+      <div className="container-fluid" style={{ background: '#f5f5f5' }}>
+        <div className={styles.footer} style={{ background: '#f5f5f5' }}>
+          <div className={styles.mainFooter} style={{ background: '#f5f5f5' }}>
+            <div className={styles.container} style={{ background: '#f5f5f5' }}>
+              <div className="row" style={{ background: '#f5f5f5' }}>
                 <ul>
                   <li>
                     <a>

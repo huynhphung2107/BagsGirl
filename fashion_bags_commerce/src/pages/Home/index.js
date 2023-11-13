@@ -10,26 +10,26 @@ import { Link } from 'react-router-dom';
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function Home() {
   return (
-    <div className="container-fluid" >
-      <Layout>
-        <Header></Header>{' '}
-        <div className="duongDan">
-          <ul className="ul">
-            <span>
-              <Link to={'/'}>
-                <li className="li">Trang chủ</li>
-              </Link>
-            </span>
-          </ul>
-        </div>
-        <ContentLayout className="content">
+    <Layout>
+      <Header></Header>{' '}
+      <div className="duongDan">
+        <ul className="ul">
+          <span>
+            <Link to={'/'}>
+              <li className="li">Trang chủ</li>
+            </Link>
+          </span>
+        </ul>
+      </div>
+      <ContentLayout>
+        <div className="container-fluid">
           <Content />
-        </ContentLayout>
-        <FooterLayout>
-          <Footer></Footer>
-        </FooterLayout>
-      </Layout>
-    </div>
+        </div>
+      </ContentLayout>
+      <FooterLayout>
+        <Footer></Footer>
+      </FooterLayout>
+    </Layout>
   );
 }
 

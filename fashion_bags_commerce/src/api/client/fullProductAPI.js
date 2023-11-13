@@ -5,8 +5,8 @@ const fullProductAPI = {
     const url = '/all-products/';
     return axiosClient.get(url, {});
   },
-  get(id) {
-    const url = `/getOne/${id}`;
+  findById(id) {
+    const url = `/detail-product/${id}`;
     return axiosClient.get(url);
   },
 //   add(data) {

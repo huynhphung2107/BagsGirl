@@ -26,7 +26,7 @@ function Shop() {
             </span>
           </ul>
         </div>
-        <ContentLayout>
+        <ContentLayout style={{ backgroundColor: 'white' }}>
           <div className="container-fluid">
             <div className="row">
               <div className="col-4">
@@ -38,7 +38,7 @@ function Shop() {
             </div>
           </div>
         </ContentLayout>
-        <FooterLayout className="">
+        <FooterLayout>
           <Footer></Footer>
         </FooterLayout>
       </Layout>
