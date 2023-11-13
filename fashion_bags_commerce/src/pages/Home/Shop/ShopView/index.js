@@ -1,181 +1,77 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Image } from 'antd';
-
+import fullProductAPI from '~/api/client/fullProductAPI';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import styles from './index.module.scss';
+import { Link } from 'react-router-dom';
+
+library.add(faShoppingCart);
 
 function ShopView({ titleContent }) {
+  const [data, setData] = useState([]);
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(amount);
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
+
+  const getAll = async () => {
+    try {
+      const response = await fullProductAPI.getAll();
+      const data = response.data;
+
+      setData(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   return (
     <Fragment>
       <div className="container">
-        <div className={styles.productList}>
+        <div>
           <div className="row">
-            <div className="col-3">
-              <div className={styles.producItem}>
-                <div className={styles.productImage}>
-                  <a>
-                    <div className={styles.contentImage}>
-                      <Image src="https://www.vascara.com/uploads/cms_productmedia/2023/August/31/tui-deo-cheo-may-chan-hinh-vuong---sho-0213---mau-kem__71508__1693427949-medium.jpg"></Image>
+            <div className={styles.scrollableList}>
+              {data.map((product) => (
+                <div key={product.productId} className="col-4">
+                  <div className={styles.producItem}>
+                    <div className={styles.productImage}>
+                      <a>
+                        <div className={styles.contentImage}>
+                          <Image  src={product.imagesImgUrl}></Image>
+                          <div className={styles.cartIcon}>
+                            {/* Icon giỏ hàng */}
+                            <Link style={{ color: 'white' }} to={'/cart'}>
+                              <FontAwesomeIcon style={{ padding: '5px', paddingTop: '10px' }} icon={faShoppingCart} />
+                            </Link>{' '}
+                          </div>
+                        </div>
+                      </a>
                     </div>
-                  </a>
-                </div>
-                <div className={styles.describer}>
-                  <span className={styles.productPrice}>
-                    <ins>
-                      <span className={styles.productTitle}>9384</span>
-                      <span>đ</span>
-                    </ins>
-                  </span>
-                  <div className={styles.productTitle}>Giày Slingback nhấn quai</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className={styles.producItem}>
-                <div className={styles.productImage}>
-                  <a>
-                    <div className={styles.contentImage}>
-                      <Image src="https://www.vascara.com/uploads/cms_productmedia/2023/August/31/tui-tote-over-size-quai-doi-that-nut---tot-0129---mau-den__71544__1693428905-medium.jpg"></Image>
+                    <div className={styles.describer}>
+                      <span className={styles.productPrice}>
+                        <a>
+                          <span className={styles.price}>
+                            {product.productDetail ? formatCurrency(product.productDetail.retailPrice) : ''}
+                          </span>
+                        </a>
+                      </span>
+                      <div className={styles.productTitle}>
+                        {product.productName} {product.brandName}{' '}
+                      </div>
                     </div>
-                  </a>
+                  </div>
                 </div>
-                <div className={styles.describer}>
-                  <span className={styles.productPrice}>
-                    <ins>
-                      <span className={styles.amount}>9384</span>
-                      <span>đ</span>
-                    </ins>
-                  </span>
-                  <div className={styles.productTitle}>Giày Slingback nhấn quai</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className={styles.producItem}>
-                <div className={styles.productImage}>
-                  <a>
-                    <div className={styles.contentImage}>
-                      <Image src="https://www.vascara.com/uploads/cms_productmedia/2023/August/31/giay-slingback-nhan-quai-ankle-strap---bmn-0600---mau-do__71387__1693424341-medium.jpg"></Image>
-                    </div>
-                  </a>
-                </div>
-                <div className={styles.describer}>
-                  <span className={styles.productPrice}>
-                    <ins>
-                      <span className={styles.amount}>9384</span>
-                      <span>đ</span>
-                    </ins>
-                  </span>
-                  <div className={styles.productTitle}>Giày Slingback nhấn quai</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-3">
-              <div className={styles.producItem}>
-                <div className={styles.productImage}>
-                  <a>
-                    <div className={styles.contentImage}>
-                      <Image src="https://www.vascara.com/uploads/cms_productmedia/2023/August/31/tui-deo-cheo-nap-gap-nhan-dinh-tan---sho-0234---mau-bac__71586__1693430324-medium@2x.jpg"></Image>
-                    </div>
-                  </a>
-                </div>
-                <div className={styles.describer}>
-                  <span className={styles.productPrice}>
-                    <ins>
-                      <span className={styles.amount}>9384</span>
-                      <span>đ</span>
-                    </ins>
-                  </span>
-                  <div className={styles.productTitle}>Giày Slingback nhấn quai</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <br></br>
-          <br></br>
-          <br></br>
-
-          <div className="row">
-            <div className="col-3">
-              <div className={styles.producItem}>
-                <div className={styles.productImage}>
-                  <a>
-                    <div className={styles.contentImage}>
-                      <Image src="https://www.vascara.com/uploads/cms_productmedia/2023/August/31/giay-slingback-nhan-quai-ankle-strap---bmn-0600---mau-do__71387__1693424341-medium.jpg"></Image>
-                    </div>
-                  </a>
-                </div>
-                <div className={styles.describer}>
-                  <span className={styles.productPrice}>
-                    <ins>
-                      <span className={styles.amount}>9384</span>
-                      <span>đ</span>
-                    </ins>
-                  </span>
-                  <div className={styles.productTitle}>Giày Slingback nhấn quai</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className={styles.producItem}>
-                <div className={styles.productImage}>
-                  <a>
-                    <div className={styles.contentImage}>
-                      <Image src="https://www.vascara.com/uploads/cms_productmedia/2023/August/31/tui-deo-cheo-nap-gap-nhan-dinh-tan---sho-0234---mau-bac__71586__1693430324-medium@2x.jpg"></Image>
-                    </div>
-                  </a>
-                </div>
-                <div className={styles.describer}>
-                  <span className={styles.productPrice}>
-                    <ins>
-                      <span className={styles.amount}>9384</span>
-                      <span>đ</span>
-                    </ins>
-                  </span>
-                  <div className={styles.productTitle}>Giày Slingback nhấn quai</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className={styles.producItem}>
-                <div className={styles.productImage}>
-                  <a>
-                    <div className={styles.contentImage}>
-                      <Image src="https://www.vascara.com/uploads/cms_productmedia/2023/August/31/tui-tote-over-size-quai-doi-that-nut---tot-0129---mau-den__71544__1693428905-medium.jpg"></Image>
-                    </div>
-                  </a>
-                </div>
-                <div className={styles.describer}>
-                  <span className={styles.productPrice}>
-                    <ins>
-                      <span className={styles.amount}>9384</span>
-                      <span>đ</span>
-                    </ins>
-                  </span>
-                  <div className={styles.productTitle}>Giày Slingback nhấn quai</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className={styles.producItem}>
-                <div className={styles.productImage}>
-                  <a>
-                    <div className={styles.contentImage}>
-                      <Image src="https://www.vascara.com/uploads/cms_productmedia/2023/August/31/tui-deo-cheo-may-chan-hinh-vuong---sho-0213---mau-kem__71508__1693427949-medium.jpg"></Image>
-                    </div>
-                  </a>
-                </div>
-                <div className={styles.describer}>
-                  <span className={styles.productPrice}>
-                    <ins>
-                      <span className={styles.amount}>9384</span>
-                      <span>đ</span>
-                    </ins>
-                  </span>
-                  <div className={styles.productTitle}>Giày Slingback nhấn quai</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

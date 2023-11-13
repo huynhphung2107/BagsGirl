@@ -6,7 +6,7 @@ import { SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 function MainHeader() {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{ height: '100px' }}>
       <div className="mainHeader">
         <div className="content">
           <div className="toolLeft">

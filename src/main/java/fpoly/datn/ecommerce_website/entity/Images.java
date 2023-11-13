@@ -43,6 +43,6 @@ public class Images {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Products products;
+    private Products product;
 
 }

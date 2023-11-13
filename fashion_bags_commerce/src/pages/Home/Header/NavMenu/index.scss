@@ -1,6 +1,7 @@
 .navContent {
   padding: 20px;
   background-color: white;
+
   .centeredMenu {
     .menu {
       display: flex;
@@ -18,9 +19,14 @@
 .ant-menu-overflow-item {
   margin: 0px 28px;
 }
-.navMenu {
+.submenu {
   color: black;
+  font-weight: 400;
+  font-family: 'Times New Roman', Times, serif;
 }
-.navMenu:hover {
-  background-color: red;
+.submenu:hover {
+  background-color: lightblue;
+  color: red;
+  // animation-timeline: 500;
+  // border-radius: 50% 50%;
 }

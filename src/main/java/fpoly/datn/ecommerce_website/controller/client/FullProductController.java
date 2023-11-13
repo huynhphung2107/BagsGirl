@@ -1,0 +1,36 @@
+package fpoly.datn.ecommerce_website.controller.client;
+
+import fpoly.datn.ecommerce_website.dto.FullProductDTO;
+import fpoly.datn.ecommerce_website.service.serviceImpl.FullProductServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/manage")
+public class FullProductController {
+    @Autowired
+    private FullProductServiceImpl productService;
+
+    @GetMapping("/all-products/")
+    public ResponseEntity<List<FullProductDTO>> getAllFullProducts() {
+        List<FullProductDTO> fullProducts = productService.getAllFullProducts();
+        return ResponseEntity.ok(fullProducts);
+    }
+
+    @GetMapping("/getOne/{id}")
+    public ResponseEntity<?> chiTietSanPham(@PathVariable String id) {
+        FullProductDTO productDetail = productService.getOne(id);
+
+        if (productDetail != null) {
+            return ResponseEntity.ok(productDetail);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
