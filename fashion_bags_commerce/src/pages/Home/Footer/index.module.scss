@@ -1,7 +1,9 @@
 .footer {
-  margin-top: 120px;
+  // background-color: white;
+  // margin-top: 120px;
   .mainFooter {
     .container {
+      background-color: white;
       .checkedImg {
         width: 150px;
       }
@@ -24,4 +26,7 @@
   .bottomFooter {
     text-align: center;
   }
+}
+.container-fluid {
+  background-color: white;
 }

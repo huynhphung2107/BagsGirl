@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import Header from '../Header';
 import Footer from '../Footer';
 import ShopDetailView from './ShopDetailView';
-
+import styles from './shopDetail.module.scss';
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function ShopDetail() {
   return (
-    <div>
+    <div className={styles.backgroundDetail}>
       <Layout>
         <Header></Header>
         <div className="duongDan">
@@ -25,10 +25,8 @@ function ShopDetail() {
         </div>
         <ContentLayout>
           <div className="container-fluid">
-
-            
+            <ShopDetailView />
           </div>
-          <ShopDetailView/>
         </ContentLayout>
         <FooterLayout>
           <Footer></Footer>

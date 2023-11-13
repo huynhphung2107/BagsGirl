@@ -18,7 +18,7 @@ function MainHeader() {
             <div className="searchForm">
               <form className="form">
                 <SearchOutlined className="icon" />
-                <input className="searchInput" placeholder="Đây là ô tìm kiếm"></input>
+                <input className="searchInput" placeholder="Tìm kiếm sản phẩm"></input>
               </form>
             </div>
           </div>

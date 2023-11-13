@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,9 +24,9 @@ public class FullProductController {
         return ResponseEntity.ok(fullProducts);
     }
 
-    @GetMapping("/getOne/{id}")
+    @GetMapping("/detail-product/{id}")
     public ResponseEntity<?> chiTietSanPham(@PathVariable String id) {
-        FullProductDTO productDetail = productService.getOne(id);
+        FullProductDTO productDetail = productService.findById(id);
 
         if (productDetail != null) {
             return ResponseEntity.ok(productDetail);
@@ -33,4 +34,15 @@ public class FullProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
+//    @GetMapping("/getOne")
+//    public ResponseEntity<?> chiTietSanPham(@RequestParam String id) {
+//        List<Object[]> productDetails = productRepository.getProductDetailsById(id);
+//
+//        if (!productDetails.isEmpty()) {
+//            return ResponseEntity.ok(productDetails);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }
