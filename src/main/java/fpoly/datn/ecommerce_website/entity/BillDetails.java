@@ -22,7 +22,7 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-@Table(name = "bill_details", schema = "dbo", catalog = "FashionBagsEcommerceDB")
+@Table(name = "bill_details")
 public class BillDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
