@@ -57,7 +57,7 @@ function TableContent() {
         const xoa = await billDetailsAPI.updateStatus(id, status);
         notification.info({
             message: 'Thông báo',
-            description: 'Đã hủy thành công hóa đơn có id là :' + id,
+            description: 'Đã hủy thành công trạng thái nhân viên có id là :' + id,
         });
         reload();
     };
