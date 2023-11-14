@@ -3,6 +3,7 @@ package fpoly.datn.ecommerce_website.controller.client;
 import fpoly.datn.ecommerce_website.dto.FullProductDTO;
 import fpoly.datn.ecommerce_website.service.serviceImpl.FullProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import java.util.List;
 public class FullProductController {
     @Autowired
     private FullProductServiceImpl productService;
+
 
     @GetMapping("/all-products/")
     public ResponseEntity<List<FullProductDTO>> getAllFullProducts() {
@@ -35,14 +37,22 @@ public class FullProductController {
         }
     }
 
-//    @GetMapping("/getOne")
-//    public ResponseEntity<?> chiTietSanPham(@RequestParam String id) {
-//        List<Object[]> productDetails = productRepository.getProductDetailsById(id);
-//
-//        if (!productDetails.isEmpty()) {
-//            return ResponseEntity.ok(productDetails);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @GetMapping("/findProductByColor")
+    public ResponseEntity<FullProductDTO> findProductByColor(
+            @RequestParam(name = "id") String productId,
+            @RequestParam(name = "colorId") String colorId
+    ) {
+
+        FullProductDTO product = productService.findProductByColor(productId, colorId);
+
+        if (product != null) {
+
+
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 }

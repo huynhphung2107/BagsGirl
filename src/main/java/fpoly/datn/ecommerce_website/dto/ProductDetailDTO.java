@@ -22,6 +22,7 @@ public class ProductDetailDTO {
     private String productDetailId;
     private BigDecimal importPrice;
     private BigDecimal retailPrice;
+    private String colorId;
     private String colorName;
     private String typeName;
     private String materialName;

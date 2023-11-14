@@ -32,5 +32,4 @@ public interface IProductDetailRepository extends JpaRepository<ProductDetails, 
     )
     List<ProductDetails> findByKeyword(@Param("keyword") String keyword);
 
-
 }

@@ -64,9 +64,8 @@ function ShopView({ titleContent }) {
                     <div className={styles.productImage}>
                       <Link to={`/shop/detail/${product.productId}`}>
                         <div className={styles.contentImage}>
-                          <Image src={product.imagesImgUrl}></Image>
+                          <Image src={product.img?product.img.imgUrl:''}></Image>
                           <div className={styles.cartIcon}>
-                            {/* Icon giỏ hàng */}
                             <Link style={{ color: 'white' }} to={'/cart'}>
                               <FontAwesomeIcon style={{ padding: '5px', paddingTop: '10px' }} icon={faShoppingCart} />
                             </Link>{' '}
@@ -82,9 +81,10 @@ function ShopView({ titleContent }) {
                           </span>
                         </a>
                       </span>
-                      <div className={styles.productTitle}>
+                     <Link to={`/shop/detail/${product.productId}`}>
+                     <div className={styles.productTitle}>
                         {product.productName} {product.brandName}{' '}
-                      </div>
+                      </div></Link>
                     </div>
                   </div>
                 </div>
