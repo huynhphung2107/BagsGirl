@@ -18,24 +18,24 @@ import java.util.Optional;
 public class CartServiceImpl implements CartService {
 
     @Autowired
-    private ICartRepository repo;
+    private ICartRepository iCartRepository;
 
 
     @Override
     public List<Carts> findAll() {
-        return this.repo.findAll();
+        return this.iCartRepository.findAll();
     }
 
     @Override
     public Page<Carts> findAllPhanTrang(Integer page) {
         Pageable pageable = PageRequest.of(page,5);
-        return repo.findAll(pageable);
+        return iCartRepository.findAll(pageable);
     }
 
 
     @Override
     public Carts findById(String id) {
-        return repo.findById(id).orElse(null);
+        return iCartRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -57,10 +57,10 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Boolean delete(String id) {
-        Optional<Carts> optional = repo.findById(id);
+        Optional<Carts> optional = iCartRepository.findById(id);
         if(optional.isPresent()){
             Carts kh = optional.get();
-            repo.delete(kh);
+            iCartRepository.delete(kh);
             return true;
         }else{
             return false;

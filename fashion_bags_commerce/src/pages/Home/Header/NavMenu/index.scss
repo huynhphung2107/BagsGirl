@@ -1,5 +1,5 @@
 .navContent {
-  padding: 20px;
+  padding-top: 20px;
   background-color: white;
 
   .centeredMenu {
@@ -9,6 +9,7 @@
       justify-content: center;
       width: 100%;
       margin: 0;
+      padding: 0;
 
       .ant-menu-title-content {
         font-size: 23px;
@@ -20,13 +21,13 @@
   margin: 0px 28px;
 }
 .submenu {
-  color: black;
+  color: white;
   font-weight: 400;
   font-family: 'Times New Roman', Times, serif;
 }
 .submenu:hover {
-  background-color: lightblue;
-  color: red;
-  // animation-timeline: 500;
-  // border-radius: 50% 50%;
+  background-color: white;
+  color: black;
+  border-radius: 32px;
+  border: 0.5px solid black;
 }

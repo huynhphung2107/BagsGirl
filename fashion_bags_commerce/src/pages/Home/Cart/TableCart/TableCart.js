@@ -8,7 +8,7 @@ const columns = [
   {
     title: 'Ảnh',
     dataIndex: 'anh',
-    render: (anh) => <img src={anh} alt="Ảnh sản phẩm" width={195} height={266}  />,
+    render: (anh) => <img src={anh} alt="Ảnh sản phẩm" width={195} height={266} />,
     width: 200,
   },
   {
@@ -66,7 +66,7 @@ const TableCart = () => (
       </div>
     </div>
 
-    {/* <div>
+    <div>
       <div className="row">
         <div className="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div id="div-cartitemmoreforgift" class="cus-note"></div>
@@ -115,7 +115,7 @@ const TableCart = () => (
           </a>
         </div>
       </div>
-    </div> */}
+    </div>
   </Fragment>
 );
 

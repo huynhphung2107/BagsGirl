@@ -7,6 +7,7 @@ import VNDFormaterFunc from '~/Utilities/VNDFormaterFunc';
 import axios from 'axios';
 import { data } from 'jquery';
 import Icon from '@ant-design/icons/lib/components/Icon';
+import { CarOutlined, MinusOutlined, PlusOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 function ShopDetailView() {
   const [quantity, setQuantity] = useState(1);
@@ -105,7 +106,7 @@ function ShopDetailView() {
   }
 
   return (
-    <div className="detail-product">
+    <div className="detail-product" style={{ margin: '0% 5% 0px 5%' }}>
       <div className="container">
         <div className="row custom-row">
           <div className="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12">
@@ -187,7 +188,7 @@ function ShopDetailView() {
                         <hr></hr>
                         <li className={styles.productDetailItem}>
                           <span className={styles.label}>Phù hợp sử dụng: </span>
-                          <span className={styles.labelName}>Đi làm, đi chơi </span>
+                          <span className={styles.labelName}>{dataDetail.describe}</span>
                         </li>
                       </ul>
                     </div>
@@ -215,7 +216,7 @@ function ShopDetailView() {
                 <div className={' title_attr'}>
                   <div className={styles.book_number}>
                     <div className={styles.item_change1} onClick={handleDecrement}>
-                      -
+                      <MinusOutlined />
                     </div>
                     <input
                       className={styles.input_amount}
@@ -224,15 +225,16 @@ function ShopDetailView() {
                       onChange={handleInputChange}
                     />
                     <div className={styles.item_change2} onClick={handleIncrement}>
-                      +
+                      <PlusOutlined />
                     </div>
                   </div>
                 </div>
               </div>
               <br></br>
+              <div className={styles.button_buy_now}>Mua ngay</div>
+
               <div className={styles.button_buy_now}>
-                {' '}
-                <Icon />
+                <ShoppingCartOutlined />
                 Thêm vào giỏ hàng
               </div>
             </div>

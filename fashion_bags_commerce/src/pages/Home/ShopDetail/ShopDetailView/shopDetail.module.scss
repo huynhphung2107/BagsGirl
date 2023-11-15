@@ -8,9 +8,6 @@
   background: transparent;
   border-bottom: 1px solid #000000;
 }
-.title_attr {
-  // border-bottom: 1px solid #000000;
-}
 .image_main {
   margin: 0 0 10px 0;
   padding: 10px 0 0 0;
@@ -21,7 +18,7 @@
 }
 .container {
   max-width: 1600px;
-  width: 85%;
+  width: 100%;
 }
 .custom-row {
   display: table !important;
@@ -44,7 +41,7 @@
   line-height: initial;
   text-transform: uppercase;
   padding-bottom: 20px;
-  color: #ff529c;
+  color: rgb(141, 27, 27);
   font-size: 60px;
 
   margin-bottom: 25px;
@@ -63,7 +60,7 @@
   font-size: 17pt;
 }
 .currency {
-  color: #ff529c;
+  color: black;
   font-weight: 200 !important;
   font-weight: bold;
 }
@@ -77,11 +74,16 @@
   float: left;
   display: flex;
   border: 1px solid gray;
-  height: 30px;
+  height: 50px;
+  text-align: center;
   // border-radius: 20%;
-  border-bottom: 1px solid #000000;
+  // border-bottom: 1px solid #000000;
 
   border-radius: 32px;
+}
+.title_attr {
+  text-align: center;
+  margin-bottom: 30px;
 }
 .input_amount {
   width: 50px;
@@ -89,30 +91,34 @@
   border: none;
 }
 .item_change1 {
-  padding: 0 10px;
+  padding: 15px 10px 0 10px;
   border-right: 1px gray solid;
+  text-align: center;
 }
 
 .item_change2 {
-  padding: 0 10px;
+  padding: 15px 10px 0 10px;
   border-left: 1px gray solid;
 }
 .item_change1:hover {
-  background-color: #3498db;
+  background-color: white;
+  color: black;
   border-radius: 32px;
+  border: 1px gray solid;
   cursor: pointer;
 }
 .item_change2:hover {
-  background-color: #3498db;
-
+  background-color: white;
+  color: black;
+  border: 1px gray solid;
   border-radius: 32px;
   cursor: pointer;
 }
 
 .button_buy_now {
-  background: rgb(41, 152, 188);
+  background: black;
   color: white;
-  margin-top: 15px;
+  margin-top: 25px;
   padding: 15px 0;
   line-height: 1;
   text-align: center;
@@ -120,18 +126,20 @@
   cursor: pointer;
   border-radius: 50px;
   font-size: 23px;
-  border-bottom: 1px solid #000000;
+  border: 1px solid #000000;
 }
+
 .button_buy_now:hover {
-  background: rgb(101, 195, 226);
+  background: white;
+  color: black;
 }
 .content_product_pc {
-  border-color: rgb(41, 152, 188) !important;
+  border-color: black !important;
   font-size: 20px;
   margin: 50px 0px;
 }
 .group_content_product {
-  border: 1px solid rgb(41, 152, 188);
+  border: 1px solid black;
   width: 700px;
   border-radius: 32px;
 }
@@ -144,7 +152,7 @@
   text-align: center;
 }
 .active {
-  background-color: rgb(41, 152, 188);
+  background-color: black;
   border-radius: 32px;
   width: 95%;
   color: white;
@@ -180,7 +188,7 @@
   background: transparent;
 }
 li {
-  border-color: #ff529c !important;
+  border-color: black !important;
 }
 
 .materialrVariant {
