@@ -44,14 +44,6 @@ public class FullProductServiceImpl {
             if (product.getProductDetails() != null && !product.getProductDetails().isEmpty()) {
                 fullProductDTO.setProductDetail(modelMapper.map(product.getProductDetails().get(0), ProductDetailDTO.class));
             }
-//            if (product.getProductDetails() != null && !product.getProductDetails().isEmpty()) {
-//                // Assuming setProductDetails is a method in FullProductDTO to set a list of ProductDetailDTO objects
-//                fullProductDTO.setProductDetails(
-//                        product.getProductDetails().stream()
-//                                .map(detail -> modelMapper.map(detail, ProductDetailDTO.class))
-//                                .collect(Collectors.toList())
-//                );
-//            }
             return fullProductDTO;
         }).collect(Collectors.toList());
     }
@@ -59,7 +51,7 @@ public class FullProductServiceImpl {
 
 
     //Chi tiet san pham
-    public FullProductDTO findById(String id) {
+    public FullProductDTO findByListProductDetailById(String id) {
         Products product = productRepository.findById(id).orElse(null);
 
         if (product != null) {
@@ -94,19 +86,24 @@ public class FullProductServiceImpl {
 
         return null; // Trả về null nếu không tìm thấy sản phẩm
     }
-    // Trong FullProductServiceImpl.java
 
-    public FullProductDTO findProductByColor(String productId, String colorId) {
-        Products product = productRepository.findById(productId).get();
-        ProductDetails productDetails = productDetailRepository.findById(colorId).get();
+    public FullProductDTO findByProductDetailById(String id) {
+        Products product = productRepository.findById(id).orElse(null);
 
-        if (product != null && productDetails != null) {
+        if (product != null) {
             FullProductDTO fullProductDTO = modelMapper.map(product, FullProductDTO.class);
-            fullProductDTO.setProductDetails(Collections.singletonList(modelMapper.map(productDetails, ProductDetailDTO.class)));
+
+            if (product.getImages() != null && !product.getImages().isEmpty()) {
+                fullProductDTO.setImg(modelMapper.map(product.getImages().get(0), ImageDTO.class));
+            }
+
+            if (product.getProductDetails() != null && !product.getProductDetails().isEmpty()) {
+                fullProductDTO.setProductDetail(modelMapper.map(product.getProductDetails().get(0), ProductDetailDTO.class));
+            }
             return fullProductDTO;
         }
 
-        return null;
+        return null; // Trả về null nếu không tìm thấy sản phẩm
     }
 
 

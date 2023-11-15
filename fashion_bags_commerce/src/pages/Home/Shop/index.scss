@@ -4,6 +4,7 @@
 }
 .content {
   height: fit-content;
+  justify-content: center;
   background-color: white;
 }
 .footer {
@@ -13,13 +14,16 @@
 
 .container {
   background-color: white;
+  background-color: white;
 }
 
 .container-fluid {
   background-color: white;
+  width: 100%;
 }
 .row {
   margin-bottom: 30px;
+  background-color: white;
 }
 .col-4 {
   width: 20%;
@@ -40,8 +44,6 @@
   font-family: 'Times New Roman', Times, serif;
 }
 .duongDan {
-
-
   margin: 0;
   display: flex;
   justify-content: center;

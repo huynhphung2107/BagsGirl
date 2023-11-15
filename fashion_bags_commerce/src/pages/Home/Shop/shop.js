@@ -26,8 +26,8 @@ function Shop() {
             </span>
           </ul>
         </div>
-        <ContentLayout style={{ backgroundColor: 'white' }}>
-          <div className="container-fluid">
+        <div className="container-fluid">
+          <ContentLayout style={{ backgroundColor: 'white' }}>
             <div className="row">
               <div className="col-4">
                 <LocSanPham />
@@ -36,8 +36,9 @@ function Shop() {
                 <ShopView />
               </div>{' '}
             </div>
-          </div>
-        </ContentLayout>
+          </ContentLayout>
+        </div>
+
         <FooterLayout>
           <Footer></Footer>
         </FooterLayout>

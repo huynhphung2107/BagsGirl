@@ -8,12 +8,9 @@ function MainHeader() {
   return (
     <div className="container-fluid" style={{ height: '100px' }}>
       <div className="mainHeader">
+          <img className="image" alt="img" src="https://i.imgur.com/RjBesHk.jpg"></img>
         <div className="content">
-          <div className="toolLeft">
-            <div className="logo">
-              <img className="image" alt="img" src="https://i.imgur.com/OfgyXFE.png"></img>
-            </div>
-          </div>
+          <div className="toolLeft"></div>
           <div className="search">
             <div className="searchForm">
               <form className="form">

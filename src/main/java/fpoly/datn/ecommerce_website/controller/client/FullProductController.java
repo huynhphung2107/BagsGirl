@@ -27,8 +27,8 @@ public class FullProductController {
     }
 
     @GetMapping("/detail-product/{id}")
-    public ResponseEntity<?> chiTietSanPham(@PathVariable String id) {
-        FullProductDTO productDetail = productService.findById(id);
+    public ResponseEntity<?> listSanPhamChiTiet(@PathVariable String id) {
+        FullProductDTO productDetail = productService.findByListProductDetailById(id);
 
         if (productDetail != null) {
             return ResponseEntity.ok(productDetail);
@@ -37,20 +37,14 @@ public class FullProductController {
         }
     }
 
-    @GetMapping("/findProductByColor")
-    public ResponseEntity<FullProductDTO> findProductByColor(
-            @RequestParam(name = "id") String productId,
-            @RequestParam(name = "colorId") String colorId
-    ) {
+    @GetMapping("/getOne-product/{id}")
+    public ResponseEntity<?> sanPhamChiTiet(@PathVariable String id) {
+        FullProductDTO productDetail = productService.findByProductDetailById(id);
 
-        FullProductDTO product = productService.findProductByColor(productId, colorId);
-
-        if (product != null) {
-
-
-            return new ResponseEntity<>(product, HttpStatus.OK);
+        if (productDetail != null) {
+            return ResponseEntity.ok(productDetail);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 

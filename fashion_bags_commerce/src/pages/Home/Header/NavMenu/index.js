@@ -37,7 +37,7 @@ function NavMenu() {
         <div className="centeredMenu">
           <Menu
             className="menu"
-            style={{ backgroundColor: 'black' }}
+            // style={{ backgroundColor: ' rgb(99, 240, 240)' }}
             mode="horizontal"
             selectedKeys={selectedKeys}
             onClick={({ key }) => handleMenuClick(key)}

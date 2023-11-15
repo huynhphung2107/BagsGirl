@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './shopDetail.module.scss';
 import { Checkbox, Image, Input, Select } from 'antd';
 import fullProductAPI from '~/api/client/fullProductAPI';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import VNDFormaterFunc from '~/Utilities/VNDFormaterFunc';
 import axios from 'axios';
 import { data } from 'jquery';
@@ -233,10 +233,12 @@ function ShopDetailView() {
               <br></br>
               <div className={styles.button_buy_now}>Mua ngay</div>
 
-              <div className={styles.button_buy_now}>
-                <ShoppingCartOutlined />
-                Thêm vào giỏ hàng
-              </div>
+              <Link to={'/cart'}>
+                <div className={styles.button_buy_now}>
+                  <ShoppingCartOutlined />
+                  Thêm vào giỏ hàng
+                </div>
+              </Link>
             </div>
           </div>
         </div>
