@@ -26,7 +26,7 @@ function Shop() {
             </span>
           </ul>
         </div>
-        <div className="container-fluid">
+        <div className="container">
           <ContentLayout style={{ backgroundColor: 'white' }}>
             <ProductFilter />
             <ShopView />

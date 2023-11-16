@@ -66,16 +66,15 @@ function ShopView({ titleContent }) {
     <Fragment>
       <div className="container">
         <div>
-          <div className="row">
-            <div className={styles.scrollableList}>
-              {data.map((product) => (
-                <div key={product.productId} className="col-4">
-                  <div className={styles.producItem}>
-                    <div className={styles.productImage}>
-                      <Link to={`/shop/detail/${product.productId}`}>
-                        <div className={styles.contentImage}>
-                          <Image src={product.img ? product.img.imgUrl : ''}></Image>
-                          {/* <div className={styles.cartIcon}>
+          <div className={styles.scrollableList}>
+            {data.map((product) => (
+              <div key={product.productId} className="col-4">
+                <div className={styles.producItem}>
+                  <div className={styles.productImage}>
+                    <Link to={`/shop/detail/${product.productId}`}>
+                      <div className={styles.contentImage}>
+                        <Image src={product.img ? product.img.imgUrl : ''}></Image>
+                        {/* <div className={styles.cartIcon}>
                             <Link style={{ color: 'white' }} to={'/cart'}>
                               <FontAwesomeIcon
                                 style={{ padding: '5px', paddingTop: '10px' }}
@@ -84,27 +83,26 @@ function ShopView({ titleContent }) {
                               />
                             </Link>{' '}
                           </div> */}
-                        </div>
-                      </Link>
-                    </div>
-                    <div className={styles.describer}>
-                      <span className={styles.productPrice}>
-                        <a>
-                          <span className={styles.price}>
-                            {product.productDetail ? formatCurrency(product.productDetail.retailPrice) : ''}
-                          </span>
-                        </a>
-                      </span>
-                      <Link to={`/shop/detail/${product.productId}`}>
-                        <div className={styles.productTitle}>
-                          {product.productName} {product.brandName}{' '}
-                        </div>
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className={styles.describer}>
+                    <span className={styles.productPrice}>
+                      <a>
+                        <span className={styles.price}>
+                          {product.productDetail ? formatCurrency(product.productDetail.retailPrice) : ''}
+                        </span>
+                      </a>
+                    </span>
+                    <Link to={`/shop/detail/${product.productId}`}>
+                      <div className={styles.productTitle}>
+                        {product.productName} {product.brandName}{' '}
+                      </div>
+                    </Link>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
