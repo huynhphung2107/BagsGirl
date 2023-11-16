@@ -37,6 +37,7 @@ function NavMenu() {
         <div className="centeredMenu">
           <Menu
             className="menu"
+            // style={{ backgroundColor: ' rgb(99, 240, 240)' }}
             mode="horizontal"
             selectedKeys={selectedKeys}
             onClick={({ key }) => handleMenuClick(key)}
@@ -51,7 +52,7 @@ function NavMenu() {
               <SubMenu key="subMenu2" title="CỬA HÀNG"></SubMenu>
             </Link>
 
-            <Link className="submenu" to={'/shop/detail'}>
+            <Link className="submenu" to={'#'}>
               <SubMenu key="subMenu3" title="GIỚI THIỆU">
                 {/* <Menu.Item key="3.1">#GIRLS</Menu.Item>
                 <Menu.Item key="3.2">#BOYS</Menu.Item> */}

@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import styles from './shopDetail.module.scss';
-import { Image, Input } from 'antd';
+import { Checkbox, Image, Input, Select } from 'antd';
 import fullProductAPI from '~/api/client/fullProductAPI';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import VNDFormaterFunc from '~/Utilities/VNDFormaterFunc';
+import axios from 'axios';
+import { data } from 'jquery';
+import Icon from '@ant-design/icons/lib/components/Icon';
+import { CarOutlined, MinusOutlined, PlusOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 function ShopDetailView() {
   const [quantity, setQuantity] = useState(1);
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedMaterial, setSelectedMaterial] = useState(null);
+  const [dataDetail, setDataDetail] = useState(null);
 
   const handleInputChange = (event) => {
     // Kiểm tra nếu giá trị nhập vào không phải là số, thì không thay đổi giá trị của input
-    if (/\D/g.test(event.target.value)) return;
+    // if (/\D/g.test(event.target.value)) return;
+    console.log('>>>> value', event.target.value);
 
     // Cập nhật giá trị quantity
-    setQuantity(parseInt(event.target.value, 10));
+    // setQuantity(parseInt(event.target.value, 10));
   };
 
   const handleIncrement = () => {
@@ -36,6 +44,8 @@ function ShopDetailView() {
         const response = await fullProductAPI.findById(productId);
         const data = response.data;
         setProduct(data);
+        setDataDetail(data?.productDetails[0]);
+        console.log('>>>> data', data);
       } catch (error) {
         console.error('Error fetching product details:', error);
       }
@@ -44,51 +54,78 @@ function ShopDetailView() {
     fetchProductDetail();
   }, [productId]);
 
-  const renderColorVariants = () => {
+  console.log('>>> data detail', dataDetail);
+
+  const handleColorChange = async (color) => {
+    setSelectedColor(color);
+  };
+
+  const handleMaterialChange = (material) => {
+    setSelectedMaterial(material);
+  };
+
+  const renderColor = () => {
     if (!product || !product.productDetails) {
       return null;
     }
 
     return product.productDetails.map((variant, index) => (
       <div key={index} className={styles.colorVariant}>
-        <h3>{variant.colorName}</h3>
-        <p>Size: {variant.size}</p>
-        <p>Price: {VNDFormaterFunc(variant.price)}</p>
-        {/* Add other details specific to this color variant */}
+        <Checkbox
+          checked={selectedColor === variant.colorName}
+          onChange={() => {
+            setDataDetail(product?.productDetails[index]);
+            handleColorChange(variant.colorName);
+          }}
+        >
+          {variant.colorName}
+        </Checkbox>
+      </div>
+    ));
+  };
+  const renderMaterial = () => {
+    if (!product || !product.productDetails) {
+      return null;
+    }
+
+    return product.productDetails.map((variant, index) => (
+      <div key={index} className={styles.materialrVariant}>
+        <Checkbox
+          checked={selectedMaterial === variant.materialName}
+          onChange={() => handleMaterialChange(variant.materialName)}
+        >
+          {variant.materialName}
+        </Checkbox>
       </div>
     ));
   };
 
   if (!product) {
     // You can render a loading state or an error message here
-    return <div>Loading...</div>;
+    return <div style={{ textAlign: 'left', fontSize: '20px' }}>Loading...</div>;
   }
 
   return (
-    <div className="detail-product">
+    <div className="detail-product" style={{ margin: '0% 5% 0px 5%' }}>
       <div className="container">
         <div className="row custom-row">
           <div className="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12">
             <div className={styles.group_images}>
               <div className={styles.image_main}>
-                <Image src={product.imagesImgUrl} style={{ width: '700px', height: '450px' }}></Image>
+                <Image src={product.img ? product.img.imgUrl : ''} style={{ width: '700px', height: '450px' }}></Image>
               </div>
+
               <div>
-                <Image
-                  src={product.imagesImgUrl}
-                  className={styles.image_child}
-                  style={{ width: '236px', height: '150px' }}
-                ></Image>
-                <Image
-                  src={product.imagesImgUrl}
-                  className={styles.image_child}
-                  style={{ width: '236px', height: '150px' }}
-                ></Image>
-                <Image
-                  src={product.imagesImgUrl}
-                  className={styles.image_child}
-                  style={{ width: '236px', height: '150px' }}
-                ></Image>
+                {product.imgs &&
+                  product.imgs.length > 0 &&
+                  product.imgs.map((image, index) => (
+                    <Image
+                      key={index}
+                      src={image.imgUrl}
+                      className={styles.image_child}
+                      style={{ width: '236px', height: '150px' }}
+                    />
+                  ))}
               </div>
 
               <br></br>
@@ -114,41 +151,44 @@ function ShopDetailView() {
                         <hr></hr>
                         <li className={styles.productDetailItem}>
                           <span className={styles.label}>Loại sản phẩm: </span>
-                          <span className={styles.labelName}>{product.productDetail.typeName}</span>
+                          <span className={styles.labelName}>{dataDetail.typeName}</span>
                         </li>
                         <hr></hr>
                         <li className={styles.productDetailItem}>
-                          <span className={styles.label}>Kích thước (dài x rộng x cao): </span>
-                          <span className={styles.labelName}>
-                            {product.productDetail.sizeLength}cm x {product.productDetail.sizeWidth}cm x{' '}
-                            {product.productDetail.sizeHeight}cm
-                          </span>
+                          <span className={styles.label}>Màu sắc: </span>
+                          <span className={styles.labelName}>{dataDetail.colorName}</span>
                         </li>
                         <hr></hr>
                         <li className={styles.productDetailItem}>
                           <span className={styles.label}>Chất liệu: </span>
-                          <span className={styles.labelName}>{product.productDetail.materialName}</span>
+                          <span className={styles.labelName}>{dataDetail.materialName}</span>
                         </li>
                         <hr></hr>
                         <li className={styles.productDetailItem}>
+                          <span className={styles.label}>Kích thước (dài x rộng x cao): </span>
+
+                          <span className={styles.labelName}>
+                            {product.productDetails &&
+                              product.productDetails.length > 0 &&
+                              `${dataDetail.sizeLength}cm x ${dataDetail.sizeWidth}cm x${dataDetail.sizeHeight}cm`}
+                          </span>
+                        </li>
+                        <hr></hr>
+
+                        <li className={styles.productDetailItem}>
                           <span className={styles.label}>Kiểu khóa: </span>
-                          <span className={styles.labelName}>{product.productDetail.buckleTypeName}</span>
+                          <span className={styles.labelName}>{dataDetail.buckleTypeName}</span>
                         </li>
                         <hr></hr>
                         <li className={styles.productDetailItem}>
                           <span className={styles.label}>Số ngăn: </span>
-                          <span className={styles.labelName}>{product.productDetail.compartmentName}</span>
-                        </li>
-                        <hr></hr>
-                        <li className={styles.productDetailItem}>
-                          <span className={styles.label}>Kích cỡ: </span>
-                          <span className={styles.labelName}>{product.productDetail.sizeName}</span>
+                          <span className={styles.labelName}>{dataDetail.compartmentName}</span>
                         </li>
 
                         <hr></hr>
                         <li className={styles.productDetailItem}>
                           <span className={styles.label}>Phù hợp sử dụng: </span>
-                          <span className={styles.labelName}>Đi làm, đi chơi </span>
+                          <span className={styles.labelName}>{dataDetail.describe}</span>
                         </li>
                       </ul>
                     </div>
@@ -160,32 +200,23 @@ function ShopDetailView() {
 
           <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12 fix-product">
             <div className="product-info">
-              <h1 className="title-product">
-                {product.productName}-{product.brandName}-{product.productDetail.colorName}
+              <h1 className={styles.title_product}>
+                {product.productName}-{product.productCode}-{product.brandName}
               </h1>
-              <hr></hr>
-              <span className="price ">
-                <h4>
-                  <span className={styles.amount}>
-                    {' '}
-                    {product.productDetail ? VNDFormaterFunc(product.productDetail.retailPrice) : ''}
-                  </span>
-                </h4>
+              <span>
+                <h4 className={styles.price}>{VNDFormaterFunc(dataDetail.retailPrice)}</h4>
               </span>
-              <hr></hr>
               <div className={styles.group_color}>
-                {product.productDetail.colorName}
-                {renderColorVariants()}
+                <h3 style={{ fontStyle: 'italic', fontSize: '16pt' }}>Màu sắc</h3>{' '}
+                <div className={styles.materialrVariant}>{renderColor()}</div>
               </div>
-              <br></br>
-              <hr></hr>
-              <div className="group-attr quantity cus-quantity">
-                <h3 className="title-product">Số lượng:</h3>
+              <div className={styles.amount}>
+                <h3 style={{ fontStyle: 'italic', fontSize: '16pt' }}>Số lượng:</h3>
 
-                <div className=" title-attr">
+                <div className={' title_attr'}>
                   <div className={styles.book_number}>
                     <div className={styles.item_change1} onClick={handleDecrement}>
-                      -
+                      <MinusOutlined />
                     </div>
                     <input
                       className={styles.input_amount}
@@ -194,20 +225,20 @@ function ShopDetailView() {
                       onChange={handleInputChange}
                     />
                     <div className={styles.item_change2} onClick={handleIncrement}>
-                      +
+                      <PlusOutlined />
                     </div>
                   </div>
                 </div>
               </div>
               <br></br>
-              <hr></hr>
               <div className={styles.button_buy_now}>Mua ngay</div>
-              {/* <div class="group-attr other-product cus-otherproduct">
-                    <div class="title-attr">Sản phẩm cùng loại khác màu</div>
-                    <ul class="list-attr">
-                                                  <li><a href="https://www.vascara.com/tui-xach-tay/tui-tote-taco-xach-tay-tot-0148-mau-den"><img src="https://www.vascara.com/uploads/cms_productmedia/2023/November/1/tui-tote-taco-xach-tay---tot-0148---mau-den__72466__1698774128-medium.jpg" alt="Túi tote taco xách tay - TOT 0148 - Màu đen"></a></li>
-                                            </ul>
-                  </div> */}
+
+              <Link to={'/cart'}>
+                <div className={styles.button_buy_now}>
+                  <ShoppingCartOutlined />
+                  Thêm vào giỏ hàng
+                </div>
+              </Link>
             </div>
           </div>
         </div>

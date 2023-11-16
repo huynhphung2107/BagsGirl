@@ -1,22 +1,24 @@
 .mainHeader {
   background-color: white;
-  padding: 15px 50px;
+  padding: 15px 0px 0 0;
+  .image {
+    width: 300px;
+    height: 100px;
+  }
+  justify-content: center;
+  display: flex;
   .content {
     display: flex;
-    justify-content: space-between;
-    margin: 30px 15px 30px 3ch;
+    justify-content: center;
+    margin: 30px 30px 30px 1px;
+    float: right;
 
-    .logo {
-      .image {
-        width: 250px;
-        height: 80px;
-      }
-    }
     .search {
       padding-right: 30px;
       border: 1px solid black;
       border-radius: 30px;
-
+      margin: 0px 20px;
+      width: 1100px;
       height: fit-content;
       .searchForm {
         .form {

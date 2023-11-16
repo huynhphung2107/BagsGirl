@@ -11,7 +11,16 @@ import { Link } from 'react-router-dom';
 library.add(faShoppingCart);
 
 function ShopView({ titleContent }) {
+  const [cart, setCart] = useState([]);
   const [data, setData] = useState([]);
+
+  const onAddtoCartHandler = (product) => {
+    if (cart.indexOf(product) !== -1) return null;
+    const arr = [...cart];
+    product.amount = 1;
+    arr.push(product);
+    setCart([...arr]);
+  };
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('vi-VN', {
@@ -22,6 +31,7 @@ function ShopView({ titleContent }) {
 
   useEffect(() => {
     getAll();
+    console.log(cart);
   }, []);
 
   const getAll = async () => {
@@ -54,7 +64,7 @@ function ShopView({ titleContent }) {
 
   return (
     <Fragment>
-      <div className="container">
+      <div className="container-fluid">
         <div>
           <div className="row">
             <div className={styles.scrollableList}>
@@ -64,13 +74,16 @@ function ShopView({ titleContent }) {
                     <div className={styles.productImage}>
                       <Link to={`/shop/detail/${product.productId}`}>
                         <div className={styles.contentImage}>
-                          <Image src={product.imagesImgUrl}></Image>
-                          <div className={styles.cartIcon}>
-                            {/* Icon giỏ hàng */}
+                          <Image src={product.img ? product.img.imgUrl : ''}></Image>
+                          {/* <div className={styles.cartIcon}>
                             <Link style={{ color: 'white' }} to={'/cart'}>
-                              <FontAwesomeIcon style={{ padding: '5px', paddingTop: '10px' }} icon={faShoppingCart} />
+                              <FontAwesomeIcon
+                                style={{ padding: '5px', paddingTop: '10px' }}
+                                icon={faShoppingCart}
+                                onClick={() => onAddtoCartHandler(product)}
+                              />
                             </Link>{' '}
-                          </div>
+                          </div> */}
                         </div>
                       </Link>
                     </div>
@@ -82,9 +95,11 @@ function ShopView({ titleContent }) {
                           </span>
                         </a>
                       </span>
-                      <div className={styles.productTitle}>
-                        {product.productName} {product.brandName}{' '}
-                      </div>
+                      <Link to={`/shop/detail/${product.productId}`}>
+                        <div className={styles.productTitle}>
+                          {product.productName} {product.brandName}{' '}
+                        </div>
+                      </Link>
                     </div>
                   </div>
                 </div>

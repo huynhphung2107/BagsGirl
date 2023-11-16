@@ -2,8 +2,8 @@ import { Layout } from 'antd';
 import Header from '../Header';
 import Footer from '../Footer';
 import styles from './index.module.scss';
-import TableCart from './TableCart/TableCart';
 import { Link } from 'react-router-dom';
+import GioHang from './TableCart/TableCart';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 
@@ -25,16 +25,17 @@ function CartView() {
             </span>
           </ul>
         </div>
-        <ContentLayout className="content">
-          <div style={{ textAlign: 'center' }}>
-            <h5 className={styles.title}>Hiện chưa có sản phẩm nào trong giỏ hàng của bạn</h5>
-            <br></br>
-            <Link to={'/shop'} className={styles.continue_cart}>
-              <span>Tiếp tục mua sắm...</span>
-            </Link>
-          </div>
-          <TableCart />
-        </ContentLayout>
+
+        <div className="container-fluid">
+          <ContentLayout>
+            <div style={{ textAlign: 'center' }}>
+              <Link to={'/shop'} className={styles.continue_cart}>
+                <span>Tiếp tục mua sắm...</span>
+              </Link>
+            </div>
+            <GioHang />
+          </ContentLayout>
+        </div>
 
         <FooterLayout>
           <Footer></Footer>
