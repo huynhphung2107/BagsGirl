@@ -1,6 +1,6 @@
-import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar';
+import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/sideBar';
 import { Layout } from 'antd';
-import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header';
+import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header/header';
 
 import TableContent from '../ShiftViewer/Table/table';
 

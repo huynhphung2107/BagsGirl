@@ -1,5 +1,5 @@
 //CSS
-import styles from './index.module.scss';
+import styles from './productAddForm.module.scss';
 //React Component
 import React, { Fragment, memo, useContext, useEffect, useState } from 'react';
 import { InboxOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
@@ -26,7 +26,7 @@ import { storage } from '~/firebase/firebase';
 import baloAPI from '~/api/productsAPI';
 // Utils
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
-import BaloDetailsPreview from './BaloDetailsPreview/BaloDetailsPreview';
+import BaloDetailsPreview from './BaloDetailsPreview/baloDetailsPreview';
 import TextArea from 'antd/es/input/TextArea';
 import Title from 'antd/es/skeleton/Title';
 import colorAPI from '~/api/propertitesBalo/colorAPI';
@@ -39,7 +39,7 @@ import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 // import { useDropzone } from 'react-dropzone';
-import imageAPI from '~/api/ImageAPI';
+import imageAPI from '~/api/imageAPI';
 import { async } from '@firebase/util';
 import Dragger from 'antd/es/upload/Dragger';
 

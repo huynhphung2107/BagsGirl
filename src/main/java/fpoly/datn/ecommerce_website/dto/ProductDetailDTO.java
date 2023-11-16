@@ -34,6 +34,7 @@ public class ProductDetailDTO {
     private String compartmentName;
     private String buckleTypeName;
     private String describe;
+    private Integer amount;
     private Integer productDetailAmount;
     private String productDetailDescribe;
     private Integer productDetailStatus;

@@ -2,9 +2,9 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
-import styles from './index.module.scss';
-import FormTypeEdit from '../../TypeEdit/FormEdit/FormEditType';
-import FormTypeCreate from '../../TypeEdit/FormCreate/FormCreateType';
+import styles from './tableType.module.scss';
+import FormTypeEdit from '../../TypeEdit/FormEdit/formEditType';
+import FormTypeCreate from '../../TypeEdit/FormCreate/formCreateType';
 
 function TableContent() {
   const [typeList, setTypeList] = useState([]);

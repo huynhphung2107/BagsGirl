@@ -1,0 +1,67 @@
+.group-attr {
+  font-family: GARAMONDPREMRPRO-IT;
+  float: left;
+  display: flex;
+}
+.book_number {
+  float: left;
+  display: flex;
+  border: 1px solid gray;
+  height: 50px;
+  text-align: center;
+  // border-radius: 20%;
+  // border-bottom: 1px solid #000000;
+
+  border-radius: 32px;
+}
+.title_attr {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.input_amount {
+  width: 50px;
+  text-align: center;
+  border: none;
+}
+.input_amount:hover {
+  cursor: not-allowed;
+}
+.item_change1 {
+  padding: 15px 10px 0 10px;
+  border-right: 1px gray solid;
+  text-align: center;
+}
+
+.item_change2 {
+  padding: 15px 10px 0 10px;
+  border-left: 1px gray solid;
+}
+.item_change1:hover {
+  background-color: white;
+  color: black;
+  border-radius: 32px;
+  border: 1px gray solid;
+  cursor: pointer;
+}
+.item_change2:hover {
+  background-color: white;
+  color: black;
+  border: 1px gray solid;
+  border-radius: 32px;
+  cursor: pointer;
+}
+.continue_cart {
+  background: #eee;
+  padding: 12px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: inline-block;
+  // margin-bottom: 30px;
+  // margin-top: 15px;
+  color: #000000;
+  text-decoration: none;
+}
+.continue_cart:hover {
+  background-color: rgb(238, 85, 85);
+  color: white;
+}

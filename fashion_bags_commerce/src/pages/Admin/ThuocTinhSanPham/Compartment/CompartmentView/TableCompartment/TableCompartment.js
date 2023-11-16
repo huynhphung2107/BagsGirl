@@ -2,9 +2,9 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import compartmentAPI from '~/api/propertitesBalo/compartmentAPI';
-import styles from './index.module.scss';
-import FormEditCompartment from '../../CompartmentEdit/FormEditCompartment/FormEditCompartment';
-import FormCreateCompartment from '../../CompartmentEdit/FormCreateCompartment/FormCreateCompartment';
+import styles from './tableCompartment.module.scss';
+import FormEditCompartment from '../../CompartmentEdit/FormEditCompartment/formEditCompartment';
+import FormCreateCompartment from '../../CompartmentEdit/FormCreateCompartment/formCreateCompartment';
 
 function TableContent() {
   const [compartmentList, setCompartmentList] = useState([]);

@@ -1,34 +1,34 @@
 import { Layout } from 'antd';
-import Footer from '../Footer';
-import Header from '../Header';
-import ShopView from './ShopView';
+import Footer from '../Footer/footerClient';
+import Header from '../Header/headerCilent';
+import ShopView from './ShopView/shopView';
 
-import './index.scss';
+import styles from './shop.module.scss';
 import { Link } from 'react-router-dom';
-import ProductFilter from './LocSanPham';
+import ProductFilter from './LocSanPham/locSanPham';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function Shop() {
   return (
-    <div>
-      <Layout>
+   
+      <Layout style={{ backgroundColor: 'white' }}>
         <Header></Header>
-        <div className="duongDan">
-          <ul className="ul">
+        <div className={styles.duongDan}>
+          <ul className={styles.ul}>
             <span>
               <Link to={'/'}>
-                <li className="li">Trang chủ-- </li>
+                <li className={styles.li}>Trang chủ-- </li>
               </Link>
 
               <Link to={'/shop'}>
-                <li className="li"> cửa hàng</li>
+                <li className={styles.li}> cửa hàng</li>
               </Link>
             </span>
           </ul>
         </div>
-        <div className="container">
-          <ContentLayout style={{ backgroundColor: 'white' }}>
-            <ProductFilter />
+        <div className={styles.container}>
+          <ContentLayout>
+            {/* <ProductFilter /> */}
             <ShopView />
           </ContentLayout>
         </div>
@@ -37,7 +37,7 @@ function Shop() {
           <Footer></Footer>
         </FooterLayout>
       </Layout>
-    </div>
+   
   );
 }
 

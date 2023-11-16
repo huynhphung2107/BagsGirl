@@ -1,0 +1,33 @@
+.navContent {
+  padding-top: 20px;
+  background-color: white;
+
+  .centeredMenu {
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+
+      .ant-menu-title-content {
+        font-size: 23px;
+      }
+    }
+  }
+}
+.ant-menu-overflow-item {
+  margin: 0px 38px;
+}
+.submenu {
+  color: black;
+  font-weight: 400 bold;
+  font-size: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.submenu:hover {
+  background-color: rgb(99, 240, 240);
+  color: black;
+  border-radius: 32px;
+}

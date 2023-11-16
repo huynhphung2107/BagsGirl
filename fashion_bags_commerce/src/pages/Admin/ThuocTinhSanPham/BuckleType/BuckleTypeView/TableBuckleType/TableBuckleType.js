@@ -2,9 +2,9 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
-import styles from './index.module.scss';
-import FormEditBuckleType from '../../BuckleTypeEdit/FormEditBuckleType/FormEditBuckleType';
-import FormBuckleTypeCreate from '../../BuckleTypeEdit/FormCreateBuckleType/FormCreateBuckleType';
+import styles from './tableBuckleType.module.scss';
+import FormEditBuckleType from '../../BuckleTypeEdit/FormEditBuckleType/formEditBuckleType';
+import FormBuckleTypeCreate from '../../BuckleTypeEdit/FormCreateBuckleType/formCreateBuckleType';
 
 function TableContent() {
   const [buckleTypeList, setBuckleTypeList] = useState([]);

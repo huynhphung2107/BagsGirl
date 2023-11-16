@@ -1,4 +1,3 @@
-import '../FormEdit/FormProductEdit.css';
 
 import React, { Fragment, useState } from 'react';
 import { EditOutlined, PlusOutlined } from '@ant-design/icons';

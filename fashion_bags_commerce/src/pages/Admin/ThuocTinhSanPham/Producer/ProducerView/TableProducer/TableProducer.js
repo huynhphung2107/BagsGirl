@@ -2,9 +2,9 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import producerAPI from '~/api/propertitesBalo/producerAPI';
-import styles from './index.module.scss';
-import FormEditProducer from '../../ProducerEdit/FormEditProducer/FormEditProducer';
-import FormProducerCreate from '../../ProducerEdit/FormCreateProducer/FormCreateProduer';
+import styles from './tableProducer.module.scss';
+import FormEditProducer from '../../ProducerEdit/FormEditProducer/formEditProducer';
+import FormProducerCreate from '../../ProducerEdit/FormCreateProducer/formCreateProduer';
 // import FormTypeEdit from '../../TypeEdit/FormEdit/FormEditType';
 
 function TableContent() {
