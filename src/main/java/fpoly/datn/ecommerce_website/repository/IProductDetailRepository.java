@@ -26,9 +26,8 @@ public interface IProductDetailRepository extends JpaRepository<ProductDetails, 
             "OR b.brand.brandName LIKE %:keyword%" +
             "OR bd.compartment.compartmentName LIKE %:keyword%" +
             "OR bd.buckleType.buckleTypeName LIKE %:keyword%" +
-            "OR bd.producer.producerName LIKE %:keyword%"
-//            "OR CAST (bd.importPrice as string) LIKE %:keyword%" +
-//            "OR CAST(bd.retailPrice as string) LIKE %:keyword%"
+            "OR bd.producer.producerName LIKE %:keyword%"+
+            "OR CAST(bd.retailPrice as string) LIKE %:keyword%"
     )
     List<ProductDetails> findByKeyword(@Param("keyword") String keyword);
 

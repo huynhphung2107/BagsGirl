@@ -4,8 +4,8 @@ import Header from '../Header';
 import ShopView from './ShopView';
 
 import './index.scss';
-import LocSanPham from './LocSanPham';
 import { Link } from 'react-router-dom';
+import ProductFilter from './LocSanPham';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function Shop() {
@@ -28,14 +28,8 @@ function Shop() {
         </div>
         <div className="container-fluid">
           <ContentLayout style={{ backgroundColor: 'white' }}>
-            <div className="row">
-              <div className="col-4">
-                <LocSanPham />
-              </div>
-              <div className="col-8">
-                <ShopView />
-              </div>{' '}
-            </div>
+            <ProductFilter />
+            <ShopView />
           </ContentLayout>
         </div>
 

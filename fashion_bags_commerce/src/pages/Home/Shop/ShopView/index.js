@@ -64,7 +64,7 @@ function ShopView({ titleContent }) {
 
   return (
     <Fragment>
-      <div className="container">
+      <div className="container-fluid">
         <div>
           <div className="row">
             <div className={styles.scrollableList}>
