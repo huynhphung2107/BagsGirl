@@ -4,7 +4,7 @@ import { Content, Footer, Header } from 'antd/es/layout/layout';
 import { Fragment } from 'react';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header/header';
 import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/sideBar';
-import ProductAddForm from './ProductAddForm/productAddForm';
+import ProductAddForm from './ProductAddForm/ProductAddForm';
 function ProductAdd() {
   return (
     <Fragment>

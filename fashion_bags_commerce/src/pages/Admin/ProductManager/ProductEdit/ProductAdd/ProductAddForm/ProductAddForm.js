@@ -26,7 +26,7 @@ import { storage } from '~/firebase/firebase';
 import baloAPI from '~/api/productsAPI';
 // Utils
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
-import BaloDetailsPreview from './BaloDetailsPreview/baloDetailsPreview';
+// import BaloDetailsPreview from './BaloDetailsPreview/baloDetailsPreview';
 import TextArea from 'antd/es/input/TextArea';
 import Title from 'antd/es/skeleton/Title';
 import colorAPI from '~/api/propertitesBalo/colorAPI';
@@ -42,6 +42,7 @@ import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 import imageAPI from '~/api/imageAPI';
 import { async } from '@firebase/util';
 import Dragger from 'antd/es/upload/Dragger';
+import BaloDetailsPreview from './BaloDetailsPreview/BaloDetailsPreview';
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {

@@ -2,7 +2,7 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/side
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header/header';
 import TableContent from './Table/tableProduct';
-import FormBaloEditTonggle from '../ProductEdit/FormCreate/formBaloEditTonggle';
+import FormBaloEditTonggle from '../ProductEdit/FormCreate/FormBaloEditTonggle';
 
 const { Header, Footer, Sider, Content } = Layout;
 const headerStyle = {

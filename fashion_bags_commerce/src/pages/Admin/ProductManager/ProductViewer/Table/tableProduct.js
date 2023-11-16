@@ -1,12 +1,12 @@
 import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from 'antd';
 import { useEffect, useState, useContext } from 'react';
-import FormProductEdit from '../../ProductEdit/FormEdit/formProductEdit';
-import FormProductViewDetails from '../../ProductViewDetails/FormViewer/formProductViewDetails';
+import FormProductViewDetails from '../../ProductViewDetails/FormViewer/FormProductViewDetails';
 import baloAPI from '~/api/productsAPI';
 
 import styles from './tableProduct.module.scss';
-import FormBaloEditTonggle from '../../ProductEdit/FormCreate/formBaloEditTonggle';
 import { DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
+import FormProductEdit from '../../ProductEdit/FormEdit/FormProductEdit';
+import FormBaloEditTonggle from '../../ProductEdit/FormCreate/FormBaloEditTonggle';
 
 function TableContent() {
   const [baloList, setBaloList] = useState([]);

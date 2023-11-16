@@ -4,7 +4,7 @@ import { Content, Footer, Header } from 'antd/es/layout/layout';
 import { Fragment } from 'react';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header/header';
 import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/sideBar';
-import SalesCounterForm from './salesCounterForm';
+import SalesCounterForm from './SalesCounterForm';
 
 function SalesCounter() {
   return (
