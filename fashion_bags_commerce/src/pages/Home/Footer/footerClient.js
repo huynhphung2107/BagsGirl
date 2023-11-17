@@ -3,9 +3,10 @@ import styles from './footerClient.module.scss';
 
 function Footer() {
   return (
+       <div className={styles.container_fluid} >
         <div className={styles.footer}>
           <div className={styles.mainFooter}>
-            <div className={styles.container1}>
+            <div className={styles.container}>
               <div className="row">
                 <ul>
                   <li>
@@ -48,6 +49,7 @@ function Footer() {
             </p>
           </div>
         </div>
+      </div>
   );
 }
 

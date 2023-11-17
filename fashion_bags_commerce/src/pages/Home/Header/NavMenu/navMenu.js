@@ -43,28 +43,28 @@ function NavMenu() {
             onClick={({ key }) => handleMenuClick(key)}
           >
             <Link key={1} className={styles.submenu} to={'/'}>
-              <SubMenu key={'subMenu${1}'} title="TRANG CHỦ">
+              <SubMenu  title="TRANG CHỦ">
                 {/* <Menu.Item key="1.1">NEW ARRIVAL</Menu.Item>
                 <Menu.Item key="1.2">COLLECTION</Menu.Item> */}
               </SubMenu>
             </Link>
             <Link className={styles.submenu} to={'/shop'}>
-              <SubMenu key="subMenu2" title="SẢN PHẨM"></SubMenu>
+              <SubMenu  title="SẢN PHẨM"></SubMenu>
             </Link>
 
             <Link className={styles.submenu} to={'#'}>
-              <SubMenu key="subMenu3" title="GIỚI THIỆU">
+              <SubMenu  title="GIỚI THIỆU">
                 {/* <Menu.Item key="3.1">#GIRLS</Menu.Item>
                 <Menu.Item key="3.2">#BOYS</Menu.Item> */}
               </SubMenu>
             </Link>
 
             <Link className={styles.submenu} to={'/shop'}>
-              <SubMenu key="subMenu4" title="LIÊN HỆ"></SubMenu>
+              <SubMenu  title="LIÊN HỆ"></SubMenu>
             </Link>
 
             <Link className={styles.submenu} to={'/cart'}>
-              <SubMenu key="subMenu5" title="GIỎ HÀNG"></SubMenu>
+              <SubMenu  title="GIỎ HÀNG"></SubMenu>
             </Link>
           </Menu>
         </div>

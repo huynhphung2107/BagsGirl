@@ -10,14 +10,8 @@ function Header() {
   return (
     <Fragment>
       <NoticeHeader />
-      <div className={styles.container_fluid}>
-        <div style={{ backgroundColor: 'white' }}>
-          <div className={styles.fixed_header}>
-            <MainHeader />
-            <NavMenu />
-          </div>
-        </div>
-      </div>
+      <MainHeader />
+      <NavMenu />
     </Fragment>
   );
 }

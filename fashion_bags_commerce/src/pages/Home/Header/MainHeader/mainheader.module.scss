@@ -3,7 +3,7 @@
   padding: 15px 0px 0 0;
   .image {
     width: 300px;
-    height: 100px;
+    height: 150px;
   }
   justify-content: center;
   display: flex;
@@ -17,20 +17,20 @@
       padding-right: 30px;
       border: 1px solid black;
       border-radius: 30px;
-      margin: 0px 20px;
-      width: 1100px;
+      margin: 15px 20px 0 0;
+
+      width: 1120px;
       height: fit-content;
       .searchForm {
         .form {
           display: flex;
           .icon {
-            margin: 0px 10px;
+            margin: 10px 10px;
             font-size: 40px;
           }
           input {
             padding: 12px 30px 12px 10px;
             font-size: 20px;
-
             border: 0px;
             width: 650px;
             height: 50px;
@@ -53,7 +53,7 @@
           .horizontalLogin {
             display: flex; /* Sử dụng mô hình flexbox */
             padding-left: 0px;
-            margin: 0px;
+            margin: 0px auto;
           }
 
           .horizontalLogin li {
@@ -68,13 +68,13 @@
           }
         }
       }
-      .cart {
-        .cartBadge {
-          .cartIcon {
-            font-size: 50px;
-          }
-        }
+
+      .cartIcon {
+        font-size: 50px;
       }
+    }
+    .cart {
+      padding-top: 15px;
     }
   }
 }

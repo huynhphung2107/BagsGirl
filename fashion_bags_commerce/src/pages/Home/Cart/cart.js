@@ -4,7 +4,7 @@ import Footer from '../Footer/footerClient';
 import styles from './cart.module.scss';
 import { Link } from 'react-router-dom';
 import CartItem from './CartItem/cartItem';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { DoubleRightOutlined } from '@ant-design/icons';
 import AddressVietnam from '~/api/addressVietNam/apiAddress';
 
@@ -19,27 +19,18 @@ function CartView() {
       setCartItems(parsedCart);
     }
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div>
-      <Layout style={{ background: 'white' }}>
-        <Header className={styles.header}></Header>
-        {/* <div className={styles.duongDan}>
-          <ul className={styles.ul}>
-            <span>
-              <Link to={'/'}>
-                <li className={styles.li}>Trang chủ-- </li>
-              </Link>
-
-              <Link to={'/cart'}>
-                <li className={styles.li}>giỏ hàng</li>
-              </Link>
-            </span>
-          </ul>
-        </div> */}
-
-        <div className="container-fluid">
-          <ContentLayout>
+    <Fragment>
+      <body>
+        <div className="fullpage">
+          <div className="header001">
+            <Header />
+          </div>
+          <div className="page_content">
             {cartItems.length === 0 ? (
               <div style={{ textAlign: 'center' }}>
                 <h3 style={{ color: 'gray', margin: '50px 0 0 0' }}>Bạn chưa có sản phẩm nào trong giỏ hàng.. </h3>
@@ -52,17 +43,16 @@ function CartView() {
             ) : (
               <div style={{ textAlign: 'center' }}>
                 <CartItem />
-               <AddressVietnam/>
+                <AddressVietnam />
               </div>
             )}
-          </ContentLayout>
+          </div>
+          <div className="footer_client">
+            <Footer />
+          </div>
         </div>
-
-        <FooterLayout>
-          <Footer></Footer>
-        </FooterLayout>
-      </Layout>
-    </div>
+      </body>
+    </Fragment>
   );
 }
 

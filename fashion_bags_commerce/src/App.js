@@ -25,6 +25,7 @@ import HoaDonView from './pages/Admin/QuanLyHoaDon/HienThiHoaDon/indexHoaDonView
 import CartView from './pages/Home/Cart/cart';
 import Shop from './pages/Home/Shop/shop';
 import ShopDetail from './pages/Home/ShopDetail/shopDetail';
+import { useEffect } from 'react';
 
 const dynamicRoutes = [
   { path: '/admin', component: <Admin />, title: 'Trang chủ' },
@@ -54,12 +55,15 @@ const dynamicRoutes = [
 ];
 
 function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Router>
       <div className="App">
         <Routes>
           {dynamicRoutes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.component}></Route>
+            <Route key={index} exact path={route.path} element={route.component}></Route>
           ))}
         </Routes>
       </div>

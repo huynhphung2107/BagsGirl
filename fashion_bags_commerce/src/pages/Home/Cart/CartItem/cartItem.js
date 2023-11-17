@@ -68,20 +68,9 @@ function CartItem() {
       key: 'brandName',
     },
     {
-      title: 'Chất liệu',
-      dataIndex: 'materialName',
-      key: 'materialName',
-    },
-    {
       title: 'Số lượng',
       dataIndex: 'quantity',
       render: (text, record) => (
-        // <div>
-        //   <button onClick={() => handleDecrement(record)}> - </button>
-        //   <input type="number" value={record.quantity} onChange={(e) => handleQuantityChange(e, record)} min={1} />
-        //   <button onClick={() => handleIncrement(record)}> + </button>
-        // </div>
-
         <div className={' title_attr'}>
           <div className={styles.book_number}>
             <div className={styles.item_change1} onClick={() => handleDecrement(record)}>

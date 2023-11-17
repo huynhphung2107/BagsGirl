@@ -1,40 +1,4 @@
-.header {
-  height: fit-content;
-  background-color: #fff;
-}
-.content {
-  // height: fit-content;
-  justify-content: center;
-  flex-wrap: wrap;
-  display: flex;
-  background-color: white;
-}
-.footer {
-  height: fit-content;
-  background-color: white;
-}
 
-.container {
-  background-color: white;
-  text-align: center;
-  justify-content: center;
-}
-
-.ul {
+Link {
   list-style: none;
-}
-.ul .li {
-  float: left;
-  font-size: 15pt;
-  color: black;
-  font-family:Arial, Helvetica, sans-serif;
-}
-.duongDan {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  text-align: center;
-  margin-bottom: 10px;
 }

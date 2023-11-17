@@ -3,33 +3,29 @@ import Content from './Content';
 import Footer from './Footer/footerClient';
 import Header from './Header/headerCilent';
 
-import styles from'./home.module.scss';
-import LoginForm from '../Login/FormLogin/FormLogin/LoginForm';
-import { Link } from 'react-router-dom';
+import './home.scss';
+import { Fragment, useEffect } from 'react';
 
-const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-    <Layout style={{ background: 'white' }}>
-      <Header></Header>{' '}
-      {/* <div className={styles.duongDan}>
-        <ul className={styles.ul}>
-          <span>
-            <Link to={'/'}>
-              <li className={styles.li}>Trang chủ</li>
-            </Link>
-          </span>
-        </ul>
-      </div> */}
-      <ContentLayout>
-        <div className="container-fluid">
-          <Content />
+    <Fragment>
+      <body title="BagGirls">
+        <div className="fullpage">
+          <div className="header001">
+            <Header />
+          </div>
+          <div className="page_content">
+            <Content />
+          </div>
+          <div className="footer_client">
+            <Footer />
+          </div>
         </div>
-      </ContentLayout>
-      <FooterLayout >
-        <Footer className={styles.footer}></Footer>
-      </FooterLayout>
-    </Layout>
+      </body>
+    </Fragment>
   );
 }
 

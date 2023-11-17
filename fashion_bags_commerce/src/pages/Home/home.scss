@@ -1,0 +1,22 @@
+.fullpage {
+  display: block;
+  width: 100%;
+  float: left;
+  background-color: white;
+  text-align: center;
+}
+body .fullpage {
+  // margin: 0;
+  // padding: 0;
+  // border: 0;
+  // font-size: 100%;
+  // font-weight: normal;
+  // vertical-align: baseline;
+  // background: transparent;
+  background-color: white;
+}
+.page_content {
+  width: 1920px;
+  max-width: 100%;
+  margin: 0 auto;
+}
