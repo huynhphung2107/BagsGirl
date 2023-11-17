@@ -49,23 +49,23 @@ function ShopView({ titleContent }) {
     }
   };
 
-  const detailProduct = async (productId) => {
-    try {
-      const response = await fullProductAPI.findById(productId);
-      const data = response.data;
+  // const detailProduct = async (productId) => {
+  //   try {
+  //     const response = await fullProductAPI.findById(productId);
+  //     const data = response.data;
 
-      // Process or use the product data as needed
-      console.log('Product details:', data);
+  //     // Process or use the product data as needed
+  //     console.log('Product details:', data);
 
-      // You can return the data if needed
-      return data;
-    } catch (error) {
-      console.error('Error fetching data:', error);
+  //     // You can return the data if needed
+  //     return data;
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
 
-      // You might want to handle the error or return an error message
-      throw new Error('Error fetching product details');
-    }
-  };
+  //     // You might want to handle the error or return an error message
+  //     throw new Error('Error fetching product details');
+  //   }
+  // };
 
   return (
     <Fragment>
@@ -74,13 +74,13 @@ function ShopView({ titleContent }) {
           <button class={styles.line_col} onClick={() => handleColumnChange('col-4')}>
             <FullscreenOutlined />
           </button>
-          Sắp xếp hiển thị
+          SẢN PHẨM
           <button class={styles.line_col} onClick={() => handleColumnChange('col-3')}>
             <FullscreenExitOutlined />
           </button>
         </h3>
 
-        <div className="container">
+        <div className={styles.listSanPham}>
           <div className="row">
             <div className={styles.scrollableList}>
               {data.map((product) => (

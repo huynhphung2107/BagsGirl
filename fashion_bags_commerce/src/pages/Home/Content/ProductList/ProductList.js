@@ -6,7 +6,6 @@ import { Image } from 'antd';
 function ProductList({ titleContent }) {
   return (
     <Fragment>
-      <div className="container">
         <div className={styles.block}>
           <div className={styles.container1}>
             <div>
@@ -192,7 +191,6 @@ function ProductList({ titleContent }) {
             </div>
           </div>
         </div>
-      </div>
     </Fragment>
   );
 }

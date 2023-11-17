@@ -5,39 +5,30 @@ import ShopView from './ShopView/shopView';
 
 import styles from './shop.module.scss';
 import { Link } from 'react-router-dom';
-import ProductFilter from './LocSanPham/locSanPham';
+import { Fragment, useEffect } from 'react';
 
-const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
+
+
 function Shop() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-   
-      <Layout style={{ backgroundColor: 'white' }}>
-        <Header></Header>
-        {/* <div className={styles.duongDan}>
-          <ul className={styles.ul}>
-            <span>
-              <Link to={'/'}>
-                <li className={styles.li}>Trang chủ-- </li>
-              </Link>
-
-              <Link to={'/shop'}>
-                <li className={styles.li}> cửa hàng</li>
-              </Link>
-            </span>
-          </ul>
-        </div> */}
-        <div className={styles.container}>
-          <ContentLayout>
-            {/* <ProductFilter /> */}
-            <ShopView />
-          </ContentLayout>
+    <Fragment>
+    <body>
+      <div className={styles.fullpage}>
+        <div className={styles.header001}>
+          <Header />
         </div>
-
-        <FooterLayout>
-          <Footer></Footer>
-        </FooterLayout>
-      </Layout>
-   
+        <div className={styles.page_content}>
+          <ShopView />
+        </div>
+        <div className={styles.footer_client}>
+          <Footer />
+        </div>
+      </div>
+    </body>
+  </Fragment>
   );
 }
 

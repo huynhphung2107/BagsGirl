@@ -76,13 +76,13 @@ function ShopDetailView() {
     // Tăng giá trị quantity khi nhấn nút '+'
     const amountInDatabase = dataDetail.amount; // Số lượng tồn kho trong cơ sở dữ liệu
 
-  if (quantity + 1 > amountInDatabase) {
-    // Hiển thị thông báo khi số lượng vượt quá số lượng trong kho
-    alert('Số lượng vượt quá số lượng trong kho!');
-  } else {
-    // Tăng giá trị quantity khi số lượng không vượt quá số lượng trong kho
-    setQuantity(quantity + 1);
-  }
+    if (quantity + 1 > amountInDatabase) {
+      // Hiển thị thông báo khi số lượng vượt quá số lượng trong kho
+      alert('Số lượng vượt quá số lượng trong kho!');
+    } else {
+      // Tăng giá trị quantity khi số lượng không vượt quá số lượng trong kho
+      setQuantity(quantity + 1);
+    }
   };
 
   const handleDecrement = () => {
@@ -126,7 +126,7 @@ function ShopDetailView() {
     return product.productDetails.map((variant, index) => (
       <div key={index} className={styles.colorVariant}>
         <Checkbox
-          checked={selectedColor === variant.colorName? variant.colorName:''}
+          checked={selectedColor === variant.colorName ? variant.colorName : ''}
           onChange={() => {
             setDataDetail(product?.productDetails[index]);
             handleColorChange(variant.colorName);
@@ -288,7 +288,7 @@ function ShopDetailView() {
               </div>
 
               <br></br>
-             
+
               <Link to="/cart">
                 {/* Thêm sản phẩm vào giỏ hàng và chuyển hướng đến trang /cart */}
                 <div className={styles.button_buy_now} onClick={() => addToTemporaryCart(product)}>

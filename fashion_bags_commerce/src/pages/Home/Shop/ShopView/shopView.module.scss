@@ -4,7 +4,6 @@
 
   font-weight: normal;
   font-family: Arial, Helvetica, sans-serif;
-
 }
 .productTitle {
   font-size: 15pt;
@@ -23,7 +22,6 @@
 .producItem {
   margin-bottom: 20px;
   font-family: Arial, Helvetica, sans-serif;
-
 }
 
 .contentImage {
@@ -38,12 +36,15 @@
   margin: 0 10px;
   width: 40px;
   border: none;
-  
-
 }
 .line_col:hover {
   background-color: rgb(99, 240, 240);
 }
-.sortTitle{
+.sortTitle {
   font-family: Arial, Helvetica, sans-serif;
+  color: rgb(215, 101, 101);
+  font-size: 20px;
+}
+.listSanPham {
+  margin: 0 8%;
 }
