@@ -3,7 +3,7 @@ import Content from './Content';
 import Footer from './Footer/footerClient';
 import Header from './Header/headerCilent';
 
-import styles from './home.module.scss';
+import './home.scss';
 import { Fragment, useEffect } from 'react';
 
 function Home() {
@@ -13,14 +13,14 @@ function Home() {
   return (
     <Fragment>
       <body title="BagGirls">
-        <div className={styles.fullpage}>
-          <div className={styles.header001}>
+        <div className="fullpage">
+          <div className="header001">
             <Header />
           </div>
-          <div className={styles.page_content}>
+          <div className="page_content">
             <Content />
           </div>
-          <div className={styles.footer_client}>
+          <div className="footer_client">
             <Footer />
           </div>
         </div>

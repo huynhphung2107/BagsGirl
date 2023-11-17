@@ -135,6 +135,26 @@
   background-color: black;
   color: white;
 }
+.button_buy_now1 {
+  margin-top: 25px;
+  padding: 15px 0;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 23px;
+  border: 1px solid #000000;
+
+  background-color: black;
+
+  color: white;
+}
+
+.button_buy_now1:hover {
+  background-color: white;
+  color: black;
+}
 .content_product_pc {
   border-color: black !important;
   font-size: 20px;
@@ -196,4 +216,3 @@ li {
 .materialrVariant {
   display: flex;
 }
-

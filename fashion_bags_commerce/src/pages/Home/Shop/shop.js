@@ -16,17 +16,17 @@ function Shop() {
   return (
     <Fragment>
     <body>
-      <div className={styles.fullpage}>
-        <div className={styles.header001}>
-          <Header />
+    <div className="fullpage">
+          <div className="header001">
+            <Header />
+          </div>
+          <div className="page_content">
+            <ShopView />
+          </div>
+          <div className="footer_client">
+            <Footer />
+          </div>
         </div>
-        <div className={styles.page_content}>
-          <ShopView />
-        </div>
-        <div className={styles.footer_client}>
-          <Footer />
-        </div>
-      </div>
     </body>
   </Fragment>
   );

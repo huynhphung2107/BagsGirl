@@ -8,14 +8,14 @@ function MainHeader() {
   return (
     <div className="container-fluid" style={{ height: '100px' }}>
       <div className={styles.mainHeader}>
-        <img className={styles.image} alt="img" src="https://i.imgur.com/RjBesHk.jpg"></img>
+        <img className={styles.image} alt="img" src="https://i.imgur.com/e1Tfbn5.png"></img>
         <div className={styles.content}>
           <div className={styles.toolLeft}></div>
           <div className={styles.search}>
             <div className={styles.searchForm}>
               <form className={styles.form}>
-                <SearchOutlined className={styles.icon}/>
-                <input className={styles.searchInput}placeholder="Tìm kiếm sản phẩm"></input>
+                <SearchOutlined className={styles.icon} />
+                <input className={styles.searchInput} placeholder="Tìm kiếm sản phẩm"></input>
               </form>
             </div>
           </div>
@@ -35,7 +35,7 @@ function MainHeader() {
             </div>
             <div className={styles.cart}>
               <Link to={'/cart'}>
-                <Badge className={styles.cartBadge} count="1">
+                <Badge className={styles.cartBadge} count="2">
                   <ShoppingCartOutlined href="/cart" className={styles.cartIcon} />
                 </Badge>
               </Link>

@@ -26,11 +26,11 @@ function CartView() {
   return (
     <Fragment>
       <body>
-        <div className={styles.fullpage}>
-          <div className={styles.header001}>
+        <div className="fullpage">
+          <div className="header001">
             <Header />
           </div>
-          <div className={styles.page_content}>
+          <div className="page_content">
             {cartItems.length === 0 ? (
               <div style={{ textAlign: 'center' }}>
                 <h3 style={{ color: 'gray', margin: '50px 0 0 0' }}>Bạn chưa có sản phẩm nào trong giỏ hàng.. </h3>
@@ -47,7 +47,7 @@ function CartView() {
               </div>
             )}
           </div>
-          <div className={styles.footer_client}>
+          <div className="footer_client">
             <Footer />
           </div>
         </div>

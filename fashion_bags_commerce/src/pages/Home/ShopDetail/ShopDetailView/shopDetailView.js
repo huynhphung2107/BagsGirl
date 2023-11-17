@@ -296,7 +296,7 @@ function ShopDetailView() {
                   Thêm vào giỏ hàng
                 </div>
               </Link>
-              <div className={styles.button_buy_now}>Mua ngay</div>
+              <div className={styles.button_buy_now1}>Mua ngay</div>
             </div>
           </div>
         </div>

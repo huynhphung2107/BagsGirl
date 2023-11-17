@@ -1,13 +1,13 @@
 .carouselHeader {
-  height: 30px;
-  padding: 5px;
+  height: 40px;
+  padding: 10px;
   font-family: ttcommons-light;
-  background-color: rgb(99, 240, 240);
+  // background-color: rgb(99, 240, 240);
 
-  background-color: rgb(208, 238, 238);
+  background-color: rgb(15, 16, 16);
 
   text-align: center;
-  color: black;
+  color: white;
   user-select: none;
   :hover {
     cursor: grab;
@@ -21,5 +21,8 @@
     color: red;
     cursor: pointer;
     text-decoration: none;
+  }
+  p {
+    color: white;
   }
 }

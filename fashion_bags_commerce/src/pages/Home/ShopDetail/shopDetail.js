@@ -12,14 +12,14 @@ function ShopDetail() {
   return (
     <Fragment>
       <body>
-        <div className={styles.fullpage}>
-          <div className={styles.header001}>
+      <div className="fullpage">
+          <div className="header001">
             <Header />
           </div>
-          <div className={styles.page_content}>
+          <div className="page_content">
             <ShopDetailView />
           </div>
-          <div className={styles.footer_client}>
+          <div className="footer_client">
             <Footer />
           </div>
         </div>
