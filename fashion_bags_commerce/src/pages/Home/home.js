@@ -12,7 +12,7 @@ function Home() {
   return (
     <Layout style={{ background: 'white' }}>
       <Header></Header>{' '}
-      <div className={styles.duongDan}>
+      {/* <div className={styles.duongDan}>
         <ul className={styles.ul}>
           <span>
             <Link to={'/'}>
@@ -20,14 +20,14 @@ function Home() {
             </Link>
           </span>
         </ul>
-      </div>
+      </div> */}
       <ContentLayout>
         <div className="container-fluid">
           <Content />
         </div>
       </ContentLayout>
-      <FooterLayout>
-        <Footer></Footer>
+      <FooterLayout >
+        <Footer className={styles.footer}></Footer>
       </FooterLayout>
     </Layout>
   );

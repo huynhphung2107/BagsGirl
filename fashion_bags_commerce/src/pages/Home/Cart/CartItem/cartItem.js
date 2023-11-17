@@ -2,7 +2,7 @@ import { Table, Image, Button } from 'antd';
 import { useEffect, useState } from 'react';
 import styles from './tableCart.module.scss';
 import vndFormaterFunc from '~/Utilities/VNDFormaterFunc';
-import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteFilled, DeleteOutlined, DoubleRightOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 function CartItem() {
@@ -35,27 +35,37 @@ function CartItem() {
       dataIndex: 'image',
       key: 'image',
       render: (text, record) => (
-        <Image
-          style={{ width: '200px', height: '200px', marginLeft: '50px' }}
-          src={record.image}
-          alt={record.productName}
-        />
+        <Image style={{ width: '200px', height: '200px' }} src={record.image} alt={record.productName} />
       ),
     },
     {
       title: 'Sản phẩm',
       dataIndex: 'productName',
+      render: (texe, record) => (
+        <div className={styles.info_item}>
+          <div className={styles.title_product}>
+            {' '}
+            {record.productName}-{record.productCode}
+          </div>
+          <ul className={styles.attr}>
+            <li>
+              {' '}
+              <span className={styles.spanTitle}>Màu sắc: </span> {record.colorName}
+            </li>
+
+            <li>
+              <span className={styles.spanTitle}>Chất liệu: </span>
+              {record.materialName}
+            </li>
+          </ul>
+        </div>
+      ),
       key: 'productName',
     },
     {
       title: 'Thương hiệu',
       dataIndex: 'brandName',
       key: 'brandName',
-    },
-    {
-      title: 'Màu sắc',
-      dataIndex: 'colorName',
-      key: 'colorName',
     },
     {
       title: 'Chất liệu',
@@ -109,7 +119,7 @@ function CartItem() {
       dataIndex: 'operation',
       render: (text, record) => (
         <Button type="link" danger onClick={() => handleRemoveItem(record)}>
-          Xóa
+          <DeleteFilled />
         </Button>
       ),
       key: 'operation',
@@ -163,11 +173,10 @@ function CartItem() {
       <b>
         {' '}
         <Link to={'/shop'} className={styles.continue_cart}>
-          Tiếp tục mua sắm...
+          Tiếp tục mua sắm <DoubleRightOutlined />
         </Link>
       </b>
       <Table
-      
         bordered
         style={{ textAlign: 'center' }}
         className={styles.table_cart_item}

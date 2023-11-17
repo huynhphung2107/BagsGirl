@@ -3,12 +3,10 @@ import styles from './footerClient.module.scss';
 
 function Footer() {
   return (
-    <Fragment>
-      <div className="container-fluid" style={{ background: '#f5f5f5' }}>
-        <div className={styles.footer} style={{ background: '#f5f5f5' }}>
-          <div className={styles.mainFooter} style={{ background: '#f5f5f5' }}>
-            <div className={styles.container} style={{ background: '#f5f5f5' }}>
-              <div className="row" style={{ background: '#f5f5f5' }}>
+        <div className={styles.footer}>
+          <div className={styles.mainFooter}>
+            <div className={styles.container1}>
+              <div className="row">
                 <ul>
                   <li>
                     <a>
@@ -45,15 +43,11 @@ function Footer() {
           </div>
           <div className={styles.bottomFooter}>
             <p>Công ty TNHH MTV Global Fashion. Văn phòng: Lầu Túy Tiên, Tỉnh Vân Vân, Thành phố Phượt Thủ</p>
-
             <p>
               GP số <span style={{ color: '#0090ff' }}>0354903402 </span>
-              <span>do cơ sở có cai gì đó</span>
             </p>
           </div>
         </div>
-      </div>
-    </Fragment>
   );
 }
 

@@ -49,7 +49,7 @@ function NavMenu() {
               </SubMenu>
             </Link>
             <Link className={styles.submenu} to={'/shop'}>
-              <SubMenu key="subMenu2" title="CỬA HÀNG"></SubMenu>
+              <SubMenu key="subMenu2" title="SẢN PHẨM"></SubMenu>
             </Link>
 
             <Link className={styles.submenu} to={'#'}>

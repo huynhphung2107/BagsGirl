@@ -23,7 +23,7 @@ const footerStyle = {
   margin: '0 10px 10px 20px',
   borderLeft: '270px',
   color: 'black',
-  backgroundColor: '#fff',
+  backgroundColor: 'white',
 };
 const layoutContent = {
   marginLeft: '270px',

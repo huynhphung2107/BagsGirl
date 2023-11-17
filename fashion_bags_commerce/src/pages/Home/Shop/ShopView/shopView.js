@@ -70,13 +70,13 @@ function ShopView({ titleContent }) {
   return (
     <Fragment>
       <div>
-        <h3 style={{ fontFamily: 'cursive' }}>
+        <h3 className={styles.sortTitle}>
           <button class={styles.line_col} onClick={() => handleColumnChange('col-4')}>
-            <FullscreenExitOutlined />
+            <FullscreenOutlined />
           </button>
           Sắp xếp hiển thị
           <button class={styles.line_col} onClick={() => handleColumnChange('col-3')}>
-            <FullscreenOutlined />
+            <FullscreenExitOutlined />
           </button>
         </h3>
 
@@ -120,4 +120,3 @@ function ShopView({ titleContent }) {
 
 export default ShopView;
 // Trong hàm map để hiển thị danh sách sản phẩm
-

@@ -8,8 +8,9 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      margin: 0;
+      margin: 10px 0;
       padding: 0;
+      background-color: WHITE;
 
       .ant-menu-title-content {
         font-size: 23px;
@@ -17,17 +18,20 @@
     }
   }
 }
-.ant-menu-overflow-item {
-  margin: 0px 38px;
-}
+
 .submenu {
-  color: black;
-  font-weight: 400 bold;
+  color: GRAY;
+  font-weight: 400;
   font-size: 25px;
+  // margin: 0 30px;
+  padding: 10px 5px;
+  margin: 0 30px;
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-transition: all, 0.3s;
+  transition: all, 0.3s;
 }
 .submenu:hover {
-  background-color: rgb(99, 240, 240);
+  // background-color: rgb(99, 240, 240);
   color: black;
   border-radius: 32px;
 }

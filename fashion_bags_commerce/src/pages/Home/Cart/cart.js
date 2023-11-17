@@ -5,6 +5,8 @@ import styles from './cart.module.scss';
 import { Link } from 'react-router-dom';
 import CartItem from './CartItem/cartItem';
 import { useEffect, useState } from 'react';
+import { DoubleRightOutlined } from '@ant-design/icons';
+import AddressVietnam from '~/api/addressVietNam/apiAddress';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 
@@ -22,7 +24,7 @@ function CartView() {
     <div>
       <Layout style={{ background: 'white' }}>
         <Header className={styles.header}></Header>
-        <div className={styles.duongDan}>
+        {/* <div className={styles.duongDan}>
           <ul className={styles.ul}>
             <span>
               <Link to={'/'}>
@@ -34,21 +36,23 @@ function CartView() {
               </Link>
             </span>
           </ul>
-        </div>
+        </div> */}
 
         <div className="container-fluid">
           <ContentLayout>
             {cartItems.length === 0 ? (
               <div style={{ textAlign: 'center' }}>
-                <h2>Bạn chưa có sản phẩm nào trong giỏ hàng.. </h2>
+                <h3 style={{ color: 'gray', margin: '50px 0 0 0' }}>Bạn chưa có sản phẩm nào trong giỏ hàng.. </h3>
                 <Link to={'/shop'} className={styles.continue_cart}>
-                  <span>Tiếp tục mua sắm...</span>
+                  <span>
+                    Tiếp tục mua sắm <DoubleRightOutlined />
+                  </span>
                 </Link>
               </div>
             ) : (
               <div style={{ textAlign: 'center' }}>
-               
                 <CartItem />
+               <AddressVietnam/>
               </div>
             )}
           </ContentLayout>

@@ -9,7 +9,7 @@ function ShopDetail() {
   return (
     <Layout className={styles.backgroundDetail}>
       <Header></Header>
-      <div className={styles.duongDan}>
+      {/* <div className={styles.duongDan}>
         <ul className={styles.ul}>
           <span>
             <Link to={'/'}>
@@ -21,7 +21,7 @@ function ShopDetail() {
             </Link>
           </span>
         </ul>
-      </div>
+      </div> */}
       <ContentLayout>
         <div className="">
           <ShopDetailView />

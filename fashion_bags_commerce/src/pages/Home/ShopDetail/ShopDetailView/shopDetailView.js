@@ -27,6 +27,7 @@ function ShopDetailView() {
         const productToAdd = {
           image: product.img.imgUrl,
           productName: product.productName,
+          productCode: product.productCode,
           colorName: dataDetail.colorName,
           materialName: dataDetail.materialName,
           brandName: product.brandName,
@@ -125,7 +126,7 @@ function ShopDetailView() {
     return product.productDetails.map((variant, index) => (
       <div key={index} className={styles.colorVariant}>
         <Checkbox
-          checked={selectedColor === variant.colorName}
+          checked={selectedColor === variant.colorName? variant.colorName:''}
           onChange={() => {
             setDataDetail(product?.productDetails[index]);
             handleColorChange(variant.colorName);
@@ -287,7 +288,7 @@ function ShopDetailView() {
               </div>
 
               <br></br>
-              <div className={styles.button_buy_now}>Mua ngay</div>
+             
               <Link to="/cart">
                 {/* Thêm sản phẩm vào giỏ hàng và chuyển hướng đến trang /cart */}
                 <div className={styles.button_buy_now} onClick={() => addToTemporaryCart(product)}>
@@ -295,6 +296,7 @@ function ShopDetailView() {
                   Thêm vào giỏ hàng
                 </div>
               </Link>
+              <div className={styles.button_buy_now}>Mua ngay</div>
             </div>
           </div>
         </div>

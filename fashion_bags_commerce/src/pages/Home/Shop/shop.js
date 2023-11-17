@@ -13,7 +13,7 @@ function Shop() {
    
       <Layout style={{ backgroundColor: 'white' }}>
         <Header></Header>
-        <div className={styles.duongDan}>
+        {/* <div className={styles.duongDan}>
           <ul className={styles.ul}>
             <span>
               <Link to={'/'}>
@@ -25,7 +25,7 @@ function Shop() {
               </Link>
             </span>
           </ul>
-        </div>
+        </div> */}
         <div className={styles.container}>
           <ContentLayout>
             {/* <ProductFilter /> */}
