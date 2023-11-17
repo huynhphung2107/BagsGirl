@@ -261,7 +261,9 @@ function ShopDetailView() {
                 <h4 className={styles.price}>{VNDFormaterFunc(dataDetail.retailPrice)}</h4>
               </span>
               <div className={styles.group_color}>
-                <h3 style={{ fontStyle: 'italic', fontSize: '16pt' }}>Màu sắc</h3>{' '}
+                <h3 style={{ fontStyle: 'italic', fontSize: '16pt', float: 'left', padding: '5px 15px 0 0' }}>
+                  Màu sắc:{' '}
+                </h3>{' '}
                 <div className={styles.materialrVariant}>{renderColor()}</div>
               </div>
               <div className={styles.amount}>
