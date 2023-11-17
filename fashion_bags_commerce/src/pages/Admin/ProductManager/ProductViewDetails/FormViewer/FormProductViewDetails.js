@@ -1,10 +1,8 @@
-
 import React, { Fragment, useEffect, useState } from 'react';
 import { InfoOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, Table } from 'antd';
 import baloDetailsAPI from '~/api/productDetailsAPI';
 import FormProductEdit from '../../ProductEdit/FormEdit/FormProductEdit';
-
 
 const { Option } = Select;
 function FormProductViewDetails(props) {
@@ -171,8 +169,7 @@ function FormProductViewDetails(props) {
       fixed: 'right',
       render: (_, record) => (
         <Space size="middle">
-          <FormProductEdit
-           balo={record} />
+          <FormProductEdit balo={record} />
         </Space>
       ),
     },

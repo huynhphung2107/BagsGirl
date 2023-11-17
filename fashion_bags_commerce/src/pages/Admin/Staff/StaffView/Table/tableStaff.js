@@ -4,9 +4,9 @@ import staffAPI from '~/api/staffAPI';
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './tableStaff.module.scss';
 // import FormStaffViewDetails from '../../StaffViewDetails/FormStaffViewDetails';
-import FormStaffEdit from '../../StaffEdit/FormEdit/formStaffEdit';
+import FormStaffEdit from '../../StaffEdit/FormEdit/FormStaffEdit';
 import SearchForm from './FormSearch/formSearch';
-import FormStaffCreate from '../../StaffEdit/FormCreate/formStaffCreate';
+import FormStaffCreate from '../../StaffEdit/FormCreate/FormStaffCreate';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);

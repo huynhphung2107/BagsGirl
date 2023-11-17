@@ -3,9 +3,6 @@ import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header/header';
 
 import TableContent from './Table/tableStaff';
-import FormStaffCreate from '../StaffEdit/FormCreate/formStaffCreate';
-import FormStaffCreate1 from '../StaffEdit/FormCreate/formStaffCreate';
-// import FormstaffCreate from '../staffEdit/FormrCreate/FormstaffCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
 const headerStyle = {
