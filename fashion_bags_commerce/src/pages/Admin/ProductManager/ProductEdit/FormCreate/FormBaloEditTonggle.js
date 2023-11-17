@@ -1,5 +1,4 @@
-//CSS
-//React Component
+
 import React, { Fragment, useContext, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, Popconfirm, Select, notification } from 'antd';

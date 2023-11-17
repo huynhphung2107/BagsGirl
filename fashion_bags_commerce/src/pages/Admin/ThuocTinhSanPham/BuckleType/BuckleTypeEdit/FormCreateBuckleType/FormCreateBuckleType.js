@@ -4,7 +4,6 @@ import { Button, Form, Modal, Select, notification } from 'antd';
 import Input from 'antd/es/input/Input';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
-
 function FormBuckleTypeCreate(props) {
   const [openComponent, setOpenComponent] = useState(false);
   const [error, setError] = useState(true);

@@ -3,8 +3,6 @@ import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header/header';
 
 import TableContent from './Table/tableCustomer';
-import FormCustomerCreate from '../CustomerEdit/FormCreate/formCustomerCreate';
-import FormCustomerCreate1 from '../CustomerEdit/FormCreate/formCustomerCreate';
 
 const { Header, Footer, Sider, Content } = Layout;
 const headerStyle = {

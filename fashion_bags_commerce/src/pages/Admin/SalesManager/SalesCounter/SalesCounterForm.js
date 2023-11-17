@@ -26,7 +26,7 @@ import userInfoAPI from '~/api/userInfoAPI';
 import VNDFormaterFunc from '~/Utilities/VNDFormaterFunc';
 import customerAPI from '~/api/customerAPI';
 import billsAPI from '~/api/billApi';
-import billDetailsAPI from '~/api/billDetailsAPI';
+import billDetailsAPI from '~/api/BillDetailsAPI';
 const { Option } = AutoComplete;
 
 const SalesCounterForm = () => {

@@ -9,7 +9,7 @@ import {
   UnorderedListOutlined,
 } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
-import billDetailsAPI from '~/api/billDetailsAPI';
+import BillDetailsAPI from '~/api/BillDetailsAPI';
 import styles from './index.module.scss';
 import SearchForm from './FormSearch/SearchForm';
 import Loc from './FormLoc/LocTheoNgay';
@@ -148,7 +148,7 @@ function TableContent() {
 
   const getAllPhanTrang = async (pageNum, pageSize) => {
     try {
-      const response = await billDetailsAPI.getAll(pageNum, pageSize);
+      const response = await BillDetailsAPI.getAll(pageNum, pageSize);
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setBuckleTypeList(data);
@@ -172,7 +172,7 @@ function TableContent() {
 
   const handleDeleteBuckleType = async (id, status) => {
     try {
-      await billDetailsAPI.billDetailsAPI(id, status);
+      await BillDetailsAPI.updateStatus(id, status);
       notification.info({
         message: 'Xóa thành Công',
         description: 'Kiểu khóa Có ID: ' + id + ' đã được xóa thành công!!!',

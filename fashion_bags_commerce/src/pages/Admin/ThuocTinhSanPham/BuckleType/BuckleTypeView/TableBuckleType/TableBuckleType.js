@@ -5,7 +5,6 @@ import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 import styles from './tableBuckleType.module.scss';
 import FormEditBuckleType from '../../BuckleTypeEdit/FormEditBuckleType/formEditBuckleType';
 import FormBuckleTypeCreate from '../../BuckleTypeEdit/FormCreateBuckleType/FormCreateBuckleType';
-
 function TableContent() {
   const [buckleTypeList, setBuckleTypeList] = useState([]);
   const [loading, setLoading] = useState(false);

@@ -6,7 +6,7 @@ import styles from './tableCustomer.module.scss';
 import { tab } from '@testing-library/user-event/dist/tab';
 import FormCustomerEdit from '../../CustomerEdit/FormEdit/formCustomerEdit';
 import SearchForm from './FormSearch/formSearch';
-import FormCustomerCreate from '../../CustomerEdit/FormCreate/formCustomerCreate';
+import FormCustomerCreate from '../../CustomerEdit/FormCreate/FormCustomerCreate';
 
 const TableContent = () => {
   const [data, setData] = useState([]);
@@ -50,7 +50,7 @@ const TableContent = () => {
       setSearch(newFilter.trim());
       setLoading(true);
       setCurrentPage(1);
-    };
+    }
   };
 
   const getAll = async (keyword, page, size) => {
