@@ -50,13 +50,8 @@ const TableContent = () => {
     } else {
       setSearch(newFilter.trim());
       setCurrentPage(1);
-<<<<<<< HEAD:fashion_bags_commerce/src/pages/Admin/Customer/CustomerView/Table/Table.js
-      setLoading(true);
 
-    };
-=======
     }
->>>>>>> Huynh_develop:fashion_bags_commerce/src/pages/Admin/Customer/CustomerView/Table/tableCustomer.js
   };
 
   const getAll = async (keyword, page, size) => {
