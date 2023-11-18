@@ -2,7 +2,6 @@ import Sidebar from '~/component/GlobalStyles/layouts/DefaultLayout/SideBar/side
 import { Layout } from 'antd';
 import HeaderContent from '~/component/GlobalStyles/layouts/DefaultLayout/Header/header';
 import TableContent from './TableProducer/TableProducer';
-import FormCreateProducer from '../ProducerEdit/FormCreateProducer/formCreateProduer';
 
 const { Header, Footer, Sider, Content } = Layout;
 

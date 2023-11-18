@@ -3,7 +3,7 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import voucherAPI from '~/api/voucherAPI';
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './tableVoucher.module.scss';
-import FormVoucherCreate from '../../VoucherEdit/FormrCreate/formVoucherCreate';
+import FormVoucherCreate from '../../VoucherEdit/FormrCreate/FormVoucherCreate';
 // import FormvoucherEdit from '../../voucherEdit/FormEdit/FormvoucherEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);

@@ -3,8 +3,8 @@ import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
 import styles from './tableType.module.scss';
-import FormTypeEdit from '../../TypeEdit/FormEdit/formEditType';
-import FormTypeCreate from '../../TypeEdit/FormCreate/formCreateType';
+import FormTypeEdit from '../../TypeEdit/FormEdit/FormEditType';
+import FormTypeCreate from '../../TypeEdit/FormCreate/FormCreateType';
 
 function TableContent() {
   const [typeList, setTypeList] = useState([]);

@@ -3,8 +3,8 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import materialAPI from '~/api/propertitesBalo/materialAPI';
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './tableMaterial.module.scss';
-import FormMaterialEdit from '../../MaterialEdit/FormEdit/formMaterialEdit';
-import FormMaterialCreate from '../../MaterialEdit/FormCreate/formMaterialCreate';
+import FormMaterialEdit from '../../MaterialEdit/FormEdit/FormMaterialEdit';
+import FormMaterialCreate from '../../MaterialEdit/FormCreate/FormMaterialCreate';
 // import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
 const TableContent = () => {
   const [data, setData] = useState([]);

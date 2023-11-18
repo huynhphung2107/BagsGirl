@@ -3,7 +3,7 @@ import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 import styles from './tableBuckleType.module.scss';
-import FormEditBuckleType from '../../BuckleTypeEdit/FormEditBuckleType/formEditBuckleType';
+import FormEditBuckleType from '../../BuckleTypeEdit/FormEditBuckleType/FormEditBuckleType';
 import FormBuckleTypeCreate from '../../BuckleTypeEdit/FormCreateBuckleType/FormCreateBuckleType';
 function TableContent() {
   const [buckleTypeList, setBuckleTypeList] = useState([]);

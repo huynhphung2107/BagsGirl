@@ -3,8 +3,8 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import brandAPI from '~/api/propertitesBalo/brandAPI';
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './tableBrand.module.scss';
-import FormBrandEdit from '../../BrandEdit/FormEdit/formBrandEdit';
-import FormBrandCreate from '../../BrandEdit/FormCreate/formBrandCreate';
+import FormBrandEdit from '../../BrandEdit/FormEdit/FormBrandEdit';
+import FormBrandCreate from '../../BrandEdit/FormCreate/FormBrandCreate';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
