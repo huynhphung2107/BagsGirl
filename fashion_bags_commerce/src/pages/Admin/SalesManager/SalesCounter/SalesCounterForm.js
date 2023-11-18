@@ -25,7 +25,7 @@ import userinfoAPI from '~/api/userInfoAPI';
 import userInfoAPI from '~/api/userInfoAPI';
 import VNDFormaterFunc from '~/Utilities/VNDFormaterFunc';
 import customerAPI from '~/api/customerAPI';
-import billsAPI from '~/api/billApi';
+import billsAPI from '~/api/BillApi';
 import billDetailsAPI from '~/api/BillDetailsAPI';
 const { Option } = AutoComplete;
 

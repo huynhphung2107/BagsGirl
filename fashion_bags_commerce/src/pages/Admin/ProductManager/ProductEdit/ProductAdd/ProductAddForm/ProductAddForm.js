@@ -39,7 +39,7 @@ import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import typeAPI from '~/api/propertitesBalo/typeAPI';
 import buckleTypeAPI from '~/api/propertitesBalo/buckleTypeAPI';
 // import { useDropzone } from 'react-dropzone';
-import imageAPI from '~/api/imageAPI';
+import imageAPI from '~/api/ImageAPI';
 import { async } from '@firebase/util';
 import Dragger from 'antd/es/upload/Dragger';
 import BaloDetailsPreview from './BaloDetailsPreview/BaloDetailsPreview';

@@ -3,8 +3,8 @@ import { Button, Pagination, Popconfirm, Space, Spin, Table, notification } from
 import sizeAPI from '~/api/propertitesBalo/sizeAPI';
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './tableSize.module.scss';
-import FormSizeEdit from '../../SizeEdit/FormEdit/formSizeEdit';
-import FormSizeCreate from '../../SizeEdit/FormCreate/formSizeCreate';
+import FormSizeEdit from '../../SizeEdit/FormEdit/FormSizeEdit';
+import FormSizeCreate from '../../SizeEdit/FormCreate/FormSizeCreate';
 const TableContent = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);

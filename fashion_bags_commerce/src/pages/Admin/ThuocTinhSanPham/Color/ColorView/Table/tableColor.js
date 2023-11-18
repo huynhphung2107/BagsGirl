@@ -4,8 +4,8 @@ import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons'
 import { useEffect, useState, useContext } from 'react';
 import colorAPI from '~/api/propertitesBalo/colorAPI';
 import styles from './tableColor.module.scss';
-import FormColorEdit from '../../ColorEdit/FormEdit/formColorEdit';
-import FormcolorEditTonggle from '../../ColorEdit/FormCreate/formColorCreate';
+import FormColorEdit from '../../ColorEdit/FormEdit/FormColorEdit';
+import FormcolorEditTonggle from '../../ColorEdit/FormCreate/FormColorCreate';
 
 function TableContent() {
   const [list, setlist] = useState([]);

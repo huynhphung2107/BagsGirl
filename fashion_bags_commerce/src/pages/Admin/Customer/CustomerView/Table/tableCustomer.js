@@ -4,7 +4,7 @@ import customerAPI from '~/api/customerAPI';
 import { DeleteOutlined, ReloadOutlined, SyncOutlined } from '@ant-design/icons';
 import styles from './tableCustomer.module.scss';
 import { tab } from '@testing-library/user-event/dist/tab';
-import FormCustomerEdit from '../../CustomerEdit/FormEdit/formCustomerEdit';
+import FormCustomerEdit from '../../CustomerEdit/FormEdit/FormCustomerEdit';
 import SearchForm from './FormSearch/formSearch';
 import FormCustomerCreate from '../../CustomerEdit/FormCreate/FormCustomerCreate';
 
