@@ -10,7 +10,8 @@ function LayoutCarousel() {
         <Carousel autoplay={true} autoplaySpeed={1500} draggable={true}>
           <div>
             <img
-              src="https://www.vascara.com/uploads/banner/2023/November/14/17421699974436.jpg"
+              src="https://www.vascara.com/uploads/banner/2023/November/1/17381698802488.jpg"
+
               alt="TEACHER'S DAY 2023"
               className="d-block w-100"
             />
@@ -26,7 +27,8 @@ function LayoutCarousel() {
             <img
               alt="NEW ARRIVAL - T10"
               className="d-block w-100"
-              src="https://www.vascara.com/uploads/banner/2023/November/1/17381698802488.jpg"
+              src="https://www.vascara.com/uploads/banner/2023/November/14/17421699974436.jpg"
+
             ></img>
           </div>
           <div className="carousel_item">
