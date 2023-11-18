@@ -1,4 +1,4 @@
-import styles from './BaloDetailsPreview.module.scss';
+import styles from './baloDetailsPreview.module.scss';
 
 import React, { Fragment, useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
@@ -19,7 +19,7 @@ import {
 } from 'antd';
 import baloAPI from '~/api/productsAPI';
 import baloDetailsAPI from '~/api/productDetailsAPI';
-import imageAPI from '~/api/ImageAPI';
+import imageAPI from '~/api/imageAPI';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 
 const { Option } = Select;

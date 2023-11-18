@@ -22,6 +22,7 @@ public class ProductDetailDTO {
     private String productDetailId;
     private BigDecimal importPrice;
     private BigDecimal retailPrice;
+    private String colorId;
     private String colorName;
     private String typeName;
     private String materialName;
@@ -32,6 +33,8 @@ public class ProductDetailDTO {
     private String producerName;
     private String compartmentName;
     private String buckleTypeName;
+    private String describe;
+    private Integer amount;
     private Integer productDetailAmount;
     private String productDetailDescribe;
     private Integer productDetailStatus;

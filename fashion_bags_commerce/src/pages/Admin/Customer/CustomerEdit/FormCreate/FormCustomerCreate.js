@@ -68,7 +68,6 @@ const FormCustomerCreate = () => {
       throw error;
     }
   };
-
   return (
     <Fragment>
       <Button style={{ width: '100px' }} type="primary" onClick={showDrawer} icon={<PlusOutlined />}></Button>

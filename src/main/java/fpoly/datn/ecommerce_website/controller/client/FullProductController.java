@@ -3,6 +3,7 @@ package fpoly.datn.ecommerce_website.controller.client;
 import fpoly.datn.ecommerce_website.dto.FullProductDTO;
 import fpoly.datn.ecommerce_website.service.serviceImpl.FullProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ public class FullProductController {
     @Autowired
     private FullProductServiceImpl productService;
 
+
     @GetMapping("/all-products/")
     public ResponseEntity<List<FullProductDTO>> getAllFullProducts() {
         List<FullProductDTO> fullProducts = productService.getAllFullProducts();
@@ -25,8 +27,8 @@ public class FullProductController {
     }
 
     @GetMapping("/detail-product/{id}")
-    public ResponseEntity<?> chiTietSanPham(@PathVariable String id) {
-        FullProductDTO productDetail = productService.findById(id);
+    public ResponseEntity<?> listSanPhamChiTiet(@PathVariable String id) {
+        FullProductDTO productDetail = productService.findByListProductDetailById(id);
 
         if (productDetail != null) {
             return ResponseEntity.ok(productDetail);
@@ -35,14 +37,16 @@ public class FullProductController {
         }
     }
 
-//    @GetMapping("/getOne")
-//    public ResponseEntity<?> chiTietSanPham(@RequestParam String id) {
-//        List<Object[]> productDetails = productRepository.getProductDetailsById(id);
-//
-//        if (!productDetails.isEmpty()) {
-//            return ResponseEntity.ok(productDetails);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @GetMapping("/getOne-product/{id}")
+    public ResponseEntity<?> sanPhamChiTiet(@PathVariable String id) {
+        FullProductDTO productDetail = productService.findByProductDetailById(id);
+
+        if (productDetail != null) {
+            return ResponseEntity.ok(productDetail);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }

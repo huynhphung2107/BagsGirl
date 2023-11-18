@@ -1,0 +1,32 @@
+.footer {
+  // position: fixed;
+  background-color: white;
+  .mainFooter {
+    .container {
+      background-color: white;
+      .checkedImg {
+        width: 150px;
+      }
+
+      ul {
+        padding: 10px;
+        display: flex;
+        flex-direction: row; /* Đặt hướng dọc */
+        justify-content: center; /* Căn giữa theo hướng ngang */
+        align-items: center;
+        list-style-type: none;
+        li {
+          font-size: medium;
+          font-weight: bolder;
+          margin: 0px 30px;
+        }
+      }
+    }
+  }
+  .bottomFooter {
+    text-align: center;
+  }
+}
+.container-fluid {
+  background-color: white;
+}

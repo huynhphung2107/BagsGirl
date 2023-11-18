@@ -1,38 +1,30 @@
 import { Layout } from 'antd';
-import { Link } from 'react-router-dom';
-import Header from '../Header';
-import Footer from '../Footer';
-import ShopDetailView from './ShopDetailView';
+import Header from '../Header/headerCilent';
+import Footer from '../Footer/footerClient';
+import ShopDetailView from './ShopDetailView/shopDetailView';
 import styles from './shopDetail.module.scss';
+import { Fragment, useEffect } from 'react';
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 function ShopDetail() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-    <div className={styles.backgroundDetail}>
-      <Layout>
-        <Header></Header>
-        <div className="duongDan">
-          <ul className="ul">
-            <span>
-              <Link to={'/'}>
-                <li className="li">Trang chủ-- </li>
-              </Link>
-
-              <Link to={'/shop/detail'}>
-                <li className="li">Chi tiết sản phẩm</li>
-              </Link>
-            </span>
-          </ul>
-        </div>
-        <ContentLayout>
-          <div className="container-fluid">
+    <Fragment>
+      <body>
+      <div className="fullpage">
+          <div className="header001">
+            <Header />
+          </div>
+          <div className="page_content">
             <ShopDetailView />
           </div>
-        </ContentLayout>
-        <FooterLayout>
-          <Footer></Footer>
-        </FooterLayout>
-      </Layout>
-    </div>
+          <div className="footer_client">
+            <Footer />
+          </div>
+        </div>
+      </body>
+    </Fragment>
   );
 }
 

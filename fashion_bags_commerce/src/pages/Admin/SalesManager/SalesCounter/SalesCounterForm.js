@@ -14,8 +14,8 @@ import {
   message,
   notification,
 } from 'antd';
-import TableContent from '../../ProductManager/ProductViewer/Table/Table';
-import styles from './index.module.scss';
+import TableContent from '../../ProductManager/ProductViewer/Table/tableProduct';
+import styles from './saleManager.module.scss';
 import Title from 'antd/es/skeleton/Title';
 import { generateCustomCode } from '~/Utilities/GenerateCustomCode';
 import TextArea from 'antd/es/input/TextArea';
@@ -25,7 +25,7 @@ import userinfoAPI from '~/api/userInfoAPI';
 import userInfoAPI from '~/api/userInfoAPI';
 import VNDFormaterFunc from '~/Utilities/VNDFormaterFunc';
 import customerAPI from '~/api/customerAPI';
-import billsAPI from '~/api/BillApi';
+import billsAPI from '~/api/billApi';
 import billDetailsAPI from '~/api/BillDetailsAPI';
 const { Option } = AutoComplete;
 

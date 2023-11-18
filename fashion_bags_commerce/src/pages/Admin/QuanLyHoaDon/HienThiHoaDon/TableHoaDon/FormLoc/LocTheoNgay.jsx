@@ -57,7 +57,7 @@ function Loc(props) {
                     <Select
                         labelInValue
                         defaultValue={{ value: '', label: 'Tất cả' }}
-                        style={{ width: 150 }}
+                        style={{ width: '150px' }}
                         placeholder="Vui lòng chọn nhân viên"
                         onChange={handleChange}
                         options={[

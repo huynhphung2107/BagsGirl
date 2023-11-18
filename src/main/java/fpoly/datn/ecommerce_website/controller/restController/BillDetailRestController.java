@@ -21,7 +21,7 @@ public class BillDetailRestController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @RequestMapping(value = "/bill-details", method = RequestMethod.GET)
+    @RequestMapping(value = "/bill-details/", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(
             @RequestParam(required = false) Integer pageNum,
             @RequestParam(required = false) Integer pageSize) {

@@ -1,0 +1,80 @@
+.mainHeader {
+  background-color: white;
+  padding: 15px 0px 0 0;
+  .image {
+    width: 300px;
+    height: 150px;
+  }
+  justify-content: center;
+  display: flex;
+  .content {
+    display: flex;
+    justify-content: center;
+    margin: 30px 30px 30px 1px;
+    float: right;
+
+    .search {
+      padding-right: 30px;
+      border: 1px solid black;
+      border-radius: 30px;
+      margin: 15px 20px 0 0;
+
+      width: 1120px;
+      height: fit-content;
+      .searchForm {
+        .form {
+          display: flex;
+          .icon {
+            margin: 10px 10px;
+            font-size: 40px;
+          }
+          input {
+            padding: 12px 30px 12px 10px;
+            font-size: 20px;
+            border: 0px;
+            width: 650px;
+            height: 50px;
+            outline: none;
+          }
+        }
+      }
+    }
+    .toolRight {
+      display: flex;
+
+      .profile {
+        display: flex;
+        margin: 0px 40px 0px 0px;
+
+        .login {
+          display: flex;
+
+          align-items: center;
+          .horizontalLogin {
+            display: flex; /* Sử dụng mô hình flexbox */
+            padding-left: 0px;
+            margin: 0px auto;
+          }
+
+          .horizontalLogin li {
+            display: inline-block;
+            margin: 0 10px;
+
+            a {
+              font-size: 20px;
+              text-decoration: none;
+              color: black;
+            }
+          }
+        }
+      }
+
+      .cartIcon {
+        font-size: 50px;
+      }
+    }
+    .cart {
+      padding-top: 15px;
+    }
+  }
+}
