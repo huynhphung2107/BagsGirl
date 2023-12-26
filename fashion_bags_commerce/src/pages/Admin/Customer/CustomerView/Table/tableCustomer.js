@@ -16,7 +16,7 @@ const TableContent = () => {
   const [totalItem, setTotalItem] = useState();
   const [search, setSearch] = useState('');
 
-  const onCancel = () => {};
+  const onCancel = () => { };
   const reload = () => {
     setLoading(true);
     getAll(search, currentPage, pagesSize);
@@ -44,12 +44,13 @@ const TableContent = () => {
   const handleSearchChange = (newFilter) => {
     if (newFilter === undefined || newFilter.trim().length === 0) {
       setSearch('');
-      setLoading(true);
       setCurrentPage(1);
+      setLoading(true);
+
     } else {
       setSearch(newFilter.trim());
-      setLoading(true);
       setCurrentPage(1);
+
     }
   };
 
@@ -59,7 +60,16 @@ const TableContent = () => {
       const data = response.data.content;
       setTotalItem(response.data.totalElements);
       setData(data);
-    } catch (error) {}
+    } catch (error) { }
+  };
+
+  const deleteHandle = async (id, status) => {
+    const xoa = await customerAPI.updateStatus(id, status);
+    notification.info({
+      message: 'Thông báo',
+      description: 'Đã hủy thành công trạng thái nhân viên có id là :' + id,
+    });
+    reload();
   };
 
   // Define your table columns
@@ -190,14 +200,7 @@ const TableContent = () => {
     },
   ];
 
-  const deleteHandle = async (id, status) => {
-    const xoa = await customerAPI.updateStatus(id, status);
-    notification.info({
-      message: 'Thông báo',
-      description: 'Đã hủy thành công trạng thái nhân viên có id là :' + id,
-    });
-    reload();
-  };
+
 
   return (
     <div
@@ -219,7 +222,7 @@ const TableContent = () => {
         columns={columns}
         dataSource={data}
         pagination={false}
-        // onChange={handlePageChange} // Handle page changes
+      // onChange={handlePageChange} // Handle page changes
       />
 
       <Pagination

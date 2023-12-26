@@ -33,8 +33,6 @@ function Loc(props) {
         console.log(maHoaDon);
 
     }
-
-
     return (
         <div>
             <label className={styles.title}>Lọc hóa đơn theo: </label>

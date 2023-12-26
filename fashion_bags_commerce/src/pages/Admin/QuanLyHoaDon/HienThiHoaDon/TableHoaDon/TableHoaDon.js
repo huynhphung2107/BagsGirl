@@ -10,11 +10,12 @@ import {
 } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import BillDetailsAPI from '~/api/BillDetailsAPI';
-import styles from './index.module.scss';
+import styles from './styles.module.scss';
 import SearchForm from './FormSearch/SearchForm';
 import Loc from './FormLoc/LocTheoNgay';
 
 function TableContent() {
+
   const [buckleTypeList, setBuckleTypeList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -99,6 +100,7 @@ function TableContent() {
             statusText = 'Trạng thái khác';
             statusClass = 'inactive-status';
         }
+
 
         return <span className={statusClass}>{statusText}</span>;
       },

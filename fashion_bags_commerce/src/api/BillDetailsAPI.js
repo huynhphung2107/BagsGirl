@@ -2,9 +2,20 @@ import axiosClient from './axiosClient';
 
 const billDetailsAPI = {
   getAll(pageNum, pageSize) {
-    const url = '/bill-details';
+    const url = '/bill-details/';
     return axiosClient.get(url, {
       params: {
+        page: pageNum - 1,
+        size: pageSize,
+      },
+    });
+  },
+  getAllPaginationStatus(search, status, pageNum, pageSize) {
+    const url = '/bill-details/pagination';
+    return axiosClient.get(url, {
+      params: {
+        search: search,
+        status: status,
         page: pageNum - 1,
         size: pageSize,
       },

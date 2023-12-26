@@ -28,7 +28,7 @@ import java.util.Date;
 @ToString
 @Setter
 @Getter
-@Table(name = "bills", schema = "dbo", catalog = "FashionBagsEcommerceDB")
+@Table(name = "bills")
 public class Bills {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

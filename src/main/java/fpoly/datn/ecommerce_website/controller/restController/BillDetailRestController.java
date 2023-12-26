@@ -31,6 +31,15 @@ public class BillDetailRestController {
         return new ResponseEntity<>(this.iBillDetailsService.getPagination(pageNum, pageSize), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/bill-details/pagination", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllPagination(
+            @RequestParam(name = "page", defaultValue = "0") int pageNum,
+            @RequestParam(name = "size", defaultValue = "15") int pageSize,
+            @RequestParam(name ="status", defaultValue = "") String status,
+            @RequestParam(name ="search", defaultValue = "") String search){
+        return new ResponseEntity<>(this.iBillDetailsService.getPaginationStatus(search, status, pageNum, pageSize), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/bill-details", method = RequestMethod.POST)
     public ResponseEntity<?> save(
             @RequestBody BillDetailsDTO billDetailsDTO) {
